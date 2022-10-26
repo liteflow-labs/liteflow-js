@@ -44,12 +44,12 @@ useCancelOffer(
 ## Return values
 
 ```tsx
-[
-  (offerId: { id: string }) => Promise<void>,  // cancelOffer. function to cancel an Offer
+;[
+  (offerId: { id: string }) => Promise<void>, // cancelOffer. function to cancel an Offer
   {
-    activeStep: CancelOfferStep,          // returns different values depending on the current cancellation step
-    transactionHash: string | undefined   // returns the transaction hash after transaction has been placed on the blockchain
-  }
+    activeStep: CancelOfferStep, // returns different values depending on the current cancellation step
+    transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
+  },
 ]
 ```
 

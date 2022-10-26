@@ -61,7 +61,7 @@ useCreateOffer(
 ## Return values
 
 ```tsx
-[
+;[
   (data: {
     type: OfferType
     quantity: BigNumber
@@ -71,11 +71,11 @@ useCreateOffer(
     takerAddress?: string
     expiredAt: Date | null
     auctionId?: string
-  }) => Promise<string>,            // createOffer. function to create an Offer
+  }) => Promise<string>, // createOffer. function to create an Offer
   {
-    activeStep: CreateOfferStep,          // returns different values depending on the current creation step
-    transactionHash: string | undefined   // returns the transaction hash after transaction has been placed on the blockchain
-  }
+    activeStep: CreateOfferStep, // returns different values depending on the current creation step
+    transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
+  },
 ]
 ```
 

@@ -57,12 +57,12 @@ useAcceptAuction(
 ## Return values
 
 ```tsx
-[
-  (auctionId: string) => Promise<void>,   // acceptAuction. function to accept an Auction
+;[
+  (auctionId: string) => Promise<void>, // acceptAuction. function to accept an Auction
   {
-    activeStep: AcceptAuctionStep,        // returns different values depending on the current acceptation step
-    transactionHash: string | undefined   // returns the transaction hash after transaction has been placed on the blockchain
-  }
+    activeStep: AcceptAuctionStep, // returns different values depending on the current acceptation step
+    transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
+  },
 ]
 ```
 

@@ -43,7 +43,7 @@ useCreateAuction(
 ## Return values
 
 ```tsx
-[
+;[
   (input: {
     assetId: string
     endAt: Date
@@ -53,7 +53,7 @@ useCreateAuction(
   }) => Promise<string>, // createAuction. function to create an auction, returns id of the auction
   {
     loading: boolean, // returns true if the auction is being created
-  }
+  },
 ]
 ```
 

@@ -114,11 +114,11 @@ export class EmailConnector extends AbstractConnector {
       .then((accounts: string[]): string => accounts[0])
   }
 
-  public deactivate() {
+  public deactivate(): void {
     // noop
   }
 
-  public async close() {
+  public async close(): Promise<void> {
     if (this.magic) await this.magic.user.logout()
     this.emitDeactivate()
   }
