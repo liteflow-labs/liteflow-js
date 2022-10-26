@@ -1,0 +1,18 @@
+# misc
+.DS_Store
+*.pem
+.idea/
+
+# dependencies
+node_modules
+.vercel
+.turbo
+
+# local env files
+.env
+.env*.local
+.gitsecret/keys/random_seed
+!*.secret
+
+# build
+storybook-static

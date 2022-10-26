@@ -1,0 +1,12 @@
+**/node_modules
+
+packages/hooks/src/graphql.ts
+
+packages/components/src/graphql.ts
+
+packages/templates/src/graphql.ts
+packages/templates/**/*.mock.json
+
+**/dist
+
+.vercel/

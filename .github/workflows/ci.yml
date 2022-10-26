@@ -1,0 +1,176 @@
+name: CI
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  translation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Node version
+        run: node -v
+
+      - name: Npm version
+        run: npm -v
+
+      - name: Set version in env
+        run: |
+          echo "node-version=$(node -v)" >> $GITHUB_ENV
+          echo "npm-version=$(npm -v)" >> $GITHUB_ENV
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-
+
+      - name: Install dependencies without executing postinstall scripts
+        run: npm install --ignore-scripts
+
+      - name: Check translation
+        run: npm run check-translation
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Node version
+        run: node -v
+
+      - name: Npm version
+        run: npm -v
+
+      - name: Set version in env
+        run: |
+          echo "node-version=$(node -v)" >> $GITHUB_ENV
+          echo "npm-version=$(npm -v)" >> $GITHUB_ENV
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-
+
+      - name: Install dependencies without executing postinstall scripts
+        run: npm install --ignore-scripts
+
+      - name: Lint
+        run: npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Node version
+        run: node -v
+
+      - name: Npm version
+        run: npm -v
+
+      - name: Set version in env
+        run: |
+          echo "node-version=$(node -v)" >> $GITHUB_ENV
+          echo "npm-version=$(npm -v)" >> $GITHUB_ENV
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build email connector
+        run: npm run build -w packages/email-connector
+
+      - name: Build hooks
+        run: npm run build -w packages/hooks
+
+      - name: Build components
+        run: npm run build -w packages/components
+
+      - name: Build components storybook
+        env:
+          # 7 GiB by default on GitHub, setting to 6 GiB
+          # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: npm run build-storybook -w packages/components
+
+      - name: Build templates
+        run: npm run build -w packages/templates
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Node version
+        run: node -v
+
+      - name: Npm version
+        run: npm -v
+
+      - name: Set version in env
+        run: |
+          echo "node-version=$(node -v)" >> $GITHUB_ENV
+          echo "npm-version=$(npm -v)" >> $GITHUB_ENV
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm run test
