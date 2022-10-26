@@ -35,11 +35,11 @@ useVerifyAccount(
 ## Return values
 
 ```tsx
-[
+;[
   () => Promise<string>, // verifyAccount. Function to request to verify the account, returns the verification status of the account
   {
     loading: boolean, // Returns "true" when the request is still under review
-  }
+  },
 ]
 ```
 

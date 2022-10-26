@@ -1,59 +1,21 @@
-# Installation
+# Liteflow
 
-- Requires npm 7+
-
-```bash
-npm i
-```
-
-# Development
-
-## Lint
-
-```bash
-# check for errors
-npm run lint
-
-# fix the errors
-npm run lint:fix
-```
-
-## Storybook
-
-```bash
-npm run storybook -w packages/components
-```
-
-## Generate GraphQL types
-
-To generate the types for all the packages:
-
-```bash
-npm run graphql-codegen
-```
+This repository contains the list of all the tools required to launch an NFT marketplace based on the Liteflow infrastructure.
 
 ## Packages
 
-To build all the @nft packages in the right order:
+- [Hooks](./packages/hooks/): React hooks to interact with the Liteflow API
+- [Components](./packages/components/): UI library containing themable components
+- [Templates](./packages/templates/): Opinionated implementation of full featured templates for quick
 
-```bash
-npm run build
-```
+## Documentation
 
-To build the packages in watch mode:
+For full documentation and examples, visit [https://docs.liteflow.com](https://docs.liteflow.com).
 
-```bash
-npm run watch
-```
+## Contributing
 
-## Clean
+If you're interested in contributing, please read the [contributing docs](/.github/CONTRIBUTING.md) **before submitting a pull request**.
 
-If you get some build issue, try to clean your local builds output by running:
+## License
 
-```bash
-npm run clean
-```
-
-# Publish
-
-The CI is building and publishing at every merge to the main branch the packages, the docker images and a git tag.
+[Liteflow](/LICENSE) License

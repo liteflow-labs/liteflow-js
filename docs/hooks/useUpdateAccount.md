@@ -51,11 +51,11 @@ useUpdateAccount(
 ## Return values
 
 ```tsx
-[
+;[
   (input: AccountInput) => Promise<string>, // updateAccount. function to update the user's account
   {
-    loading: boolean // returns "true" if account is still being updated
-  }
+    loading: boolean, // returns "true" if account is still being updated
+  },
 ]
 ```
 

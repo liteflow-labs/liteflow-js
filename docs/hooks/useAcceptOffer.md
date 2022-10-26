@@ -60,18 +60,18 @@ useAcceptOffer(
 ## Return values
 
 ```tsx
-[
+;[
   (
     offer: {
       id: string
       unitPrice: BigNumberish
     },
     quantity: BigNumberish,
-  ) => Promise<void>,           // acceptOffer. function to accept an Offer
+  ) => Promise<void>, // acceptOffer. function to accept an Offer
   {
-    activeStep: AcceptOfferStep,          // returns different values depending on the current acceptation step
-    transactionHash: string | undefined   // returns the transaction hash after transaction has been placed on the blockchain
-  }
+    activeStep: AcceptOfferStep, // returns different values depending on the current acceptation step
+    transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
+  },
 ]
 ```
 
