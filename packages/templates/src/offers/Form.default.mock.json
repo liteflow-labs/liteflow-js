@@ -1,0 +1,113 @@
+{
+  "data": {
+    "asset": {
+      "__typename": "Asset",
+      "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140015855675123490232454",
+      "standard": "ERC1155",
+      "name": "#118 Bounty Hunter - Edition 2 Space travel",
+      "image": "https://liteflow.mypinata.cloud/ipfs/QmeQ9EQ6g5gEfvpT9rN6dGkP1DLxdCoB4XrawFivp7wS9n",
+      "animationUrl": null,
+      "royalties": [
+        {
+          "__typename": "Royalty",
+          "value": 1000
+        }
+      ],
+      "unlockedContent": null,
+      "owned": {
+        "__typename": "OwnershipsConnection",
+        "aggregates": {
+          "__typename": "OwnershipAggregates",
+          "sum": {
+            "__typename": "OwnershipSumAggregates",
+            "quantity": "0"
+          }
+        }
+      },
+      "auctions": {
+        "__typename": "AuctionsConnection",
+        "nodes": []
+      },
+      "firstSale": {
+        "__typename": "OfferOpenSalesConnection",
+        "totalCount": 1,
+        "nodes": [
+          {
+            "__typename": "OfferOpenSale",
+            "id": "7fd4030a-2789-4aea-aaad-a5b2f83e7b34",
+            "unitPrice": "49000000000000000000",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          }
+        ]
+      },
+      "currencySales": {
+        "__typename": "OfferOpenSalesConnection",
+        "aggregates": {
+          "__typename": "OfferOpenSaleAggregates",
+          "distinctCount": {
+            "__typename": "OfferOpenSaleDistinctCountAggregates",
+            "currencyId": "1"
+          }
+        }
+      },
+      "creator": {
+        "__typename": "Account",
+        "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+        "name": "WaadeC",
+        "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+        "verification": {
+          "__typename": "AccountVerification",
+          "status": "VALIDATED"
+        }
+      }
+    },
+    "currencies": {
+      "__typename": "CurrenciesConnection",
+      "nodes": [
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+          "name": "Binance USD",
+          "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+          "decimals": 18,
+          "symbol": "BUSD",
+          "address": "0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmVt7VshRvFbar5nPzJSCiYBkH28iVEiy2YVtrSxkyTgHX",
+          "name": "Tether",
+          "id": "97-0x337610d27c682e347c9cd60bd4b3b107c9d34ddd",
+          "decimals": 18,
+          "symbol": "USDT",
+          "address": "0x337610d27c682e347c9cd60bd4b3b107c9d34ddd"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+          "name": "USD Coin",
+          "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+          "decimals": 18,
+          "symbol": "USDC",
+          "address": "0x64544969ed7ebf5f083679233325356ebe738930"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmPbwXdfuzDAVNmwhFzChfs67sFQxinRAZi6hoUjTmx4d5",
+          "name": "BNB",
+          "id": "97",
+          "decimals": 18,
+          "symbol": "BNB",
+          "address": null
+        }
+      ]
+    }
+  }
+}

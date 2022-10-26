@@ -1,0 +1,14 @@
+{
+  "data": {
+    "account": {
+      "__typename": "Account",
+      "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+      "name": "WaadeC",
+      "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+      "verification": {
+        "__typename": "AccountVerification",
+        "status": "VALIDATED"
+      }
+    }
+  }
+}

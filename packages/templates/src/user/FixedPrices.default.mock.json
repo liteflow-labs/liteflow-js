@@ -1,0 +1,205 @@
+{
+  "data": {
+    "account": {
+      "__typename": "Account",
+      "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+      "name": "WaadeC",
+      "description": "Hey, I'm a German guy creating NFTs while drinking beers 🍻",
+      "cover": "https://liteflow.mypinata.cloud/ipfs/QmNToZeoTLUSokyhC43NUJZy6K9vf8JdLaRgoiCjLnLMfe",
+      "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+      "twitter": "WaadeC",
+      "instagram": null,
+      "website": null,
+      "verification": {
+        "__typename": "AccountVerification",
+        "status": "VALIDATED"
+      }
+    },
+    "created": {
+      "__typename": "AssetsConnection",
+      "totalCount": 9
+    },
+    "onSale": {
+      "__typename": "AssetsConnection",
+      "totalCount": 7
+    },
+    "owned": {
+      "__typename": "OwnershipsConnection",
+      "totalCount": 9
+    },
+    "offers": {
+      "__typename": "OffersConnection",
+      "totalCount": 4,
+      "nodes": [
+        {
+          "__typename": "Offer",
+          "id": "75c2f63f-3c33-4b8c-a59d-c824a0d5532b",
+          "unitPrice": "10000000000000000000",
+          "availableQuantity": "10",
+          "expiredAt": "2022-06-17T07:29:30+00:00",
+          "createdAt": "2022-05-20T07:29:29.719925+00:00",
+          "maker": {
+            "__typename": "Account",
+            "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "name": "WaadeC",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140029663337819235512356",
+            "name": "Overwatch kills",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmXw2ZAr7vsyE9FJsAVUWqstnaop2n3cbE8f1ysPM9XLBN",
+            "ownerships": {
+              "__typename": "OwnershipsConnection",
+              "aggregates": {
+                "__typename": "OwnershipAggregates",
+                "sum": {
+                  "__typename": "OwnershipSumAggregates",
+                  "quantity": "10"
+                }
+              }
+            }
+          },
+          "currency": {
+            "__typename": "Currency",
+            "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+            "name": "Binance USD",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+            "decimals": 18,
+            "symbol": "BUSD"
+          }
+        },
+        {
+          "__typename": "Offer",
+          "id": "d7168a6a-a867-4134-b903-fa6e616eb66c",
+          "unitPrice": "20000000000000000000",
+          "availableQuantity": "40",
+          "expiredAt": "2022-06-17T07:29:29+00:00",
+          "createdAt": "2022-05-20T07:29:28.586118+00:00",
+          "maker": {
+            "__typename": "Account",
+            "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "name": "WaadeC",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140028399451588450780217",
+            "name": "Groot Annihilation Conquest",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmaZ5zG5MSzak2uZP8G2n3xBYkjGv8BKwhYgB9arGzTCLm",
+            "ownerships": {
+              "__typename": "OwnershipsConnection",
+              "aggregates": {
+                "__typename": "OwnershipAggregates",
+                "sum": {
+                  "__typename": "OwnershipSumAggregates",
+                  "quantity": "40"
+                }
+              }
+            }
+          },
+          "currency": {
+            "__typename": "Currency",
+            "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+            "name": "USD Coin",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+            "decimals": 18,
+            "symbol": "USDC"
+          }
+        },
+        {
+          "__typename": "Offer",
+          "id": "84dd2d8b-3104-429e-98b2-cb1df7978157",
+          "unitPrice": "20000000000000000000",
+          "availableQuantity": "88",
+          "expiredAt": "2022-06-17T07:29:28+00:00",
+          "createdAt": "2022-05-20T07:29:27.369027+00:00",
+          "maker": {
+            "__typename": "Account",
+            "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "name": "WaadeC",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140020247428532621763333",
+            "name": "Big head astronaut from ISS - Edition #76",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmcKaYaJVPU9GzvKa1tQghsEBMrXH6YvPcTPUzHgwTwvWp",
+            "ownerships": {
+              "__typename": "OwnershipsConnection",
+              "aggregates": {
+                "__typename": "OwnershipAggregates",
+                "sum": {
+                  "__typename": "OwnershipSumAggregates",
+                  "quantity": "88"
+                }
+              }
+            }
+          },
+          "currency": {
+            "__typename": "Currency",
+            "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+            "name": "USD Coin",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+            "decimals": 18,
+            "symbol": "USDC"
+          }
+        },
+        {
+          "__typename": "Offer",
+          "id": "7fd4030a-2789-4aea-aaad-a5b2f83e7b34",
+          "unitPrice": "49000000000000000000",
+          "availableQuantity": "12",
+          "expiredAt": "2022-06-17T07:29:27+00:00",
+          "createdAt": "2022-05-20T07:29:26.138842+00:00",
+          "maker": {
+            "__typename": "Account",
+            "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "name": "WaadeC",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140015855675123490232454",
+            "name": "#118 Bounty Hunter - Edition 2 Space travel",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmeQ9EQ6g5gEfvpT9rN6dGkP1DLxdCoB4XrawFivp7wS9n",
+            "ownerships": {
+              "__typename": "OwnershipsConnection",
+              "aggregates": {
+                "__typename": "OwnershipAggregates",
+                "sum": {
+                  "__typename": "OwnershipSumAggregates",
+                  "quantity": "12"
+                }
+              }
+            }
+          },
+          "currency": {
+            "__typename": "Currency",
+            "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+            "name": "Binance USD",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+            "decimals": 18,
+            "symbol": "BUSD"
+          }
+        }
+      ]
+    }
+  }
+}

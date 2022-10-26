@@ -1,0 +1,13 @@
+{
+  "data": {
+    "notifications": {
+      "__typename": "NotificationsConnection",
+      "pageInfo": {
+        "__typename": "PageInfo",
+        "hasNextPage": false,
+        "endCursor": null
+      },
+      "nodes": []
+    }
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "data": {
+    "asset": {
+      "__typename": "Asset",
+      "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140015855675123490232454",
+      "tokenId": "49600015852111813047896604022884353921118519942981476140015855675123490232454",
+      "collectionAddress": "0xaade84b6a5f76c0a5f7ae91e65197329eb23763f",
+      "standard": "ERC1155",
+      "name": "#118 Bounty Hunter - Edition 2 Space travel",
+      "description": "Boba Fett was a human male bounty hunter whose career spanned decades, from the fall of the Galactic Republic to the rise of the Galactic Empire.",
+      "traits": {
+        "__typename": "AssetTraitsConnection",
+        "nodes": [
+          {
+            "__typename": "AssetTrait",
+            "type": "Category",
+            "value": "Games"
+          }
+        ]
+      },
+      "image": "https://liteflow.mypinata.cloud/ipfs/QmeQ9EQ6g5gEfvpT9rN6dGkP1DLxdCoB4XrawFivp7wS9n",
+      "animationUrl": null,
+      "hasUnlockableContent": false,
+      "unlockedContent": null,
+      "creator": {
+        "__typename": "Account",
+        "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+        "name": "WaadeC",
+        "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+        "verification": {
+          "__typename": "AccountVerification",
+          "status": "VALIDATED"
+        }
+      },
+      "owned": {
+        "__typename": "OwnershipsConnection",
+        "aggregates": {
+          "__typename": "OwnershipAggregates",
+          "sum": {
+            "__typename": "OwnershipSumAggregates",
+            "quantity": "0"
+          }
+        }
+      },
+      "ownerships": {
+        "__typename": "OwnershipsConnection",
+        "nodes": [
+          {
+            "__typename": "Ownership",
+            "ownerAddress": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "quantity": "12",
+            "owner": {
+              "__typename": "Account",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        ],
+        "aggregates": {
+          "__typename": "OwnershipAggregates",
+          "sum": {
+            "__typename": "OwnershipSumAggregates",
+            "quantity": "12"
+          }
+        }
+      },
+      "bids": {
+        "__typename": "OfferOpenBuysConnection",
+        "nodes": [
+          {
+            "__typename": "OfferOpenBuy",
+            "id": "56918667-d654-436a-9936-804fe5712b41",
+            "createdAt": "2022-06-03T01:36:02.459133+00:00",
+            "expiredAt": "2022-07-01T01:36:03+00:00",
+            "availableQuantity": "1",
+            "taker": null,
+            "maker": {
+              "__typename": "Account",
+              "address": "0x37db46b5e1e3bd532958b277726a74818778cdb7",
+              "name": null,
+              "image": null,
+              "verification": null
+            },
+            "amount": "2000000000000000000",
+            "unitPrice": "2000000000000000000",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          },
+          {
+            "__typename": "OfferOpenBuy",
+            "id": "7cd5fd32-d633-4116-9a59-31d4c0a731c8",
+            "createdAt": "2022-06-04T09:03:18.091065+00:00",
+            "expiredAt": "2022-07-02T09:03:19+00:00",
+            "availableQuantity": "1",
+            "taker": null,
+            "maker": {
+              "__typename": "Account",
+              "address": "0xb5a15932be6caeef5d21ac704300bd45e10ff92d",
+              "name": "antho1404.eth",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmWNDKEsw2U7nUTEitmJSw32u7MPgYFjVW574ArCdiUYYE",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            },
+            "amount": "1000000000000000000",
+            "unitPrice": "1000000000000000000",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          },
+          {
+            "__typename": "OfferOpenBuy",
+            "id": "c778e49e-cbf6-47df-aaca-1672138c2286",
+            "createdAt": "2022-08-17T03:25:16.973438+00:00",
+            "expiredAt": "2022-09-14T03:24:00+00:00",
+            "availableQuantity": "1",
+            "taker": null,
+            "maker": {
+              "__typename": "Account",
+              "address": "0xb5a15932be6caeef5d21ac704300bd45e10ff92d",
+              "name": "antho1404.eth",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmWNDKEsw2U7nUTEitmJSw32u7MPgYFjVW574ArCdiUYYE",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            },
+            "amount": "1000000000000000000",
+            "unitPrice": "1000000000000000000",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          },
+          {
+            "__typename": "OfferOpenBuy",
+            "id": "806c953c-249a-47d8-b110-fbaa765f5628",
+            "createdAt": "2022-08-22T14:21:36.083127+00:00",
+            "expiredAt": "2022-09-19T14:21:00+00:00",
+            "availableQuantity": "1",
+            "taker": null,
+            "maker": {
+              "__typename": "Account",
+              "address": "0x36a631525493848ffad8eae93942aa42df011824",
+              "name": null,
+              "image": null,
+              "verification": null
+            },
+            "amount": "100000000000000006",
+            "unitPrice": "100000000000000006",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          },
+          {
+            "__typename": "OfferOpenBuy",
+            "id": "80a09898-ccca-4635-aeb9-c332c5bd522d",
+            "createdAt": "2022-10-06T03:32:23.803923+00:00",
+            "expiredAt": "2022-11-03T03:32:00+00:00",
+            "availableQuantity": "1",
+            "taker": null,
+            "maker": {
+              "__typename": "Account",
+              "address": "0xaa6510ac710e97d2a6a280658b5f641da79891fe",
+              "name": null,
+              "image": null,
+              "verification": null
+            },
+            "amount": "1000000000000000",
+            "unitPrice": "1000000000000000",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          },
+          {
+            "__typename": "OfferOpenBuy",
+            "id": "0486ee84-16bb-4353-b990-2ffbda52c8bd",
+            "createdAt": "2022-10-11T05:41:26.187638+00:00",
+            "expiredAt": "2022-11-08T05:41:00+00:00",
+            "availableQuantity": "1",
+            "taker": null,
+            "maker": {
+              "__typename": "Account",
+              "address": "0xaa6510ac710e97d2a6a280658b5f641da79891fe",
+              "name": null,
+              "image": null,
+              "verification": null
+            },
+            "amount": "10000000000000",
+            "unitPrice": "10000000000000",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          }
+        ]
+      },
+      "sales": {
+        "__typename": "OfferOpenSalesConnection",
+        "nodes": [
+          {
+            "__typename": "OfferOpenSale",
+            "id": "7fd4030a-2789-4aea-aaad-a5b2f83e7b34",
+            "unitPrice": "49000000000000000000",
+            "expiredAt": "2022-06-17T07:29:27+00:00",
+            "availableQuantity": "12",
+            "currency": {
+              "__typename": "Currency",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+              "name": "Binance USD",
+              "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+              "decimals": 18,
+              "symbol": "BUSD"
+            },
+            "maker": {
+              "__typename": "Account",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        ],
+        "aggregates": {
+          "__typename": "OfferOpenSaleAggregates",
+          "sum": {
+            "__typename": "OfferOpenSaleSumAggregates",
+            "availableQuantity": "12"
+          }
+        }
+      },
+      "auctions": {
+        "__typename": "AuctionsConnection",
+        "nodes": []
+      },
+      "histories": {
+        "__typename": "AssetHistoriesConnection",
+        "nodes": [
+          {
+            "__typename": "AssetHistory",
+            "action": "LISTING",
+            "date": "2022-05-20T07:29:26.138842+00:00",
+            "unitPrice": "49000000000000000000",
+            "quantity": "12",
+            "fromAddress": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "from": {
+              "__typename": "Account",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            },
+            "toAddress": null,
+            "to": null,
+            "transactionHash": null,
+            "currency": {
+              "__typename": "Currency",
+              "decimals": 18,
+              "symbol": "BUSD"
+            }
+          },
+          {
+            "__typename": "AssetHistory",
+            "action": "TRANSFER",
+            "date": "2022-05-20T07:27:48+00:00",
+            "unitPrice": null,
+            "quantity": "12",
+            "fromAddress": "0x0000000000000000000000000000000000000000",
+            "from": {
+              "__typename": "Account",
+              "address": "0x0000000000000000000000000000000000000000",
+              "name": null,
+              "image": null,
+              "verification": null
+            },
+            "toAddress": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "to": {
+              "__typename": "Account",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            },
+            "transactionHash": "0xf88a0e4e038e2c7ef4db96899d23e47451f4501c441b265e91ce205fe453904e",
+            "currency": null
+          }
+        ]
+      }
+    },
+    "currencies": {
+      "__typename": "CurrenciesConnection",
+      "nodes": [
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmVt7VshRvFbar5nPzJSCiYBkH28iVEiy2YVtrSxkyTgHX"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "data": {
+    "account": {
+      "__typename": "Account",
+      "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+      "name": "WaadeC",
+      "description": "Hey, I'm a German guy creating NFTs while drinking beers 🍻",
+      "cover": "https://liteflow.mypinata.cloud/ipfs/QmNToZeoTLUSokyhC43NUJZy6K9vf8JdLaRgoiCjLnLMfe",
+      "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+      "twitter": "WaadeC",
+      "instagram": null,
+      "website": null,
+      "verification": {
+        "__typename": "AccountVerification",
+        "status": "VALIDATED"
+      }
+    },
+    "created": {
+      "__typename": "AssetsConnection",
+      "totalCount": 9
+    },
+    "onSale": {
+      "__typename": "AssetsConnection",
+      "totalCount": 7
+    },
+    "owned": {
+      "__typename": "OwnershipsConnection",
+      "totalCount": 9
+    },
+    "trades": {
+      "__typename": "TradesConnection",
+      "totalCount": 0,
+      "nodes": []
+    }
+  }
+}

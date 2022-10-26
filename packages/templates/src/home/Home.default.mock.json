@@ -1,0 +1,1511 @@
+{
+  "data": {
+    "featured": {
+      "__typename": "AssetsConnection",
+      "nodes": [
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140015855675123490232454",
+          "name": "#118 Bounty Hunter - Edition 2 Space travel",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmeQ9EQ6g5gEfvpT9rN6dGkP1DLxdCoB4XrawFivp7wS9n",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "standard": "ERC1155",
+          "creator": {
+            "__typename": "Account",
+            "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "name": "WaadeC",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "owned": {
+            "__typename": "OwnershipsConnection",
+            "aggregates": {
+              "__typename": "OwnershipAggregates",
+              "sum": {
+                "__typename": "OwnershipSumAggregates",
+                "quantity": "0"
+              }
+            }
+          },
+          "ownerships": {
+            "__typename": "OwnershipsConnection",
+            "nodes": [
+              {
+                "__typename": "Ownership",
+                "ownerAddress": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+                "quantity": "12",
+                "owner": {
+                  "__typename": "Account",
+                  "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+                  "name": "WaadeC",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+                  "verification": {
+                    "__typename": "AccountVerification",
+                    "status": "VALIDATED"
+                  }
+                }
+              }
+            ],
+            "aggregates": {
+              "__typename": "OwnershipAggregates",
+              "sum": {
+                "__typename": "OwnershipSumAggregates",
+                "quantity": "12"
+              }
+            }
+          },
+          "sales": {
+            "__typename": "OfferOpenSalesConnection",
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "7fd4030a-2789-4aea-aaad-a5b2f83e7b34",
+                "unitPrice": "49000000000000000000",
+                "availableQuantity": "12",
+                "expiredAt": "2022-06-17T07:29:27+00:00",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+                  "name": "Binance USD",
+                  "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+                  "decimals": 18,
+                  "symbol": "BUSD"
+                },
+                "maker": {
+                  "__typename": "Account",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+                  "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+                  "name": "WaadeC",
+                  "verification": {
+                    "__typename": "AccountVerification",
+                    "status": "VALIDATED"
+                  }
+                }
+              }
+            ],
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "sum": {
+                "__typename": "OfferOpenSaleSumAggregates",
+                "availableQuantity": "12"
+              }
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-35830987083353123895755779054112650157316399236059730431728023881104583369287",
+          "name": "GhostNap Edition #1",
+          "image": "https://liteflow.mypinata.cloud/ipfs/Qmbwur2zYKAgJASS83T38NJUFxPhexjTMPopcssTUyRVNr",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "standard": "ERC721",
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+            "name": "Anna H.",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "owned": {
+            "__typename": "OwnershipsConnection",
+            "aggregates": {
+              "__typename": "OwnershipAggregates",
+              "sum": {
+                "__typename": "OwnershipSumAggregates",
+                "quantity": "0"
+              }
+            }
+          },
+          "ownerships": {
+            "__typename": "OwnershipsConnection",
+            "nodes": [
+              {
+                "__typename": "Ownership",
+                "ownerAddress": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+                "quantity": "1",
+                "owner": {
+                  "__typename": "Account",
+                  "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+                  "name": "Anna H.",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+                  "verification": {
+                    "__typename": "AccountVerification",
+                    "status": "VALIDATED"
+                  }
+                }
+              }
+            ],
+            "aggregates": {
+              "__typename": "OwnershipAggregates",
+              "sum": {
+                "__typename": "OwnershipSumAggregates",
+                "quantity": "1"
+              }
+            }
+          },
+          "sales": {
+            "__typename": "OfferOpenSalesConnection",
+            "nodes": [],
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "sum": {
+                "__typename": "OfferOpenSaleSumAggregates",
+                "availableQuantity": "0"
+              }
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": [
+              {
+                "__typename": "Auction",
+                "id": "7a337013-8706-4bd5-94b5-8d01926dca1d",
+                "endAt": "2022-06-17T23:50:01.97+00:00",
+                "expireAt": "2022-07-01T23:50:01.97+00:00",
+                "winningOffer": null,
+                "reserveAmount": "0",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                },
+                "bestBid": {
+                  "__typename": "OffersConnection",
+                  "nodes": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-35830987083353123895755779054112650157316399236059730431857079010031714855232",
+          "name": "Windy wavy waves",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmbUSLWvafvPJpd5GauTH9mB2VFGkf6gQaSQPxeAD1V4eA",
+          "animationUrl": "https://liteflow.mypinata.cloud/ipfs/QmcYVoyBLgQDgPQyeQAjmkoJCKBbK7rQvjYZ31LSzweNgP",
+          "unlockedContent": null,
+          "standard": "ERC721",
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+            "name": "Anna H.",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "owned": {
+            "__typename": "OwnershipsConnection",
+            "aggregates": {
+              "__typename": "OwnershipAggregates",
+              "sum": {
+                "__typename": "OwnershipSumAggregates",
+                "quantity": "0"
+              }
+            }
+          },
+          "ownerships": {
+            "__typename": "OwnershipsConnection",
+            "nodes": [
+              {
+                "__typename": "Ownership",
+                "ownerAddress": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+                "quantity": "1",
+                "owner": {
+                  "__typename": "Account",
+                  "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+                  "name": "Anna H.",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+                  "verification": {
+                    "__typename": "AccountVerification",
+                    "status": "VALIDATED"
+                  }
+                }
+              }
+            ],
+            "aggregates": {
+              "__typename": "OwnershipAggregates",
+              "sum": {
+                "__typename": "OwnershipSumAggregates",
+                "quantity": "1"
+              }
+            }
+          },
+          "sales": {
+            "__typename": "OfferOpenSalesConnection",
+            "nodes": [],
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "sum": {
+                "__typename": "OfferOpenSaleSumAggregates",
+                "availableQuantity": "0"
+              }
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          }
+        }
+      ]
+    },
+    "assets": {
+      "__typename": "AssetsConnection",
+      "nodes": [
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-35830987083353123895755779054112650157316399236059730431713574065421866334033",
+          "standard": "ERC1155",
+          "name": "Ave.CZR",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmSybmJ1bCynZWH3Y3wE2eRzxV75BPKGKpG7D34Dds8kJU",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+            "name": "Anna H.",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "fe822d5e-0e82-4d04-95a6-c64b3515c73d",
+                "unitPrice": "25000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-35830987083353123895755779054112650157316399236059730431719309693266663016809",
+          "standard": "ERC1155",
+          "name": "Discontruct",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmdbZpKcPdWnYwAVLGSL5jm5HVe93VWa9948s4j7eFGHHC",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+            "name": "Anna H.",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "c7d9774d-19ae-47c4-bf38-968541ce8db4",
+                "unitPrice": "10000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-35830987083353123895755779054112650157316399236059730431733743710891490551648",
+          "standard": "ERC1155",
+          "name": "Ring irridscent shape #823",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmUHdEkNwZFZvzocqgyk9WtYZYjJi7ubA1TuF9TdhY8Ya6",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+            "name": "Anna H.",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 0,
+            "nodes": []
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "0"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-35830987083353123895755779054112650157316399236059730431735096448023648421216",
+          "standard": "ERC1155",
+          "name": "Ring irridscent shape #824",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmTRd4i1vFn2uLizW5TYH3vcQLdnmNGoZ19FkG4TRY7GYJ",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+            "name": "Anna H.",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 0,
+            "nodes": []
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "0"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-36174914148539116512882615125906196155176598740777344057324682489869474805575",
+          "standard": "ERC1155",
+          "name": "#12 Cameras statue",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmetWAuwRUvGvGqdpGL44pnmCrrnDziaREaWaUtedMr1tm",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4ffa469c9a7f71a967e31884a5a64cf5916f905a",
+            "name": "Vivian_Solferino",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmYADyr48PU7YrAjrk7mLQfrRAvhEC2CKStj2A6LaLwCQZ",
+            "verification": null
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 0,
+            "nodes": []
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "0"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-36174914148539116512882615125906196155176598740777344057326027700575544091737",
+          "standard": "ERC1155",
+          "name": "Bionical Edition 6",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmbSXirWRSEbEHRonc2gWyf7oU2GjWRVE6skd2vUoo2Sgp",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4ffa469c9a7f71a967e31884a5a64cf5916f905a",
+            "name": "Vivian_Solferino",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmYADyr48PU7YrAjrk7mLQfrRAvhEC2CKStj2A6LaLwCQZ",
+            "verification": null
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "c14d5833-aeae-4818-8520-93297d923247",
+                "unitPrice": "25000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-36174914148539116512882615125906196155176598740777344057337490697616873251958",
+          "standard": "ERC1155",
+          "name": "Hello from another world",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmXgzwR8VPHd97NVKDrdi3ZqfBUYV6udcGoRq7EaQVagBg",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4ffa469c9a7f71a967e31884a5a64cf5916f905a",
+            "name": "Vivian_Solferino",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmYADyr48PU7YrAjrk7mLQfrRAvhEC2CKStj2A6LaLwCQZ",
+            "verification": null
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "4c0c0fc6-746f-462e-b5b7-fef4c9c8809c",
+                "unitPrice": "25000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-36174914148539116512882615125906196155176598740777344057338786883833218598195",
+          "standard": "ERC1155",
+          "name": "LABYRINTH",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmcgwXtW3Sz1GvpSoxQPeP5RU8kibGncBKE96JbEJvUJ4J",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x4ffa469c9a7f71a967e31884a5a64cf5916f905a",
+            "name": "Vivian_Solferino",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmYADyr48PU7YrAjrk7mLQfrRAvhEC2CKStj2A6LaLwCQZ",
+            "verification": null
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "f8517fac-5c2f-438d-a0dd-018cc16b747f",
+                "unitPrice": "50000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-4484280834982899386339876712021070801677686240476063982817239522845451035414",
+          "standard": "ERC1155",
+          "name": "The burning Cars #167",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmQuMouEvpXw6Y3DhtAADoMFK5VhFLPAK9mdu6y6MgwHVN",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+            "name": "This_is_MichaelF_from_Metaverse_Web3",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "39afa8aa-e8d6-4553-8da4-445bfc292e4d",
+                "unitPrice": "99000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Asset",
+          "id": "97-0xaade84b6a5f76c0a5f7ae91e65197329eb23763f-49600015852111813047896604022884353921118519942981476140020247428532621763333",
+          "standard": "ERC1155",
+          "name": "Big head astronaut from ISS - Edition #76",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmcKaYaJVPU9GzvKa1tQghsEBMrXH6YvPcTPUzHgwTwvWp",
+          "animationUrl": null,
+          "unlockedContent": null,
+          "creator": {
+            "__typename": "Account",
+            "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+            "name": "WaadeC",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+            "verification": {
+              "__typename": "AccountVerification",
+              "status": "VALIDATED"
+            }
+          },
+          "auctions": {
+            "__typename": "AuctionsConnection",
+            "nodes": []
+          },
+          "firstSale": {
+            "__typename": "OfferOpenSalesConnection",
+            "totalCount": 1,
+            "nodes": [
+              {
+                "__typename": "OfferOpenSale",
+                "id": "84dd2d8b-3104-429e-98b2-cb1df7978157",
+                "unitPrice": "20000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS",
+                  "name": "USD Coin",
+                  "id": "97-0x64544969ed7ebf5f083679233325356ebe738930",
+                  "decimals": 18,
+                  "symbol": "USDC"
+                }
+              }
+            ]
+          },
+          "currencySales": {
+            "__typename": "OfferOpenSalesConnection",
+            "aggregates": {
+              "__typename": "OfferOpenSaleAggregates",
+              "distinctCount": {
+                "__typename": "OfferOpenSaleDistinctCountAggregates",
+                "currencyId": "1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "auctions": {
+      "__typename": "AuctionsConnection",
+      "nodes": [
+        {
+          "__typename": "Auction",
+          "id": "08d5ff74-7d27-4c2e-86a4-6936438a8dee",
+          "endAt": "2022-05-27T12:32:00+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": [
+              {
+                "__typename": "Offer",
+                "unitPrice": "1000000000000000000",
+                "amount": "1000000000000000000",
+                "currency": {
+                  "__typename": "Currency",
+                  "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB",
+                  "name": "Binance USD",
+                  "id": "97-0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee",
+                  "decimals": 18,
+                  "symbol": "BUSD"
+                }
+              }
+            ]
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-62171434621851837296684596416865879916712638355443224545786814644694283286905",
+            "standard": "ERC721",
+            "name": "fashion",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmTJYLsdjTrgxMXDTtw5CE2dhrkgUg5PvD4RFYo5h6iSZu",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x8973c8f4f6decfaff71c7af05e6ab5daecc3ae2e",
+              "name": "Alan's NFT",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmTJYLsdjTrgxMXDTtw5CE2dhrkgUg5PvD4RFYo5h6iSZu",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "3204f1b3-4d4a-4859-b188-85e432fc4c11",
+          "endAt": "2022-06-10T22:20:15.23+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-97430781528009278955669206608191540911214288583714243278193187500893046936640",
+            "standard": "ERC721",
+            "name": "CryptoPunk #0127",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmZMNvgm46Sw1dkByxXuZph5gmCD9FRdH7CsuaNSYdtAzs",
+            "animationUrl": "https://liteflow.mypinata.cloud/ipfs/QmQQEu9YauTTMvoZMmt7ZnBovqC8YcXfC8qmmYhNhihVvC",
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0xd767de3d1988d59654ab0a404aae9fb2cd3fb025",
+              "name": null,
+              "image": null,
+              "verification": null
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "c64c7846-2ddd-43f5-93f8-e22fa1ff4f2c",
+          "endAt": "2022-06-10T22:20:15.637+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-97430781528009278955669206608191540911214288583714243278201385790445570040066",
+            "standard": "ERC721",
+            "name": "CryptoPunk #0128",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmUpNsZj7faS5QzH86kQvwQxhHMD8k52yFJ8iYHF2DHaDz",
+            "animationUrl": "https://liteflow.mypinata.cloud/ipfs/QmRxwXFDGQyvA1dqVbNvtY8Q34WnZDJL4cnA1bp4DSFYKy",
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0xd767de3d1988d59654ab0a404aae9fb2cd3fb025",
+              "name": null,
+              "image": null,
+              "verification": null
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "66cd6d99-ff17-496a-ab8b-3bbd843e3407",
+          "endAt": "2022-06-10T22:20:15.986+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-97430781528009278955669206608191540911214288583714243278202637487421824239154",
+            "standard": "ERC721",
+            "name": "CryptoPunk #0129",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmTgBnzB8ZWWdWtvggfbMRhNkeGq5mBqWZBi6AUXSXSw93",
+            "animationUrl": "https://liteflow.mypinata.cloud/ipfs/QmYXbyGxmRyK9C8pJnWUyC4snwfEMYandWVjThwqobyEc2",
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0xd767de3d1988d59654ab0a404aae9fb2cd3fb025",
+              "name": null,
+              "image": null,
+              "verification": null
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "e8dcf930-e92e-4daf-bf88-7b2cdf129960",
+          "endAt": "2022-06-10T22:20:16.324+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-97430781528009278955669206608191540911214288583714243278203906999052004714569",
+            "standard": "ERC721",
+            "name": "CryptoPunk #0130",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmRxehJor2n6cBtNc4nZBGDxxFtKK91NYsKy5qgYTdcPEq",
+            "animationUrl": "https://liteflow.mypinata.cloud/ipfs/QmcZsBFSsLrWa4Ftsyq2fip7wSdTwLeaeCk4g9BSCNEgVa",
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0xd767de3d1988d59654ab0a404aae9fb2cd3fb025",
+              "name": null,
+              "image": null,
+              "verification": null
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "9e91805b-c3f2-41a7-a9b0-1bdff15c1202",
+          "endAt": "2022-06-10T23:48:59.703+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-35830987083353123895755779054112650157316399236059730431699666172363286849574",
+            "standard": "ERC721",
+            "name": "Animal Frossing Wild World #1",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmNehqS4GhtXfLjQUGpijeamp4cpvnzziTPRmAphGZCn7K",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+              "name": "Anna H.",
+              "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "a4e898e3-16de-4da2-9588-0fd71143c7df",
+          "endAt": "2022-06-10T23:50:01.238+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-35830987083353123895755779054112650157316399236059730431701426168056248498003",
+            "standard": "ERC721",
+            "name": "Animal Frossing Wild World #2",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmaYhnycxep5DDn8m3yTEAETCAuyzc3suUDCdkZ6JUmSWB",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+              "name": "Anna H.",
+              "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "dab97aa7-58dd-4cd3-8585-9c0fad03974e",
+          "endAt": "2022-06-10T23:50:01.611+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-35830987083353123895755779054112650157316399236059730431709646009541758181655",
+            "standard": "ERC721",
+            "name": "Animal Frossing Wild World #3",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmRKMUE5J1tLts9Y3mZj1aBDGrJgNxVjiMkNqQnSQKzBTD",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+              "name": "Anna H.",
+              "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "07595bcc-f38d-44f2-94a6-e9107c48d521",
+          "endAt": "2022-06-11T01:29:32.721+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-49600015852111813047896604022884353921118519942981476140030955576111085847079",
+            "standard": "ERC721",
+            "name": "The Squid Game - Conquest #11",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmayZHJe4jHVATu7E62uKzZVyBC1E52PhtiAyD6mDwppMc",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "f38de60b-2bca-45a8-9da7-b28c8b9f1b75",
+          "endAt": "2022-06-11T01:29:33.146+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-49600015852111813047896604022884353921118519942981476140032632852022158440053",
+            "standard": "ERC721",
+            "name": "The Squid Game - Conquest #12",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmXKPEhWdfuXCYCdSuY5BJh6PUo9fcecchsohfSQ5uvD3r",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "8d205eb5-d70c-44fd-b361-dc43f89d3b63",
+          "endAt": "2022-06-11T01:29:34.054+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-49600015852111813047896604022884353921118519942981476140033905752223912514566",
+            "standard": "ERC721",
+            "name": "The Squid Game - Conquest #13",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmThrB3tNi6iCka61otw6HWULMfv1415YeRz2zbVh92pTy",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x6da89d36ba7cd6c371629b0724c2e17abf4049ee",
+              "name": "WaadeC",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPpSR43QCCej6Z8f2MT6tPA9EHDFXYCY5Bkxmeket5yK9",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "71437c61-76be-48ec-bfe1-9f3530361786",
+          "endAt": "2022-06-17T22:08:13.636+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982819815248829869027424",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #01",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmYedQEZcYg8MuRafHB4GihZdgmjwT721xMFwUQXknLDTG",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "36eaa3c4-9bd5-4ce6-a40b-675f74472894",
+          "endAt": "2022-06-17T22:08:13.989+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982827991803684718081124",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #02",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmViyQjDDbBdH1sw2oTRewbNnEy3Xjb33pvRWtbwxFX8hZ",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "1e9716eb-31dd-4521-9448-338e9a4f0933",
+          "endAt": "2022-06-17T22:08:14.334+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982829270824449851195746",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #03",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmV8wX6xSYKNYUwhhoVnrzRCQ6PTWthPuNZjwL6ZT2Vgup",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "6c45a8f4-cec4-4ddd-b11a-4d4576a32460",
+          "endAt": "2022-06-17T22:08:14.672+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982830561663425538396807",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #04",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmP5tUbsMrTpwcwRXqvJvoceJbbskMCFKa8Zik4ToU5s6K",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "23d6b236-fcca-4595-97b2-23b1a79dff8d",
+          "endAt": "2022-06-17T22:08:15.09+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982832570611945372287521",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #05",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmdUPQ2yAcStMeRzFWGTh5AKWjCpadVroucu9zrukTJoHz",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "05e27c1e-bae9-496f-9f52-3e41447f591b",
+          "endAt": "2022-06-17T22:08:15.501+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982833817492988485959936",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #06",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmTURTD9vrarYF4r4nYc8m1eJsSAnybaQP2Sf5V2tQL1HF",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "8712f59e-4153-403d-8824-dba6934d5e5c",
+          "endAt": "2022-06-17T22:08:15.912+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982835102860958566548880",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #07",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmR4Cso7xh1sEtUqw2KhrrdvaCXQC3sg1mWdoo5N1HEWpd",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "16bd81dc-c2c7-4a2c-b73c-16e2524580d2",
+          "endAt": "2022-06-17T22:08:16.327+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982836903109859673859224",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #08",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmPrv91TZ3XBZPG6NCHr4QpWNHQbR49jZpD4ad371an1dK",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "356ab221-ac22-4a16-add8-80be9433615d",
+          "endAt": "2022-06-17T22:08:16.665+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982838141100349961876291",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #09",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmWSE7qNhv6XDHhJCW2aeJ2Gs6SKSBoWKuv9StWoYBWvN3",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "8a25ff77-0968-427c-b0bc-2f014cd9cb81",
+          "endAt": "2022-06-17T22:08:17+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982846343795146309636129",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #10",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmQdMZtVJzuAUEuns1P3KXM5uWqHCUHje3sgs573q7tqaY",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "69f433d0-4c40-4107-a044-afd9a36d314e",
+          "endAt": "2022-06-17T22:08:18.166+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982847630681967429947920",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #11",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmSEv8y5n9PoPh6LM835vkyg9FcFCRfZMT62ywQasBBZTB",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "06d01b57-e47b-4306-aa51-5cd5354ceead",
+          "endAt": "2022-06-17T22:08:18.499+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-4484280834982899386339876712021070801677686240476063982849580210926536556579",
+            "standard": "ERC721",
+            "name": "The Day After Tomorrow - #12",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmTVcQCW5aJ3muqvGfhaEN65nkSeDjMtdWfXzTwHyS4rax",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x09ea03548b97aa045043ff55f5bd9505f2f135eb",
+              "name": "This_is_MichaelF_from_Metaverse_Web3",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmPfekHVQgzHHnJfrJ8pQMi8yo6mb7qfoT5SJdzwJ3fpRk",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "7a337013-8706-4bd5-94b5-8d01926dca1d",
+          "endAt": "2022-06-17T23:50:01.97+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-35830987083353123895755779054112650157316399236059730431728023881104583369287",
+            "standard": "ERC721",
+            "name": "GhostNap Edition #1",
+            "image": "https://liteflow.mypinata.cloud/ipfs/Qmbwur2zYKAgJASS83T38NJUFxPhexjTMPopcssTUyRVNr",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x4f379eb8bf6c83fa3aabf27a31be94d825e5de06",
+              "name": "Anna H.",
+              "image": "https://liteflow.mypinata.cloud/ipfs/Qmf29G19MH2yaUKssUwLhBAAifdVjFu2u8ycZr8MfVvfPE",
+              "verification": {
+                "__typename": "AccountVerification",
+                "status": "VALIDATED"
+              }
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "6fd33cbb-bfe1-412a-838e-d22629132810",
+          "endAt": "2022-06-18T01:26:04.416+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-36174914148539116512882615125906196155176598740777344057341809415099024308534",
+            "standard": "ERC721",
+            "name": "Running after you #7",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmXQG9PQPEw24jiTeddUQ3xuoHu83JoxHXCm95XVX24Jjc",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0x4ffa469c9a7f71a967e31884a5a64cf5916f905a",
+              "name": "Vivian_Solferino",
+              "image": "https://liteflow.mypinata.cloud/ipfs/QmYADyr48PU7YrAjrk7mLQfrRAvhEC2CKStj2A6LaLwCQZ",
+              "verification": null
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "b8014c61-8a92-4134-8113-13b1a5164d89",
+          "endAt": "2022-08-18T14:44:00+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-91642637841883539770378729995331439555625016199255705091169708845232158935093",
+            "standard": "ERC721",
+            "name": "selfie",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmeMuDN3YMnHpxYgx4K1MZ2zrwD1zxeW5vTfpq35s1mKMN",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0xca9be5177bbc579abb969c3c1a6b160485f25dee",
+              "name": null,
+              "image": null,
+              "verification": null
+            }
+          }
+        },
+        {
+          "__typename": "Auction",
+          "id": "a941f206-fac9-4c0f-b952-496b2de038d6",
+          "endAt": "2022-08-18T15:58:00+00:00",
+          "bestBid": {
+            "__typename": "OffersConnection",
+            "nodes": []
+          },
+          "asset": {
+            "__typename": "Asset",
+            "id": "97-0xdd6a37f77754d194b5ec5bb2821bf29375e17da1-91642637841883539770378729995331439555625016199255705095338237346735683077923",
+            "standard": "ERC721",
+            "name": "teste",
+            "image": "https://liteflow.mypinata.cloud/ipfs/QmeMuDN3YMnHpxYgx4K1MZ2zrwD1zxeW5vTfpq35s1mKMN",
+            "animationUrl": null,
+            "unlockedContent": null,
+            "creator": {
+              "__typename": "Account",
+              "address": "0xca9be5177bbc579abb969c3c1a6b160485f25dee",
+              "name": null,
+              "image": null,
+              "verification": null
+            }
+          }
+        }
+      ]
+    },
+    "currencies": {
+      "__typename": "CurrenciesConnection",
+      "nodes": [
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmZU3hgjxvkmsCHum7hZfDjSuz3oEPtF7QdtHXKkXgcNCB"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmVt7VshRvFbar5nPzJSCiYBkH28iVEiy2YVtrSxkyTgHX"
+        },
+        {
+          "__typename": "Currency",
+          "image": "https://liteflow.mypinata.cloud/ipfs/QmV17MDKrb3aCQa2a2SzBZaCeAeAFrpFmqCjn351cWApGS"
+        }
+      ]
+    }
+  }
+}

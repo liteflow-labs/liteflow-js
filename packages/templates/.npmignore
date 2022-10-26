@@ -1,0 +1,9 @@
+src
+.eslintrc.js
+.gitignore
+node_modules
+codegen.yml
+gen-mock.ts
+tsconfig.json
+tsconfig.script.json
+type.d.ts
