@@ -1,0 +1,178 @@
+# Liteflow SDK
+
+This is the documentation for the Liteflow SDK. The SDK contains a set of React Hooks that facilitates the creation of your own NFT Marketplace.
+
+## Before installation
+
+To use the `@nft/hooks` package you will need an app with React version `17`.
+
+## Installation
+
+To install the library, you will need to create a `.npmrc` file at the root of your project to store the NPM access token provided to you by the Liteflow team. It should contain something like this:
+
+```
+//registry.npmjs.org/:_authToken=6A595196-4520-11ED-B878-0242AC120002 // Pass your NPM authToken, this is a placeholder.
+```
+
+> <em>**Warning**: This token should be stored with your environment variables and never exposed. It's only displayed for the purpose of this example. Check the [NPM doc about this](https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow#set-the-token-as-an-environment-variable-on-the-cicd-server).</em>
+
+Once this is done, you should be able to run:
+
+```
+npm i @nft/hooks
+```
+
+## Quick Start
+
+This quick start showcase examples using [Next.js](https://nextjs.org/docs/getting-started).
+
+### 1. Include your favorite web3 provider
+
+Your application is relying on a web3 wallet. Please refer to your preferred web3 provider for the setup. Our example is using RainbowKit and Wagmi but here are a few providers tested and supported:
+
+- [WAGMI](https://wagmi.sh/)
+- [Web3React](https://github.com/Uniswap/web3-react)
+- [RainbowKit](https://www.rainbowkit.com/)
+
+### 2. Wrap app with `LiteflowProvider`, `AccountProvider` and a Web3 provider.
+
+1. Wrap your app with a Web3 provider (in this case `RainbowKitProvider` and `WagmiConfig`) and their configurations.
+
+2. Inside the Web3 provider, wrap your app with the `LiteflowProvider` and pass your Liteflow API endpoint to its `endpoint` property (similar to `https://api.acme.com/graphql`).
+
+3. Inside the `LiteflowProvider` wrap the rest of the app with the `AccountProvider` provider.
+
+```tsx
+import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
+import {
+  ConnectButton,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit'
+import '@rainbow-me/rainbowkit/styles.css'
+import { AppProps } from 'next/app'
+import { PropsWithChildren } from 'react'
+import {
+  chain,
+  configureChains,
+  createClient,
+  useAccount,
+  useDisconnect,
+  WagmiConfig,
+} from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
+
+const { chains, provider } = configureChains(
+  [chain.polygonMumbai], // Change to the chain used by your marketplace
+  [publicProvider()],
+)
+
+const { connectors } = getDefaultWallets({ appName: 'Test', chains })
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+})
+
+function AccountProvider(props: PropsWithChildren) {
+  const [authenticate, { setAuthenticationToken, resetAuthenticationToken }] =
+    useAuthenticate()
+  const { disconnect } = useDisconnect()
+  useAccount({
+    async onConnect({ address, connector }) {
+      // check if user is already authenticated, not only if its wallet is connected
+      if (
+        localStorage.getItem('authorization.address') === address &&
+        localStorage.getItem(`authorization.${address}`)
+      ) {
+        // since the user is already authenticated we can autoconnect
+        setAuthenticationToken(localStorage.getItem(`authorization.${address}`))
+        // TODO: should check the expiration date of the jwt token to make sure it's still valid
+        return
+      }
+
+      // authenticate user
+      const signer = await connector.getSigner()
+      authenticate(signer)
+        .then(({ jwtToken }) => {
+          localStorage.setItem('authorization.address', address)
+          localStorage.setItem(`authorization.${address}`, jwtToken)
+          console.log('user authenticated')
+        })
+        .catch((error) => {
+          console.error(error)
+
+          // disconnect wallet on error
+          disconnect()
+        })
+    },
+    onDisconnect() {
+      // remove authorization and authentication data
+      const address = localStorage.getItem('authorization.address')
+      localStorage.removeItem(`authorization.${address}`)
+      localStorage.removeItem('authorization.address')
+      resetAuthenticationToken()
+    },
+  })
+
+  return <>{props.children}</>
+}
+
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains} coolMode>
+        <LiteflowProvider endpoint="https://api.acme.com/graphql">
+          <AccountProvider>
+            <ConnectButton />
+            <Component {...pageProps} />
+          </AccountProvider>
+        </LiteflowProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
+  )
+}
+
+export default MyApp
+```
+
+### 3. You're all set!
+
+Every component inside your App has now access to Liteflow's hooks.
+
+```tsx
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
+import { useCreateOffer } from '@nft/hooks'
+import { BigNumber } from 'ethers'
+import { useCallback } from 'react'
+import { useSigner } from 'wagmi'
+
+export default function Home() {
+  const { data: signer } = useSigner()
+  const [_create] = useCreateOffer(
+    signer as (Signer & TypedDataSigner) | undefined,
+  )
+  const assetId =
+    '80001-0x7c68c3c59ceb245733a2fdeb47f5f7d6dbcc65b3-60249402084937876423066029128237587855293854847399126863606291191289075471730'
+
+  const create = useCallback(async () => {
+    const amount = parseFloat(prompt('amount in USDC'))
+    const id = await _create({
+      type: 'BUY',
+      assetId,
+      currencyId: '80001-0x0fa8781a83e46826621b3bc094ea2a0212e71b23', // USDC on Polygon Mumbai
+      expiredAt: new Date(Date.now() + 1000 * 60 * 60),
+      quantity: BigNumber.from(1),
+      unitPrice: BigNumber.from(amount * 1e6),
+    })
+    alert(id)
+  }, [_create])
+
+  return <>{signer && <a onClick={create}>Create offer</a>}</>
+}
+```
+
+Check out the [minimal app repo](https://github.com/liteflow-labs/minimal-app/) to see this example in a working app.
+
+Want to learn more about the hooks? Check out the [hooks docs](./hooks).
