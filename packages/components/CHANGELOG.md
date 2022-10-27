@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Added a property to enable hiding of the "create" button in the case of a platform not having the ability to mint. [#2225](https://github.com/liteflow-labs/nft/pull/2225)
+
 #### Deprecated
 
 #### Removed

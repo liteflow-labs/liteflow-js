@@ -118,8 +118,17 @@ const DrawerMenu: VFC<{
     addFund: () => Promise<null | undefined>
     addingFund: boolean
   }
+  disableMinting?: boolean
   signOutFn: () => void
-}> = ({ account, signOutFn, logo, router, multiLang, topUp }) => {
+}> = ({
+  account,
+  signOutFn,
+  logo,
+  router,
+  multiLang,
+  topUp,
+  disableMinting,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { asPath, events, query, push } = router
   const { t } = useTranslation('components')
@@ -165,9 +174,11 @@ const DrawerMenu: VFC<{
             <Link href="/explore">
               <NavItemMobile>{t('navbar.explore')}</NavItemMobile>
             </Link>
-            <Link href="/create">
-              <NavItemMobile>{t('navbar.create')}</NavItemMobile>
-            </Link>
+            {disableMinting && (
+              <Link href="/create">
+                <NavItemMobile>{t('navbar.create')}</NavItemMobile>
+              </Link>
+            )}
             {account ? (
               <>
                 <Accordion as="nav" allowMultiple>
@@ -376,6 +387,7 @@ type FormData = {
 
 const Navbar: VFC<{
   allowTopUp: boolean
+  disableMinting?: boolean
   logo?: {
     path: string
     width?: number
@@ -396,7 +408,7 @@ const Navbar: VFC<{
     networkName: string
   }
   multiLang?: MultiLang
-}> = ({ allowTopUp, logo, router, login, multiLang }) => {
+}> = ({ allowTopUp, logo, router, login, multiLang, disableMinting }) => {
   const { t } = useTranslation('components')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { account, deactivate, ready, signer } = useSession()
@@ -467,17 +479,19 @@ const Navbar: VFC<{
               {t('navbar.explore')}
             </Text>
           </Flex>
-          <Flex
-            as={Link}
-            href="/create"
-            color="brand.black"
-            align="center"
-            _hover={{ color: 'gray.500' }}
-          >
-            <Text as="span" variant="button2">
-              {t('navbar.create')}
-            </Text>
-          </Flex>
+          {disableMinting && (
+            <Flex
+              as={Link}
+              href="/create"
+              color="brand.black"
+              align="center"
+              _hover={{ color: 'gray.500' }}
+            >
+              <Text as="span" variant="button2">
+                {t('navbar.create')}
+              </Text>
+            </Flex>
+          )}
           {account && data?.account ? (
             <>
               <ActivityMenu account={account} />
@@ -543,6 +557,7 @@ const Navbar: VFC<{
             router={router}
             multiLang={multiLang}
             topUp={{ allowTopUp, addFund, addingFund }}
+            disableMinting={disableMinting}
             signOutFn={deactivate}
           />
         </Flex>
