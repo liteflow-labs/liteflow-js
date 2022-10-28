@@ -85,3 +85,34 @@ WithHint.args = {
     ...x,
   })),
 }
+
+export const WithManyChoicesAndMaxHeight = Template.bind({})
+WithManyChoicesAndMaxHeight.args = {
+  ...Default.args,
+  dropdownMaxHeight: '360px',
+  choices: [
+    ...choices,
+    { label: 'Extra choice #1', value: 'extra-choice-1' },
+    { label: 'Extra choice #2', value: 'extra-choice-2' },
+    { label: 'Extra choice #3', value: 'extra-choice-3' },
+    { label: 'Extra choice #4', value: 'extra-choice-4' },
+    { label: 'Extra choice #5', value: 'extra-choice-5' },
+    { label: 'Extra choice #6', value: 'extra-choice-6' },
+    { label: 'Extra choice #7', value: 'extra-choice-7' },
+    { label: 'Extra choice #8', value: 'extra-choice-8' },
+    { label: 'Extra choice #9', value: 'extra-choice-9' },
+    { label: 'Extra choice #10', value: 'extra-choice-10' },
+    { label: 'Extra choice #11', value: 'extra-choice-11' },
+    { label: 'Extra choice #12', value: 'extra-choice-12' },
+    { label: 'Extra choice #13', value: 'extra-choice-13' },
+    { label: 'Extra choice #14', value: 'extra-choice-14' },
+    { label: 'Extra choice #15', value: 'extra-choice-15' },
+    { label: 'Extra choice #16', value: 'extra-choice-16' },
+    { label: 'Extra choice #17', value: 'extra-choice-17' },
+    { label: 'Extra choice #18', value: 'extra-choice-18' },
+    { label: 'Extra choice #19', value: 'extra-choice-19' },
+    { label: 'Extra choice #20', value: 'extra-choice-20' },
+  ].map((x) => ({
+    ...x,
+  })),
+}

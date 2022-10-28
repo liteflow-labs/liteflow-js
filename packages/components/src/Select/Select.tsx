@@ -21,6 +21,7 @@ import Image from '../Image/Image'
 
 type IProps = HTMLAttributes<any> & {
   selectWidth?: string | number
+  dropdownMaxHeight?: string | number
   label?: string
   choices: {
     value: string
@@ -42,6 +43,7 @@ type IProps = HTMLAttributes<any> & {
 
 const Select: FC<IProps> = ({
   selectWidth,
+  dropdownMaxHeight,
   label,
   choices,
   value,
@@ -149,7 +151,12 @@ const Select: FC<IProps> = ({
                 )}
               </Flex>
             </MenuButton>
-            <MenuList zIndex={10} minW={0}>
+            <MenuList
+              zIndex={10}
+              minW={0}
+              maxH={dropdownMaxHeight ? dropdownMaxHeight : 52}
+              overflowY="scroll"
+            >
               {choices.map((choice, i) => (
                 <MenuItem
                   onClick={() => {
