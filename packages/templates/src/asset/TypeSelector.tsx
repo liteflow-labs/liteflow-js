@@ -20,7 +20,6 @@ import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React from 'react'
 import {
-  AccountVerificationStatus,
   FetchAccountVerificationStatusDocument,
   FetchAccountVerificationStatusQuery,
   FetchAccountVerificationStatusQueryVariables,
@@ -59,7 +58,7 @@ export const Template: NextPage<{
 
   if (
     restrictMintToVerifiedAccount &&
-    data?.account?.verification?.status !== AccountVerificationStatus.Validated
+    data?.account?.verification?.status !== 'VALIDATED'
   )
     return (
       <>

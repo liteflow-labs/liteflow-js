@@ -5,7 +5,6 @@ import { BigNumber } from '@ethersproject/bignumber'
 import {
   Account,
   AccountVerification,
-  AccountVerificationStatus,
   Asset,
   AssetHistory,
   AssetHistoryAction,
@@ -97,7 +96,7 @@ export const convertUser = (
   address: user?.address || defaultAddress,
   image: user?.image || null,
   name: user?.name || null,
-  verified: user?.verification?.status === AccountVerificationStatus.Validated,
+  verified: user?.verification?.status === 'VALIDATED',
 })
 
 export const convertFullUser = (
@@ -204,9 +203,7 @@ export const convertHistories = (
       ? {
           image: history.from.image,
           name: history.from.name,
-          verified:
-            history.from.verification?.status ===
-            AccountVerificationStatus.Validated,
+          verified: history.from.verification?.status === 'VALIDATED',
         }
       : null,
     toAddress: history.toAddress,
@@ -214,9 +211,7 @@ export const convertHistories = (
       ? {
           image: history.to.image,
           name: history.to.name,
-          verified:
-            history.to.verification?.status ===
-            AccountVerificationStatus.Validated,
+          verified: history.to.verification?.status === 'VALIDATED',
         }
       : null,
     currency: history.currency,
@@ -338,8 +333,7 @@ export const convertSaleFull = (
       address: sale.maker.address,
       name: sale.maker.name,
       image: sale.maker.image,
-      verified:
-        sale.maker.verification?.status === AccountVerificationStatus.Validated,
+      verified: sale.maker.verification?.status === 'VALIDATED',
     },
     expiredAt: sale.expiredAt ? new Date(sale.expiredAt) : undefined,
     availableQuantity: BigNumber.from(sale.availableQuantity),
@@ -375,8 +369,7 @@ export const convertBid = (
       address: bid.maker.address,
       image: bid.maker.image,
       name: bid.maker.name,
-      verified:
-        bid.maker.verification?.status === AccountVerificationStatus.Validated,
+      verified: bid.maker.verification?.status === 'VALIDATED',
     },
     unitPrice: BigNumber.from(bid.unitPrice),
     currency: bid.currency,

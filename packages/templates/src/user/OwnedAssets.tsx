@@ -57,10 +57,7 @@ export const server = (
 
     const limit = getLimit(ctx, defaultLimit)
     const page = getPage(ctx)
-    const orderBy = getOrder<OwnershipsOrderBy>(
-      ctx,
-      OwnershipsOrderBy.CreatedAtDesc,
-    )
+    const orderBy = getOrder<OwnershipsOrderBy>(ctx, 'CREATED_AT_DESC')
     const offset = getOffset(ctx, defaultLimit)
 
     const now = new Date()
@@ -171,18 +168,18 @@ export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
       }
       loginUrlForReferral={loginUrlForReferral}
     >
-      <TokenGrid
+      <TokenGrid<OwnershipsOrderBy>
         assets={assets}
         orderBy={{
           value: orderBy,
           choices: [
             {
               label: t('user.owned-assets.orderBy.values.createdAtDesc'),
-              value: OwnershipsOrderBy.CreatedAtDesc,
+              value: 'CREATED_AT_DESC',
             },
             {
               label: t('user.owned-assets.orderBy.values.createdAtAsc'),
-              value: OwnershipsOrderBy.CreatedAtAsc,
+              value: 'CREATED_AT_ASC',
             },
           ],
           onSort: changeOrder,

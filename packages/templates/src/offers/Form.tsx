@@ -30,7 +30,6 @@ import {
   FeesForOfferQuery,
   OfferForAssetDocument,
   OfferForAssetQuery,
-  Standard,
   useFeesForOfferQuery,
   useOfferForAssetQuery,
 } from '../graphql'
@@ -171,7 +170,7 @@ export const Template: VFC<
         value: SaleType.TIMED_AUCTION,
         label: t('offers.form.options.values.auction'),
         icon: HiOutlineClock,
-        disabled: asset?.standard !== Standard.Erc721,
+        disabled: asset?.standard !== 'ERC721',
       },
     ],
     [asset, t],
