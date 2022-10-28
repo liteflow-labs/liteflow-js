@@ -85,3 +85,21 @@ WithHint.args = {
     ...x,
   })),
 }
+
+export const WithManyChoices = Template.bind({})
+WithManyChoices.args = {
+  ...Default.args,
+  choices: [
+    ...choices,
+    ...choices,
+    ...choices,
+    ...choices,
+    ...choices,
+    ...choices,
+    ...choices,
+    ...choices,
+    ...choices,
+  ].map((x) => ({
+    ...x,
+  })),
+}
