@@ -6,6 +6,8 @@
 
 #### Added
 
+- Add `isValid` to auction status hook to return true if the auction if valid, false otherwise [#59](https://github.com/liteflow-labs/libraries/pull/59)
+
 #### Changed
 
 #### Deprecated

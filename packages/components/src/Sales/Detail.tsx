@@ -2,7 +2,7 @@ import { Stack } from '@chakra-ui/react'
 import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { useAuctionStatus } from '@nft/hooks'
-import React, { useMemo, VFC } from 'react'
+import React, { VFC } from 'react'
 import SaleAuctionButton from './Auction/Button'
 import type { Props as SaleAuctionInfoProps } from './Auction/Info'
 import SaleAuctionInfo from './Auction/Info'
@@ -79,23 +79,8 @@ const SaleDetail: VFC<Props> = ({
     hasBids,
     bellowReservePrice,
     reservePriceMatches,
+    isValid,
   } = useAuctionStatus(auction, bestBid)
-
-  const validAuction = useMemo(
-    () =>
-      auction &&
-      (inProgress ||
-        (endedAndWaitingForTransfer &&
-          (!hasBids || bellowReservePrice || reservePriceMatches))),
-    [
-      auction,
-      inProgress,
-      endedAndWaitingForTransfer,
-      hasBids,
-      bellowReservePrice,
-      reservePriceMatches,
-    ],
-  )
 
   return (
     <Stack spacing={8}>
@@ -123,7 +108,7 @@ const SaleDetail: VFC<Props> = ({
             onOfferCanceled={onOfferCanceled}
           />
         </>
-      ) : auction && validAuction ? (
+      ) : auction && isValid ? (
         <>
           <SaleAuctionSummary
             auction={auction}

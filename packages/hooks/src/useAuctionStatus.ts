@@ -11,6 +11,7 @@ type SuccessStatus = {
   hasBids: boolean
   bellowReservePrice: boolean
   reservePriceMatches: boolean
+  isValid: boolean
 }
 
 export default function useAuctionStatus(
@@ -64,6 +65,21 @@ export default function useAuctionStatus(
     [auction?.reserveAmount, bestBid?.amount],
   )
 
+  // check if auction is still valid
+  const isValid = useMemo(() => {
+    if (!auction) return false
+    if (inProgress) return true
+    if (!endedAndWaitingForTransfer) return false
+    return !hasBids || bellowReservePrice || reservePriceMatches
+  }, [
+    auction,
+    inProgress,
+    endedAndWaitingForTransfer,
+    hasBids,
+    bellowReservePrice,
+    reservePriceMatches,
+  ])
+
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(interval)
@@ -73,9 +89,9 @@ export default function useAuctionStatus(
     inProgress,
     endedAndWaitingForTransfer,
     ended,
-
     hasBids,
     bellowReservePrice,
     reservePriceMatches,
+    isValid,
   }
 }
