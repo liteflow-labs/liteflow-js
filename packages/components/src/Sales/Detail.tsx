@@ -7,7 +7,7 @@ import SaleAuctionButton from './Auction/Button'
 import type { Props as SaleAuctionInfoProps } from './Auction/Info'
 import SaleAuctionInfo from './Auction/Info'
 import SaleAuctionSummary, {
-  Props as SaleAuctionSummaryProps
+  Props as SaleAuctionSummaryProps,
 } from './Auction/Summary'
 import type { Props as SaleDirectButtonProps } from './Direct/Button'
 import SaleDirectButton from './Direct/Button'
