@@ -46,3 +46,9 @@ AllowTopUp.args = {
   ...Default.args,
   allowTopUp: true,
 }
+
+export const DisableMinting = Template.bind({})
+DisableMinting.args = {
+  ...Default.args,
+  disableMinting: true,
+}

@@ -174,7 +174,7 @@ const DrawerMenu: VFC<{
             <Link href="/explore">
               <NavItemMobile>{t('navbar.explore')}</NavItemMobile>
             </Link>
-            {disableMinting && (
+            {!disableMinting && (
               <Link href="/create">
                 <NavItemMobile>{t('navbar.create')}</NavItemMobile>
               </Link>
@@ -479,7 +479,7 @@ const Navbar: VFC<{
               {t('navbar.explore')}
             </Text>
           </Flex>
-          {disableMinting && (
+          {!disableMinting && (
             <Flex
               as={Link}
               href="/create"
