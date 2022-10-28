@@ -73,7 +73,7 @@ const TokenAsset: VFC<Props> = ({
           <OwnersModal owners={owners} />
         </Stack>
       )}
-      {standard === Standard.Erc721 && (
+      {standard === 'ERC721' && (
         <Stack spacing={3}>
           <Heading as="h5" variant="heading3" color="gray.500">
             {t('token.metadata.edition')}
@@ -86,7 +86,7 @@ const TokenAsset: VFC<Props> = ({
           </Flex>
         </Stack>
       )}
-      {standard === Standard.Erc1155 && (
+      {standard === 'ERC1155' && (
         <Stack spacing={3}>
           <Heading as="h5" variant="heading3" color="gray.500">
             {t('token.metadata.edition')}
