@@ -5,13 +5,13 @@ type TimelineStatus = {
   inProgress: boolean
   ended: boolean
   endedAndWaitingForTransfer: boolean
-  validAuction: boolean
 }
 
 type SuccessStatus = {
   hasBids: boolean
   bellowReservePrice: boolean
   reservePriceMatches: boolean
+  isValid: boolean
 }
 
 export default function useAuctionStatus(
@@ -66,7 +66,7 @@ export default function useAuctionStatus(
   )
 
   // check if auction is still valid
-  const validAuction = useMemo(() => {
+  const isValid = useMemo(() => {
     if (!auction) return false
     if (inProgress) return true
     if (!endedAndWaitingForTransfer) return false
@@ -92,6 +92,6 @@ export default function useAuctionStatus(
     hasBids,
     bellowReservePrice,
     reservePriceMatches,
-    validAuction,
+    isValid,
   }
 }

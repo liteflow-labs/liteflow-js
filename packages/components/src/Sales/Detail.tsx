@@ -79,7 +79,7 @@ const SaleDetail: VFC<Props> = ({
     hasBids,
     bellowReservePrice,
     reservePriceMatches,
-    validAuction,
+    isValid,
   } = useAuctionStatus(auction, bestBid)
 
   return (
@@ -108,7 +108,7 @@ const SaleDetail: VFC<Props> = ({
             onOfferCanceled={onOfferCanceled}
           />
         </>
-      ) : auction && validAuction ? (
+      ) : auction && isValid ? (
         <>
           <SaleAuctionSummary
             auction={auction}
