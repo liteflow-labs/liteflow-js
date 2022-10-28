@@ -69,10 +69,8 @@ export default function useAuctionStatus(
   const validAuction = useMemo(() => {
     if (!auction) return false
     if (inProgress) return true
-    return (
-      endedAndWaitingForTransfer &&
-      (!hasBids || bellowReservePrice || reservePriceMatches)
-    )
+    if (!endedAndWaitingForTransfer) return false
+    return !hasBids || bellowReservePrice || reservePriceMatches
   }, [
     auction,
     inProgress,
