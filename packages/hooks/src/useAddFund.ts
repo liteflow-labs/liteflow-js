@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorCodes } from './error'
 
 gql`
   mutation CreateWyrePayment($address: Address!) {
@@ -14,20 +16,19 @@ gql`
 
 export default function useAddFund(
   signer: Signer | undefined,
-): [() => Promise<null | undefined>, { loading: boolean }] {
+): [() => Promise<void>, { loading: boolean }] {
   const { sdk } = useContext(LiteflowContext)
   const [loading, setLoading] = useState(false)
   const addFunds = useCallback(async () => {
-    if (!signer) throw new Error('signer falsy')
+    invariant(signer, ErrorCodes.SIGNER_FALSY)
     try {
       setLoading(true)
       const account = await signer.getAddress()
-      const data = await sdk.CreateWyrePayment({
+      const { createWyrePayment } = await sdk.CreateWyrePayment({
         address: account.toLowerCase(),
       })
-      const { url } = (data || {}).createWyrePayment || {}
-      if (!url) return null
-      window.open(url)
+      // TOFIX: Should return the URL and let the component open in a new window
+      window.open(createWyrePayment.url)
     } finally {
       setLoading(false)
     }

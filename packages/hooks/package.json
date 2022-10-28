@@ -30,7 +30,8 @@
     "graphql-request": "^5.0.0",
     "graphql-tag": "^2.12.6",
     "react": "^17.0.2",
-    "react-device-detect": "^1.17.0"
+    "react-device-detect": "^1.17.0",
+    "ts-invariant": "0.9.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.7",

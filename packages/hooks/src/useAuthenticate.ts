@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorCodes } from './error'
 
 gql`
   mutation RequestAuthentication($input: RequestAuthenticationInput!) {
@@ -39,26 +41,24 @@ export default function useAuthenticate(): [
 
   const authenticate = useCallback(
     async (signer: Signer) => {
-      if (!signer) throw new Error('signer is falsy')
+      invariant(signer, ErrorCodes.SIGNER_FALSY)
       const address = (await signer.getAddress()).toLowerCase()
-      if (!address) throw new Error('address is falsy')
 
       try {
         resetAuthenticationToken()
         setLoading(true)
         // request message
-        const requestAuthenticationData = await sdk.RequestAuthentication({
+        const { requestAuthentication } = await sdk.RequestAuthentication({
           input: {
             clientMutationId: null,
             address,
           },
         })
-        if (!requestAuthenticationData?.requestAuthentication.message)
-          throw new Error('unknown error during request of authentication data')
-        const payload = requestAuthenticationData.requestAuthentication
 
         // sign message
-        const signature = await signer.signMessage(payload.message)
+        const signature = await signer.signMessage(
+          requestAuthentication.message,
+        )
 
         // authenticate against the API
         const authenticateData = await sdk.Authenticate({
@@ -66,16 +66,13 @@ export default function useAuthenticate(): [
             clientMutationId: null,
             signature,
             parameters: {
-              address: payload.parameters.address,
-              expirationTime: payload.parameters.expirationTime,
-              issuedAt: payload.parameters.issuedAt,
-              nonce: payload.parameters.nonce,
+              address: requestAuthentication.parameters.address,
+              expirationTime: requestAuthentication.parameters.expirationTime,
+              issuedAt: requestAuthentication.parameters.issuedAt,
+              nonce: requestAuthentication.parameters.nonce,
             },
           },
         })
-        if (!authenticateData?.authenticate?.jwtToken)
-          throw new Error('unknown error during authenticate request')
-
         setAuthenticationToken(authenticateData.authenticate.jwtToken)
         return {
           accountAddress: address,

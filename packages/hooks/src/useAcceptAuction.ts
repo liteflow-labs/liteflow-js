@@ -2,7 +2,9 @@ import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumber } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useEffect, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorCodes } from './error'
 import useAcceptOffer, { AcceptOfferStep } from './useAcceptOffer'
 
 gql`
@@ -72,15 +74,16 @@ export default function useAcceptAuction(signer: Signer | undefined): [
       try {
         setActiveProcess(AcceptAuctionStep.RESOLVE_BEST_BID)
         const data = await sdk.FetchAuctionBid({ id: auctionId })
-        if (!data?.auction) throw new Error('Auction not found')
+        invariant(data.auction, ErrorCodes.AUCTION_NOT_FOUND)
         const offer = data.auction.offers.nodes[0]
-        if (!offer) throw new Error('No offer found')
-        if (
-          BigNumber.from(offer.amount).lt(
+        invariant(offer, ErrorCodes.OFFER_NOT_FOUND)
+
+        invariant(
+          BigNumber.from(offer.amount).gte(
             BigNumber.from(data.auction.reserveAmount),
-          )
+          ),
+          ErrorCodes.AUCTION_RESERVER_NOT_MATCH,
         )
-          throw new Error('reserve not matched')
         await acceptOffer(offer, offer.quantity)
       } finally {
         setActiveProcess(AcceptAuctionStep.INITIAL)

@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorCodes } from './error'
 
 gql`
   mutation VerifyAccount($input: CreateAccountVerificationInput!) {
@@ -27,12 +29,12 @@ export default function useVerifyAccount(
   const [loading, setLoading] = useState(false)
 
   const verifyAccount = useCallback(async () => {
-    if (!signer) throw new Error('signer falsy')
+    invariant(signer, ErrorCodes.SIGNER_FALSY)
     try {
       setLoading(true)
       const account = await signer.getAddress()
 
-      const data = await sdk.VerifyAccount({
+      const { createAccountVerification } = await sdk.VerifyAccount({
         input: {
           clientMutationId: null,
           accountVerification: {
@@ -40,9 +42,11 @@ export default function useVerifyAccount(
           },
         },
       })
-      if (!data?.createAccountVerification?.accountVerification)
-        throw new Error('data falsy')
-      return data.createAccountVerification.accountVerification.status
+      invariant(
+        createAccountVerification?.accountVerification,
+        ErrorCodes.ACCOUNT_VERIFICATION_FAILED,
+      )
+      return createAccountVerification.accountVerification.status
     } finally {
       setLoading(false)
     }

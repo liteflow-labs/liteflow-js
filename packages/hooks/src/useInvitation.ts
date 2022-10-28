@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorCodes } from './error'
 
 gql`
   mutation CreateInvitation {
@@ -41,20 +43,21 @@ export default function useInvitation(signer: Signer | undefined): {
   const [accepting, setAccepting] = useState(false)
   const [creating, setCreating] = useState(false)
   const create = useCallback(async () => {
-    if (!signer) throw new Error('signer falsy')
+    invariant(signer, ErrorCodes.SIGNER_FALSY)
     try {
       setCreating(true)
       const account = await signer.getAddress()
-      const invite = await sdk.GetInvitation({
+      const { invitationByInvitedByAddress } = await sdk.GetInvitation({
         address: account.toLowerCase(),
       })
-      if (invite.invitationByInvitedByAddress) {
-        return invite.invitationByInvitedByAddress.id
-      }
-      const data = await sdk.CreateInvitation()
-      if (!data?.createInvitation?.invitation?.id) throw new Error('No id')
+      if (invitationByInvitedByAddress) return invitationByInvitedByAddress.id
+      const { createInvitation } = await sdk.CreateInvitation()
+      invariant(
+        createInvitation?.invitation?.id,
+        ErrorCodes.INVITATION_CREATION_FAILED,
+      )
 
-      return data.createInvitation.invitation.id
+      return createInvitation.invitation.id
     } finally {
       setCreating(false)
     }
@@ -64,10 +67,11 @@ export default function useInvitation(signer: Signer | undefined): {
     async (invitationId: string) => {
       try {
         setAccepting(true)
-        const data = await sdk.AcceptInvitation({ id: invitationId })
-        if (!data?.acceptInvitation?.invitation)
-          throw new Error('No invitation')
-        return data.acceptInvitation.invitation.id
+        const { acceptInvitation } = await sdk.AcceptInvitation({
+          id: invitationId,
+        })
+        invariant(acceptInvitation?.invitation, ErrorCodes.INVITATION_NOT_FOUND)
+        return acceptInvitation.invitation.id
       } finally {
         setAccepting(false)
       }
