@@ -6,21 +6,29 @@
 
 #### Added
 
+#### Changed
+
+#### Deprecated
+
+#### Removed
+
+#### Fixed
+
+#### Security
+
+## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
+
+#### Added
+
 - Added a `dropdownMaxHeight` property to the `Select` component to enable control of the dropdown height. [#58](https://github.com/liteflow-labs/libraries/pull/58)
 
 #### Changed
 
 - Added a property to enable hiding of the "create" button in the case of a platform not having the ability to mint. [#2225](https://github.com/liteflow-labs/nft/pull/2225)
 
-#### Deprecated
-
 #### Removed
 
 - Removed `autoprefixer` from the package. https://github.com/liteflow-labs/nft/pull/2222
-
-#### Fixed
-
-#### Security
 
 ## [v1.0.0-beta.5](https://github.com/liteflow-labs/nft/releases/tag/v1.0.0-beta.5) - 2022-10-24
 
