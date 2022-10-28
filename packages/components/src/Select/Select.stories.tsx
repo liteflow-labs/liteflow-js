@@ -86,9 +86,10 @@ WithHint.args = {
   })),
 }
 
-export const WithManyChoices = Template.bind({})
-WithManyChoices.args = {
+export const WithManyChoicesAndMaxHeight = Template.bind({})
+WithManyChoicesAndMaxHeight.args = {
   ...Default.args,
+  dropdownMaxHeight: '360px',
   choices: [
     ...choices,
     ...choices,

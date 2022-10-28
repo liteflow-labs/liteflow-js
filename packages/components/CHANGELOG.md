@@ -6,6 +6,8 @@
 
 #### Added
 
+- Added a `dropdownMaxHeight` property to the `Select` component to enable control of the dropdown height. [#58](https://github.com/liteflow-labs/libraries/pull/58)
+
 #### Changed
 
 #### Deprecated
