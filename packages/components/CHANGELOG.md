@@ -14,7 +14,7 @@
 
 #### Fixed
 
-- Type in the banner in the wallet page [](https://github.com/liteflow-labs/libraries/pull/)
+- Type in the banner on the wallet page [#61](https://github.com/liteflow-labs/libraries/pull/61)
 
 #### Security
 
