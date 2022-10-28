@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Type in the banner in the wallet page [](https://github.com/liteflow-labs/libraries/pull/)
+
 #### Security
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
