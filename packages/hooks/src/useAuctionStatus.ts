@@ -5,6 +5,7 @@ type TimelineStatus = {
   inProgress: boolean
   ended: boolean
   endedAndWaitingForTransfer: boolean
+  validAuction: boolean
 }
 
 type SuccessStatus = {
@@ -64,6 +65,23 @@ export default function useAuctionStatus(
     [auction?.reserveAmount, bestBid?.amount],
   )
 
+  // check if auction is still valid
+  const validAuction = useMemo(() => {
+    if (!auction) return false
+    if (inProgress) return true
+    return (
+      endedAndWaitingForTransfer &&
+      (!hasBids || bellowReservePrice || reservePriceMatches)
+    )
+  }, [
+    auction,
+    inProgress,
+    endedAndWaitingForTransfer,
+    hasBids,
+    bellowReservePrice,
+    reservePriceMatches,
+  ])
+
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(interval)
@@ -73,9 +91,9 @@ export default function useAuctionStatus(
     inProgress,
     endedAndWaitingForTransfer,
     ended,
-
     hasBids,
     bellowReservePrice,
     reservePriceMatches,
+    validAuction,
   }
 }
