@@ -196,13 +196,13 @@ export default function useCreateNFT(
 
           const { createLazyMintedAssetSignature } =
             await sdk.CreateLazyMintedAssetSignature({
-            asset: assetToCreate,
-          })
+              asset: assetToCreate,
+            })
 
           invariant(
             createLazyMintedAssetSignature?.eip712Data,
             ErrorCodes.MINT_SIGNATURE_GENERATION,
-            )
+          )
 
           // sign data
           setActiveProcess(CreateNftStep.LAZYMINT_SIGNATURE)
