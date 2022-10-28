@@ -14,9 +14,13 @@
 
 #### Fixed
 
-- Fixed storybook to document all templates [#2231](https://github.com/liteflow-labs/nft/pull/2231)
-
 #### Security
+
+## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
+
+#### Fixed
+
+- Fixed storybook to document all templates [#2231](https://github.com/liteflow-labs/nft/pull/2231)
 
 ## [v1.0.0-beta.5](https://github.com/liteflow-labs/nft/releases/tag/v1.0.0-beta.5) - 2022-10-24
 

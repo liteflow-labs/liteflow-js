@@ -6,8 +6,6 @@
 
 #### Added
 
-- Add `isValid` to auction status hook to return true if the auction if valid, false otherwise [#59](https://github.com/liteflow-labs/libraries/pull/59)
-
 #### Changed
 
 #### Deprecated
@@ -17,6 +15,12 @@
 #### Fixed
 
 #### Security
+
+## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
+
+#### Added
+
+- Add `isValid` to auction status hook to return true if the auction if valid, false otherwise [#59](https://github.com/liteflow-labs/libraries/pull/59)
 
 ## [v1.0.0-beta.5](https://github.com/liteflow-labs/nft/releases/tag/v1.0.0-beta.5) - 2022-10-24
 
