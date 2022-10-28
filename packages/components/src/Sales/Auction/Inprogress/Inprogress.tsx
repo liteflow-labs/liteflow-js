@@ -55,7 +55,7 @@ const SaleAuctionInProgress: VFC<Props> = ({ auction, bestBid }) => {
   return (
     <Flex wrap="wrap" gap={8}>
       <Flex direction="column" gap={3}>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {bidTitle}
         </Heading>
         <Flex gap={2}>
@@ -67,7 +67,7 @@ const SaleAuctionInProgress: VFC<Props> = ({ auction, bestBid }) => {
             justify="center"
             rounded="full"
             borderWidth="1px"
-            borderColor="gray.200"
+            borderColor="inherit"
           >
             {currency.image && (
               <Image
@@ -78,14 +78,14 @@ const SaleAuctionInProgress: VFC<Props> = ({ auction, bestBid }) => {
               />
             )}
           </Flex>
-          <Heading as="h2" variant="subtitle" color="brand.black">
+          <Heading as="h2" variant="subtitle">
             {bidChildren}
           </Heading>
         </Flex>
       </Flex>
 
       <Flex direction="column" gap={3}>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {t('sales.auction.in-progress.ending')}
         </Heading>
         <Flex align="center" gap={3}>
@@ -98,9 +98,9 @@ const SaleAuctionInProgress: VFC<Props> = ({ auction, bestBid }) => {
             justify="center"
             rounded="full"
           >
-            <Icon as={HiOutlineClock} h={5} w={5} color="white" />
+            <Icon as={HiOutlineClock} h={5} w={5} />
           </Flex>
-          <Heading as="h2" variant="subtitle" color="brand.black">
+          <Heading as="h2" variant="subtitle">
             <Countdown date={auction.endAt} />
           </Heading>
         </Flex>

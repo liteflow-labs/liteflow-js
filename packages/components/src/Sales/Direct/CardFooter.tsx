@@ -37,13 +37,13 @@ const SaleDirectCardFooter: VFC<Props> = ({
             borderRadius="full"
             boxShadow="none"
             border="1px"
-            borderColor="gray.200"
+            borderColor="inherit"
           >
             <TagLabel as={HStack} spacing={1}>
-              <Text as="span" variant="text-sm" color="brand.black">
+              <Text as="span" variant="text-sm">
                 {t('sales.direct.card-footer.price')}
               </Text>
-              <Text as="span" variant="button2" color="brand.black">
+              <Text as="span" variant="button2">
                 <Price
                   amount={unitPrice}
                   currency={currency}
@@ -61,10 +61,10 @@ const SaleDirectCardFooter: VFC<Props> = ({
             borderRadius="full"
             boxShadow="none"
             border="1px"
-            borderColor="gray.200"
+            borderColor="inherit"
           >
             <TagLabel>
-              <Text as="span" variant="text-sm" color="brand.black">
+              <Text as="span" variant="text-sm">
                 {t('sales.direct.card-footer.offers', {
                   count: numberOfSales,
                 })}
@@ -79,13 +79,13 @@ const SaleDirectCardFooter: VFC<Props> = ({
             borderRadius="full"
             boxShadow="none"
             border="1px"
-            borderColor="gray.200"
+            borderColor="inherit"
           >
             <TagLabel as={HStack} spacing={1}>
-              <Text as="span" variant="text-sm" color="brand.black">
+              <Text as="span" variant="text-sm">
                 {t('sales.direct.card-footer.from')}
               </Text>
-              <Text as="span" variant="button2" color="brand.black">
+              <Text as="span" variant="button2">
                 <Price
                   amount={unitPrice}
                   currency={currency}
@@ -106,7 +106,6 @@ const SaleDirectCardFooter: VFC<Props> = ({
         href={href}
         mt={3.5}
         w="full"
-        color="brand.500"
         justify="space-between"
         fontSize="sm"
         fontWeight="semibold"

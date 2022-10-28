@@ -45,7 +45,6 @@ const OwnersModal: VFC<Props> = ({ owners }) => {
             <Flex>
               {t('token.owners.title')}
               <Flex
-                bgColor="brand.50"
                 my="auto"
                 ml={3}
                 align="center"
@@ -54,7 +53,7 @@ const OwnersModal: VFC<Props> = ({ owners }) => {
                 py={0.5}
                 px={2.5}
               >
-                <Text as="span" variant="caption" color="brand.500">
+                <Text as="span" variant="caption">
                   {owners.length}
                 </Text>
               </Flex>

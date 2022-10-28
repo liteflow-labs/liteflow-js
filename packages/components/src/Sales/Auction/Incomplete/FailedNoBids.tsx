@@ -20,14 +20,14 @@ const SaleAuctionIncompleteNoBids: VFC<Props> = ({ isOwner }) => {
   return (
     <Stack spacing={8}>
       <hr />
-      <Heading as="h2" variant="subtitle" color="brand.black">
+      <Heading as="h2" variant="subtitle">
         {t('sales.auction.failed-no-bid.ended')}
       </Heading>
       <Stack spacing={3}>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {t('sales.auction.failed-no-bid.highest-bid')}
         </Heading>
-        <Heading as="h4" variant="heading2" color="brand.black">
+        <Heading as="h4" variant="heading2">
           {t('sales.auction.failed-no-bid.no-bids')}
         </Heading>
       </Stack>

@@ -16,21 +16,20 @@ const Empty: FC<EmptyTypes> = ({ icon, title, description, button, href }) => {
     <Stack minH="460px" align="center" justify="center" spacing={8}>
       <Flex
         as="span"
-        bgColor="brand.50"
         h={12}
         w={12}
         align="center"
         justify="center"
         rounded="full"
       >
-        {icon ? icon : <Icon as={HiOutlinePlus} w={8} h={8} color="gray.400" />}
+        {icon ? icon : <Icon as={HiOutlinePlus} w={8} h={8} />}
       </Flex>
       <Stack spacing={1} textAlign="center">
-        <Heading as="h3" variant="heading1" color="brand.black">
+        <Heading as="h3" variant="heading1">
           {title}
         </Heading>
         {description && (
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {description}
           </Heading>
         )}

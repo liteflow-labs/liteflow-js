@@ -16,33 +16,25 @@ const TraitList: FC<TraitListProps> = ({ traits }) => {
           flexDirection="column"
           rounded="xl"
           border="1px"
-          borderColor="gray.200"
+          borderColor="inherit"
           p={3}
         >
           <Text
             as="span"
             variant="caption"
-            color="gray.500"
             title={trait.type}
             isTruncated
             pb={1}
           >
             {t(`categories.${trait.type}`, null, { fallback: trait.type })}
           </Text>
-          <Text
-            as="span"
-            variant="subtitle2"
-            color="brand.black"
-            title={trait.value}
-            isTruncated
-          >
+          <Text as="span" variant="subtitle2" title={trait.value} isTruncated>
             {t(`categories.${trait.value}`, null, { fallback: trait.value })}
           </Text>
           {trait.rarity && (
             <Text
               as="span"
               variant="caption"
-              color="brand.black"
               title={t('traits.rarity', { value: trait.rarity })}
               isTruncated
             >

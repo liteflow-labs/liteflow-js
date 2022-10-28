@@ -155,7 +155,6 @@ const Bid: VFC<Props> = ({
                     as={Price}
                     amount={bid.unitPrice}
                     currency={bid.currency}
-                    color="black"
                     fontWeight="medium"
                   />,
                 ]}
@@ -168,14 +167,7 @@ const Bid: VFC<Props> = ({
                   <Trans
                     ns="components"
                     i18nKey="bid.detail.requested"
-                    components={[
-                      <Text
-                        as="span"
-                        ml={2}
-                        color="black"
-                        fontWeight="medium"
-                      />,
-                    ]}
+                    components={[<Text as="span" ml={2} fontWeight="medium" />]}
                     values={{ quantity: bid.availableQuantity.toString() }}
                   />
                 </span>
@@ -190,21 +182,18 @@ const Bid: VFC<Props> = ({
                 as="span"
                 title={bid.maker.name || bid.maker.address}
                 fontWeight="medium"
-                color="black"
                 fontSize="sm"
               >
                 {bid.maker.name || (
                   <WalletAddress address={bid.maker.address} isShort />
                 )}
               </Text>
-              {bid.maker.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {bid.maker.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>
           </Link>
         }
         caption={
-          <Text as="span" color="gray.400">
+          <Text as="span">
             {dateFromNow(bid.createdAt)}
             {bid.expiredAt &&
               t('bid.detail.expires', { date: formatDate(bid.expiredAt) })}
@@ -226,7 +215,6 @@ const Bid: VFC<Props> = ({
             {canCancel && (
               <Button
                 variant="outline"
-                colorScheme="gray"
                 w={{ base: 'full', md: 'auto' }}
                 isLoading={activeCancelOfferStep !== CancelOfferStep.INITIAL}
                 onClick={cancelBid}

@@ -31,50 +31,47 @@ const Summary: FC<
   return (
     <>
       {isSingle ? (
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {t('offer.summary.single')}
         </Heading>
       ) : (
         <>
-          <Heading as={Flex} variant="heading3" color="gray.500" mb={2}>
+          <Heading as={Flex} variant="heading3" mb={2}>
             {t('offer.summary.price')}
             <Text
               as={Price}
               amount={price}
               currency={currency}
-              color="brand.black"
               ml={1}
               fontWeight="semibold"
             />
           </Heading>
-          <Heading as={Flex} variant="heading3" color="gray.500" mb={2}>
+          <Heading as={Flex} variant="heading3" mb={2}>
             {t('offer.summary.quantity')}
-            <Text as="span" color="brand.black" ml={1} fontWeight="semibold">
+            <Text as="span" ml={1} fontWeight="semibold">
               {quantity}
             </Text>
           </Heading>
         </>
       )}
       {feesOnTopPerTenThousand && (
-        <Heading as={Flex} variant="heading3" color="gray.500" mb={2}>
+        <Heading as={Flex} variant="heading3" mb={2}>
           {t('offer.summary.fees', { value: feesOnTopPerTenThousand / 100 })}
           <Text
             as={Price}
             amount={totalFees}
             currency={currency}
-            color="brand.black"
             ml={1}
             fontWeight="semibold"
           />
         </Heading>
       )}
-      <Heading as={Flex} variant="heading3" color="gray.500" mb={8}>
+      <Heading as={Flex} variant="heading3" mb={8}>
         {t('offer.summary.total')}
         <Text
           as={Price}
           amount={totalPrice.add(totalFees)}
           currency={currency}
-          color="brand.black"
           ml={1}
           fontWeight="semibold"
         />

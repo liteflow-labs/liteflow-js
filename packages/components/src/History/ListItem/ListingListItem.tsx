@@ -36,18 +36,17 @@ const ListingListItem: VFC<IProps> = ({
 }) => {
   return (
     <ListItem
-      image={<Icon as={FaTag} h={5} w={5} color="gray.400" />}
+      image={<Icon as={FaTag} h={5} w={5} />}
       label={
         <Trans
           ns="components"
           i18nKey="history.listing.listed"
           values={{ count: quantity.toNumber() }}
           components={[
-            <Text as="span" color="brand.black" fontWeight="medium" />,
+            <Text as="span" fontWeight="medium" />,
             currency ? (
               <Text
                 as={Price}
-                color="brand.black"
                 fontWeight="medium"
                 amount={unitPrice}
                 currency={currency}
@@ -73,23 +72,16 @@ const ListingListItem: VFC<IProps> = ({
               <Text
                 as="span"
                 title={from?.name || fromAddress}
-                color="brand.black"
                 fontWeight="medium"
               >
                 {from?.name || <WalletAddress address={fromAddress} isShort />}
               </Text>
-              {from?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {from?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
           ]}
         />
       }
-      caption={
-        <Text as="span" color="gray.400">
-          {formatDate(date)}
-        </Text>
-      }
+      caption={<Text as="span">{formatDate(date)}</Text>}
     />
   )
 }

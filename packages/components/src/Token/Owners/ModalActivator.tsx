@@ -53,7 +53,7 @@ const OwnersModalActivator: VFC<Props> = ({ owners, ...props }) => {
             rounded="full"
             bgColor="brand.50"
           >
-            <Text as="span" variant="caption" color="brand.500">
+            <Text as="span" variant="caption">
               {`+${owners.length >= 103 ? 99 : owners.length - 4}`}
             </Text>
           </Flex>

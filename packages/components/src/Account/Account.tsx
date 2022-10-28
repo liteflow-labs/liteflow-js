@@ -33,13 +33,12 @@ const AccountTemplate: FC<{
   const defaultIndex = tabs.findIndex(({ type }) => type === currentTab)
   return (
     <>
-      <Heading as="h1" variant="title" color="brand.black" pb={6}>
+      <Heading as="h1" variant="title" pb={6}>
         {t('account.title')}
       </Heading>
       <Tabs
         isManual
         defaultIndex={defaultIndex}
-        colorScheme="brand"
         overflowX="auto"
         overflowY="hidden"
       >

@@ -175,7 +175,6 @@ export default function NotificationDetail({
               h={14}
               w={14}
               overflow="hidden"
-              bgColor="gray.100"
               rounded="sm"
             >
               <Image
@@ -195,7 +194,6 @@ export default function NotificationDetail({
               h={14}
               w={14}
               overflow="hidden"
-              bgColor="gray.100"
               rounded="full"
             >
               <AccountImage
@@ -207,9 +205,9 @@ export default function NotificationDetail({
           </div>
         )}
         <Box>
-          <Text variant="caption" color="brand.black">
+          <Text variant="caption">
             {content.children}
-            <Text as="span" ml={1} color="gray.500">
+            <Text as="span" ml={1}>
               {dateFromNow(createdAt)}
             </Text>
           </Text>

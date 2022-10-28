@@ -31,26 +31,13 @@ const WalletBase: VFC<Props> = ({
   return (
     <Box as="a" p={6} onClick={handle}>
       {activatingConnector === connector ? (
-        <Spinner
-          display="block"
-          color="brand.500"
-          h={8}
-          w={8}
-          thickness="2px"
-          speed="0.65s"
-        />
+        <Spinner display="block" h={8} w={8} thickness="2px" speed="0.65s" />
       ) : (
         <Box h={8} w={8}>
           {icon}
         </Box>
       )}
-      <Text
-        as="span"
-        color="brand.black"
-        fontSize="sm"
-        fontWeight="semibold"
-        lineHeight={5}
-      >
+      <Text as="span" fontSize="sm" fontWeight="semibold" lineHeight={5}>
         {name}
       </Text>
     </Box>

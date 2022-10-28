@@ -41,7 +41,7 @@ const TokenAsset: VFC<Props> = ({
     <Flex wrap="wrap" rowGap={6} columnGap={8}>
       {creator && (
         <Stack spacing={3}>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('token.metadata.creator')}
           </Heading>
           <Avatar
@@ -54,7 +54,7 @@ const TokenAsset: VFC<Props> = ({
       )}
       {owners.length === 1 && (
         <Stack spacing={3}>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('token.metadata.owner')}
           </Heading>
           <Avatar
@@ -67,7 +67,7 @@ const TokenAsset: VFC<Props> = ({
       )}
       {owners.length > 1 && (
         <Stack spacing={3}>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('token.metadata.owners')}
           </Heading>
           <OwnersModal owners={owners} />
@@ -75,12 +75,12 @@ const TokenAsset: VFC<Props> = ({
       )}
       {standard === Standard.Erc721 && (
         <Stack spacing={3}>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('token.metadata.edition')}
           </Heading>
           <Flex align="center" display="inline-flex" h="full">
-            <Icon as={IoImageOutline} mr={2} h={4} w={4} color="gray.500" />
-            <Text as="span" variant="subtitle2" color="gray.500">
+            <Icon as={IoImageOutline} mr={2} h={4} w={4} />
+            <Text as="span" variant="subtitle2">
               {t('token.metadata.single')}
             </Text>
           </Flex>
@@ -88,7 +88,7 @@ const TokenAsset: VFC<Props> = ({
       )}
       {standard === Standard.Erc1155 && (
         <Stack spacing={3}>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('token.metadata.edition')}
           </Heading>
           <Supply

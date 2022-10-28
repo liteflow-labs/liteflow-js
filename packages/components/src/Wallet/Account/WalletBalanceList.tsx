@@ -20,7 +20,7 @@ const WalletBalanceList: VFC<IProps> = ({ account, currencies }) => {
   const { t } = useTranslation('components')
   if (currencies.length === 0)
     return (
-      <Text as="p" variant="text" color="gray.500">
+      <Text as="p" variant="text">
         {t('wallet.balances.none')}
       </Text>
     )
@@ -40,7 +40,7 @@ const WalletBalanceList: VFC<IProps> = ({ account, currencies }) => {
               justify={{ md: 'space-between' }}
             >
               <span>{x.name}</span>
-              <Text as="span" color="brand.black" fontWeight="medium">
+              <Text as="span" fontWeight="medium">
                 <WalletBalance account={account} currency={x} />
               </Text>
             </Flex>

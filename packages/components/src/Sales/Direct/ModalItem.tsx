@@ -102,7 +102,6 @@ const SaleDirectModalItem: VFC<Props> = ({
           >
             <Text
               as="span"
-              color="brand.black"
               fontWeight="medium"
               title={sale.maker.name || sale.maker.address}
             >
@@ -110,9 +109,7 @@ const SaleDirectModalItem: VFC<Props> = ({
                 <WalletAddress address={sale.maker.address} isShort />
               )}
             </Text>
-            {sale.maker.verified && (
-              <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-            )}
+            {sale.maker.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
           </Flex>
         }
         subtitle={
@@ -120,7 +117,6 @@ const SaleDirectModalItem: VFC<Props> = ({
             <span>
               <Text
                 as={Price}
-                color="brand.black"
                 fontWeight="medium"
                 amount={sale.unitPrice}
                 currency={sale.currency}
@@ -136,7 +132,7 @@ const SaleDirectModalItem: VFC<Props> = ({
         }
         caption={
           sale.expiredAt ? (
-            <Text as="span" color="gray.400">
+            <Text as="span">
               {t('sales.direct.modal-item.expiration', {
                 date: formatDate(sale.expiredAt),
               })}

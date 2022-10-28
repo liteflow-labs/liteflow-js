@@ -39,17 +39,10 @@ const OwnersModalItem: VFC<Props> = ({
         }
         label={
           <Flex display="inline-flex" align="center" columnGap={1.5}>
-            <Text
-              as="span"
-              color="brand.black"
-              fontWeight="medium"
-              title={name || address}
-            >
+            <Text as="span" fontWeight="medium" title={name || address}>
               {name || <WalletAddress address={address} isShort />}
             </Text>
-            {verified && (
-              <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-            )}
+            {verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
           </Flex>
         }
         caption={t('token.modal-item.owns', {

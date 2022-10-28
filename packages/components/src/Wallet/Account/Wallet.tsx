@@ -31,10 +31,10 @@ const WalletTemplate: FC<{
     <Stack spacing={12} pt={12}>
       <Stack spacing={6}>
         <div>
-          <Heading as="h2" variant="subtitle" color="brand.black">
+          <Heading as="h2" variant="subtitle">
             {t('wallet.wallet.deposit.title')}
           </Heading>
-          <Text as="p" variant="text" color="gray.500">
+          <Text as="p" variant="text">
             {t('wallet.wallet.deposit.description')}
           </Text>
         </div>
@@ -57,7 +57,7 @@ const WalletTemplate: FC<{
       </Stack>
       <hr />
       <Stack spacing={6}>
-        <Heading as="h2" variant="subtitle" color="brand.black">
+        <Heading as="h2" variant="subtitle">
           {t('wallet.wallet.balances')}
         </Heading>
         <WalletBalanceList currencies={currencies} account={account} />

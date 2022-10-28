@@ -44,14 +44,13 @@ const Balance: FC<
         rounded="full"
         py={2}
         px={4}
-        bgColor="brand.50"
       >
-        <Icon as={IoWalletOutline} color="brand.black" mr={3} h={4} w={4} />
-        <Heading as="span" variant="heading3" color="gray.500" mr={2}>
+        <Icon as={IoWalletOutline} mr={3} h={4} w={4} />
+        <Heading as="span" variant="heading3" mr={2}>
           {t('user.balance.title')}
         </Heading>
         {balance && (
-          <Heading as="h5" variant="heading3" color="brand.black">
+          <Heading as="h5" variant="heading3">
             <Text
               as={Price}
               fontWeight="semibold"

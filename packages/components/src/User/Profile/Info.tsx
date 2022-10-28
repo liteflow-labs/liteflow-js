@@ -86,16 +86,11 @@ const UserProfileInfo: VFC<{
     <VStack as="aside" spacing={8} align="flex-start" px={6}>
       {name && (
         <Box>
-          <Heading
-            as="h1"
-            variant="title"
-            color="brand.black"
-            overflowWrap="break-word"
-          >
+          <Heading as="h1" variant="title" overflowWrap="break-word">
             {name}
           </Heading>
           {verified && (
-            <Flex color="brand.500" mt={2} align="center" gap={1}>
+            <Flex mt={2} align="center" gap={1}>
               <Icon as={HiBadgeCheck} /> <span>{t('user.info.verified')}</span>
             </Flex>
           )}
@@ -120,10 +115,10 @@ const UserProfileInfo: VFC<{
 
       {description && (
         <Stack spacing={3}>
-          <Heading as="h4" variant="heading2" color="brand.black">
+          <Heading as="h4" variant="heading2">
             {t('user.info.bio')}
           </Heading>
-          <Text as="p" variant="text-sm" color="gray.500">
+          <Text as="p" variant="text-sm">
             {description}
           </Text>
         </Stack>
@@ -182,10 +177,10 @@ const UserProfileInfo: VFC<{
 
       {ownerLoggedIn && loginUrlForReferral && (
         <Stack spacing={4} maxW="100%">
-          <Heading as="h4" variant="heading2" color="brand.black">
+          <Heading as="h4" variant="heading2">
             {t('user.referral.title')}
           </Heading>
-          <Text color="gray.500">{t('user.referral.description')}</Text>
+          <Text>{t('user.referral.description')}</Text>
           <Button
             variant="outline"
             isLoading={!referralUrl || creatingReferralLink}

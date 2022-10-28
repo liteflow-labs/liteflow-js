@@ -141,14 +141,14 @@ const Dropzone: FC<IProps> = ({
             ? 'blue.600'
             : isDragReject || error || fileRejections.length > 0
             ? 'red.500'
-            : 'gray.200'
+            : 'inherit'
         }
         bgColor={
           isDragActive
             ? 'blue.100'
             : isDragReject || error || fileRejections.length > 0
             ? 'red.100'
-            : 'white'
+            : 'transparent'
         }
         p={6}
         {...getRootProps()}
@@ -186,7 +186,6 @@ const Dropzone: FC<IProps> = ({
           <Heading
             as="span"
             variant="heading3"
-            color="gray.500"
             mb={3}
             w="full"
             textAlign="center"
@@ -204,7 +203,6 @@ const Dropzone: FC<IProps> = ({
           <Heading
             as="span"
             variant="heading3"
-            color="gray.500"
             mb={3}
             w="full"
             textAlign="center"
@@ -214,12 +212,12 @@ const Dropzone: FC<IProps> = ({
             {file?.name ? file.name : heading}
           </Heading>
         )}
-        <Button variant="outline" colorScheme="gray" onClick={emptyHandler}>
+        <Button variant="outline" onClick={emptyHandler}>
           <Text as="span" isTruncated>
             {children({ hasPreview: !!preview })}
           </Text>
         </Button>
-        <Text as="p" variant="text-sm" color="gray.500">
+        <Text as="p" variant="text-sm">
           {hint}
         </Text>
       </Stack>

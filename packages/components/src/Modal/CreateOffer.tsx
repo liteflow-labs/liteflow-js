@@ -47,23 +47,13 @@ const CreateOfferModal: FC<Props> = ({
         return {
           title: t('modal.create-offer.approval.approval.title'),
           description: t('modal.create-offer.approval.approval.description'),
-          icon: (
-            <Icon as={CgArrowLongRight} color="brand.500" h="22px" w="22px" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case CreateOfferStep.APPROVAL_PENDING:
         return {
           title: t('modal.create-offer.approval.pending.title'),
           description: t('modal.create-offer.approval.pending.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case CreateOfferStep.SIGNATURE:
         return {
@@ -89,9 +79,7 @@ const CreateOfferModal: FC<Props> = ({
         return {
           title: t('modal.create-offer.signature.signature.title'),
           description: t('modal.create-offer.signature.signature.description'),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       default:
         return null
@@ -113,12 +101,12 @@ const CreateOfferModal: FC<Props> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Heading as="h3" variant="heading1" color="brand.black">
+          <Heading as="h3" variant="heading1">
             {title}
           </Heading>
         </ModalHeader>
         <ModalBody>
-          <Text as="p" variant="text" color="gray.500" mb={4}>
+          <Text as="p" variant="text" mb={4}>
             {t('modal.create-offer.description')}
           </Text>
 
@@ -128,10 +116,10 @@ const CreateOfferModal: FC<Props> = ({
                 {approval.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {approval.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {approval.description}
                 </Text>
               </Box>
@@ -146,10 +134,10 @@ const CreateOfferModal: FC<Props> = ({
                 {signature.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {signature.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {signature.description}
                 </Text>
               </Box>

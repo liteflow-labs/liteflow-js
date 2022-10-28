@@ -43,10 +43,10 @@ const SaleOpenInfo: VFC<Props> = ({ assetId, isOwner, isHomepage }) => {
               h={8}
               w={8}
             >
-              <Icon as={BiBadgeCheck} h={6} w={6} color="white" />
+              <Icon as={BiBadgeCheck} h={6} w={6} />
             </Flex>
           </Box>
-          <Heading as="h4" variant="heading2" color="brand.black">
+          <Heading as="h4" variant="heading2">
             {t('sales.open.info.owner')}
           </Heading>
         </Flex>
@@ -55,7 +55,6 @@ const SaleOpenInfo: VFC<Props> = ({ assetId, isOwner, isHomepage }) => {
           <Button
             variant="outline"
             colorScheme="gray"
-            bgColor="white"
             rightIcon={<Icon as={HiArrowNarrowRight} />}
           >
             <Text as="span" isTruncated>

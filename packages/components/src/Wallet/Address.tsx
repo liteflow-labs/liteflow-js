@@ -39,9 +39,7 @@ const WalletAddress: VFC<{
     return (
       <CustomTag
         onClick={handleClick}
-        postIcon={
-          <Icon as={HiOutlineClipboard} ml={3} h={4} w={4} color="gray.400" />
-        }
+        postIcon={<Icon as={HiOutlineClipboard} ml={3} h={4} w={4} />}
       >
         {children}
       </CustomTag>
@@ -57,14 +55,7 @@ const WalletAddress: VFC<{
       title={address}
     >
       {children}
-      <Icon
-        as={HiOutlineClipboard}
-        ml={2}
-        h={4}
-        w={4}
-        color="gray.400"
-        minW="max-content"
-      />
+      <Icon as={HiOutlineClipboard} ml={2} h={4} w={4} minW="max-content" />
     </Flex>
   ) : (
     <>{children}</>

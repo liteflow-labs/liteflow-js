@@ -47,11 +47,11 @@ const SaleAuctionIncompleteSuccess: VFC<Props> = ({
   return (
     <Stack spacing={8}>
       <hr />
-      <Heading as="h2" variant="subtitle" color="brand.black">
+      <Heading as="h2" variant="subtitle">
         {t('sales.auction.success.ended')}
       </Heading>
       <Stack spacing={3}>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {t('sales.auction.success.highest-bid')}
         </Heading>
         <Flex align="center" gap={3}>
@@ -64,7 +64,7 @@ const SaleAuctionIncompleteSuccess: VFC<Props> = ({
             address={bestBid.maker.address}
             image={bestBid.maker.image}
           />
-          <Heading as="h4" variant="heading2" color="brand.black">
+          <Heading as="h4" variant="heading2">
             <Trans
               ns="components"
               i18nKey="sales.auction.success.offer"
@@ -73,7 +73,7 @@ const SaleAuctionIncompleteSuccess: VFC<Props> = ({
                   amount={bestBid.unitPrice}
                   currency={bestBid.currency}
                 />,
-                <Text as="span" color="gray.500" />,
+                <Text as="span" />,
                 <Link href={`/users/${bestBid.maker.address}`}>
                   {bestBid.maker.name ? (
                     <span>{bestBid.maker.name}</span>

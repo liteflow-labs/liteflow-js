@@ -47,7 +47,7 @@ const SaleDirectSummary: VFC<Props> = ({ sales, isSingle }) => {
             overflow="hidden"
             rounded="full"
             border="1px"
-            borderColor="gray.200"
+            borderColor="inherit"
           >
             <Image
               src={sale.currency.image}
@@ -68,7 +68,7 @@ const SaleDirectSummary: VFC<Props> = ({ sales, isSingle }) => {
                 overflow="hidden"
                 rounded="full"
                 border="1px"
-                borderColor="gray.200"
+                borderColor="inherit"
                 ml={i > 0 ? -2 : undefined}
               >
                 <Image
@@ -128,15 +128,15 @@ const SaleDirectSummary: VFC<Props> = ({ sales, isSingle }) => {
   return (
     <Flex wrap="wrap" gap={8}>
       <Flex direction="column" gap={3}>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {title}
         </Heading>
         <Flex gap={2}>
           {image}
-          <Heading as="h2" variant="subtitle" color="brand.black">
+          <Heading as="h2" variant="subtitle">
             {subtitle}
             {caption && (
-              <Heading as="span" variant="heading3" color="gray.500" ml={3}>
+              <Heading as="span" variant="heading3" ml={3}>
                 {caption}
               </Heading>
             )}
@@ -145,12 +145,12 @@ const SaleDirectSummary: VFC<Props> = ({ sales, isSingle }) => {
       </Flex>
       {sales.length === 1 && sales[0].expiredAt && (
         <Flex direction="column" gap={3}>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('sales.direct.summary.expires')}
           </Heading>
           <Flex h="full" align="center" gap={1}>
-            <Icon as={HiOutlineClock} h={5} w={5} color="gray.400" />
-            <Heading as="h5" variant="heading3" color="gray.500">
+            <Icon as={HiOutlineClock} h={5} w={5} />
+            <Heading as="h5" variant="heading3">
               {formatDate(sales[0].expiredAt)}
             </Heading>
           </Flex>

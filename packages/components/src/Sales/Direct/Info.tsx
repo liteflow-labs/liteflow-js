@@ -116,15 +116,14 @@ const SaleDirectInfo: VFC<Props> = ({
               h={8}
               w={8}
             >
-              <Icon as={BiBadgeCheck} h={6} w={6} color="white" />
+              <Icon as={BiBadgeCheck} h={6} w={6} />
             </Flex>
           </Box>
-          <Heading as="h5" variant="heading3" color="gray.500">
+          <Heading as="h5" variant="heading3">
             {t('sales.direct.info.price')}
             {currentAccountFirstSale && (
               <Text
                 as={Price}
-                color="brand.black"
                 ml={2}
                 fontWeight="semibold"
                 amount={currentAccountFirstSale.unitPrice}
@@ -136,7 +135,6 @@ const SaleDirectInfo: VFC<Props> = ({
         <Button
           variant="outline"
           colorScheme="gray"
-          bgColor="white"
           onClick={() => handleCancel(currentAccountFirstSale)}
           rightIcon={<HiArrowNarrowRight />}
           isLoading={activeStep !== CancelOfferStep.INITIAL}

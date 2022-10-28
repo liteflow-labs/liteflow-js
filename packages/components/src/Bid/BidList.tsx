@@ -30,7 +30,7 @@ const BidList: VFC<Props> = ({
   const { t } = useTranslation('components')
   if (bids.length === 0)
     return (
-      <Text as="p" variant="text" color="gray.500">
+      <Text as="p" variant="text">
         {t('bid.list.none')}
       </Text>
     )

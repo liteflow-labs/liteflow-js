@@ -90,7 +90,7 @@ const UserProfileNavigation: VFC<IProps> = ({
       <TabList>
         {tabs.map((tab, index) => (
           <Link key={index} href={tab.href} whiteSpace="nowrap">
-            <Tab as="div" borderColor="gray.200">
+            <Tab as="div" borderColor="inherit">
               <HStack spacing={2}>
                 <Text as="span" variant="subtitle1">
                   {tab.title}

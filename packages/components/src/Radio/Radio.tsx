@@ -22,7 +22,7 @@ const Radio: FC<IProps> = ({ choice, ...props }) => {
       }}
       _focus={{
         borderWidth: '1px',
-        borderColor: 'brand.500',
+        borderColor: 'inherit',
         ringColor: 'brand.500',
         ringOpacity: '1',
         outline: 'none',
@@ -31,7 +31,6 @@ const Radio: FC<IProps> = ({ choice, ...props }) => {
       <input {...getInputProps()} hidden />
       <Flex
         cursor={choice.disabled ? 'not-allowed' : 'pointer'}
-        bgColor={choice.disabled || props.isChecked ? 'brand.50' : undefined}
         align="center"
         gap={4}
         rounded="xl"
@@ -41,7 +40,7 @@ const Radio: FC<IProps> = ({ choice, ...props }) => {
             ? 'transparent'
             : props.isChecked
             ? 'brand.500'
-            : 'gray.200'
+            : 'inherit'
         }
         py={7}
         pl={5}
@@ -51,19 +50,10 @@ const Radio: FC<IProps> = ({ choice, ...props }) => {
         {...getCheckboxProps()}
       >
         {choice.icon && (
-          <Box
-            as={choice.icon}
-            h={6}
-            w={6}
-            transition="all 0.3s ease-in-out"
-            color={
-              choice.disabled || !props.isChecked ? 'gray.400' : 'brand.black'
-            }
-          />
+          <Box as={choice.icon} h={6} w={6} transition="all 0.3s ease-in-out" />
         )}
         <Text
           variant="button1"
-          color="brand.black"
           cursor={choice.disabled ? 'not-allowed' : 'pointer'}
         >
           {choice.label}

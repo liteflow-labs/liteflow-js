@@ -55,10 +55,8 @@ const TokenMedia: VFC<
       return (
         <Center width="100%" height="100%" bg="brand.100">
           <Stack align="center" spacing={3}>
-            <Icon as={FaImage} color="gray.500" w="5em" h="4em" />
-            <Text color="gray.500" fontWeight="600">
-              {t('asset.detail.errors.image')}
-            </Text>
+            <Icon as={FaImage} w="5em" h="4em" />
+            <Text fontWeight="600">{t('asset.detail.errors.image')}</Text>
           </Stack>
         </Center>
       )

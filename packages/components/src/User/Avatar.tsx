@@ -25,12 +25,12 @@ const Avatar: VFC<Props> = ({ address, name, image, verified }) => {
           w={8}
           h={8}
         />
-        <Text as="span" variant="subtitle2" color="gray.500">
+        <Text as="span" variant="subtitle2">
           {name || <WalletAddress address={address} isShort />}
         </Text>
         {verified && (
           <Flex align="center" h={4} w={4}>
-            <Icon as={HiBadgeCheck} color="brand.500" />
+            <Icon as={HiBadgeCheck} />
           </Flex>
         )}
       </Flex>

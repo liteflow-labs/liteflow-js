@@ -80,7 +80,6 @@ const SaleDirectButton: VFC<Props> = ({
         href={`/tokens/${assetId}`}
         variant="outline"
         colorScheme="gray"
-        bgColor="white"
         isFullWidth
         rightIcon={<HiArrowNarrowRight />}
       >

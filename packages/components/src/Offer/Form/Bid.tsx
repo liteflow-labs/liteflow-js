@@ -323,7 +323,7 @@ const OfferFormBid: FC<Props> = (props) => {
             <FormErrorMessage>{errors.quantity.message}</FormErrorMessage>
           )}
           <FormHelperText>
-            <Text as="p" variant="text" color="gray.500">
+            <Text as="p" variant="text">
               {t('offer.form.bid.supply', {
                 count: parseInt(props.supply, 10),
               })}
@@ -340,7 +340,7 @@ const OfferFormBid: FC<Props> = (props) => {
           <FormHelperText>
             <Tooltip
               label={
-                <Text as="span" variant="caption" color="brand.black">
+                <Text as="span" variant="caption">
                   {t('offer.form.bid.expiration.tooltip')}
                 </Text>
               }
@@ -351,13 +351,7 @@ const OfferFormBid: FC<Props> = (props) => {
               bg="white"
             >
               <span>
-                <Icon
-                  as={FaInfoCircle}
-                  h={4}
-                  w={4}
-                  cursor="pointer"
-                  color="gray.400"
-                />
+                <Icon as={FaInfoCircle} h={4} w={4} cursor="pointer" />
               </span>
             </Tooltip>
           </FormHelperText>

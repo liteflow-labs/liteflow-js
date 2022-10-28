@@ -94,7 +94,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
   }
   if (histories.length === 0)
     return (
-      <Text as="p" variant="text" color="gray.500">
+      <Text as="p" variant="text">
         {t('history.none')}
       </Text>
     )

@@ -11,23 +11,20 @@ export default {
 
 const Template: ComponentStory<typeof List> = (args) => (
   <List {...args}>
+    <ListItem image={<Box h={10} w={10} rounded="full" />} label="label" />
     <ListItem
-      image={<Box h={10} w={10} rounded="full" bgColor="gray.100" />}
-      label="label"
-    />
-    <ListItem
-      image={<Box h={10} w={10} rounded="full" bgColor="gray.100" />}
+      image={<Box h={10} w={10} rounded="full" />}
       label="label"
       subtitle="subtitle"
     />
     <ListItem
-      image={<Box h={10} w={10} rounded="full" bgColor="gray.100" />}
+      image={<Box h={10} w={10} rounded="full" />}
       label="label"
       subtitle="subtitle"
       caption="caption"
     />
     <ListItem
-      image={<Box h={10} w={10} rounded="full" bgColor="gray.100" />}
+      image={<Box h={10} w={10} rounded="full" />}
       label="label"
       subtitle="subtitle"
       caption="caption"
@@ -40,7 +37,7 @@ const Template: ComponentStory<typeof List> = (args) => (
       }
     />
     <ListItem
-      image={<Box h={10} w={10} rounded="full" bgColor="gray.100" />}
+      image={<Box h={10} w={10} rounded="full" />}
       label="label 5"
       subtitle="subtitle"
       caption="caption"

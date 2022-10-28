@@ -82,9 +82,8 @@ const NavItemMobile: FC<HTMLAttributes<any> & { as?: As<any> | undefined }> = ({
       pr={4}
       pl={3}
       fontWeight="medium"
-      borderColor="gray.200"
+      borderColor="inherit"
       borderLeftWidth="4px"
-      color="gray.600"
       cursor="pointer"
       _hover={{
         bgColor: 'brand.50',
@@ -146,7 +145,7 @@ const DrawerMenu: VFC<{
       <IconButton
         ref={btnRef}
         onClick={onOpen}
-        icon={<HiOutlineMenu color="gray" size={24} />}
+        icon={<HiOutlineMenu size={24} />}
         aria-label="Open menu"
         variant="ghost"
         colorScheme="gray"
@@ -188,9 +187,8 @@ const DrawerMenu: VFC<{
                       pr={4}
                       pl={3}
                       fontWeight="medium"
-                      borderColor="gray.200"
+                      borderColor="inherit"
                       borderLeftWidth="4px"
-                      color="gray.600"
                       _hover={{
                         color: 'gray.800',
                         borderColor: 'brand.200',
@@ -231,9 +229,8 @@ const DrawerMenu: VFC<{
                       pr={4}
                       pl={3}
                       fontWeight="medium"
-                      borderColor="gray.200"
+                      borderColor="inherit"
                       borderLeftWidth="4px"
-                      color="gray.600"
                       _hover={{
                         color: 'gray.800',
                         borderColor: 'brand.200',
@@ -309,7 +306,7 @@ const ActivityMenu: VFC<{ account: string }> = ({ account }) => {
   const { t } = useTranslation('components')
   return (
     <Menu>
-      <MenuButton color="brand.black" _hover={{ color: 'gray.500' }}>
+      <MenuButton _hover={{ color: 'gray.500' }}>
         <HStack spacing={2}>
           <Text as="span" variant="button2">
             {t('navbar.activity.title')}
@@ -462,7 +459,7 @@ const Navbar: VFC<{
         <Flex as="form" my="auto" grow={1} onSubmit={onSubmit}>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
-              <Icon as={HiOutlineSearch} w={6} h={6} color="gray.400" />
+              <Icon as={HiOutlineSearch} w={6} h={6} />
             </InputLeftElement>
             <Input placeholder={t('navbar.search')} {...register('search')} />
           </InputGroup>
@@ -471,7 +468,6 @@ const Navbar: VFC<{
           <Flex
             as={Link}
             href="/explore"
-            color="brand.black"
             align="center"
             _hover={{ color: 'gray.500' }}
           >
@@ -483,7 +479,6 @@ const Navbar: VFC<{
             <Flex
               as={Link}
               href="/create"
-              color="brand.black"
               align="center"
               _hover={{ color: 'gray.500' }}
             >
@@ -504,7 +499,7 @@ const Navbar: VFC<{
                   position="relative"
                 >
                   <div>
-                    <Icon as={FaBell} color="brand.black" h={4} w={4} />
+                    <Icon as={FaBell} h={4} w={4} />
                     {data.account.notifications.totalCount > 0 && (
                       <Flex
                         position="absolute"

@@ -31,7 +31,6 @@ export function ListItem({
           justify="center"
           overflow="hidden"
           rounded="full"
-          bgColor="gray.100"
         >
           {image}
         </Flex>
@@ -42,16 +41,16 @@ export function ListItem({
           gap={3}
         >
           <Box w="full" overflow="hidden">
-            <Text as="p" variant="text-sm" color="gray.500">
+            <Text as="p" variant="text-sm">
               {label}
             </Text>
             {subtitle && (
-              <Text as="p" variant="text-sm" color="gray.500">
+              <Text as="p" variant="text-sm">
                 {subtitle}
               </Text>
             )}
             {caption && (
-              <Text as="p" variant="text-sm" color="gray.500">
+              <Text as="p" variant="text-sm">
                 {caption}
               </Text>
             )}

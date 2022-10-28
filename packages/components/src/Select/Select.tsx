@@ -83,7 +83,7 @@ const Select: FC<IProps> = ({
           </HStack>
         )}
         {hint && (
-          <Text as="p" variant="text-sm" color="gray.500" mt={1} mb={3}>
+          <Text as="p" variant="text-sm" mt={1} mb={3}>
             {hint}
           </Text>
         )}
@@ -98,13 +98,13 @@ const Select: FC<IProps> = ({
               py={2}
               borderWidth="1px"
               color={
-                props.disabled ? 'gray.500' : !error ? 'brand.black' : 'red.900'
+                props.disabled ? 'gray.500' : !error ? 'inherit' : 'red.900'
               }
-              bgColor={props.disabled ? 'gray.100' : 'white'}
+              bgColor={(props.disabled && 'gray.100') || 'inherit'}
               w={selectWidth ? selectWidth : 'full'}
               shadow={props.disabled ? undefined : 'sm'}
               pointerEvents={props.disabled ? 'none' : undefined}
-              borderColor={!error ? 'gray.200' : 'red.300'}
+              borderColor={!error ? 'inherit' : 'red.300'}
               _hover={{
                 shadow: props.disabled ? undefined : 'md',
               }}
@@ -126,7 +126,7 @@ const Select: FC<IProps> = ({
                         overflow="hidden"
                         rounded="full"
                         borderWidth="1px"
-                        borderColor="gray.200"
+                        borderColor="inherit"
                       >
                         <Image
                           src={selectedChoice.image}
@@ -140,12 +140,7 @@ const Select: FC<IProps> = ({
                     </Text>
                   </>
                 ) : (
-                  <Text
-                    as="span"
-                    fontWeight="normal"
-                    isTruncated
-                    color="gray.500"
-                  >
+                  <Text as="span" fontWeight="normal" isTruncated>
                     {placeholder}
                   </Text>
                 )}
@@ -177,7 +172,7 @@ const Select: FC<IProps> = ({
                         overflow="hidden"
                         rounded="full"
                         borderWidth="1px"
-                        borderColor="gray.200"
+                        borderColor="inherit"
                       >
                         <Image src={choice.image} width={24} height={24} />
                       </Box>
@@ -194,7 +189,7 @@ const Select: FC<IProps> = ({
                       {choice.label}
                     </Text>
                     {choice.caption && (
-                      <Text as="span" variant="text-sm" color="gray.500">
+                      <Text as="span" variant="text-sm">
                         {choice.caption}
                       </Text>
                     )}

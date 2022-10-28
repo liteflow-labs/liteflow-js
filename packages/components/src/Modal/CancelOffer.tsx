@@ -47,23 +47,13 @@ const CancelOfferModal: FC<Props> = ({
           description: t(
             'modal.cancel-offer.transaction.signature.description',
           ),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case CancelOfferStep.TRANSACTION_PENDING:
         return {
           title: t('modal.cancel-offer.transaction.pending.title'),
           description: t('modal.cancel-offer.transaction.pending.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       default:
         return null
@@ -85,12 +75,12 @@ const CancelOfferModal: FC<Props> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Heading as="h3" variant="heading1" color="brand.black">
+          <Heading as="h3" variant="heading1">
             {title}
           </Heading>
         </ModalHeader>
         <ModalBody>
-          <Text as="p" variant="text" color="gray.500" mb={4}>
+          <Text as="p" variant="text" mb={4}>
             {t('modal.cancel-offer.description')}
           </Text>
 
@@ -99,10 +89,10 @@ const CancelOfferModal: FC<Props> = ({
               {transaction.icon}
             </Flex>
             <Box flex={1}>
-              <Heading as="h4" variant="heading2" color="brand.black">
+              <Heading as="h4" variant="heading2">
                 {transaction.title}
               </Heading>
-              <Text as="p" variant="text-sm" color="gray.500">
+              <Text as="p" variant="text-sm">
                 {transaction.description}
               </Text>
             </Box>

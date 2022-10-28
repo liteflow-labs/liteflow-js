@@ -163,7 +163,7 @@ const OfferFormCheckout: FC<Props> = ({
             <FormErrorMessage>{errors.quantity.message}</FormErrorMessage>
           )}
           <FormHelperText>
-            <Text as="p" variant="text" color="gray.500">
+            <Text as="p" variant="text">
               {t('offer.form.checkout.available', {
                 count: parseInt(offer.availableQuantity, 10),
               })}

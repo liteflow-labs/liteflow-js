@@ -43,11 +43,11 @@ const SaleAuctionIncompleteReservePrice: VFC<Props> = ({
   return (
     <Stack spacing={8}>
       <hr />
-      <Heading as="h2" variant="subtitle" color="brand.black">
+      <Heading as="h2" variant="subtitle">
         {t('sales.auction.failed-no-reserve.ended')}
       </Heading>
       <Stack spacing={3}>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {t('sales.auction.failed-no-reserve.highest-bid')}
         </Heading>
         <Flex align="center" gap={3}>
@@ -60,7 +60,7 @@ const SaleAuctionIncompleteReservePrice: VFC<Props> = ({
             address={bestBid.maker.address}
             image={bestBid.maker.image}
           />
-          <Heading as="h4" variant="heading2" color="brand.black">
+          <Heading as="h4" variant="heading2">
             <Trans
               ns="components"
               i18nKey="sales.auction.failed-no-reserve.offer"
@@ -69,7 +69,7 @@ const SaleAuctionIncompleteReservePrice: VFC<Props> = ({
                   amount={bestBid.unitPrice}
                   currency={bestBid.currency}
                 />,
-                <Text as="span" color="gray.500" />,
+                <Text as="span" />,
                 <Link href={`/users/${bestBid.maker.address}`}>
                   {bestBid.maker.name ? (
                     <span>{bestBid.maker.name}</span>

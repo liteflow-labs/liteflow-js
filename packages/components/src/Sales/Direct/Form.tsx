@@ -279,7 +279,7 @@ const SalesDirectForm: VFC<Props> = ({
           )}
           {quantityAvailable && (
             <FormHelperText>
-              <Text as="p" variant="text" color="gray.500">
+              <Text as="p" variant="text">
                 {t('sales.direct.form.available', {
                   count: quantityAvailable.toNumber(),
                 })}
@@ -297,7 +297,7 @@ const SalesDirectForm: VFC<Props> = ({
           <FormHelperText>
             <Tooltip
               label={
-                <Text as="span" variant="caption" color="brand.black">
+                <Text as="span" variant="caption">
                   {t('sales.direct.form.expiration.tooltip')}
                 </Text>
               }
@@ -308,13 +308,7 @@ const SalesDirectForm: VFC<Props> = ({
               bg="white"
             >
               <span>
-                <Icon
-                  as={FaInfoCircle}
-                  h={4}
-                  w={4}
-                  cursor="pointer"
-                  color="gray.400"
-                />
+                <Icon as={FaInfoCircle} h={4} w={4} cursor="pointer" />
               </span>
             </Tooltip>
           </FormHelperText>
@@ -335,11 +329,10 @@ const SalesDirectForm: VFC<Props> = ({
       <Stack spacing={2}>
         {isSingle && (
           <>
-            <Text variant="text" color="gray.500">
+            <Text variant="text">
               {t('sales.direct.form.fees', { value: feesPerTenThousand / 100 })}
               <Text
                 as={Price}
-                color="brand.black"
                 ml={1}
                 fontWeight="semibold"
                 amount={amountFees}
@@ -347,13 +340,12 @@ const SalesDirectForm: VFC<Props> = ({
               />
             </Text>
 
-            <Text variant="text" color="gray.500">
+            <Text variant="text">
               {t('sales.direct.form.royalties', {
                 value: royaltiesPerTenThousand / 100,
               })}
               <Text
                 as={Price}
-                color="brand.black"
                 ml={1}
                 fontWeight="semibold"
                 amount={amountRoyalties}
@@ -363,13 +355,12 @@ const SalesDirectForm: VFC<Props> = ({
           </>
         )}
 
-        <Text variant="text" color="gray.500">
+        <Text variant="text">
           {isSingle
             ? t('sales.direct.form.receive-single')
             : t('sales.direct.form.receive-multiple')}
           <Text
             as={Price}
-            color="brand.black"
             ml={1}
             fontWeight="semibold"
             amount={isSingle ? priceWithFees : priceUnit}
@@ -379,22 +370,21 @@ const SalesDirectForm: VFC<Props> = ({
 
         {!isSingle && (
           <>
-            <Text variant="text" color="gray.500">
+            <Text variant="text">
               {t('sales.direct.form.quantity-for-sale')}
-              <Text as="span" color="brand.black" ml={1} fontWeight="semibold">
+              <Text as="span" ml={1} fontWeight="semibold">
                 {t('sales.direct.form.quantities', {
                   count: parseInt(quantity, 10),
                 })}
               </Text>
             </Text>
 
-            <Text variant="text" color="gray.500">
+            <Text variant="text">
               {t('sales.direct.form.total-fees', {
                 value: feesPerTenThousand / 100,
               })}
               <Text
                 as={Price}
-                color="brand.black"
                 mx={1}
                 fontWeight="semibold"
                 amount={quantity ? amountFees.mul(quantity) : 0}
@@ -402,13 +392,12 @@ const SalesDirectForm: VFC<Props> = ({
               />
             </Text>
 
-            <Text variant="text" color="gray.500">
+            <Text variant="text">
               {t('sales.direct.form.total-royalties', {
                 value: royaltiesPerTenThousand / 100,
               })}
               <Text
                 as={Price}
-                color="brand.black"
                 ml={1}
                 fontWeight="semibold"
                 amount={quantity ? amountRoyalties.mul(quantity) : 0}
@@ -416,11 +405,10 @@ const SalesDirectForm: VFC<Props> = ({
               />
             </Text>
 
-            <Text variant="text" color="gray.500">
+            <Text variant="text">
               {t('sales.direct.form.total-receive')}
               <Text
                 as={Price}
-                color="brand.black"
                 mx={1}
                 fontWeight="semibold"
                 amount={quantity ? priceWithFees.mul(quantity) : 0}

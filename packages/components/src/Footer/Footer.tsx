@@ -24,12 +24,8 @@ const Footer: VFC<Props> = (props) => {
                 link.href.match(/^[http|mailto]/) ? (
                   <Text
                     as="a"
-                    color="gray.500"
                     fontWeight="medium"
                     cursor="pointer"
-                    _hover={{
-                      color: 'brand.black',
-                    }}
                     href={link.href}
                     target="_blank"
                     rel="noopenner noreferrer"
@@ -39,14 +35,7 @@ const Footer: VFC<Props> = (props) => {
                   </Text>
                 ) : (
                   <Link href={link.href} key={i}>
-                    <Text
-                      color="gray.500"
-                      fontWeight="medium"
-                      cursor="pointer"
-                      _hover={{
-                        color: 'brand.black',
-                      }}
-                    >
+                    <Text fontWeight="medium" cursor="pointer">
                       {link.label}
                     </Text>
                   </Link>
@@ -58,10 +47,10 @@ const Footer: VFC<Props> = (props) => {
             as="hr"
             borderTop="1px"
             borderStyle="solid"
-            borderColor="gray.200"
+            borderColor="inherit"
           />
           <Flex justify="center" pt={8} pb={14}>
-            <Text as="p" variant="text" color="gray.500" display="flex">
+            <Text as="p" variant="text" display="flex">
               {t('footer.copyright', {
                 date: new Date().getFullYear(),
                 name: props.name,

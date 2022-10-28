@@ -49,20 +49,19 @@ const PurchaseListItem: VFC<IProps> = ({
 }) => {
   return (
     <ListItem
-      image={<Icon as={FaShoppingCart} h={5} w={5} color="gray.400" />}
+      image={<Icon as={FaShoppingCart} h={5} w={5} />}
       label={
         <Trans
           ns="components"
           i18nKey="history.purchase.purchased"
           values={{ count: quantity.toNumber() }}
           components={[
-            <Text as="span" color="brand.black" fontWeight="medium" />,
+            <Text as="span" fontWeight="medium" />,
             currency ? (
               <Text
                 as={Price}
                 amount={unitPrice}
                 currency={currency}
-                color="brand.black"
                 fontWeight="medium"
               />
             ) : (
@@ -85,15 +84,12 @@ const PurchaseListItem: VFC<IProps> = ({
             >
               <Text
                 as="span"
-                color="brand.black"
                 fontWeight="medium"
                 title={from?.name || fromAddress}
               >
                 {from?.name || <WalletAddress address={fromAddress} isShort />}
               </Text>
-              {from?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {from?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
             <Flex
               align="center"
@@ -102,23 +98,16 @@ const PurchaseListItem: VFC<IProps> = ({
               display="inline-flex"
               href={`/users/${toAddress}`}
             >
-              <Text
-                as="span"
-                color="brand.black"
-                fontWeight="medium"
-                title={to?.name || toAddress}
-              >
+              <Text as="span" fontWeight="medium" title={to?.name || toAddress}>
                 {to?.name || <WalletAddress address={toAddress} isShort />}
               </Text>
-              {to?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {to?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
           ]}
         />
       }
       caption={
-        <Flex as="span" align="center" color="gray.400">
+        <Flex as="span" align="center">
           {formatDate(date)}
           {transactionHash && (
             <Flex

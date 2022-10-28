@@ -74,13 +74,7 @@ export default function Pagination({
           value={limit.toString()}
           inlineLabel
         />
-        <Text
-          as="span"
-          variant="text-sm"
-          color="gray.500"
-          mt={{ base: 'auto', sm: 0 }}
-          w="full"
-        >
+        <Text as="span" variant="text-sm" mt={{ base: 'auto', sm: 0 }} w="full">
           {result.caption({
             from: (page - 1) * limit + 1,
             to: Math.min((page - 1) * limit + limit, total || Infinity),
@@ -108,7 +102,7 @@ export default function Pagination({
             )}
             value={page.toString()}
           />
-          <Text as="p" variant="text-sm" color="gray.500" w="full">
+          <Text as="p" variant="text-sm" w="full">
             {result.pages({ total: totalPage })}
           </Text>
         </Flex>

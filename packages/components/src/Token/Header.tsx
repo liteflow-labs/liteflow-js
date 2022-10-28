@@ -87,7 +87,7 @@ const TokenHeader: VFC<Props> = ({
         </Flex>
       </Box>
       <Stack spacing={8} p={{ base: 6, md: 12 }}>
-        <Heading as="h1" variant="title" color="brand.black">
+        <Heading as="h1" variant="title">
           {asset.name}
         </Heading>
         <TokenAsset

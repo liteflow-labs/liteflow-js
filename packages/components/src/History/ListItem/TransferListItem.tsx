@@ -41,14 +41,14 @@ const TransferListItem: VFC<IProps> = ({
 }) => {
   return (
     <ListItem
-      image={<Icon as={FaLongArrowAltRight} h={5} w={5} color="gray.400" />}
+      image={<Icon as={FaLongArrowAltRight} h={5} w={5} />}
       label={
         <Trans
           ns="components"
           i18nKey="history.transfer.transferred"
           values={{ count: quantity.toNumber() }}
           components={[
-            <Text as="span" color="brand.black" fontWeight="medium" />,
+            <Text as="span" fontWeight="medium" />,
             <Flex
               as={Link}
               display="inline-flex"
@@ -56,17 +56,10 @@ const TransferListItem: VFC<IProps> = ({
               gap={1.5}
               href={`/users/${toAddress}`}
             >
-              <Text
-                as="span"
-                title={to?.name || toAddress}
-                color="brand.black"
-                fontWeight="medium"
-              >
+              <Text as="span" title={to?.name || toAddress} fontWeight="medium">
                 {to?.name || <WalletAddress address={toAddress} isShort />}
               </Text>
-              {to?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {to?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
           ]}
         />
@@ -86,20 +79,17 @@ const TransferListItem: VFC<IProps> = ({
               <Text
                 as="span"
                 title={from?.name || fromAddress}
-                color="brand.black"
                 fontWeight="medium"
               >
                 {from?.name || <WalletAddress address={fromAddress} isShort />}
               </Text>
-              {from?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {from?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
           ]}
         />
       }
       caption={
-        <Flex align="center" color="gray.400" as="span">
+        <Flex align="center" as="span">
           {formatDate(date)}
           {transactionHash && (
             <Flex

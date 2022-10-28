@@ -20,15 +20,14 @@ const SaleOpenCardFooter: FC<HTMLAttributes<any> & Props> = ({
         borderRadius="full"
         boxShadow="none"
         border="1px"
-        borderColor="gray.200"
+        borderColor="inherit"
       >
-        <Text as="span" variant="text-sm" color="brand.black">
+        <Text as="span" variant="text-sm">
           {t('sales.open.card-footer.open')}
         </Text>
       </Tag>
       <Flex
         as={Link}
-        color="brand.500"
         mt={3.5}
         w="full"
         justify="space-between"

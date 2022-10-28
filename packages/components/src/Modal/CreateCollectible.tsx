@@ -49,15 +49,7 @@ const CreateCollectibleModal: FC<Props> = ({
         return {
           title: t('modal.create-collectible.upload.upload.title'),
           description: t('modal.create-collectible.upload.upload.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case CreateNftStep.TRANSACTION_SIGNATURE:
       case CreateNftStep.TRANSACTION_PENDING:
@@ -96,9 +88,7 @@ const CreateCollectibleModal: FC<Props> = ({
           description: t(
             'modal.create-collectible.transaction.signature.description',
           ),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case CreateNftStep.TRANSACTION_PENDING:
         return {
@@ -106,15 +96,7 @@ const CreateCollectibleModal: FC<Props> = ({
           description: t(
             'modal.create-collectible.transaction.pending.description',
           ),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case CreateNftStep.OWNERSHIP:
         return {
@@ -122,15 +104,7 @@ const CreateCollectibleModal: FC<Props> = ({
           description: t(
             'modal.create-collectible.transaction.ownership.description',
           ),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case CreateNftStep.LAZYMINT_SIGNATURE:
         return {
@@ -140,9 +114,7 @@ const CreateCollectibleModal: FC<Props> = ({
           description: t(
             'modal.create-collectible.transaction.lazymint-signature.description',
           ),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case CreateNftStep.LAZYMINT_PENDING:
         return {
@@ -152,15 +124,7 @@ const CreateCollectibleModal: FC<Props> = ({
           description: t(
             'modal.create-collectible.transaction.lazymint-pending.description',
           ),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       default:
         return null
@@ -182,12 +146,12 @@ const CreateCollectibleModal: FC<Props> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Heading as="h3" variant="heading1" color="brand.black">
+          <Heading as="h3" variant="heading1">
             {title}
           </Heading>
         </ModalHeader>
         <ModalBody>
-          <Text as="p" variant="text" color="gray.500" mb={4}>
+          <Text as="p" variant="text" mb={4}>
             {t(
               isLazyMint
                 ? 'modal.create-collectible.description-lazymint'
@@ -201,10 +165,10 @@ const CreateCollectibleModal: FC<Props> = ({
                 {upload.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {upload.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {upload.description}
                 </Text>
               </Box>
@@ -219,10 +183,10 @@ const CreateCollectibleModal: FC<Props> = ({
                 {transaction.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {transaction.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {transaction.description}
                 </Text>
               </Box>

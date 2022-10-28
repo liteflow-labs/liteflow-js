@@ -27,15 +27,13 @@ const LazyMintListItem: VFC<IProps> = ({
 }) => {
   return (
     <ListItem
-      image={<Icon as={WiStars} h={5} w={5} color="gray.400" />}
+      image={<Icon as={WiStars} h={5} w={5} />}
       label={
         <Trans
           ns="components"
           i18nKey="history.lazymint.minted"
           values={{ count: quantity.toNumber() }}
-          components={[
-            <Text as="span" color="brand.black" fontWeight="medium" />,
-          ]}
+          components={[<Text as="span" fontWeight="medium" />]}
         />
       }
       subtitle={
@@ -53,20 +51,17 @@ const LazyMintListItem: VFC<IProps> = ({
               <Text
                 as="span"
                 title={from?.name || fromAddress}
-                color="brand.black"
                 fontWeight="medium"
               >
                 {from?.name || <WalletAddress address={fromAddress} isShort />}
               </Text>
-              {from?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {from?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
           ]}
         />
       }
       caption={
-        <Flex as="span" align="center" color="gray.400">
+        <Flex as="span" align="center">
           {formatDate(date)}
         </Flex>
       }

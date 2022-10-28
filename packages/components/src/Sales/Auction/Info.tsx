@@ -81,13 +81,12 @@ const SaleAuctionInfo: VFC<Props> = ({
     if (inProgress) {
       return {
         type: 'success',
-        icon: <Icon as={BiBadgeCheck} h={6} w={6} color="white" />,
+        icon: <Icon as={BiBadgeCheck} h={6} w={6} />,
         title: (
           <>
             {t('sales.auction.info.reserve')}
             <Text
               as={Price}
-              color="brand.black"
               ml={2}
               fontWeight="semibold"
               amount={auction.reserveAmount}
@@ -100,7 +99,7 @@ const SaleAuctionInfo: VFC<Props> = ({
     if (endedWithNoBids) {
       return {
         type: 'success',
-        icon: <Icon as={BiBadgeCheck} h={6} w={6} color="white" />,
+        icon: <Icon as={BiBadgeCheck} h={6} w={6} />,
         title: t('sales.auction.info.no-bids.title'),
         action: {
           children: (
@@ -116,7 +115,7 @@ const SaleAuctionInfo: VFC<Props> = ({
     if (endedWithNoReserve) {
       return {
         type: 'success',
-        icon: <Icon as={BiBadgeCheck} h={6} w={6} color="white" />,
+        icon: <Icon as={BiBadgeCheck} h={6} w={6} />,
         title: t('sales.auction.info.no-reserve.title'),
         action: {
           children: (
@@ -132,7 +131,7 @@ const SaleAuctionInfo: VFC<Props> = ({
     if (endedWithReserve) {
       return {
         type: 'success',
-        icon: <Icon as={BiBadgeCheck} h={6} w={6} color="white" />,
+        icon: <Icon as={BiBadgeCheck} h={6} w={6} />,
         title: t('sales.auction.info.with-reserve.title'),
         action: {
           children: (
@@ -168,6 +167,7 @@ const SaleAuctionInfo: VFC<Props> = ({
       rounded="xl"
       p={6}
       bgColor={info.type === 'success' ? 'green.50' : undefined}
+      color={info.type === 'success' ? 'green.500' : undefined}
     >
       <Flex align="center">
         <Flex
@@ -182,25 +182,19 @@ const SaleAuctionInfo: VFC<Props> = ({
         >
           {info.icon}
         </Flex>
-        <Heading as="h5" variant="heading3" color="gray.500">
+        <Heading as="h5" variant="heading3">
           {info.title}
         </Heading>
       </Flex>
 
       {info.action?.onClick && (
-        <Button
-          variant="outline"
-          colorScheme="gray"
-          bgColor="white"
-          {...info.action}
-        />
+        <Button variant="outline" colorScheme="gray" {...info.action} />
       )}
       {info.action?.href && (
         <Button
           as={Link}
           variant="outline"
           colorScheme="gray"
-          bgColor="white"
           {...info.action}
         />
       )}

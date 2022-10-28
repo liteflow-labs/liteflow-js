@@ -33,15 +33,13 @@ const MintListItem: VFC<IProps> = ({
 }) => {
   return (
     <ListItem
-      image={<Icon as={WiStars} h={5} w={5} color="gray.400" />}
+      image={<Icon as={WiStars} h={5} w={5} />}
       label={
         <Trans
           ns="components"
           i18nKey="history.mint.minted"
           values={{ count: quantity.toNumber() }}
-          components={[
-            <Text as="span" color="brand.black" fontWeight="medium" />,
-          ]}
+          components={[<Text as="span" fontWeight="medium" />]}
         />
       }
       subtitle={
@@ -56,23 +54,16 @@ const MintListItem: VFC<IProps> = ({
               as={Link}
               href={`/users/${toAddress}`}
             >
-              <Text
-                as="span"
-                title={to?.name || toAddress}
-                color="brand.black"
-                fontWeight="medium"
-              >
+              <Text as="span" title={to?.name || toAddress} fontWeight="medium">
                 {to?.name || <WalletAddress address={toAddress} isShort />}
               </Text>
-              {to?.verified && (
-                <Icon as={HiBadgeCheck} color="brand.500" h={4} w={4} />
-              )}
+              {to?.verified && <Icon as={HiBadgeCheck} h={4} w={4} />}
             </Flex>,
           ]}
         />
       }
       caption={
-        <Flex as="span" align="center" color="gray.400">
+        <Flex as="span" align="center">
           {formatDate(date)}
           {transactionHash && (
             <Flex

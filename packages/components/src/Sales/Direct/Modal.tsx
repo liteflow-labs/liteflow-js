@@ -52,7 +52,7 @@ const SaleDirectModal: VFC<Props> = ({
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Heading as="h3" variant="heading1" color="brand.black">
+            <Heading as="h3" variant="heading1">
               {t('sales.direct.modal.title')}
             </Heading>
           </ModalHeader>

@@ -85,7 +85,7 @@ const TokenGrid: VFC<{
       <ChakraPagination
         py="6"
         borderTop="1px"
-        borderColor="gray.200"
+        borderColor="inherit"
         {...pagination}
       />
     </Stack>

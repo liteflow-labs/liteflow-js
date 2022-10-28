@@ -33,22 +33,21 @@ const SaleAuctionCardFooter: VFC<Props> = ({ href, endAt, bestBid }) => {
         borderRadius="full"
         boxShadow="none"
         border="1px"
-        borderColor="gray.200"
+        borderColor="inherit"
       >
         <Avatar
-          icon={<Icon as={HiOutlineClock} h={4} w={4} color="white" />}
+          icon={<Icon as={HiOutlineClock} h={4} w={4} />}
           size="sm"
           bg="brand.500"
           ml={-3}
         />
-        <Text as="span" variant="button2" color="brand.black">
+        <Text as="span" variant="button2">
           <Countdown date={endAt} />
         </Text>
       </Tag>
       <Flex
         as={Link}
         justify="space-between"
-        color="brand.500"
         mt={3.5}
         w="full"
         fontSize="sm"

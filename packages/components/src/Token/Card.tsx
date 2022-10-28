@@ -92,8 +92,7 @@ const NFTCard: VFC<Props> = ({
       overflow="hidden"
       rounded="xl"
       borderWidth="1px"
-      borderColor="gray.200"
-      bgColor="white"
+      borderColor="inherit"
     >
       <Flex as={Link} href={href} h={72} w={72}>
         <TokenMedia
@@ -110,13 +109,7 @@ const NFTCard: VFC<Props> = ({
       <Stack spacing={3} p={6}>
         <Link href={href}>
           <a>
-            <Heading
-              as="h4"
-              variant="heading2"
-              color="brand.black"
-              title={asset.name}
-              isTruncated
-            >
+            <Heading as="h4" variant="heading2" title={asset.name} isTruncated>
               {asset.name}
             </Heading>
           </a>

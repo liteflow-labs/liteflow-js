@@ -48,15 +48,7 @@ const AcceptAuctionModal: FC<Props> = ({
         return {
           title: t('modal.accept-auction.auction.resolve.title'),
           description: t('modal.accept-auction.auction.resolve.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case AcceptAuctionStep.APPROVAL_SIGNATURE:
       case AcceptAuctionStep.APPROVAL_PENDING:
@@ -85,23 +77,13 @@ const AcceptAuctionModal: FC<Props> = ({
         return {
           title: t('modal.accept-auction.approval.signature.title'),
           description: t('modal.accept-auction.approval.signature.description'),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case AcceptAuctionStep.APPROVAL_PENDING:
         return {
           title: t('modal.accept-auction.approval.pending.title'),
           description: t('modal.accept-auction.approval.pending.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case AcceptAuctionStep.TRANSACTION_SIGNATURE:
       case AcceptAuctionStep.TRANSACTION_PENDING:
@@ -134,9 +116,7 @@ const AcceptAuctionModal: FC<Props> = ({
           description: t(
             'modal.accept-auction.transaction.signature.description',
           ),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case AcceptAuctionStep.TRANSACTION_PENDING:
         return {
@@ -144,15 +124,7 @@ const AcceptAuctionModal: FC<Props> = ({
           description: t(
             'modal.accept-auction.transaction.pending.description',
           ),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case AcceptAuctionStep.OWNERSHIP:
         return {
@@ -160,15 +132,7 @@ const AcceptAuctionModal: FC<Props> = ({
           description: t(
             'modal.accept-auction.transaction.ownership.description',
           ),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       default:
         return null
@@ -190,12 +154,12 @@ const AcceptAuctionModal: FC<Props> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Heading as="h3" variant="heading1" color="brand.black">
+          <Heading as="h3" variant="heading1">
             {title}
           </Heading>
         </ModalHeader>
         <ModalBody>
-          <Text as="p" variant="text" color="gray.500" mb={4}>
+          <Text as="p" variant="text" mb={4}>
             {t('modal.accept-auction.description')}
           </Text>
 
@@ -205,10 +169,10 @@ const AcceptAuctionModal: FC<Props> = ({
                 {auction.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {auction.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {auction.description}
                 </Text>
               </Box>
@@ -225,10 +189,10 @@ const AcceptAuctionModal: FC<Props> = ({
                 {approval.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {approval.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {approval.description}
                 </Text>
               </Box>
@@ -249,10 +213,10 @@ const AcceptAuctionModal: FC<Props> = ({
                 {transaction.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {transaction.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {transaction.description}
                 </Text>
               </Box>

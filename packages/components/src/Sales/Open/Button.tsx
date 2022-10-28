@@ -20,7 +20,6 @@ const SaleOpenButton: VFC<Props> = ({ assetId, isHomepage, ownAllSupply }) => {
         href={`/tokens/${assetId}`}
         variant="outline"
         colorScheme="gray"
-        bgColor="white"
         size="lg"
         rightIcon={<Icon as={HiArrowNarrowRight} />}
         isFullWidth

@@ -47,23 +47,13 @@ const AcceptOfferModal: FC<Props> = ({
         return {
           title: t('modal.accept-offer.approval.signature.title'),
           description: t('modal.accept-offer.approval.signature.description'),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case AcceptOfferStep.APPROVAL_PENDING:
         return {
           title: t('modal.accept-offer.approval.pending.title'),
           description: t('modal.accept-offer.approval.pending.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case AcceptOfferStep.TRANSACTION_SIGNATURE:
       case AcceptOfferStep.TRANSACTION_PENDING:
@@ -93,23 +83,13 @@ const AcceptOfferModal: FC<Props> = ({
           description: t(
             'modal.accept-offer.transaction.signature.description',
           ),
-          icon: (
-            <Icon as={CgArrowLongRight} h="22px" w="22px" color="brand.500" />
-          ),
+          icon: <Icon as={CgArrowLongRight} h="22px" w="22px" />,
         }
       case AcceptOfferStep.TRANSACTION_PENDING:
         return {
           title: t('modal.accept-offer.transaction.pending.title'),
           description: t('modal.accept-offer.transaction.pending.description'),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       case AcceptOfferStep.OWNERSHIP:
         return {
@@ -117,15 +97,7 @@ const AcceptOfferModal: FC<Props> = ({
           description: t(
             'modal.accept-offer.transaction.ownership.description',
           ),
-          icon: (
-            <Spinner
-              color="brand.500"
-              h={6}
-              w={6}
-              thickness="2px"
-              speed="0.65s"
-            />
-          ),
+          icon: <Spinner h={6} w={6} thickness="2px" speed="0.65s" />,
         }
       default:
         return null
@@ -147,12 +119,12 @@ const AcceptOfferModal: FC<Props> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Heading as="h3" variant="heading1" color="brand.black">
+          <Heading as="h3" variant="heading1">
             {title}
           </Heading>
         </ModalHeader>
         <ModalBody>
-          <Text as="p" variant="text" color="gray.500" mb={4}>
+          <Text as="p" variant="text" mb={4}>
             {t('modal.accept-offer.description')}
           </Text>
 
@@ -162,10 +134,10 @@ const AcceptOfferModal: FC<Props> = ({
                 {approval.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {approval.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {approval.description}
                 </Text>
               </Box>
@@ -185,10 +157,10 @@ const AcceptOfferModal: FC<Props> = ({
                 {transaction.icon}
               </Flex>
               <Box flex={1}>
-                <Heading as="h4" variant="heading2" color="brand.black">
+                <Heading as="h4" variant="heading2">
                   {transaction.title}
                 </Heading>
-                <Text as="p" variant="text-sm" color="gray.500">
+                <Text as="p" variant="text-sm">
                   {transaction.description}
                 </Text>
               </Box>

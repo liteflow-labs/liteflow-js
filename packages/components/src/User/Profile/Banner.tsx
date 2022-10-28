@@ -22,7 +22,7 @@ const UserProfileBanner: VFC<Props> = ({ cover, image, address, name }) => {
       h="200px"
       w="full"
       rounded="xl"
-      bgColor="gray.100"
+      bgColor="inherit"
     >
       {cover && (
         <Image
@@ -43,8 +43,6 @@ const UserProfileBanner: VFC<Props> = ({ cover, image, address, name }) => {
         overflow="hidden"
         rounded="full"
         borderWidth="4px"
-        borderColor="white"
-        bgColor="white"
       >
         <AccountImage address={address} image={image} size={96} />
       </Box>

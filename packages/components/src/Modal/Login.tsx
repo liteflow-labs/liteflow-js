@@ -63,13 +63,13 @@ const LoginModal: FC<Props> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Heading as="h3" variant="heading1" color="brand.black">
+          <Heading as="h3" variant="heading1">
             {t('modal.login.title')}
           </Heading>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text as="p" variant="text" color="gray.500" mb={4}>
+          <Text as="p" variant="text" mb={4}>
             {t('modal.login.description')}
           </Text>
 
@@ -84,15 +84,10 @@ const LoginModal: FC<Props> = ({
                 bottom={0}
                 left={0}
               >
-                <Box w="full" borderTop="1px" borderColor="gray.200" />
+                <Box w="full" borderTop="1px" borderColor="inherit" />
               </Flex>
-              <Flex position="relative" bgColor="white" pr={2}>
-                <Text
-                  as="p"
-                  variant="text-sm"
-                  fontWeight={500}
-                  color="gray.500"
-                >
+              <Flex position="relative" pr={2}>
+                <Text as="p" variant="text-sm" fontWeight={500}>
                   {t('modal.login.alternative')}
                 </Text>
               </Flex>
@@ -118,7 +113,7 @@ const LoginModal: FC<Props> = ({
                   spacing={3}
                   rounded="xl"
                   borderWidth={1}
-                  borderColor="gray.200"
+                  borderColor="inherit"
                   shadow="sm"
                   _hover={{
                     shadow: 'md',
@@ -135,7 +130,7 @@ const LoginModal: FC<Props> = ({
                   spacing={3}
                   rounded="xl"
                   borderWidth={1}
-                  borderColor="gray.200"
+                  borderColor="inherit"
                   shadow="sm"
                   _hover={{
                     shadow: 'md',
@@ -152,7 +147,7 @@ const LoginModal: FC<Props> = ({
                   spacing={3}
                   rounded="xl"
                   borderWidth={1}
-                  borderColor="gray.200"
+                  borderColor="inherit"
                   shadow="sm"
                   _hover={{
                     shadow: 'md',
