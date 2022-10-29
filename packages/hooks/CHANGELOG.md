@@ -6,7 +6,7 @@
 
 #### Added
 
-- Add `useConfig` hook to return the configuration of the platform [](https://github.com/liteflow-labs/libraries/pull/)
+- Add `useConfig` hook to return the configuration of the platform [#65](https://github.com/liteflow-labs/libraries/pull/65)
   - `hasLazyMint` is true when lazymint is activated
   - `hasReferralSystem` is true when the referral and invitation system is activated
   - `hasSocialFeatures` is true when all the social features (likes, comments...) are activated
@@ -23,7 +23,7 @@
 
 #### Fixed
 
-- Add proper errors when calling a hook relying on a feature not activated [](https://github.com/liteflow-labs/libraries/pull/)
+- Add proper errors when calling a hook relying on a feature not activated [#65](https://github.com/liteflow-labs/libraries/pull/65)
 
 #### Security
 

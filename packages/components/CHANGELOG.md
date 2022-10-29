@@ -4,7 +4,7 @@
 
 #### Breaking Changes
 
-- `TokenFormCreate` does not require the `activateLazyMint` props anymore [](https://github.com/liteflow-labs/libraries/pull/)
+- `TokenFormCreate` does not require the `activateLazyMint` props anymore [#65](https://github.com/liteflow-labs/libraries/pull/65)
 
 #### Added
 
