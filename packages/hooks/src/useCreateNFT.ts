@@ -99,6 +99,7 @@ export default function useCreateNFT(
   },
 ] {
   const { sdk } = useContext(LiteflowContext)
+  const config = useConfig()
   const [transactionHash, setTransactionHash] = useState<string>()
   const [activeStep, setActiveProcess] = useState<CreateNftStep>(
     CreateNftStep.INITIAL,
@@ -169,6 +170,10 @@ export default function useCreateNFT(
       traits,
       isLazyMint,
     }) => {
+      invariant(
+        !isPrivate || (isPrivate && (await config).hasUnlockableContent),
+        ErrorCodes.FEATURE_DISABLED_UNLOCKABLE_CONTENT,
+      )
       invariant(signer, ErrorCodes.SIGNER_FALSY)
       const account = await signer.getAddress()
 
@@ -274,7 +279,7 @@ export default function useCreateNFT(
         setTransactionHash(undefined)
       }
     },
-    [sdk, signer, pollOwnership, uploadMedia],
+    [sdk, signer, pollOwnership, uploadMedia, config],
   )
 
   return [createNft, { activeStep, transactionHash }]
