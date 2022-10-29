@@ -1,4 +1,4 @@
-import { GraphQLClient } from 'graphql-request'
+import { gql, GraphQLClient } from 'graphql-request'
 import React, {
   createContext,
   PropsWithChildren,
@@ -7,13 +7,26 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import type { Sdk } from './graphql'
+import type { Config, Sdk } from './graphql'
 import { getSdk } from './graphql'
+
+gql`
+  query GetConfig {
+    config {
+      hasLazyMint
+      hasReferralSystem
+      hasSocialFeatures
+      hasTopUp
+      hasUnlockableContent
+    }
+  }
+`
 
 export type LiteflowContext = {
   setAuthenticationToken: (token: string) => void
   resetAuthenticationToken: () => void
   sdk: Sdk
+  config: Promise<Config>
 }
 
 export type LiteflowProviderProps = {
@@ -28,6 +41,7 @@ export const LiteflowContext = createContext<LiteflowContext>({
     throw new Error('not implemented')
   },
   sdk: {} as Sdk,
+  config: {} as Promise<Config>,
 })
 
 export function LiteflowProvider({
@@ -37,6 +51,10 @@ export function LiteflowProvider({
   const [authenticationToken, setAuthenticationToken] = useState<string>()
   const client = useMemo(() => new GraphQLClient(endpoint), [endpoint])
   const sdk = useMemo(() => getSdk(client), [client])
+  const config = useMemo(
+    () => sdk.GetConfig().then(({ config }) => config),
+    [sdk],
+  )
 
   const resetAuthenticationToken = useCallback(
     () => setAuthenticationToken(undefined),
@@ -58,6 +76,7 @@ export function LiteflowProvider({
         resetAuthenticationToken,
         setAuthenticationToken,
         sdk,
+        config,
       }}
     >
       {children}

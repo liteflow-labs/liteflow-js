@@ -6,6 +6,7 @@ import useAuctionStatus from './useAuctionStatus'
 import useAuthenticate from './useAuthenticate'
 import useBalance from './useBalance'
 import useCancelOffer, { CancelOfferStep } from './useCancelOffer'
+import useConfig from './useConfig'
 import useCreateAuction from './useCreateAuction'
 import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
@@ -38,6 +39,7 @@ export {
    * Stable
    * These hooks are ready to use and are unlikely to have breaking change
    */
+  useConfig,
   useAcceptAuction,
   useAcceptOffer,
   useAuthenticate,
