@@ -81,7 +81,6 @@ export const Template: NextPage<
     maxRoyalties?: number
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
-    activateLazyMint?: boolean
   }
 > = ({
   multiple,
@@ -94,7 +93,6 @@ export const Template: NextPage<
   maxRoyalties = 30,
   restrictMintToVerifiedAccount = false,
   reportEmail,
-  activateLazyMint = false,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
@@ -241,7 +239,6 @@ export const Template: NextPage<
           login={login}
           activateUnlockableContent={activateUnlockableContent}
           maxRoyalties={maxRoyalties}
-          activateLazyMint={activateLazyMint}
         />
       </Flex>
     </>
