@@ -4,6 +4,7 @@ import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorCodes } from './error'
+import useConfig from './useConfig'
 
 gql`
   mutation CreateWyrePayment($address: Address!) {
@@ -19,7 +20,10 @@ export default function useAddFund(
 ): [() => Promise<void>, { loading: boolean }] {
   const { sdk } = useContext(LiteflowContext)
   const [loading, setLoading] = useState(false)
+  const config = useConfig()
+
   const addFunds = useCallback(async () => {
+    invariant((await config).hasTopUp, ErrorCodes.FEATURE_DISABLED_TOP_UP)
     invariant(signer, ErrorCodes.SIGNER_FALSY)
     try {
       setLoading(true)
@@ -32,6 +36,6 @@ export default function useAddFund(
     } finally {
       setLoading(false)
     }
-  }, [sdk, signer])
+  }, [sdk, signer, config])
   return [addFunds, { loading }]
 }
