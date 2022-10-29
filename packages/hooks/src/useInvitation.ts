@@ -4,6 +4,7 @@ import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorCodes } from './error'
+import useConfig from './useConfig'
 
 gql`
   mutation CreateInvitation {
@@ -40,9 +41,14 @@ export default function useInvitation(signer: Signer | undefined): {
   creating: boolean
 } {
   const { sdk } = useContext(LiteflowContext)
+  const config = useConfig()
   const [accepting, setAccepting] = useState(false)
   const [creating, setCreating] = useState(false)
   const create = useCallback(async () => {
+    invariant(
+      (await config).hasReferralSystem,
+      ErrorCodes.FEATURE_DISABLED_REFERRAL,
+    )
     invariant(signer, ErrorCodes.SIGNER_FALSY)
     try {
       setCreating(true)
@@ -61,10 +67,14 @@ export default function useInvitation(signer: Signer | undefined): {
     } finally {
       setCreating(false)
     }
-  }, [sdk, signer])
+  }, [sdk, signer, config])
 
   const accept = useCallback(
     async (invitationId: string) => {
+      invariant(
+        (await config).hasReferralSystem,
+        ErrorCodes.FEATURE_DISABLED_REFERRAL,
+      )
       try {
         setAccepting(true)
         const { acceptInvitation } = await sdk.AcceptInvitation({
@@ -76,7 +86,7 @@ export default function useInvitation(signer: Signer | undefined): {
         setAccepting(false)
       }
     },
-    [sdk],
+    [sdk, config],
   )
 
   return { create, accept, accepting, creating }
