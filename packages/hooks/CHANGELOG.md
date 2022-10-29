@@ -8,7 +8,7 @@
 
 #### Changed
 
-- Use of ts-invariant to assert conditions in the codebase + remove useless checks [#](https://github.com/liteflow-labs/libraries/pull/)
+- Use of ts-invariant to assert conditions in the codebase + remove useless checks [#64](https://github.com/liteflow-labs/libraries/pull/64)
 
 #### Deprecated
 
