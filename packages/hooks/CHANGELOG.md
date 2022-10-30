@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Remove unnecessary `graphql` dependency[#66](https://github.com/liteflow-labs/libraries/pull/66)
+
 #### Deprecated
 
 #### Removed
