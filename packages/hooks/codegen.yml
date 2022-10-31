@@ -10,7 +10,7 @@ generates:
       - 'typescript-graphql-request'
     config:
       avoidOptionals: true
-      enumsAsConst: true
+      enumsAsTypes: true
 config:
   scalars:
     URI: 'URI'

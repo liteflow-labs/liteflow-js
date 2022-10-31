@@ -5,7 +5,7 @@ import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorCodes } from './error'
-import { OfferType, TransactionFragment } from './graphql'
+import { TransactionFragment } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
@@ -97,7 +97,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
         // check if operator is authorized
         let approval: TransactionFragment | null
-        if (offer.type === OfferType.Sale) {
+        if (offer.type === 'SALE') {
           // accepting an offer of type sale, approval is on the currency
           approval = offer.currency.approval
         } else {
@@ -127,7 +127,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         // determine the asset id to check ownership from
         const assetId = offer.assetId
         const newOwner =
-          offer.type === OfferType.Sale
+          offer.type === 'SALE'
             ? offer.takerAddress || account.toLowerCase()
             : offer.makerAddress
 

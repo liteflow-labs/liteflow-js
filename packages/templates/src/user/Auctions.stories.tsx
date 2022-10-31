@@ -3,7 +3,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import { withReactContext } from 'storybook-react-context'
 import {
-  AuctionsOrderBy,
   FetchUserAuctionsDocument,
   FetchUserAuctionsQueryVariables,
 } from '../graphql'
@@ -33,7 +32,7 @@ Default.args = {
   userAddress: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
   limit: 12,
   offset: 0,
-  orderBy: AuctionsOrderBy.CreatedAtDesc,
+  orderBy: 'CREATED_AT_DESC',
   limits: [12, 24, 36, 48],
   page: 1,
   explorer: {

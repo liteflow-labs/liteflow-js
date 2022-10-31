@@ -9,6 +9,7 @@
 #### Changed
 
 - Use of ts-invariant to assert conditions in the codebase + remove useless checks [#64](https://github.com/liteflow-labs/libraries/pull/64)
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
 
 #### Deprecated
 

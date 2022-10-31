@@ -8,11 +8,15 @@
 
 #### Changed
 
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
+
 #### Deprecated
 
 #### Removed
 
 #### Fixed
+
+- Fix error 500 when accessing the notification template without being logged in [#67](https://github.com/liteflow-labs/libraries/pull/67)
 
 #### Security
 

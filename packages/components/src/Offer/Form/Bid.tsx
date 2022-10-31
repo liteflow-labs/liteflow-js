@@ -34,7 +34,6 @@ import dayjs from 'dayjs'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FC, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { OfferType } from '../../graphql'
 import Image from '../../Image/Image'
 import CreateOfferModal from '../../Modal/CreateOffer'
 import LoginModal from '../../Modal/Login'
@@ -178,7 +177,7 @@ const OfferFormBid: FC<Props> = (props) => {
     try {
       createOfferOnOpen()
       const id = await createOffer({
-        type: OfferType.Buy,
+        type: 'BUY',
         quantity: BigNumber.from(quantity),
         unitPrice: priceUnit,
         assetId: assetId,

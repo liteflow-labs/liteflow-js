@@ -22,7 +22,6 @@ import {
   BidOnAssetQuery,
   FeesForBidDocument,
   FeesForBidQuery,
-  Standard,
   useBidOnAssetQuery,
   useFeesForBidQuery,
 } from '../graphql'
@@ -245,7 +244,7 @@ export const Template: VFC<
             </>
           )}
 
-          {asset.standard === Standard.Erc721 && (
+          {asset.standard === 'ERC721' && (
             <OfferFormBid
               signer={signer}
               account={account}
@@ -263,7 +262,7 @@ export const Template: VFC<
               login={login}
             />
           )}
-          {asset.standard === Standard.Erc1155 && (
+          {asset.standard === 'ERC1155' && (
             <OfferFormBid
               signer={signer}
               account={account}

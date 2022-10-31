@@ -49,7 +49,6 @@ import {
   FetchAssetIdFromTokenIdQuery,
   FetchAssetIdFromTokenIdQueryVariables,
   FetchAssetQuery,
-  Standard,
   useFetchAssetQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
@@ -171,7 +170,7 @@ export const Template: VFC<
       ),
     [asset],
   )
-  const isSingle = useMemo(() => asset?.standard === Standard.Erc721, [asset])
+  const isSingle = useMemo(() => asset?.standard === 'ERC721', [asset])
 
   const tabs = [
     {
