@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Fixed a property issue causing the story for `MintListItem` Storybook story do not display. [#71](https://github.com/liteflow-labs/libraries/pull/71)
+
 #### Security
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
