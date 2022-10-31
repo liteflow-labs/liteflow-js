@@ -11,7 +11,7 @@ generates:
       - 'typescript-react-apollo'
     config:
       avoidOptionals: true
-      enumsAsConst: true
+      enumsAsTypes: true
 config:
   scalars:
     URI: 'URI'

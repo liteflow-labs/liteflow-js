@@ -41,7 +41,6 @@ import invariant from 'ts-invariant'
 import {
   FetchUserFixedPriceDocument,
   FetchUserFixedPriceQuery,
-  OfferOpenBuysOrderBy,
   OffersOrderBy,
   useFetchUserFixedPriceQuery,
 } from '../graphql'
@@ -79,10 +78,7 @@ export const server = (
     invariant(userAddress, 'userAddress is falsy')
     const limit = getLimit(context, defaultLimit)
     const page = getPage(context)
-    const orderBy = getOrder<OffersOrderBy>(
-      context,
-      OffersOrderBy.CreatedAtDesc,
-    )
+    const orderBy = getOrder<OffersOrderBy>(context, 'CREATED_AT_DESC')
     const offset = getOffset(context, defaultLimit)
     const now = new Date()
     const { data, error } = await client.query<FetchUserFixedPriceQuery>({
@@ -256,26 +252,26 @@ export const Template: VFC<
             </Link>
           </Flex>
           <Box ml="auto" w={{ base: 'full', md: 'min-content' }}>
-            <Select
+            <Select<OffersOrderBy>
               label={t('user.fixed.orderBy.label')}
               name="Sort by"
               onChange={changeOrder}
               choices={[
                 {
                   label: t('user.fixed.orderBy.values.createdAtDesc'),
-                  value: OfferOpenBuysOrderBy.CreatedAtDesc,
+                  value: 'CREATED_AT_DESC',
                 },
                 {
                   label: t('user.fixed.orderBy.values.createdAtAsc'),
-                  value: OfferOpenBuysOrderBy.CreatedAtAsc,
+                  value: 'CREATED_AT_ASC',
                 },
                 {
                   label: t('user.fixed.orderBy.values.unitPriceAsc'),
-                  value: OfferOpenBuysOrderBy.UnitPriceInRefAsc,
+                  value: 'UNIT_PRICE_IN_REF_ASC',
                 },
                 {
                   label: t('user.fixed.orderBy.values.unitPriceDesc'),
-                  value: OfferOpenBuysOrderBy.UnitPriceInRefDesc,
+                  value: 'UNIT_PRICE_IN_REF_DESC',
                 },
               ]}
               value={orderBy}

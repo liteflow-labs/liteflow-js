@@ -6,7 +6,11 @@
 
 #### Added
 
+- Add generic type for `Select` and `TokenGrid` components [#63](https://github.com/liteflow-labs/libraries/pull/63)
+
 #### Changed
+
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
 
 #### Deprecated
 

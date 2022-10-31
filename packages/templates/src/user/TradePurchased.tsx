@@ -69,10 +69,7 @@ export const server = (
     invariant(userAddress, 'userAddress is falsy')
     const limit = getLimit(context, defaultLimit)
     const page = getPage(context)
-    const orderBy = getOrder<TradesOrderBy>(
-      context,
-      TradesOrderBy.TimestampDesc,
-    )
+    const orderBy = getOrder<TradesOrderBy>(context, 'TIMESTAMP_DESC')
     const offset = getOffset(context, defaultLimit)
     const now = new Date()
     const { data, error } = await client.query<FetchUserTradePurchasedQuery>({
@@ -212,26 +209,26 @@ export const Template: VFC<
             </Link>
           </Flex>
           <Box ml="auto" w={{ base: 'full', md: 'min-content' }}>
-            <Select
+            <Select<TradesOrderBy>
               label={t('user.trade-purchased.orderBy.label')}
               name="Sort by"
               onChange={changeOrder}
               choices={[
                 {
                   label: t('user.trade-purchased.orderBy.values.timestampDesc'),
-                  value: TradesOrderBy.TimestampDesc,
+                  value: 'TIMESTAMP_DESC',
                 },
                 {
                   label: t('user.trade-purchased.orderBy.values.timestampAsc'),
-                  value: TradesOrderBy.TimestampAsc,
+                  value: 'TIMESTAMP_ASC',
                 },
                 {
                   label: t('user.trade-purchased.orderBy.values.amountAsc'),
-                  value: TradesOrderBy.AmountInRefAsc,
+                  value: 'AMOUNT_IN_REF_ASC',
                 },
                 {
                   label: t('user.trade-purchased.orderBy.values.amountDesc'),
-                  value: TradesOrderBy.AmountInRefDesc,
+                  value: 'AMOUNT_IN_REF_DESC',
                 },
               ]}
               value={orderBy}

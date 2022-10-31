@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
+
 #### Deprecated
 
 #### Removed
