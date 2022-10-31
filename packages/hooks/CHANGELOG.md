@@ -8,6 +8,7 @@
 
 #### Changed
 
+- Remove unnecessary `graphql` dependency[#66](https://github.com/liteflow-labs/libraries/pull/66)
 - Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
 
 #### Deprecated
