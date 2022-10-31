@@ -43,6 +43,7 @@ function Logo(): JSX.Element {
 
 const config: DocsThemeConfig = {
   head: Head,
+  primaryHue: 146,
   chat: {
     icon: null,
   },
