@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 import { Offer } from './graphql'
 import { convertTx } from './utils/transaction'
 
@@ -50,7 +50,7 @@ export default function useCancelOffer(signer: Signer | undefined): [
 
   const cancelOffer: CancelOfferFn = useCallback(
     async ({ id }) => {
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       try {
@@ -59,7 +59,7 @@ export default function useCancelOffer(signer: Signer | undefined): [
           offerId: id,
           taker: account.toLowerCase(),
         })
-        invariant(offer, ErrorCodes.OFFER_NOT_FOUND)
+        invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         setActiveProcess(CancelOfferStep.TRANSACTION_SIGNATURE)
         // sign and broadcast the transaction

@@ -4,7 +4,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 import { TransactionFragment } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
@@ -82,7 +82,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
   const acceptOffer: acceptOfferFn = useCallback(
     async ({ id, unitPrice }, quantity) => {
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       try {
@@ -93,7 +93,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
           quantity: quantity.toString(),
           amount: BigNumber.from(unitPrice).mul(quantity).toString(),
         })
-        invariant(offer, ErrorCodes.OFFER_NOT_FOUND)
+        invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         // check if operator is authorized
         let approval: TransactionFragment | null

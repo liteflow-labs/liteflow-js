@@ -4,7 +4,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 import useAcceptOffer, { AcceptOfferStep } from './useAcceptOffer'
 
 gql`
@@ -74,15 +74,15 @@ export default function useAcceptAuction(signer: Signer | undefined): [
       try {
         setActiveProcess(AcceptAuctionStep.RESOLVE_BEST_BID)
         const data = await sdk.FetchAuctionBid({ id: auctionId })
-        invariant(data.auction, ErrorCodes.AUCTION_NOT_FOUND)
+        invariant(data.auction, ErrorMessages.AUCTION_NOT_FOUND)
         const offer = data.auction.offers.nodes[0]
-        invariant(offer, ErrorCodes.OFFER_NOT_FOUND)
+        invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         invariant(
           BigNumber.from(offer.amount).gte(
             BigNumber.from(data.auction.reserveAmount),
           ),
-          ErrorCodes.AUCTION_RESERVER_NOT_MATCH,
+          ErrorMessages.AUCTION_RESERVER_NOT_MATCH,
         )
         await acceptOffer(offer, offer.quantity)
       } finally {

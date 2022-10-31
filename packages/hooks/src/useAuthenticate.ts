@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   mutation RequestAuthentication($input: RequestAuthenticationInput!) {
@@ -41,7 +41,7 @@ export default function useAuthenticate(): [
 
   const authenticate = useCallback(
     async (signer: Signer) => {
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const address = (await signer.getAddress()).toLowerCase()
 
       try {

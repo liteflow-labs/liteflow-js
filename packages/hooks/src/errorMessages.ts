@@ -1,4 +1,4 @@
-export enum ErrorCodes {
+export enum ErrorMessages {
   FEATURE_DISABLED_LAZY_MINT = 'Feature LazyMint disabled',
   FEATURE_DISABLED_TOP_UP = 'Feature TopUp disabled',
   FEATURE_DISABLED_SOCIAL = 'Feature Social disabled',

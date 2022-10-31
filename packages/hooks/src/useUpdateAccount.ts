@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 import useIPFSUploader from './useIPFSUploader'
 import { formatSocial } from './utils/formatSocial'
 
@@ -48,7 +48,7 @@ export default function useUpdateAccount(
 
   const updateAccount = useCallback(
     async (inputs: AccountInput) => {
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       setLoading(true)
@@ -75,7 +75,7 @@ export default function useUpdateAccount(
             },
           },
         })
-        invariant(updateAccount?.account, ErrorCodes.ACCOUNT_UPDATE_FAILED)
+        invariant(updateAccount?.account, ErrorMessages.ACCOUNT_UPDATE_FAILED)
         return updateAccount.account.address
       } finally {
         setLoading(false)
