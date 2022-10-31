@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />
 
 const assets = [
   {
-    standard: Standard.Erc721,
+    standard: 'ERC721' as Standard,
     id: '1',
     name: 'My NFT',
     animationUrl: undefined,
@@ -33,7 +33,7 @@ const assets = [
     hasMultiCurrency: false,
   },
   {
-    standard: Standard.Erc721,
+    standard: 'ERC721' as Standard,
     id: '1',
     name: 'My NFT',
     animationUrl: undefined,
@@ -53,7 +53,7 @@ const assets = [
     hasMultiCurrency: false,
   },
   {
-    standard: Standard.Erc721,
+    standard: 'ERC721' as Standard,
     id: '1',
     name: 'My NFT',
     animationUrl: undefined,
@@ -76,11 +76,11 @@ const assets = [
 
 const orderBy = {
   choices: [
-    { label: 'Date: Newest', value: OwnershipsOrderBy.CreatedAtDesc },
-    { label: 'Date: Oldest', value: OwnershipsOrderBy.CreatedAtAsc },
+    { label: 'Date: Newest', value: 'CREATED_AT_DESC' as OwnershipsOrderBy },
+    { label: 'Date: Oldest', value: 'CREATED_AT_ASC' as OwnershipsOrderBy },
   ],
   onSort: async (x: any) => console.log(x),
-  value: OwnershipsOrderBy.CreatedAtDesc,
+  value: 'CREATED_AT_DESC' as OwnershipsOrderBy,
 }
 
 const pagination: PaginationProps = {

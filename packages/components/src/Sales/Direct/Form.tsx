@@ -34,7 +34,7 @@ import dayjs from 'dayjs'
 import useTranslation from 'next-translate/useTranslation'
 import React, { useMemo, VFC } from 'react'
 import { useForm } from 'react-hook-form'
-import { OfferType, Standard } from '../../graphql'
+import { Standard } from '../../graphql'
 import Image from '../../Image/Image'
 import CreateOfferModal from '../../Modal/CreateOffer'
 import Price from '../../Price/Price'
@@ -137,16 +137,13 @@ const SalesDirectForm: VFC<Props> = ({
     if (activeStep !== CreateOfferStep.INITIAL) return
     if (!asset) throw new Error('asset falsy')
     if (!currency) throw new Error('currency falsy')
-    if (
-      asset.standard !== Standard.Erc721 &&
-      asset.standard !== Standard.Erc1155
-    )
+    if (asset.standard !== 'ERC721' && asset.standard !== 'ERC1155')
       throw new Error('invalid token')
 
     try {
       onOpen()
       const id = await createAndPublishOffer({
-        type: OfferType.Sale,
+        type: 'SALE',
         quantity: BigNumber.from(quantity),
         unitPrice: priceUnit,
         assetId: asset.id,
@@ -165,7 +162,7 @@ const SalesDirectForm: VFC<Props> = ({
     }
   })
 
-  const isSingle = useMemo(() => asset.standard === Standard.Erc721, [asset])
+  const isSingle = useMemo(() => asset.standard === 'ERC721', [asset])
 
   return (
     <Stack as="form" spacing={8} onSubmit={onSubmit}>

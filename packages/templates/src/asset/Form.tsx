@@ -26,10 +26,8 @@ import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useMemo, useState } from 'react'
 import {
-  AccountVerificationStatus,
   FetchAccountDocument,
   FetchAccountQuery,
-  Standard,
   useFetchAccountQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
@@ -125,7 +123,7 @@ export const Template: NextPage<
         image: imageUrlLocal || undefined,
         animationUrl: animationUrlLocal,
         name: formData?.name || '',
-        standard: multiple ? Standard.Erc1155 : Standard.Erc721,
+        standard: multiple ? 'ERC1155' : 'ERC721',
       } as NFTCardProps['asset']),
     [imageUrlLocal, animationUrlLocal, formData?.name, multiple],
   )
@@ -135,9 +133,7 @@ export const Template: NextPage<
       address: data?.account?.address || '0x',
       image: data?.account?.image || undefined,
       name: data?.account?.name || undefined,
-      verified:
-        data?.account?.verification?.status ===
-        AccountVerificationStatus.Validated,
+      verified: data?.account?.verification?.status === 'VALIDATED',
     }),
     [data?.account],
   )

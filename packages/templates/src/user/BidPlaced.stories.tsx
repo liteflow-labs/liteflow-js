@@ -3,7 +3,6 @@ import React from 'react'
 import {
   FetchUserBidsPlacedDocument,
   FetchUserBidsPlacedQueryVariables,
-  OfferOpenBuysOrderBy,
 } from '../graphql'
 import * as UserBidPlaced from './BidPlaced'
 
@@ -22,7 +21,7 @@ Default.args = {
   userAddress: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
   limit: 12,
   offset: 0,
-  orderBy: OfferOpenBuysOrderBy.CreatedAtDesc,
+  orderBy: 'CREATED_AT_DESC',
   limits: [12, 24, 36, 48],
   page: 1,
   explorer: {

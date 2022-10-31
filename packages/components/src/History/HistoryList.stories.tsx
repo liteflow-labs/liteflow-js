@@ -1,7 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { AssetHistoryAction } from '../graphql'
 import HistoryList from './HistoryList'
 
 export default {
@@ -52,15 +51,13 @@ const blockExplorer = {
 
 export const PurchaseSingle = Template.bind({})
 PurchaseSingle.args = {
-  histories: [{ action: AssetHistoryAction.Purchase, ...historySingleEdition }],
+  histories: [{ action: 'PURCHASE', ...historySingleEdition }],
   blockExplorer,
 }
 
 export const PurchaseMultiple = Template.bind({})
 PurchaseMultiple.args = {
-  histories: [
-    { action: AssetHistoryAction.Purchase, ...historyMultipleEdition },
-  ],
+  histories: [{ action: 'PURCHASE', ...historyMultipleEdition }],
   blockExplorer,
 }
 
@@ -92,7 +89,7 @@ export const ListingSingle = Template.bind({})
 ListingSingle.args = {
   histories: [
     {
-      action: AssetHistoryAction.Listing,
+      action: 'LISTING',
       ...historySingleEdition,
       transactionHash: null,
     },
@@ -103,7 +100,7 @@ export const ListingMultiple = Template.bind({})
 ListingMultiple.args = {
   histories: [
     {
-      action: AssetHistoryAction.Listing,
+      action: 'LISTING',
       ...historyMultipleEdition,
       transactionHash: null,
     },
@@ -112,14 +109,12 @@ ListingMultiple.args = {
 
 export const TransferSingle = Template.bind({})
 TransferSingle.args = {
-  histories: [{ action: AssetHistoryAction.Transfer, ...historySingleEdition }],
+  histories: [{ action: 'TRANSFER', ...historySingleEdition }],
   blockExplorer,
 }
 
 export const TransferMultiple = Template.bind({})
 TransferMultiple.args = {
-  histories: [
-    { action: AssetHistoryAction.Transfer, ...historyMultipleEdition },
-  ],
+  histories: [{ action: 'TRANSFER', ...historyMultipleEdition }],
   blockExplorer,
 }

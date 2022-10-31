@@ -74,10 +74,7 @@ export const server = (
     invariant(userAddress, 'userAddress is falsy')
     const limit = getLimit(context, defaultLimit)
     const page = getPage(context)
-    const orderBy = getOrder<AuctionsOrderBy>(
-      context,
-      AuctionsOrderBy.CreatedAtDesc,
-    )
+    const orderBy = getOrder<AuctionsOrderBy>(context, 'CREATED_AT_DESC')
     const offset = getOffset(context, defaultLimit)
     const now = new Date()
     const { data, error } = await client.query<FetchUserAuctionsQuery>({
@@ -242,18 +239,18 @@ export const Template: VFC<
             </Link>
           </Flex>
           <Box ml="auto" w={{ base: 'full', md: 'min-content' }}>
-            <Select
+            <Select<AuctionsOrderBy>
               label={t('user.auctions.orderBy.label')}
               name="Sort by"
               onChange={changeOrder}
               choices={[
                 {
                   label: t('user.auctions.orderBy.values.createdAtDesc'),
-                  value: AuctionsOrderBy.CreatedAtDesc,
+                  value: 'CREATED_AT_DESC',
                 },
                 {
                   label: t('user.auctions.orderBy.values.createdAtAsc'),
-                  value: AuctionsOrderBy.CreatedAtAsc,
+                  value: 'CREATED_AT_ASC',
                 },
               ]}
               value={orderBy}

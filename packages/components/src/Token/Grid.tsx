@@ -1,6 +1,7 @@
 import { Box, chakra, Flex, SimpleGrid, Stack } from '@chakra-ui/react'
 import useTranslation from 'next-translate/useTranslation'
-import React, { VFC } from 'react'
+import React from 'react'
+import { ReactElement } from 'react'
 import Empty from '../Empty/Empty'
 import type { IProp as PaginationProps } from '../Pagination/Pagination'
 import Pagination from '../Pagination/Pagination'
@@ -8,7 +9,7 @@ import Select from '../Select/Select'
 import type { Props as NFTCardProps } from './Card'
 import NFTCard from './Card'
 
-const TokenGrid: VFC<{
+type IProps<Order extends string> = {
   assets: (NFTCardProps['asset'] & {
     auction: NFTCardProps['auction']
     creator: NFTCardProps['creator']
@@ -17,15 +18,21 @@ const TokenGrid: VFC<{
     hasMultiCurrency: boolean
   })[]
   orderBy: {
-    value: string
+    value: Order
     choices: {
-      value: string
+      value: Order
       label: string
     }[]
     onSort: (orderBy: any) => Promise<void>
   }
   pagination: PaginationProps
-}> = ({ assets, orderBy, pagination }) => {
+}
+
+const TokenGrid = <Order extends string>({
+  assets,
+  orderBy,
+  pagination,
+}: IProps<Order>): ReactElement => {
   const { t } = useTranslation('components')
   if (assets.length === 0)
     return (
