@@ -6,13 +6,20 @@
 
 #### Added
 
+- Add generic type for `Select` and `TokenGrid` components [#63](https://github.com/liteflow-labs/libraries/pull/63)
+
 #### Changed
+
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
 
 #### Deprecated
 
 #### Removed
 
 #### Fixed
+
+- Type in the banner on the wallet page [#61](https://github.com/liteflow-labs/libraries/pull/61)
+- Fixed a property issue causing the story for `MintListItem` Storybook story do not display. [#71](https://github.com/liteflow-labs/libraries/pull/71)
 
 #### Security
 

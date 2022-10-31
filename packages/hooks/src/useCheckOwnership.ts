@@ -1,7 +1,9 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
 import { useCallback, useContext } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   query CheckOwnership($assetId: String!, $ownerAddress: Address!) {
@@ -34,20 +36,19 @@ export default function useCheckOwnership(): {
   const { sdk } = useContext(LiteflowContext)
   const checkOwnership = useCallback<CheckOwnershipFunction>(
     async (assetId: string, ownerAddress: string) => {
-      const checkedOwnership = await sdk.CheckOwnership({
+      const { ownerships } = await sdk.CheckOwnership({
         assetId,
         ownerAddress,
       })
-      if (!checkedOwnership?.ownerships)
-        throw new Error('checkedOwnership.ownerships is falsy')
-      if (checkedOwnership.ownerships.nodes.length === 0)
+      invariant(ownerships, ErrorMessages.OWNERSHIP_NOT_FOUND)
+      if (ownerships.nodes.length === 0)
         return {
           isOwner: false,
           quantity: '0',
         }
       return {
         isOwner: true,
-        quantity: checkedOwnership.ownerships.nodes[0].quantity,
+        quantity: ownerships.nodes[0].quantity,
       }
     },
     [sdk],
@@ -82,8 +83,7 @@ export default function useCheckOwnership(): {
         await new Promise((resolve) => setTimeout(resolve, interval))
         i++
       }
-      if (i === max - 1)
-        throw new Error('polling timeout. could not check ownership')
+      invariant(i !== max - 1, ErrorMessages.POLLING_TIMEOUT)
     },
     [checkOwnership],
   )

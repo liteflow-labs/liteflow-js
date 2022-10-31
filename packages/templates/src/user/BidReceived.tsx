@@ -79,10 +79,7 @@ export const server = (
     invariant(userAddress, 'userAddress is falsy')
     const limit = getLimit(context, defaultLimit)
     const page = getPage(context)
-    const orderBy = getOrder<OfferOpenBuysOrderBy>(
-      context,
-      OfferOpenBuysOrderBy.CreatedAtDesc,
-    )
+    const orderBy = getOrder<OfferOpenBuysOrderBy>(context, 'CREATED_AT_DESC')
     const offset = getOffset(context, defaultLimit)
     const now = new Date()
     const { data, error } = await client.query<FetchUserBidsReceivedQuery>({
@@ -256,18 +253,18 @@ export const Template: VFC<
             </Link>
           </Flex>
           <Box ml="auto" w={{ base: 'full', md: 'min-content' }}>
-            <Select
+            <Select<OfferOpenBuysOrderBy>
               label={t('user.bid-received.orderBy.label')}
               name="Sort by"
               onChange={changeOrder}
               choices={[
                 {
                   label: t('user.bid-received.orderBy.values.createdAtDesc'),
-                  value: OfferOpenBuysOrderBy.CreatedAtDesc,
+                  value: 'CREATED_AT_DESC',
                 },
                 {
                   label: t('user.bid-received.orderBy.values.createdAtAsc'),
-                  value: OfferOpenBuysOrderBy.CreatedAtAsc,
+                  value: 'CREATED_AT_ASC',
                 },
               ]}
               value={orderBy}

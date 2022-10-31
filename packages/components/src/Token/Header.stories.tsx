@@ -1,7 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { Standard } from '../graphql'
 import Header from './Header'
 
 export default {
@@ -20,7 +19,7 @@ Default.args = {
     name: 'Cryptamus®',
     saleSupply: BigNumber.from(1),
     totalSupply: BigNumber.from(1),
-    standard: Standard.Erc721,
+    standard: 'ERC721',
     animationUrl: undefined,
     unlockedContent: null,
     owned: BigNumber.from(1),

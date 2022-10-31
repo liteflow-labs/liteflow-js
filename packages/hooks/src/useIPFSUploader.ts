@@ -1,5 +1,7 @@
 import IPFSGatewayTools from '@pinata/ipfs-gateway-tools/dist/node' // The node plugin is working for both node and browser while the browser only works on client side
 import { useCallback } from 'react'
+import invariant from 'ts-invariant'
+import { ErrorMessages } from './errorMessages'
 
 type UploadFn = (
   file: File | string,
@@ -22,7 +24,7 @@ export default function useIPFSUploader(uploadUrl: string): [UploadFn] {
         body: formData,
       })
       const result = await response.json()
-      if (!response.ok) throw new Error(`upload failed: ${result.error}`)
+      invariant(response.ok, `${ErrorMessages.UPLOAD_FAILED}: ${result.error}`)
       return result.cid
     },
     [uploadUrl],

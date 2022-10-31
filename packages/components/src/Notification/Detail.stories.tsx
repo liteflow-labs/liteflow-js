@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { AccountVerificationStatus, NotificationAction } from '../graphql'
+import { AccountVerificationStatus } from '../graphql'
 import Detail from './Detail'
 
 export default {
@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof Detail> = (args) => <Detail {...args} />
 const data = {
   createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hour ago
   accountVerification: {
-    status: AccountVerificationStatus.Validated,
+    status: 'VALIDATED' as AccountVerificationStatus,
     account: {
       address: '0xfa1e52eb55a08e04c497d004bb7bd8d9ebcba9d3',
       image:
@@ -48,67 +48,67 @@ const data = {
 export const AccountVerificationValidated = Template.bind({})
 AccountVerificationValidated.args = {
   ...data,
-  action: NotificationAction.AccountVerificationValidated,
+  action: 'ACCOUNT_VERIFICATION_VALIDATED',
 }
 
 export const AuctionBidCreated = Template.bind({})
 AuctionBidCreated.args = {
   ...data,
-  action: NotificationAction.AuctionBidCreated,
+  action: 'AUCTION_BID_CREATED',
 }
 
 export const AuctionBidExpired = Template.bind({})
 AuctionBidExpired.args = {
   ...data,
-  action: NotificationAction.AuctionBidExpired,
+  action: 'AUCTION_BID_EXPIRED',
 }
 
 export const AuctionEndedNoBids = Template.bind({})
 AuctionEndedNoBids.args = {
   ...data,
-  action: NotificationAction.AuctionEndedNobids,
+  action: 'AUCTION_ENDED_NOBIDS',
 }
 
 export const AuctionEndedReservePriceBuyer = Template.bind({})
 AuctionEndedReservePriceBuyer.args = {
   ...data,
-  action: NotificationAction.AuctionEndedReservepriceBuyer,
+  action: 'AUCTION_ENDED_RESERVEPRICE_BUYER',
 }
 
 export const AuctionEndedReservePriceSeller = Template.bind({})
 AuctionEndedReservePriceSeller.args = {
   ...data,
-  action: NotificationAction.AuctionEndedReservepriceSeller,
+  action: 'AUCTION_ENDED_RESERVEPRICE_SELLER',
 }
 
 export const AuctionEndedWonBuyer = Template.bind({})
 AuctionEndedWonBuyer.args = {
   ...data,
-  action: NotificationAction.AuctionEndedWonBuyer,
+  action: 'AUCTION_ENDED_WON_BUYER',
 }
 
 export const AuctionEndedWonSeller = Template.bind({})
 AuctionEndedWonSeller.args = {
   ...data,
-  action: NotificationAction.AuctionEndedWonSeller,
+  action: 'AUCTION_ENDED_WON_SELLER',
 }
 
 export const AuctionExpired = Template.bind({})
 AuctionExpired.args = {
   ...data,
-  action: NotificationAction.AuctionExpired,
+  action: 'AUCTION_EXPIRED',
 }
 
 export const AuctionExpireSoon = Template.bind({})
 AuctionExpireSoon.args = {
   ...data,
-  action: NotificationAction.AuctionExpireSoon,
+  action: 'AUCTION_EXPIRE_SOON',
 }
 
 export const OpenBidExpiredSingleEdition = Template.bind({})
 OpenBidExpiredSingleEdition.args = {
   ...data,
-  action: NotificationAction.BidExpired,
+  action: 'BID_EXPIRED',
 }
 
 export const OpenBidExpiredMultipleEdition = Template.bind({})
@@ -119,25 +119,25 @@ OpenBidExpiredMultipleEdition.args = {
     unitPrice: '2000',
     quantity: '3',
   },
-  action: NotificationAction.BidExpired,
+  action: 'BID_EXPIRED',
 }
 
 export const DirectSaleExpired = Template.bind({})
 DirectSaleExpired.args = {
   ...data,
-  action: NotificationAction.OfferExpired,
+  action: 'OFFER_EXPIRED',
 }
 
 export const BidAccepted = Template.bind({})
 BidAccepted.args = {
   ...data,
-  action: NotificationAction.BidAccepted,
+  action: 'BID_ACCEPTED',
 }
 
 export const BidCreatedSingle = Template.bind({})
 BidCreatedSingle.args = {
   ...data,
-  action: NotificationAction.BidCreated,
+  action: 'BID_CREATED',
 }
 
 export const BidCreatedMultiple = Template.bind({})
@@ -148,13 +148,13 @@ BidCreatedMultiple.args = {
     unitPrice: '2000',
     quantity: '3',
   },
-  action: NotificationAction.BidCreated,
+  action: 'BID_CREATED',
 }
 
 export const OfferPurchasedSingle = Template.bind({})
 OfferPurchasedSingle.args = {
   ...data,
-  action: NotificationAction.OfferPurchased,
+  action: 'OFFER_PURCHASED',
 }
 
 export const OfferPurchasedMultiple = Template.bind({})
@@ -167,19 +167,19 @@ OfferPurchasedMultiple.args = {
     buyerAddress: '0xad367b82aacefed065d9a1f5ca53b2221780eb4f',
     quantity: '4',
   },
-  action: NotificationAction.OfferPurchased,
+  action: 'OFFER_PURCHASED',
 }
 
 export const OfferPurchasedMultipleFallback = Template.bind({})
 OfferPurchasedMultipleFallback.args = {
   ...data,
-  action: NotificationAction.OfferPurchased,
+  action: 'OFFER_PURCHASED',
 }
 
 export const ReferralRefereeRegistered = Template.bind({})
 ReferralRefereeRegistered.args = {
   createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hour ago
-  action: NotificationAction.ReferralRefereeRegistered,
+  action: 'REFERRAL_REFEREE_REGISTERED',
   refereeAccount: {
     address: '0xad367b82aacefed065d9a1f5ca53b2221780eb4f',
     username: 'Patrick',

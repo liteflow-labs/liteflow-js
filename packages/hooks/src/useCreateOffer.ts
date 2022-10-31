@@ -2,7 +2,9 @@ import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { BigNumber } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorMessages } from './errorMessages'
 import { OfferType, TransactionFragment } from './graphql'
 import { convertTx } from './utils/transaction'
 
@@ -102,11 +104,11 @@ export default function useCreateOffer(
       expiredAt: Date | null
       auctionId?: string
     }): Promise<string> => {
-      if (!signer) throw new Error('signer falsy')
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       try {
-        const data = await sdk.CreateOffer({
+        const { createOffer } = await sdk.CreateOffer({
           input: {
             type,
             makerAddress: account.toLowerCase(),
@@ -121,18 +123,12 @@ export default function useCreateOffer(
           makerAddress: account.toLowerCase(),
           amount: quantity.mul(unitPrice).toString(),
         })
-        if (!data?.createOffer?.offer)
-          throw new Error('Error during creation of offer: unknown error')
-        const {
-          id: offerId,
-          eip712Data,
-          asset,
-          currency,
-        } = data.createOffer.offer
+        invariant(createOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
+        const { id: offerId, eip712Data, asset, currency } = createOffer.offer
 
         setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         let approval: TransactionFragment | null
-        if (type === OfferType.Sale) {
+        if (type === 'SALE') {
           // creating a new offer of type sale, approval is on the asset
           approval = // typescript check
             asset.token.__typename === 'ERC721' ||
@@ -169,8 +165,7 @@ export default function useCreateOffer(
           offerId,
           signature,
         })
-        if (!publishOffer?.offer)
-          throw new Error('Error during creation of offer')
+        invariant(publishOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
         return publishOffer.offer.id
       } finally {
         setActiveProcess(CreateOfferStep.INITIAL)

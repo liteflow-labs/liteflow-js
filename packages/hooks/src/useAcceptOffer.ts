@@ -2,8 +2,10 @@ import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { OfferType, TransactionFragment } from './graphql'
+import { ErrorMessages } from './errorMessages'
+import { TransactionFragment } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
@@ -79,36 +81,31 @@ export default function useAcceptOffer(signer: Signer | undefined): [
   const [transactionHash, setTransactionHash] = useState<string>()
 
   const acceptOffer: acceptOfferFn = useCallback(
-    async (offer, quantity) => {
-      if (!signer) throw new Error('signer falsy')
+    async ({ id, unitPrice }, quantity) => {
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       try {
         // fetch approval from api
-        const offerWithApprovalAndFill = await sdk.OfferWithApprovalAndFill({
-          offerId: offer.id,
+        const { offer } = await sdk.OfferWithApprovalAndFill({
+          offerId: id,
           taker: account.toLowerCase(),
           quantity: quantity.toString(),
-          amount: BigNumber.from(offer.unitPrice).mul(quantity).toString(),
+          amount: BigNumber.from(unitPrice).mul(quantity).toString(),
         })
-        if (!offerWithApprovalAndFill)
-          throw new Error('unknown error when fetching offer approval and fill')
-
-        if (!offerWithApprovalAndFill.offer)
-          throw new Error(`offer ${offer.id} doesn't exists`)
+        invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         // check if operator is authorized
         let approval: TransactionFragment | null
-        if (offerWithApprovalAndFill.offer.type === OfferType.Sale) {
+        if (offer.type === 'SALE') {
           // accepting an offer of type sale, approval is on the currency
-          approval = offerWithApprovalAndFill.offer.currency.approval
+          approval = offer.currency.approval
         } else {
           // accepting an offer of type buy, approval is on the asset
           approval = // typescript check
-            offerWithApprovalAndFill.offer.asset.token.__typename ===
-              'ERC721' ||
-            offerWithApprovalAndFill.offer.asset.token.__typename === 'ERC1155'
-              ? offerWithApprovalAndFill.offer.asset.token.approval
+            offer.asset.token.__typename === 'ERC721' ||
+            offer.asset.token.__typename === 'ERC1155'
+              ? offer.asset.token.approval
               : null
         }
         if (approval) {
@@ -128,12 +125,11 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         }
 
         // determine the asset id to check ownership from
-        const assetId = offerWithApprovalAndFill.offer.assetId
+        const assetId = offer.assetId
         const newOwner =
-          offerWithApprovalAndFill.offer.type === OfferType.Sale
-            ? offerWithApprovalAndFill.offer.takerAddress ||
-              account.toLowerCase()
-            : offerWithApprovalAndFill.offer.makerAddress
+          offer.type === 'SALE'
+            ? offer.takerAddress || account.toLowerCase()
+            : offer.makerAddress
 
         // fetch initial quantity
         const { quantity: initialQuantity } = await checkOwnership(
@@ -143,9 +139,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
         setActiveProcess(AcceptOfferStep.TRANSACTION_SIGNATURE)
         // sign and broadcast the transaction
-        const tx = await signer.sendTransaction(
-          convertTx(offerWithApprovalAndFill.offer.fill),
-        )
+        const tx = await signer.sendTransaction(convertTx(offer.fill))
         setTransactionHash(tx.hash)
         setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
         console.info(`waiting for transaction with hash ${tx.hash}...`)

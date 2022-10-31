@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorMessages } from './errorMessages'
 import useIPFSUploader from './useIPFSUploader'
 import { formatSocial } from './utils/formatSocial'
 
@@ -46,7 +48,7 @@ export default function useUpdateAccount(
 
   const updateAccount = useCallback(
     async (inputs: AccountInput) => {
-      if (!signer) throw new Error('signer falsy')
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       setLoading(true)
@@ -55,7 +57,7 @@ export default function useUpdateAccount(
           inputs.image ? uploadFile(inputs.image) : undefined,
           inputs.cover ? uploadFile(inputs.cover) : undefined,
         ])
-        const data = await sdk.UpdateAccount({
+        const { updateAccount } = await sdk.UpdateAccount({
           input: {
             clientMutationId: null,
             address: account.toLowerCase(),
@@ -73,9 +75,8 @@ export default function useUpdateAccount(
             },
           },
         })
-        if (!data?.updateAccount?.account)
-          throw new Error('error while updating the account')
-        return data.updateAccount.account.address
+        invariant(updateAccount?.account, ErrorMessages.ACCOUNT_UPDATE_FAILED)
+        return updateAccount.account.address
       } finally {
         setLoading(false)
       }

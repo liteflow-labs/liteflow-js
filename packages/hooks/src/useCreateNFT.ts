@@ -1,7 +1,9 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorMessages } from './errorMessages'
 import { Standard } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import useIPFSUploader from './useIPFSUploader'
@@ -121,7 +123,7 @@ export default function useCreateNFT(
       unlockableContent: string | null
     }> => {
       if (isPrivate) {
-        if (!preview) throw new Error('preview is required for private content')
+        invariant(preview, ErrorMessages.MINT_UNLOCKABLE_CONTENT_PREVIEW)
         const [previewIpfs, privateContentIpfs] = await Promise.all([
           uploadFile(preview),
           uploadFile(content, { protected: true }),
@@ -133,8 +135,7 @@ export default function useCreateNFT(
         }
       }
       if (isAnimation) {
-        if (!preview)
-          throw new Error('preview is required for animations content')
+        invariant(preview, ErrorMessages.MINT_ANIMATION_PREVIEW)
         const [previewIpfs, contentIpfs] = await Promise.all([
           uploadFile(preview),
           uploadFile(content),
@@ -168,7 +169,7 @@ export default function useCreateNFT(
       traits,
       isLazyMint,
     }) => {
-      if (!signer) throw new Error('signer falsy')
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       setActiveProcess(CreateNftStep.UPLOAD)
@@ -193,37 +194,40 @@ export default function useCreateNFT(
             royalties: royalties ? Math.round(royalties * 100) : null,
           }
 
-          const data = await sdk.CreateLazyMintedAssetSignature({
-            asset: assetToCreate,
-          })
-          if (!data?.createLazyMintedAssetSignature?.eip712Data)
-            throw new Error(
-              'error while creating the lazy minted asset signature',
-            )
+          const { createLazyMintedAssetSignature } =
+            await sdk.CreateLazyMintedAssetSignature({
+              asset: assetToCreate,
+            })
+
+          invariant(
+            createLazyMintedAssetSignature?.eip712Data,
+            ErrorMessages.MINT_SIGNATURE_GENERATION,
+          )
 
           // sign data
           setActiveProcess(CreateNftStep.LAZYMINT_SIGNATURE)
-          const eip712Data = data.createLazyMintedAssetSignature.eip712Data
+          const eip712Data = createLazyMintedAssetSignature.eip712Data
           const { domain, types, message /*, primaryType */ } = eip712Data
           delete types.EIP712Domain // Hack: remove primary type from types to allow ethers detect the main type "Order" (aka: primaryType)
           const signature = await signer._signTypedData(domain, types, message)
 
           // send signature to api
           setActiveProcess(CreateNftStep.LAZYMINT_PENDING)
-          const result = await sdk.CreateLazyMintedAsset({
+          const { createLazyMintedAsset } = await sdk.CreateLazyMintedAsset({
             signature,
             asset: {
               tokenId: message.tokenId,
               ...assetToCreate,
             },
           })
-          if (!result?.createLazyMintedAsset?.asset)
-            throw new Error('error while creating the lazy minted asset')
-
-          return result.createLazyMintedAsset.asset.id
+          invariant(
+            createLazyMintedAsset?.asset,
+            ErrorMessages.ASSET_LAZY_MINT_CREATION_FAILED,
+          )
+          return createLazyMintedAsset.asset.id
         }
 
-        const data = await sdk.CreateAsset({
+        const { createAsset } = await sdk.CreateAsset({
           input: {
             standard,
             creatorAddress: account.toLowerCase(),
@@ -236,14 +240,14 @@ export default function useCreateNFT(
           amount: amount ? amount.toString() : '1',
           royalties: royalties ? Math.round(royalties * 100) : 0,
         })
-        const asset = data.createAsset?.asset
-        if (!asset) throw new Error('error while creating this asset')
-        if (
-          asset.token.__typename !== 'ERC721' &&
-          asset.token.__typename !== 'ERC1155'
+        const asset = createAsset?.asset
+        invariant(asset, ErrorMessages.ASSET_CREATION_FAILED)
+        invariant(
+          asset.token.__typename === 'ERC721' ||
+            asset.token.__typename === 'ERC1155',
+          ErrorMessages.ASSET_INVALID_STANDARD,
         )
-          throw new Error('invalid token')
-        if (!asset.token.mint) throw new Error('no transaction to mint')
+        invariant(asset.token.mint, ErrorMessages.ASSET_NO_MINT)
 
         setActiveProcess(CreateNftStep.TRANSACTION_SIGNATURE)
         const tx = await signer.sendTransaction(convertTx(asset.token.mint))

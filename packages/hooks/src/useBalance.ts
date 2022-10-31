@@ -30,12 +30,12 @@ export default function useBalance(
     if (!currencyId) return
     try {
       setLoading(true)
-      const data = await sdk.FetchBalance({
+      const { currency } = await sdk.FetchBalance({
         currencyId: currencyId,
         account: account.toLowerCase(),
       })
-      if (!data?.currency || !data.currency.balanceOf) return
-      const res = BigNumber.from(data.currency.balanceOf)
+      if (!currency) return
+      const res = BigNumber.from(currency.balanceOf)
       setBalance(res)
       return res
     } finally {
