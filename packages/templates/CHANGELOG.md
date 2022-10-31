@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Fix error 500 when accessing the notification template without being logged in [#67](https://github.com/liteflow-labs/libraries/pull/67)
+
 #### Security
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
