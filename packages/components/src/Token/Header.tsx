@@ -57,7 +57,7 @@ const TokenHeader: VFC<Props> = ({
     () => asset.owned.gte(asset.totalSupply),
     [asset],
   )
-  const isSingle = useMemo(() => asset.standard === Standard.Erc721, [asset])
+  const isSingle = useMemo(() => asset.standard === 'ERC721', [asset])
 
   return (
     <SimpleGrid spacing={4} flex="0 0 100%" columns={{ base: 0, md: 2 }}>

@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { AssetsOrderBy, FetchAllErc721And1155Document } from '../graphql'
+import { FetchAllErc721And1155Document } from '../graphql'
 import * as Explorer from './Explorer'
 
 export default {
@@ -28,7 +28,7 @@ Default.args = {
     offers: [],
     currencyId: null,
   },
-  orderBy: AssetsOrderBy.CreatedAtDesc,
+  orderBy: 'CREATED_AT_DESC',
   search: null,
   traits: {
     Category: ['Category 1', 'Category 2'],

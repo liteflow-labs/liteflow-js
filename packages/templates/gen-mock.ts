@@ -1,8 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { writeFileSync } from 'fs'
 import {
-  AssetsOrderBy,
-  AuctionsOrderBy,
   BidOnAssetDocument,
   BidOnAssetQuery,
   BidOnAssetQueryVariables,
@@ -56,10 +54,6 @@ import {
   OfferForAssetDocument,
   OfferForAssetQuery,
   OfferForAssetQueryVariables,
-  OfferOpenBuysOrderBy,
-  OffersOrderBy,
-  OwnershipsOrderBy,
-  TradesOrderBy,
 } from './src/graphql'
 
 const client = new ApolloClient({
@@ -131,7 +125,7 @@ client
       now: new Date('2022-05-22T04:53:29.881Z'),
       limit: 10,
       offset: 0,
-      orderBy: AssetsOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       filter: [],
     },
   })
@@ -197,7 +191,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: OwnershipsOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -233,7 +227,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: AssetsOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -268,7 +262,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: AssetsOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -287,7 +281,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: OfferOpenBuysOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -321,7 +315,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: OfferOpenBuysOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -340,7 +334,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: AuctionsOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -359,7 +353,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: OffersOrderBy.CreatedAtDesc,
+      orderBy: 'CREATED_AT_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -378,7 +372,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: TradesOrderBy.TimestampDesc,
+      orderBy: 'TIMESTAMP_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })
@@ -397,7 +391,7 @@ client
       address: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
       limit: 10,
       offset: 0,
-      orderBy: TradesOrderBy.TimestampDesc,
+      orderBy: 'TIMESTAMP_DESC',
       now: new Date('2022-05-02T23:03:00.000Z'),
     },
   })

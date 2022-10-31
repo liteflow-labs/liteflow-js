@@ -1,7 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { Standard } from '../graphql'
 import Metadata from './Metadata'
 
 export default {
@@ -15,7 +14,7 @@ const Template: ComponentStory<typeof Metadata> = (args) => (
 
 export const Erc721 = Template.bind({})
 Erc721.args = {
-  standard: Standard.Erc721,
+  standard: 'ERC721',
   creator: {
     address: '0x0043a24fe3e2de5ec5c3ab0efd35b746a28b4f54',
     name: 'GENSHIRO.io',
@@ -39,7 +38,7 @@ Erc721.args = {
 
 export const Erc1155SingleOwner = Template.bind({})
 Erc1155SingleOwner.args = {
-  standard: Standard.Erc1155,
+  standard: 'ERC1155',
   creator: {
     address: '0x0043a24fe3e2de5ec5c3ab0efd35b746a28b4f54',
     name: 'GENSHIRO.io',
@@ -63,7 +62,7 @@ Erc1155SingleOwner.args = {
 
 export const Erc1155MultipleOwner = Template.bind({})
 Erc1155MultipleOwner.args = {
-  standard: Standard.Erc1155,
+  standard: 'ERC1155',
   creator: {
     address: '0x0043a24fe3e2de5ec5c3ab0efd35b746a28b4f54',
     name: 'GENSHIRO.io',
@@ -95,7 +94,7 @@ Erc1155MultipleOwner.args = {
 
 export const Erc1155MultipleOwnerMoreThanFive = Template.bind({})
 Erc1155MultipleOwnerMoreThanFive.args = {
-  standard: Standard.Erc1155,
+  standard: 'ERC1155',
   creator: {
     address: '0x0043a24fe3e2de5ec5c3ab0efd35b746a28b4f54',
     name: 'GENSHIRO.io',

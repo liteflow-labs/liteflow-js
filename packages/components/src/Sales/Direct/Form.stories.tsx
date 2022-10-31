@@ -1,7 +1,6 @@
 import { VoidSigner } from '@ethersproject/abstract-signer'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { Standard } from '../../graphql'
 import Form from './Form'
 
 export default {
@@ -15,7 +14,7 @@ export const IsSingle = Template.bind({})
 IsSingle.args = {
   asset: {
     id: '1',
-    standard: Standard.Erc721,
+    standard: 'ERC721',
   },
   currencies: [
     {
@@ -39,7 +38,7 @@ export const IsMultiple = Template.bind({})
 IsMultiple.args = {
   asset: {
     id: '1',
-    standard: Standard.Erc1155,
+    standard: 'ERC1155',
   },
   currencies: [
     {

@@ -3,7 +3,7 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import { LiteflowContext } from './context'
-import { OfferType, TransactionFragment } from './graphql'
+import { TransactionFragment } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
@@ -99,7 +99,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
         // check if operator is authorized
         let approval: TransactionFragment | null
-        if (offerWithApprovalAndFill.offer.type === OfferType.Sale) {
+        if (offerWithApprovalAndFill.offer.type === 'SALE') {
           // accepting an offer of type sale, approval is on the currency
           approval = offerWithApprovalAndFill.offer.currency.approval
         } else {
@@ -130,7 +130,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         // determine the asset id to check ownership from
         const assetId = offerWithApprovalAndFill.offer.assetId
         const newOwner =
-          offerWithApprovalAndFill.offer.type === OfferType.Sale
+          offerWithApprovalAndFill.offer.type === 'SALE'
             ? offerWithApprovalAndFill.offer.takerAddress ||
               account.toLowerCase()
             : offerWithApprovalAndFill.offer.makerAddress

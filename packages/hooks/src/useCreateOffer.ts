@@ -132,7 +132,7 @@ export default function useCreateOffer(
 
         setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         let approval: TransactionFragment | null
-        if (type === OfferType.Sale) {
+        if (type === 'SALE') {
           // creating a new offer of type sale, approval is on the asset
           approval = // typescript check
             asset.token.__typename === 'ERC721' ||

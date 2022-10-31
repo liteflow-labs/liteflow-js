@@ -5,7 +5,6 @@ import { withReactContext } from 'storybook-react-context'
 import {
   FetchUserFixedPriceDocument,
   FetchUserFixedPriceQueryVariables,
-  OffersOrderBy,
 } from '../graphql'
 import * as UserFixedPrices from './FixedPrices'
 
@@ -33,7 +32,7 @@ Default.args = {
   userAddress: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
   limit: 12,
   offset: 0,
-  orderBy: OffersOrderBy.CreatedAtDesc,
+  orderBy: 'CREATED_AT_DESC',
   limits: [12, 24, 36, 48],
   page: 1,
   explorer: {

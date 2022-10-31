@@ -16,13 +16,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useMemo, VFC } from 'react'
 import invariant from 'ts-invariant'
-import {
-  AccountVerificationStatus,
-  CheckoutDocument,
-  CheckoutQuery,
-  Standard,
-  useCheckoutQuery,
-} from '../graphql'
+import { CheckoutDocument, CheckoutQuery, useCheckoutQuery } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import {
@@ -117,7 +111,7 @@ export const Template: VFC<
     () => (offer ? BigNumber.from(offer.unitPrice) : undefined),
     [offer],
   )
-  const isSingle = useMemo(() => asset?.standard === Standard.Erc721, [asset])
+  const isSingle = useMemo(() => asset?.standard === 'ERC721', [asset])
 
   const onPurchased = useCallback(async () => {
     if (!data?.offer) return
@@ -164,10 +158,7 @@ export const Template: VFC<
               address={offer.maker.address}
               image={offer.maker.image}
               name={offer.maker.name}
-              verified={
-                offer.maker.verification?.status ===
-                AccountVerificationStatus.Validated
-              }
+              verified={offer.maker.verification?.status === 'VALIDATED'}
             />
           </Stack>
 
