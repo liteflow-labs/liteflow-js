@@ -19,6 +19,7 @@
 #### Fixed
 
 - Type in the banner on the wallet page [#61](https://github.com/liteflow-labs/libraries/pull/61)
+- Fixed a property issue causing the story for `MintListItem` Storybook story do not display. [#71](https://github.com/liteflow-labs/libraries/pull/71)
 
 #### Security
 

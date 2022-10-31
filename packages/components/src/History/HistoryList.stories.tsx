@@ -65,7 +65,7 @@ export const MintSingle = Template.bind({})
 MintSingle.args = {
   histories: [
     {
-      action: null,
+      action: 'TRANSFER',
       ...historySingleEdition,
       fromAddress: '0x0000000000000000000000000000000000000000',
     },
@@ -77,7 +77,7 @@ export const MintMultiple = Template.bind({})
 MintMultiple.args = {
   histories: [
     {
-      action: null,
+      action: 'TRANSFER',
       ...historyMultipleEdition,
       fromAddress: '0x0000000000000000000000000000000000000000',
     },
