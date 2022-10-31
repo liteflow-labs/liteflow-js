@@ -50,7 +50,7 @@ const WalletTemplate: FC<{
               {t('wallet.wallet.banner.title', { networkName })}
             </AlertTitle>
             <AlertDescription>
-              {t('wallet.wallet.banner.description', { networkName })}')
+              {t('wallet.wallet.banner.description', { networkName })}
             </AlertDescription>
           </Box>
         </Alert>
