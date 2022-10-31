@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorMessages } from './errorMessages'
 import { Offer } from './graphql'
 import { convertTx } from './utils/transaction'
 
@@ -47,27 +49,21 @@ export default function useCancelOffer(signer: Signer | undefined): [
   )
 
   const cancelOffer: CancelOfferFn = useCallback(
-    async (offer) => {
-      if (!signer) throw new Error('signer falsy')
+    async ({ id }) => {
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       try {
         // fetch cancel tx from api
-        const offerWithCancel = await sdk.OfferWithCancel({
-          offerId: offer.id,
+        const { offer } = await sdk.OfferWithCancel({
+          offerId: id,
           taker: account.toLowerCase(),
         })
-        if (!offerWithCancel)
-          throw new Error('unknown error when fetching offer with cancel')
-
-        if (!offerWithCancel.offer)
-          throw new Error(`offer ${offer.id} doesn't exists`)
+        invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         setActiveProcess(CancelOfferStep.TRANSACTION_SIGNATURE)
         // sign and broadcast the transaction
-        const tx = await signer.sendTransaction(
-          convertTx(offerWithCancel.offer.cancel),
-        )
+        const tx = await signer.sendTransaction(convertTx(offer.cancel))
         setActiveProcess(CancelOfferStep.TRANSACTION_PENDING)
         setTransactionHash(tx.hash)
         console.info(`waiting for transaction with hash ${tx.hash}...`)
@@ -75,7 +71,7 @@ export default function useCancelOffer(signer: Signer | undefined): [
         console.info(`transaction validated`)
 
         // set the offer as cancelled on the api
-        await sdk.DeleteOffer({ id: offer.id })
+        await sdk.DeleteOffer({ id })
       } finally {
         setActiveProcess(CancelOfferStep.INITIAL)
         setTransactionHash(undefined)

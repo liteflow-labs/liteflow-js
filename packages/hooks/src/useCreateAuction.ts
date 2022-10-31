@@ -1,7 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
+import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   mutation CreateAuction($createAuctionInput: AuctionInput!) {
@@ -28,11 +30,11 @@ export default function useCreateAuction(
   const [loading, setLoading] = useState(false)
   const createAuctionFn = useCallback(
     async (input: AuctionInput): Promise<string> => {
-      if (!signer) throw new Error('signer falsy')
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       try {
         setLoading(true)
         const account = await signer.getAddress()
-        const data = await sdk.CreateAuction({
+        const { createAuction } = await sdk.CreateAuction({
           createAuctionInput: {
             assetId: input.assetId,
             endAt: input.endAt,
@@ -45,8 +47,11 @@ export default function useCreateAuction(
             ),
           },
         })
-        if (!data.createAuction?.auction?.id) throw new Error('unknown error')
-        return data.createAuction.auction.id
+        invariant(
+          createAuction?.auction?.id,
+          ErrorMessages.AUCTION_CREATION_FAILED,
+        )
+        return createAuction.auction.id
       } finally {
         setLoading(false)
       }
