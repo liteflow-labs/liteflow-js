@@ -15,7 +15,7 @@
     "gen-mock": "TS_NODE_PROJECT=./tsconfig.script.json ts-node ./gen-mock https://nft-demo-bsc-testnet-4u4nk.ondigitalocean.app/graphql"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
+    "@apollo/client": "^3.5.9",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
