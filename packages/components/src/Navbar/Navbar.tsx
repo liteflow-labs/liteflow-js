@@ -115,7 +115,7 @@ const DrawerMenu: VFC<{
   multiLang?: MultiLang
   topUp: {
     allowTopUp: boolean
-    addFund: () => Promise<void>
+    addFund: () => Promise<null | undefined>
     addingFund: boolean
   }
   disableMinting?: boolean
@@ -341,7 +341,7 @@ const UserMenu: VFC<{
   }
   topUp: {
     allowTopUp: boolean
-    addFund: () => Promise<void>
+    addFund: () => Promise<null | undefined>
     addingFund: boolean
   }
   signOutFn: () => void

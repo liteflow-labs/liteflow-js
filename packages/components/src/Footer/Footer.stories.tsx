@@ -33,3 +33,10 @@ Default.args = {
   name: 'Liteflow',
   links: links,
 }
+
+export const WithBrandNote = Template.bind({})
+WithBrandNote.args = {
+  name: 'Liteflow',
+  links: links,
+  showBrandNote: true,
+}
