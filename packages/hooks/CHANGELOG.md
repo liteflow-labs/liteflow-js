@@ -18,6 +18,8 @@
 
 #### Fixed
 
+- Ensure that the `parsePrice` doesn't crash even with invalid input [#68](https://github.com/liteflow-labs/libraries/pull/68)
+
 #### Security
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
