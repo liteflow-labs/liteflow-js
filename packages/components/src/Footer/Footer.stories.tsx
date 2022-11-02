@@ -34,8 +34,8 @@ Default.args = {
   links: links,
 }
 
-export const WithBrandNote = Template.bind({})
-WithBrandNote.args = {
+export const WithPoweredBy = Template.bind({})
+WithPoweredBy.args = {
   name: 'Liteflow',
   links: links,
   showPoweredBy: true,
