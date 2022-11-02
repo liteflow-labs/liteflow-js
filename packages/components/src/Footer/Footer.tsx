@@ -10,10 +10,10 @@ type Props = {
     href: string
     label: string
   }[]
-  showBrandNote?: boolean
+  showPoweredBy?: boolean
 }
 
-const Footer: VFC<Props> = ({ name, links, showBrandNote }) => {
+const Footer: VFC<Props> = ({ name, links, showPoweredBy }) => {
   const { t } = useTranslation('components')
   return (
     <>
@@ -76,7 +76,7 @@ const Footer: VFC<Props> = ({ name, links, showBrandNote }) => {
                 name,
               })}
             </Text>
-            {showBrandNote && (
+            {showPoweredBy && (
               <Flex>
                 <Show above="md">
                   <Divider

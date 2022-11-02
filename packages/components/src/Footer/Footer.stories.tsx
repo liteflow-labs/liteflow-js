@@ -38,5 +38,5 @@ export const WithBrandNote = Template.bind({})
 WithBrandNote.args = {
   name: 'Liteflow',
   links: links,
-  showBrandNote: true,
+  showPoweredBy: true,
 }
