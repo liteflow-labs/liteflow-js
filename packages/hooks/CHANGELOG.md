@@ -8,19 +8,25 @@
 
 #### Changed
 
-- Use of ts-invariant to assert conditions in the codebase + remove useless checks [#64](https://github.com/liteflow-labs/libraries/pull/64)
-- Remove unnecessary `graphql` dependency[#66](https://github.com/liteflow-labs/libraries/pull/66)
-- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
-
 #### Deprecated
 
 #### Removed
 
 #### Fixed
 
-- Ensure that the `parsePrice` doesn't crash even with invalid input [#68](https://github.com/liteflow-labs/libraries/pull/68)
-
 #### Security
+
+## [v1.0.0-beta.7](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.7) - 2022-11-03
+
+#### Changed
+
+- Use of ts-invariant to assert conditions in the codebase + remove useless checks [#64](https://github.com/liteflow-labs/libraries/pull/64)
+- Remove unnecessary `graphql` dependency[#66](https://github.com/liteflow-labs/libraries/pull/66)
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
+
+#### Fixed
+
+- Ensure that the `parsePrice` doesn't crash even with invalid input [#68](https://github.com/liteflow-labs/libraries/pull/68)
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
 
