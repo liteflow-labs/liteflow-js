@@ -7,6 +7,7 @@
 #### Added
 
 - Add generic type for `Select` and `TokenGrid` components [#63](https://github.com/liteflow-labs/libraries/pull/63)
+- Added the `showPoweredBy` property to the footer in cases where we display "Powered By Liteflow". [#79](https://github.com/liteflow-labs/liteflow-js/pull/79)
 
 #### Changed
 
