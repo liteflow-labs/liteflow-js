@@ -15,8 +15,9 @@ import {
   TokenHeader,
   wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
 import { HiArrowNarrowRight } from '@react-icons/all-files/hi/HiArrowNarrowRight'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FC, useCallback, useEffect, useMemo } from 'react'
@@ -103,10 +104,20 @@ export const Template: FC<
       name: string
       url: string
     }
+    userHasBeenReconnected: boolean
   }
-> = ({ now, limit, featuredTokens, tokens, explorer, currentAccount }) => {
+> = ({
+  now,
+  limit,
+  featuredTokens,
+  tokens,
+  explorer,
+  currentAccount,
+  userHasBeenReconnected,
+}) => {
   const { t } = useTranslation('templates')
-  const { account, signer, ready } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
   const toast = useToast()
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch, error } = useFetchHomePageQuery({
@@ -115,7 +126,9 @@ export const Template: FC<
       now: date,
       limit,
       assetIds: tokens,
-      address: (ready ? account?.toLowerCase() : currentAccount) || '',
+      address:
+        (userHasBeenReconnected ? account?.toLowerCase() : currentAccount) ||
+        '',
     },
   })
 

@@ -34,10 +34,11 @@ import {
   TraitList,
   wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
 import { FaInfoCircle } from '@react-icons/all-files/fa/FaInfoCircle'
 import { HiOutlineDotsHorizontal } from '@react-icons/all-files/hi/HiOutlineDotsHorizontal'
 import { HiOutlineExternalLink } from '@react-icons/all-files/hi/HiOutlineExternalLink'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
@@ -139,10 +140,19 @@ export const Template: VFC<
       url: string
     }
     reportEmail: string
+    userHasBeenReconnected: boolean
   }
-> = ({ assetId, explorer, now: nowProp, reportEmail, currentAccount }) => {
+> = ({
+  assetId,
+  explorer,
+  now: nowProp,
+  reportEmail,
+  currentAccount,
+  userHasBeenReconnected,
+}) => {
   const { t } = useTranslation('templates')
-  const { account, signer, ready } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
   const { query } = useRouter()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
   const [showPreview, setShowPreview] = useState(false)
@@ -152,7 +162,9 @@ export const Template: VFC<
     variables: {
       id: assetId,
       now: date,
-      address: (ready ? account?.toLowerCase() : currentAccount) || '',
+      address:
+        (userHasBeenReconnected ? account?.toLowerCase() : currentAccount) ||
+        '',
     },
   })
 

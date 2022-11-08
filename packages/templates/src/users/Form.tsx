@@ -1,6 +1,7 @@
 import { useToast } from '@chakra-ui/react'
 import { Account, UserFormEdit } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, VFC } from 'react'
@@ -9,11 +10,13 @@ import useLoginRedirect from '../hooks/useLoginRedirect'
 
 export const Template: VFC<{
   uploadUrl: string
-}> = ({ uploadUrl }) => {
+  userHasBeenReconnected: boolean
+}> = ({ uploadUrl, userHasBeenReconnected }) => {
   const { t } = useTranslation('templates')
   const { push } = useRouter()
-  const { account, signer } = useSession()
-  useLoginRedirect()
+  const { account } = useWeb3React()
+  const signer = useSigner()
+  useLoginRedirect(userHasBeenReconnected)
   const toast = useToast()
 
   const { data } = useGetAccountQuery({

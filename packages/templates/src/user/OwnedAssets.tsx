@@ -1,6 +1,7 @@
 import { Text } from '@chakra-ui/react'
 import { TokenGrid, wrapServerSideProps } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -90,7 +91,9 @@ export const server = (
     }
   })
 
-export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
+export const Template: NextPage<
+  Omit<Props, 'meta'> & { limits: number[]; userHasBeenReconnected: boolean }
+> = ({
   now,
   limit,
   limits,
@@ -99,11 +102,13 @@ export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
   orderBy,
   userAddress,
   loginUrlForReferral,
+  userHasBeenReconnected,
 }) => {
   const { t } = useTranslation('templates')
   const { pathname, replace, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useFetchOwnedAssetsQuery({
@@ -115,7 +120,7 @@ export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, userHasBeenReconnected)
 
   const userAccount = useMemo(
     () => convertFullUser(data?.account || null, userAddress),

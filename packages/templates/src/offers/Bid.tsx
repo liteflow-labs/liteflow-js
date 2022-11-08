@@ -9,8 +9,9 @@ import {
   TokenCard,
   wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
 import { HiOutlineClock } from '@react-icons/all-files/hi/HiOutlineClock'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import getT from 'next-translate/getT'
 import useTranslation from 'next-translate/useTranslation'
@@ -101,6 +102,7 @@ export const Template: VFC<
       walletConnect: boolean
       networkName: string
     }
+    userHasBeenReconnected: boolean
   }
 > = ({
   now,
@@ -110,11 +112,13 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   login,
+  userHasBeenReconnected,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useBidOnAssetQuery({
@@ -123,7 +127,7 @@ export const Template: VFC<
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, userHasBeenReconnected)
 
   const fees = useFeesForBidQuery({
     variables: {

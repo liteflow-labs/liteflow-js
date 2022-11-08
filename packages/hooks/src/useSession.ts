@@ -9,7 +9,6 @@ export type ISessionContext = {
   account?: string | null
   error?: Error
   signer?: Signer & TypedDataSigner
-  ready: boolean
   connectors: {
     injected?: InjectedConnector
     email?: EmailConnector
@@ -21,7 +20,6 @@ export type ISessionContext = {
 }
 
 export const SessionContext = createContext<ISessionContext>({
-  ready: false,
   connectors: {},
   deactivate: () => {
     throw new Error('not implemented')

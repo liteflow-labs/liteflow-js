@@ -1,5 +1,5 @@
 import { Account, WalletAccount, wrapServerSideProps } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import React, { useMemo, VFC } from 'react'
 import {
@@ -31,9 +31,10 @@ export const server = (url: string): GetServerSideProps<Props> =>
 
 export const Template: VFC<{
   networkName: string
-}> = ({ networkName }) => {
-  const { account } = useSession()
-  useLoginRedirect()
+  userHasBeenReconnected: boolean
+}> = ({ networkName, userHasBeenReconnected }) => {
+  const { account } = useWeb3React()
+  useLoginRedirect(userHasBeenReconnected)
   const { data } = useWalletCurrenciesQuery()
   const currencies = useMemo(() => data?.currencies?.nodes, [data])
 

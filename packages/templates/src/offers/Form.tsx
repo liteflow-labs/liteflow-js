@@ -16,9 +16,10 @@ import {
   TokenCard,
   wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
 import { AiOutlineDollarCircle } from '@react-icons/all-files/ai/AiOutlineDollarCircle'
 import { HiOutlineClock } from '@react-icons/all-files/hi/HiOutlineClock'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import getT from 'next-translate/getT'
 import useTranslation from 'next-translate/useTranslation'
@@ -111,6 +112,7 @@ export const Template: VFC<
     }
     offerValidity: number
     auctionValidity: number
+    userHasBeenReconnected: boolean
   }
 > = ({
   now,
@@ -119,12 +121,14 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   currentAccount,
+  userHasBeenReconnected,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  useLoginRedirect()
+  useLoginRedirect(userHasBeenReconnected)
   const toast = useToast()
-  const { account, signer, ready } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 
@@ -133,7 +137,9 @@ export const Template: VFC<
     variables: {
       id: assetId,
       now: date,
-      address: (ready ? account?.toLowerCase() : currentAccount) || '',
+      address:
+        (userHasBeenReconnected ? account?.toLowerCase() : currentAccount) ||
+        '',
     },
   })
 

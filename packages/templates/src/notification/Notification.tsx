@@ -1,7 +1,7 @@
 import { Button, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { Empty, Notification, wrapServerSideProps } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { FaBell } from '@react-icons/all-files/fa/FaBell'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
@@ -39,10 +39,14 @@ export const server = (url: string): GetServerSideProps<Props> =>
     }
   })
 
-export const Template: VFC<Props> = ({ address }) => {
+export const Template: VFC<
+  Props & {
+    userHasBeenReconnected: boolean
+  }
+> = ({ address, userHasBeenReconnected }) => {
   const { t } = useTranslation('templates')
-  useLoginRedirect()
-  const { account } = useSession()
+  useLoginRedirect(userHasBeenReconnected)
+  const { account } = useWeb3React()
   const [_, setCookies] = useCookies()
   const [loading, setLoading] = useState(false)
 

@@ -29,11 +29,12 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useAddFund, useSession } from '@nft/hooks'
+import { useAddFund, useSigner } from '@nft/hooks'
 import { FaBell } from '@react-icons/all-files/fa/FaBell'
 import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown'
 import { HiOutlineMenu } from '@react-icons/all-files/hi/HiOutlineMenu'
 import { HiOutlineSearch } from '@react-icons/all-files/hi/HiOutlineSearch'
+import { useWeb3React } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import { MittEmitter } from 'next/dist/shared/lib/mitt'
 import Image from 'next/image'
@@ -408,10 +409,20 @@ const Navbar: VFC<{
     networkName: string
   }
   multiLang?: MultiLang
-}> = ({ allowTopUp, logo, router, login, multiLang, disableMinting }) => {
+  userHasBeenReconnected: boolean
+}> = ({
+  allowTopUp,
+  logo,
+  router,
+  login,
+  multiLang,
+  disableMinting,
+  userHasBeenReconnected,
+}) => {
   const { t } = useTranslation('components')
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { account, deactivate, ready, signer } = useSession()
+  const { account, deactivate } = useWeb3React()
+  const signer = useSigner()
   const { asPath, query, push, isReady } = router
   const { register, setValue, handleSubmit } = useForm<FormData>()
   const [addFund, { loading: addingFund }] = useAddFund(signer)
@@ -422,7 +433,7 @@ const Navbar: VFC<{
       account: account?.toLowerCase() || '',
       lastNotification: new Date(lastNotification || 0),
     },
-    skip: !account || !ready,
+    skip: !account || !userHasBeenReconnected,
   })
 
   useEffect(() => {

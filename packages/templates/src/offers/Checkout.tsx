@@ -9,7 +9,8 @@ import {
   UserAvatar,
   wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import getT from 'next-translate/getT'
 import useTranslation from 'next-translate/useTranslation'
@@ -86,13 +87,15 @@ export const Template: VFC<
       walletConnect: boolean
       networkName: string
     }
+    userHasBeenReconnected: boolean
   }
-> = ({ now, offerId, explorer, allowTopUp, login }) => {
+> = ({ now, offerId, explorer, allowTopUp, login, userHasBeenReconnected }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
 
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 
@@ -103,7 +106,7 @@ export const Template: VFC<
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, userHasBeenReconnected)
 
   const offer = useMemo(() => data?.offer, [data])
   const asset = useMemo(() => offer?.asset, [offer])

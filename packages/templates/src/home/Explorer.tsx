@@ -318,6 +318,7 @@ export const server = (
 export const Template: VFC<
   Props & {
     limits: number[]
+    userHasBeenReconnected: boolean
   }
 > = ({
   limit,
@@ -330,6 +331,7 @@ export const Template: VFC<
   orderBy,
   filter,
   limits,
+  userHasBeenReconnected,
 }) => {
   const { t } = useTranslation('templates')
   const date = useMemo(() => new Date(now), [now])
@@ -342,7 +344,7 @@ export const Template: VFC<
       filter: queryFilter,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, userHasBeenReconnected)
 
   const [changePage, changeLimit, { loading: pageLoading }] = usePaginate()
 

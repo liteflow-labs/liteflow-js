@@ -18,8 +18,9 @@ import {
 } from '@nft/components'
 import type { Props as NFTCardProps } from '@nft/components/dist/Token/Card'
 import type { FormData } from '@nft/components/dist/Token/Form/Create'
-import { useSession } from '@nft/hooks'
+import { useSigner } from '@nft/hooks'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -80,6 +81,7 @@ export const Template: NextPage<
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
     activateLazyMint?: boolean
+    userHasBeenReconnected: boolean
   }
 > = ({
   multiple,
@@ -93,14 +95,18 @@ export const Template: NextPage<
   restrictMintToVerifiedAccount = false,
   reportEmail,
   activateLazyMint = false,
+  userHasBeenReconnected,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  const { account, ready, signer } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
   const toast = useToast()
   const { data } = useFetchAccountQuery({
     variables: {
-      account: (ready ? account?.toLowerCase() : currentAccount) || '',
+      account:
+        (userHasBeenReconnected ? account?.toLowerCase() : currentAccount) ||
+        '',
     },
   })
 

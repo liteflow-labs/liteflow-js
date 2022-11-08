@@ -3,7 +3,6 @@ import {
   ISessionContext,
   SessionContext,
   useAuthenticate,
-  useEagerConnect,
   useSigner,
 } from '@nft/hooks'
 import { useWeb3React } from '@web3-react/core'
@@ -50,7 +49,6 @@ const Session: FC<Props> = ({ connectors, ...props }) => {
   const { account, deactivate, error } = useWeb3React()
   const signer = useSigner()
   const [cookies, setCookie, removeCookie] = useCookies()
-  const ready = useEagerConnect(connectors, currentAccount(cookies))
   const [
     _authenticateWallet,
     { setAuthenticationToken, resetAuthenticationToken },
@@ -90,24 +88,22 @@ const Session: FC<Props> = ({ connectors, ...props }) => {
 
   useEffect(() => {
     if (ssr) return // Disable cookie writing on the server-side
-    if (!ready) return
     // Update the current account in the cookie when the account changes so the client can keep track of the current account
     if (account) {
       setCookie(COOKIE_ADDRESS, account.toLowerCase(), cookieOptions)
     } else {
       removeCookie(COOKIE_ADDRESS, cookieOptions)
     }
-  }, [ssr, ready, account, setCookie, removeCookie])
+  }, [ssr, account, setCookie, removeCookie])
 
   const loggedInUser = useMemo(() => {
     const current = currentAccount(cookies)
     if (ssr) return current // Trust only cookies for the server
-    if (!ready) return null
     if (!account) return null
     if (!current) return null
     if (current.toLowerCase() !== account.toLowerCase()) return null
     return current.toLowerCase()
-  }, [ready, ssr, cookies, account])
+  }, [ssr, cookies, account])
 
   useEffect(() => {
     const res = currentJWT(cookies)
@@ -121,7 +117,6 @@ const Session: FC<Props> = ({ connectors, ...props }) => {
   return (
     <SessionContext.Provider
       value={{
-        ready: ssr ? true : ready,
         account: loggedInUser,
         error,
         signer,
