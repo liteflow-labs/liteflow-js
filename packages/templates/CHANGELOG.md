@@ -8,18 +8,24 @@
 
 #### Changed
 
-- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
-- Update minimum version of `@apollo/client` to `^3.5.9`, which includes a fix for [this Apollo Client issue](https://github.com/apollographql/apollo-client/pull/9367)
-
 #### Deprecated
 
 #### Removed
 
 #### Fixed
 
-- Fix error 500 when accessing the notification template without being logged in [#67](https://github.com/liteflow-labs/libraries/pull/67)
-
 #### Security
+
+## [v1.0.0-beta.7](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.7) - 2022-11-03
+
+#### Changed
+
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
+- Update minimum version of `@apollo/client` to `^3.5.9`, which includes a fix for [this Apollo Client issue](https://github.com/apollographql/apollo-client/pull/9367)
+
+#### Fixed
+
+- Fix error 500 when accessing the notification template without being logged in [#67](https://github.com/liteflow-labs/libraries/pull/67)
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
 

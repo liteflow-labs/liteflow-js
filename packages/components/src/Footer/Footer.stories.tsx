@@ -33,3 +33,10 @@ Default.args = {
   name: 'Liteflow',
   links: links,
 }
+
+export const WithPoweredBy = Template.bind({})
+WithPoweredBy.args = {
+  name: 'Liteflow',
+  links: links,
+  showPoweredBy: true,
+}
