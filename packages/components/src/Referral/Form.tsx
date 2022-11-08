@@ -1,6 +1,7 @@
 import { Button, Icon, Text, useDisclosure, useToast } from '@chakra-ui/react'
-import { formatError, useInvitation, useSession } from '@nft/hooks'
+import { formatError, useInvitation, useSigner } from '@nft/hooks'
 import { HiOutlineClipboard } from '@react-icons/all-files/hi/HiOutlineClipboard'
+import { useWeb3React } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
 import LoginModal from '../Modal/Login'
@@ -19,7 +20,8 @@ type Props = {
 const ReferralForm: VFC<Props> = ({ login, loginUrl }) => {
   const { t } = useTranslation('components')
   const toast = useToast()
-  const { signer, account } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
   const { create, creating } = useInvitation(signer)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [url, setUrl] = useState<string>()

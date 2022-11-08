@@ -31,8 +31,9 @@ import {
   formatError,
   useAcceptOffer,
   useIsLoggedIn,
-  useSession,
+  useSigner,
 } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -132,7 +133,8 @@ export const Template: VFC<
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
+  const signer = useSigner()
   const [changePage, changeLimit] = usePaginate()
   const [accept, { activeStep, transactionHash }] = useAcceptOffer(signer)
   const toast = useToast()

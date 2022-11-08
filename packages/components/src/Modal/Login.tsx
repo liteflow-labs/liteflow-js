@@ -12,8 +12,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { useSession } from '@nft/hooks'
-import { UnsupportedChainIdError } from '@web3-react/core'
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FC, useEffect, useMemo, useState } from 'react'
 import WalletCoinbase from '../Wallet/Connectors/Coinbase'
@@ -41,7 +40,7 @@ const LoginModal: FC<Props> = ({
   networkName,
 }) => {
   const { t } = useTranslation('components')
-  const { account, error } = useSession()
+  const { account, error } = useWeb3React()
   const [errorFromLogin, setErrorFromLogin] = useState<Error>()
 
   const invalidNetwork = useMemo(

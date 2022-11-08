@@ -6,8 +6,8 @@ import {
   MetamaskConnector,
   WalletConnectConnector,
 } from '@nft/components'
-import { useInvitation, useSession } from '@nft/hooks'
-import { UnsupportedChainIdError } from '@web3-react/core'
+import { useInvitation, useSigner } from '@nft/hooks'
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
@@ -30,7 +30,8 @@ export const Template: VFC<Props> = ({
   const { t } = useTranslation('templates')
   const { back, query, replace } = useRouter()
   const referral = Array.isArray(query.ref) ? query.ref[0] : query.ref
-  const { account, signer, error } = useSession()
+  const { account, error } = useWeb3React()
+  const signer = useSigner()
   const { accept } = useInvitation(signer)
   const toast = useToast()
   const [errorFromLogin, setErrorFromLogin] = useState<Error>()
