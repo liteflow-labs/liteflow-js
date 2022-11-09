@@ -21,7 +21,10 @@ const categories = [
 export const IsSingle = Template.bind({})
 IsSingle.args = {
   signer: new VoidSigner('0x0000000000000000000000000000000000000000'),
-  multiple: false,
+  collection: {
+    address: '0x',
+    standard: 'ERC721',
+  },
   categories: categories,
   blockExplorer: {
     name: 'Etherscan',
@@ -44,7 +47,10 @@ IsSingle.args = {
 export const IsMultiple = Template.bind({})
 IsMultiple.args = {
   ...IsSingle.args,
-  multiple: true,
+  collection: {
+    address: '0x',
+    standard: 'ERC1155',
+  },
 }
 
 export const IsSingleUnlockable = Template.bind({})

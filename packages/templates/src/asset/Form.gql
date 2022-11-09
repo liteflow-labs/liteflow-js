@@ -1,10 +1,16 @@
-query FetchAccount($account: Address!) {
+query FetchAccountAndCollections($account: Address!) {
   account(address: $account) {
     address
     name
     image
     verification {
       status
+    }
+  }
+  collections {
+    nodes {
+      address
+      standard
     }
   }
 }

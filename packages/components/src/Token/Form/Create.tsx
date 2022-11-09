@@ -26,6 +26,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { FC, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import Dropzone from '../../Dropzone/Dropzone'
+import { Standard } from '../../graphql'
 import CreateCollectibleModal from '../../Modal/CreateCollectible'
 import LoginModal from '../../Modal/Login'
 import Select from '../../Select/Select'
@@ -44,7 +45,10 @@ export type FormData = {
 
 type Props = {
   signer: (Signer & TypedDataSigner) | undefined
-  multiple: boolean
+  collection: {
+    address: string
+    standard: Standard
+  }
   categories: { id: string; title: string }[]
   blockExplorer: BlockExplorer
   uploadUrl: string
@@ -64,7 +68,7 @@ type Props = {
 
 const TokenFormCreate: FC<Props> = ({
   signer,
-  multiple,
+  collection,
   categories,
   blockExplorer,
   uploadUrl,
@@ -100,6 +104,7 @@ const TokenFormCreate: FC<Props> = ({
       isPrivate: false,
     },
   })
+  const multiple = collection.standard === 'ERC1155'
   const res = useWatch({ control })
   useEffect(() => onInputChange(res), [res, onInputChange])
 
@@ -121,7 +126,7 @@ const TokenFormCreate: FC<Props> = ({
       if (parseFloat(data.royalties) > maxRoyalties)
         throw new Error('Royalties too high')
       const assetId = await createNFT({
-        standard: multiple ? 'ERC1155' : 'ERC721',
+        collection: collection.address,
         name: data.name,
         description: data.description,
         content: data.content,

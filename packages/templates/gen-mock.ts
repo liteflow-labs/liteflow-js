@@ -7,9 +7,9 @@ import {
   CheckoutDocument,
   CheckoutQuery,
   CheckoutQueryVariables,
-  FetchAccountDocument,
-  FetchAccountQuery,
-  FetchAccountQueryVariables,
+  FetchAccountAndCollectionsDocument,
+  FetchAccountAndCollectionsQuery,
+  FetchAccountAndCollectionsQueryVariables,
   FetchAllErc721And1155Document,
   FetchAllErc721And1155Query,
   FetchAllErc721And1155QueryVariables,
@@ -294,8 +294,11 @@ client
   .catch(console.error)
 
 client
-  .query<FetchAccountQuery, FetchAccountQueryVariables>({
-    query: FetchAccountDocument,
+  .query<
+    FetchAccountAndCollectionsQuery,
+    FetchAccountAndCollectionsQueryVariables
+  >({
+    query: FetchAccountAndCollectionsDocument,
     variables: {
       account: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
     },

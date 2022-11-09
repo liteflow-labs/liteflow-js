@@ -2,7 +2,7 @@ import { SessionContext } from '@nft/hooks'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import { withReactContext } from 'storybook-react-context'
-import { FetchAccountDocument } from '../graphql'
+import { FetchAccountAndCollectionsDocument } from '../graphql'
 import * as AssetForm from './Form'
 
 export default {
@@ -22,7 +22,7 @@ export default {
       mocks: [
         {
           request: {
-            query: FetchAccountDocument,
+            query: FetchAccountAndCollectionsDocument,
             variables: {
               account: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
             },

@@ -26,9 +26,9 @@ import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useMemo, useState } from 'react'
 import {
-  FetchAccountDocument,
-  FetchAccountQuery,
-  useFetchAccountQuery,
+  FetchAccountAndCollectionsDocument,
+  FetchAccountAndCollectionsQuery,
+  useFetchAccountAndCollectionsQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
 import useLocalFileURL from '../hooks/useLocalFileURL'
@@ -44,12 +44,14 @@ export const server = (
   traits: { [key: string]: string[] },
 ): GetServerSideProps<Props> =>
   wrapServerSideProps<Props>(url, async (context, client) => {
-    const { data, error } = await client.query<FetchAccountQuery>({
-      query: FetchAccountDocument,
-      variables: {
-        account: context.user.address || '',
+    const { data, error } = await client.query<FetchAccountAndCollectionsQuery>(
+      {
+        query: FetchAccountAndCollectionsDocument,
+        variables: {
+          account: context.user.address || '',
+        },
       },
-    })
+    )
     if (error) throw error
     if (!data) throw new Error('data is falsy')
     return {
@@ -98,11 +100,16 @@ export const Template: NextPage<
   const { back, push } = useRouter()
   const { account, ready, signer } = useSession()
   const toast = useToast()
-  const { data } = useFetchAccountQuery({
+  const { data } = useFetchAccountAndCollectionsQuery({
     variables: {
       account: (ready ? account?.toLowerCase() : currentAccount) || '',
     },
   })
+  const collection = useMemo(() => {
+    if (multiple)
+      return data?.collections?.nodes.find((x) => x.standard === 'ERC1155')
+    return data?.collections?.nodes.find((x) => x.standard === 'ERC721')
+  }, [data, multiple])
 
   const [formData, setFormData] = useState<Partial<FormData>>()
 
@@ -226,19 +233,21 @@ export const Template: NextPage<
             hasMultiCurrency={false}
           />
         </div>
-        <TokenFormCreate
-          signer={signer}
-          multiple={multiple}
-          categories={categories}
-          uploadUrl={uploadUrl}
-          blockExplorer={blockExplorer}
-          onCreated={onCreated}
-          onInputChange={setFormData}
-          login={login}
-          activateUnlockableContent={activateUnlockableContent}
-          maxRoyalties={maxRoyalties}
-          activateLazyMint={activateLazyMint}
-        />
+        {collection && (
+          <TokenFormCreate
+            signer={signer}
+            collection={collection}
+            categories={categories}
+            uploadUrl={uploadUrl}
+            blockExplorer={blockExplorer}
+            onCreated={onCreated}
+            onInputChange={setFormData}
+            login={login}
+            activateUnlockableContent={activateUnlockableContent}
+            maxRoyalties={maxRoyalties}
+            activateLazyMint={activateLazyMint}
+          />
+        )}
       </Flex>
     </>
   )

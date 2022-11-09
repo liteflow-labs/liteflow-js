@@ -6,6 +6,7 @@ export enum ErrorMessages {
   FEATURE_DISABLED_REFERRAL = 'Feature Referral disabled',
 
   SIGNER_FALSY = 'Signer falsy: Please login first',
+  SIGNER_NO_PROVIDER = 'Signer should have a provider',
 
   AUCTION_NOT_FOUND = 'Auction not found',
   AUCTION_RESERVER_NOT_MATCH = 'Reserve not match',
@@ -19,9 +20,7 @@ export enum ErrorMessages {
   MINT_SIGNATURE_GENERATION = 'Error while creating the lazy minted asset signature',
 
   ASSET_LAZY_MINT_CREATION_FAILED = 'Error while creating the lazy minted asset',
-  ASSET_CREATION_FAILED = 'Error while creating this asset',
-  ASSET_INVALID_STANDARD = 'Invalid token',
-  ASSET_NO_MINT = 'No transaction to mint',
+  ASSET_TRANSACTION_CREATION_FAILED = 'Error while creating the transaction for the asset',
 
   INVITATION_NOT_FOUND = 'Invitation not found',
   INVITATION_CREATION_FAILED = 'Invitation creation failed',
