@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Asset form now fetches the collection detail [#83](https://github.com/liteflow-labs/liteflow-js/pull/83)
+
 #### Deprecated
 
 #### Removed

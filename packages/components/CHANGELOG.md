@@ -4,6 +4,8 @@
 
 #### Breaking Changes
 
+- Component for the asset's form now requires the collection instead of the standard [#83](https://github.com/liteflow-labs/liteflow-js/pull/83)
+
 #### Added
 
 #### Changed
