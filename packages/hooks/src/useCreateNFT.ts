@@ -19,9 +19,9 @@ gql`
   ) {
     createAssetTransaction(
       chainId: $chainId
-      collection: $collection
+      collectionAddress: $collection
       metadata: $metadata
-      creator: $creator
+      creatorAddress: $creator
       royalties: $royalties
       supply: $supply
     ) {
