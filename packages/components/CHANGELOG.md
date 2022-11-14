@@ -6,6 +6,8 @@
 
 #### Added
 
+- Added Spanish language support [#84](https://github.com/liteflow-labs/liteflow-js/pull/84)
+
 #### Changed
 
 #### Deprecated
