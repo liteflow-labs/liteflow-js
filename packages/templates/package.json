@@ -38,7 +38,7 @@
     "@graphql-codegen/typescript": "^1.23.0",
     "@graphql-codegen/typescript-operations": "^1.18.4",
     "@graphql-codegen/typescript-react-apollo": "^2.3.1",
-    "@nft/api-graphql": "*",
+    "@nft/api-graphql": "^1.0.0-beta.7",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
