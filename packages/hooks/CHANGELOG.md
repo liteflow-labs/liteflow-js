@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Force `ownerAddress` to lowercase in `useCheckOwnership` hook [#85](https://github.com/liteflow-labs/liteflow-js/pull/85)
+
 #### Security
 
 ## [v1.0.0-beta.7](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.7) - 2022-11-03
