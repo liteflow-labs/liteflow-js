@@ -7,9 +7,10 @@
 #### Added
 
 - Added Spanish language support [#84](https://github.com/liteflow-labs/liteflow-js/pull/84)
-- Update @nft/api-graphql to version v1.0.0-beta.7 [#86](https://github.com/liteflow-labs/liteflow-js/pull/86)
 
 #### Changed
+
+- Update @nft/api-graphql to version v1.0.0-beta.7 [#86](https://github.com/liteflow-labs/liteflow-js/pull/86)
 
 #### Deprecated
 
