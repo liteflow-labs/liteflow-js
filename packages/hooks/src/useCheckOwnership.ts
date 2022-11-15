@@ -38,7 +38,7 @@ export default function useCheckOwnership(): {
     async (assetId: string, ownerAddress: string) => {
       const { ownerships } = await sdk.CheckOwnership({
         assetId,
-        ownerAddress,
+        ownerAddress: ownerAddress.toLowerCase(),
       })
       invariant(ownerships, ErrorMessages.OWNERSHIP_NOT_FOUND)
       if (ownerships.nodes.length === 0)
