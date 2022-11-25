@@ -1,4 +1,8 @@
 {
   "index": "Introduction",
-  "hooks": "NFT Hooks"
+  "graphql-api": "GraphQL API",
+  "hooks": "NFT Hooks",
+  "components": "Components",
+  "templates": "Templates",
+  "starter-kit": "Starter Kit"
 }
