@@ -73,7 +73,7 @@ export default function useInvitation(signer: Signer | undefined): {
     async (invitationId: string) => {
       invariant(
         (await config).hasReferralSystem,
-        ErrorCodes.FEATURE_DISABLED_REFERRAL,
+        ErrorMessages.FEATURE_DISABLED_REFERRAL,
       )
       try {
         setAccepting(true)
