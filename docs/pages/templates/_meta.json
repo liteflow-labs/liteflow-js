@@ -4,5 +4,8 @@
     "title": "List of templates",
     "href": "https://storybook-templates-liteflow.vercel.app/",
     "newWindow": true
+  },
+  "README_symlink": {
+    "display": "hidden"
   }
 }
