@@ -15,21 +15,21 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown'
-import React, { FC, HTMLAttributes, useMemo } from 'react'
+import React, { HTMLAttributes, ReactElement, useMemo } from 'react'
 import { Control, Controller, FieldError } from 'react-hook-form'
 import Image from '../Image/Image'
 
-type IProps = HTMLAttributes<any> & {
+type IProps<T extends string> = HTMLAttributes<any> & {
   selectWidth?: string | number
   dropdownMaxHeight?: string | number
   label?: string
   choices: {
-    value: string
+    value: T
     label: string
     image?: string
     caption?: string
   }[]
-  value?: string
+  value?: T
   onChange?(value: string | string[] | undefined): void
   disabled?: boolean
   error?: FieldError | undefined
@@ -41,7 +41,7 @@ type IProps = HTMLAttributes<any> & {
   inlineLabel?: boolean
 }
 
-const Select: FC<IProps> = ({
+const Select = <T extends string>({
   selectWidth,
   dropdownMaxHeight,
   label,
@@ -57,7 +57,7 @@ const Select: FC<IProps> = ({
   labelInfo,
   inlineLabel,
   ...props
-}) => {
+}: IProps<T>): ReactElement => {
   const selectedChoice = useMemo(
     () => choices.find((x) => x.value === value),
     [choices, value],

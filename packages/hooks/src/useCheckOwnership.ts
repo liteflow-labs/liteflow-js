@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   query CheckOwnership($assetId: String!, $ownerAddress: Address!) {
@@ -38,9 +38,9 @@ export default function useCheckOwnership(): {
     async (assetId: string, ownerAddress: string) => {
       const { ownerships } = await sdk.CheckOwnership({
         assetId,
-        ownerAddress,
+        ownerAddress: ownerAddress.toLowerCase(),
       })
-      invariant(ownerships, ErrorCodes.OWNERSHIP_NOT_FOUND)
+      invariant(ownerships, ErrorMessages.OWNERSHIP_NOT_FOUND)
       if (ownerships.nodes.length === 0)
         return {
           isOwner: false,
@@ -83,7 +83,7 @@ export default function useCheckOwnership(): {
         await new Promise((resolve) => setTimeout(resolve, interval))
         i++
       }
-      invariant(i !== max - 1, ErrorCodes.POLLING_TIMEOUT)
+      invariant(i !== max - 1, ErrorMessages.POLLING_TIMEOUT)
     },
     [checkOwnership],
   )

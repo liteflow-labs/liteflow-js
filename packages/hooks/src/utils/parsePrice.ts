@@ -6,5 +6,10 @@ export const parsePrice = (
   decimals: number,
 ): BigNumber => {
   if (!price) return BigNumber.from(0)
-  return BigNumber.from(new BN(price).shiftedBy(decimals).toFixed(0))
+  try {
+    return BigNumber.from(new BN(price).shiftedBy(decimals).toFixed(0))
+  } catch {
+    console.error(`Cannot parse price ${price} as BigNumber`)
+    return BigNumber.from(0)
+  }
 }

@@ -4,7 +4,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 import { OfferType, TransactionFragment } from './graphql'
 import { convertTx } from './utils/transaction'
 
@@ -104,7 +104,7 @@ export default function useCreateOffer(
       expiredAt: Date | null
       auctionId?: string
     }): Promise<string> => {
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       try {
@@ -123,12 +123,12 @@ export default function useCreateOffer(
           makerAddress: account.toLowerCase(),
           amount: quantity.mul(unitPrice).toString(),
         })
-        invariant(createOffer?.offer, ErrorCodes.OFFER_CREATION_FAILED)
+        invariant(createOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
         const { id: offerId, eip712Data, asset, currency } = createOffer.offer
 
         setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         let approval: TransactionFragment | null
-        if (type === OfferType.Sale) {
+        if (type === 'SALE') {
           // creating a new offer of type sale, approval is on the asset
           approval = // typescript check
             asset.token.__typename === 'ERC721' ||
@@ -165,7 +165,7 @@ export default function useCreateOffer(
           offerId,
           signature,
         })
-        invariant(publishOffer?.offer, ErrorCodes.OFFER_CREATION_FAILED)
+        invariant(publishOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
         return publishOffer.offer.id
       } finally {
         setActiveProcess(CreateOfferStep.INITIAL)

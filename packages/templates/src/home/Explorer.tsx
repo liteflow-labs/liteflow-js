@@ -225,7 +225,7 @@ export const server = (
     const offset = (page - 1) * limit
     const orderBy = Array.isArray(ctx.query.orderBy)
       ? (ctx.query.orderBy[0] as AssetsOrderBy)
-      : (ctx.query.orderBy as AssetsOrderBy) || AssetsOrderBy.CreatedAtDesc
+      : (ctx.query.orderBy as AssetsOrderBy) || 'CREATED_AT_DESC'
     const search =
       ctx.query.search && !Array.isArray(ctx.query.search)
         ? ctx.query.search
@@ -624,18 +624,18 @@ export const Template: VFC<
         </GridItem>
         <GridItem gap={6} pt={{ base: 8, lg: 0 }} colSpan={{ lg: 4, xl: 3 }}>
           <Box ml="auto" w={{ base: 'full', lg: 'min-content' }}>
-            <Select
+            <Select<AssetsOrderBy>
               label={t('explore.orderBy.label')}
               name="orderBy"
               onChange={changeOrder}
               choices={[
                 {
                   label: t('explore.orderBy.values.createdAtDesc'),
-                  value: AssetsOrderBy.CreatedAtDesc,
+                  value: 'CREATED_AT_DESC',
                 },
                 {
                   label: t('explore.orderBy.values.createdAtAsc'),
-                  value: AssetsOrderBy.CreatedAtAsc,
+                  value: 'CREATED_AT_ASC',
                 },
               ]}
               value={orderBy}

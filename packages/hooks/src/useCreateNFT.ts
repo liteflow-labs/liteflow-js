@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 import { Standard } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import useConfig from './useConfig'
@@ -124,7 +124,7 @@ export default function useCreateNFT(
       unlockableContent: string | null
     }> => {
       if (isPrivate) {
-        invariant(preview, ErrorCodes.MINT_UNLOCKABLE_CONTENT_PREVIEW)
+        invariant(preview, ErrorMessages.MINT_UNLOCKABLE_CONTENT_PREVIEW)
         const [previewIpfs, privateContentIpfs] = await Promise.all([
           uploadFile(preview),
           uploadFile(content, { protected: true }),
@@ -136,7 +136,7 @@ export default function useCreateNFT(
         }
       }
       if (isAnimation) {
-        invariant(preview, ErrorCodes.MINT_ANIMATION_PREVIEW)
+        invariant(preview, ErrorMessages.MINT_ANIMATION_PREVIEW)
         const [previewIpfs, contentIpfs] = await Promise.all([
           uploadFile(preview),
           uploadFile(content),
@@ -171,9 +171,9 @@ export default function useCreateNFT(
     }) => {
       invariant(
         !isPrivate || (isPrivate && (await config).hasUnlockableContent),
-        ErrorCodes.FEATURE_DISABLED_UNLOCKABLE_CONTENT,
+        ErrorMessages.FEATURE_DISABLED_UNLOCKABLE_CONTENT,
       )
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
       setActiveProcess(CreateNftStep.UPLOAD)
@@ -205,7 +205,7 @@ export default function useCreateNFT(
 
           invariant(
             createLazyMintedAssetSignature?.eip712Data,
-            ErrorCodes.MINT_SIGNATURE_GENERATION,
+            ErrorMessages.MINT_SIGNATURE_GENERATION,
           )
 
           // sign data
@@ -226,7 +226,7 @@ export default function useCreateNFT(
           })
           invariant(
             createLazyMintedAsset?.asset,
-            ErrorCodes.ASSET_LAZY_MINT_CREATION_FAILED,
+            ErrorMessages.ASSET_LAZY_MINT_CREATION_FAILED,
           )
           return createLazyMintedAsset.asset.id
         }
@@ -245,13 +245,13 @@ export default function useCreateNFT(
           royalties: royalties ? Math.round(royalties * 100) : 0,
         })
         const asset = createAsset?.asset
-        invariant(asset, ErrorCodes.ASSET_CREATION_FAILED)
+        invariant(asset, ErrorMessages.ASSET_CREATION_FAILED)
         invariant(
           asset.token.__typename === 'ERC721' ||
             asset.token.__typename === 'ERC1155',
-          ErrorCodes.ASSET_INVALID_STANDARD,
+          ErrorMessages.ASSET_INVALID_STANDARD,
         )
-        invariant(asset.token.mint, ErrorCodes.ASSET_NO_MINT)
+        invariant(asset.token.mint, ErrorMessages.ASSET_NO_MINT)
 
         setActiveProcess(CreateNftStep.TRANSACTION_SIGNATURE)
         const tx = await signer.sendTransaction(convertTx(asset.token.mint))

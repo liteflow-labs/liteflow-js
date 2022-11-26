@@ -1,7 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { Standard } from '../graphql'
 import Card from './Card'
 
 export default {
@@ -14,7 +13,7 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />
 export const AuctionCard = Template.bind({})
 AuctionCard.args = {
   asset: {
-    standard: Standard.Erc721,
+    standard: 'ERC721',
     id: '1',
     name: 'My NFT',
     animationUrl: undefined,

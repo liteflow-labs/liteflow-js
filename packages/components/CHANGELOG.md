@@ -18,6 +18,33 @@
 
 #### Security
 
+## [v1.0.0-beta.8](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.8) - 2022-11-15
+
+#### Added
+
+- Added Spanish language support [#84](https://github.com/liteflow-labs/liteflow-js/pull/84)
+
+#### Changed
+
+- Update @nft/api-graphql to version v1.0.0-beta.7 [#86](https://github.com/liteflow-labs/liteflow-js/pull/86)
+
+## [v1.0.0-beta.7](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.7) - 2022-11-03
+
+#### Added
+
+- Add generic type for `Select` and `TokenGrid` components [#63](https://github.com/liteflow-labs/libraries/pull/63)
+- Added the `showPoweredBy` property to the footer in cases where we display "Powered By Liteflow". [#79](https://github.com/liteflow-labs/liteflow-js/pull/79)
+
+#### Changed
+
+- Improve bundle size by removing enums in the generated types [#63](https://github.com/liteflow-labs/libraries/pull/63)
+- Update minimum version of `@apollo/client` to `^3.5.9`, which includes a fix for [this Apollo Client issue](https://github.com/apollographql/apollo-client/pull/9367)
+
+#### Fixed
+
+- Type in the banner on the wallet page [#61](https://github.com/liteflow-labs/libraries/pull/61)
+- Fixed a property issue causing the story for `MintListItem` Storybook story do not display. [#71](https://github.com/liteflow-labs/libraries/pull/71)
+
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
 
 #### Added

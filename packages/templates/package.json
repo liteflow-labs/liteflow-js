@@ -15,7 +15,7 @@
     "gen-mock": "TS_NODE_PROJECT=./tsconfig.script.json ts-node ./gen-mock https://nft-demo-bsc-testnet-4u4nk.ondigitalocean.app/graphql"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
+    "@apollo/client": "^3.5.9",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
@@ -38,7 +38,7 @@
     "@graphql-codegen/typescript": "^1.23.0",
     "@graphql-codegen/typescript-operations": "^1.18.4",
     "@graphql-codegen/typescript-react-apollo": "^2.3.1",
-    "@nft/api-graphql": "*",
+    "@nft/api-graphql": "^1.0.0-beta.7",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",

@@ -94,71 +94,71 @@ export default function NotificationDetail({
       }
     | undefined = useMemo(() => {
     switch (action) {
-      case NotificationAction.AccountVerificationValidated:
+      case 'ACCOUNT_VERIFICATION_VALIDATED':
         invariant(accountVerification, 'accountVerification is required')
         return AccountVerificationValidated({ accountVerification })
 
-      case NotificationAction.OfferPurchased:
+      case 'OFFER_PURCHASED':
         invariant(offer, 'offer is required')
         return OfferPurchased({ offer, trade })
 
-      case NotificationAction.BidAccepted:
+      case 'BID_ACCEPTED':
         invariant(offer, 'offer is required')
         return BidAccepted({ offer })
 
-      case NotificationAction.BidCreated:
+      case 'BID_CREATED':
         invariant(offer, 'offer is required')
         return BidCreated({ offer })
 
-      case NotificationAction.AuctionBidCreated:
+      case 'AUCTION_BID_CREATED':
         invariant(auction, 'auction is required')
         invariant(offer, 'offer is required')
         return AuctionBidCreated({ auction, offer })
 
-      case NotificationAction.AuctionBidExpired:
+      case 'AUCTION_BID_EXPIRED':
         invariant(auction, 'auction is required')
         invariant(offer, 'offer is required')
         return AuctionBidExpired({ auction, offer })
 
-      case NotificationAction.AuctionEndedWonSeller:
+      case 'AUCTION_ENDED_WON_SELLER':
         invariant(auction, 'auction is required')
         invariant(offer, 'offer is required')
         return AuctionEndedWonSeller({ auction, offer })
 
-      case NotificationAction.AuctionEndedReservepriceSeller:
+      case 'AUCTION_ENDED_RESERVEPRICE_SELLER':
         invariant(auction, 'auction is required')
         return AuctionEndedReservePriceSeller({ auction })
 
-      case NotificationAction.AuctionEndedNobids:
+      case 'AUCTION_ENDED_NOBIDS':
         invariant(auction, 'auction is required')
         return AuctionEndedNoBids({ auction })
 
-      case NotificationAction.AuctionEndedWonBuyer:
+      case 'AUCTION_ENDED_WON_BUYER':
         invariant(auction, 'auction is required')
         return AuctionEndedWonBuyer({ auction })
 
-      case NotificationAction.AuctionEndedReservepriceBuyer:
+      case 'AUCTION_ENDED_RESERVEPRICE_BUYER':
         invariant(auction, 'auction is required')
         return AuctionEndedReservePriceBuyer({ auction })
 
-      case NotificationAction.AuctionExpireSoon:
+      case 'AUCTION_EXPIRE_SOON':
         invariant(auction, 'auction is required')
         invariant(offer, 'offer is required')
         return AuctionExpireSoon({ auction, offer })
 
-      case NotificationAction.AuctionExpired:
+      case 'AUCTION_EXPIRED':
         invariant(auction, 'auction is required')
         return AuctionExpired({ auction })
 
-      case NotificationAction.BidExpired:
+      case 'BID_EXPIRED':
         invariant(offer, 'offer is required')
         return BidExpired({ offer })
 
-      case NotificationAction.OfferExpired:
+      case 'OFFER_EXPIRED':
         invariant(offer, 'sale is required')
         return OfferExpired({ offer })
 
-      case NotificationAction.ReferralRefereeRegistered:
+      case 'REFERRAL_REFEREE_REGISTERED':
         invariant(refereeAccount, 'refereeAccount is required')
         return ReferralRefereeRegistered({ refereeAccount })
     }

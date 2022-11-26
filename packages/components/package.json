@@ -14,7 +14,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.16",
+    "@apollo/client": "^3.5.9",
     "@bugsnag/js": "^7.16.1",
     "@bugsnag/plugin-react": "^7.16.1",
     "@chakra-ui/react": "^1.8.8",
@@ -51,7 +51,7 @@
     "@graphql-codegen/typescript": "1.23.0",
     "@graphql-codegen/typescript-operations": "1.18.4",
     "@graphql-codegen/typescript-react-apollo": "2.3.1",
-    "@nft/api-graphql": "*",
+    "@nft/api-graphql": "^1.0.0-beta.7",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",

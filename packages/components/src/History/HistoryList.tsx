@@ -44,7 +44,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
   const { t } = useTranslation('components')
   const ListItem = (history: IProps['histories'][0]) => {
     switch (history.action) {
-      case AssetHistoryAction.Listing:
+      case 'LISTING':
         invariant(history.unitPrice, 'unitPrice is required')
         return (
           <ListingListItem
@@ -54,7 +54,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
           />
         )
 
-      case AssetHistoryAction.Purchase:
+      case 'PURCHASE':
         invariant(history.unitPrice, 'unitPrice is required')
         invariant(history.toAddress, 'toAddress is required')
         return (
@@ -67,7 +67,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
           />
         )
 
-      case AssetHistoryAction.Transfer:
+      case 'TRANSFER':
         invariant(history.toAddress, 'toAddress is required')
         if (
           history.fromAddress === '0x0000000000000000000000000000000000000000'
@@ -88,7 +88,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
           />
         )
 
-      case AssetHistoryAction.Lazymint:
+      case 'LAZYMINT':
         return <LazyMintListItem {...history} />
     }
   }

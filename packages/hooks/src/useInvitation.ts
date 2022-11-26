@@ -3,8 +3,8 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
 import useConfig from './useConfig'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   mutation CreateInvitation {
@@ -47,9 +47,9 @@ export default function useInvitation(signer: Signer | undefined): {
   const create = useCallback(async () => {
     invariant(
       (await config).hasReferralSystem,
-      ErrorCodes.FEATURE_DISABLED_REFERRAL,
+      ErrorMessages.FEATURE_DISABLED_REFERRAL,
     )
-    invariant(signer, ErrorCodes.SIGNER_FALSY)
+    invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setCreating(true)
       const account = await signer.getAddress()
@@ -60,7 +60,7 @@ export default function useInvitation(signer: Signer | undefined): {
       const { createInvitation } = await sdk.CreateInvitation()
       invariant(
         createInvitation?.invitation?.id,
-        ErrorCodes.INVITATION_CREATION_FAILED,
+        ErrorMessages.INVITATION_CREATION_FAILED,
       )
 
       return createInvitation.invitation.id
@@ -80,7 +80,10 @@ export default function useInvitation(signer: Signer | undefined): {
         const { acceptInvitation } = await sdk.AcceptInvitation({
           id: invitationId,
         })
-        invariant(acceptInvitation?.invitation, ErrorCodes.INVITATION_NOT_FOUND)
+        invariant(
+          acceptInvitation?.invitation,
+          ErrorMessages.INVITATION_NOT_FOUND,
+        )
         return acceptInvitation.invitation.id
       } finally {
         setAccepting(false)

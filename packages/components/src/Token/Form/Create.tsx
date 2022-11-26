@@ -26,7 +26,6 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { FC, useEffect, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import Dropzone from '../../Dropzone/Dropzone'
-import { Standard } from '../../graphql'
 import CreateCollectibleModal from '../../Modal/CreateCollectible'
 import LoginModal from '../../Modal/Login'
 import Select from '../../Select/Select'
@@ -128,7 +127,7 @@ const TokenFormCreate: FC<Props> = ({
       if (parseFloat(data.royalties) > maxRoyalties)
         throw new Error('Royalties too high')
       const assetId = await createNFT({
-        standard: multiple ? Standard.Erc1155 : Standard.Erc721,
+        standard: multiple ? 'ERC1155' : 'ERC721',
         name: data.name,
         description: data.description,
         content: data.content,

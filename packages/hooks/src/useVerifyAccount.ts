@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   mutation VerifyAccount($input: CreateAccountVerificationInput!) {
@@ -29,7 +29,7 @@ export default function useVerifyAccount(
   const [loading, setLoading] = useState(false)
 
   const verifyAccount = useCallback(async () => {
-    invariant(signer, ErrorCodes.SIGNER_FALSY)
+    invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setLoading(true)
       const account = await signer.getAddress()
@@ -44,7 +44,7 @@ export default function useVerifyAccount(
       })
       invariant(
         createAccountVerification?.accountVerification,
-        ErrorCodes.ACCOUNT_VERIFICATION_FAILED,
+        ErrorMessages.ACCOUNT_VERIFICATION_FAILED,
       )
       return createAccountVerification.accountVerification.status
     } finally {

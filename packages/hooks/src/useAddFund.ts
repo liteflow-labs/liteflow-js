@@ -3,8 +3,8 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
 import useConfig from './useConfig'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   mutation CreateWyrePayment($address: Address!) {
@@ -23,8 +23,8 @@ export default function useAddFund(
   const config = useConfig()
 
   const addFunds = useCallback(async () => {
-    invariant((await config).hasTopUp, ErrorCodes.FEATURE_DISABLED_TOP_UP)
-    invariant(signer, ErrorCodes.SIGNER_FALSY)
+    invariant((await config).hasTopUp, ErrorMessages.FEATURE_DISABLED_TOP_UP)
+    invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setLoading(true)
       const account = await signer.getAddress()

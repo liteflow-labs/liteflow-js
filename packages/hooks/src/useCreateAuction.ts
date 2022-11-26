@@ -3,7 +3,7 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import { ErrorCodes } from './error'
+import { ErrorMessages } from './errorMessages'
 
 gql`
   mutation CreateAuction($createAuctionInput: AuctionInput!) {
@@ -30,7 +30,7 @@ export default function useCreateAuction(
   const [loading, setLoading] = useState(false)
   const createAuctionFn = useCallback(
     async (input: AuctionInput): Promise<string> => {
-      invariant(signer, ErrorCodes.SIGNER_FALSY)
+      invariant(signer, ErrorMessages.SIGNER_FALSY)
       try {
         setLoading(true)
         const account = await signer.getAddress()
@@ -49,7 +49,7 @@ export default function useCreateAuction(
         })
         invariant(
           createAuction?.auction?.id,
-          ErrorCodes.AUCTION_CREATION_FAILED,
+          ErrorMessages.AUCTION_CREATION_FAILED,
         )
         return createAuction.auction.id
       } finally {

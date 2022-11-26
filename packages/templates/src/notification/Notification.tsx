@@ -6,7 +6,6 @@ import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
 import { useCookies } from 'react-cookie'
-import invariant from 'ts-invariant'
 import {
   GetNotificationsDocument,
   GetNotificationsQuery,
@@ -22,7 +21,8 @@ export type Props = {
 export const server = (url: string): GetServerSideProps<Props> =>
   wrapServerSideProps<Props>(url, async (ctx, client) => {
     const address = ctx.user.address
-    invariant(address, 'address is falsy')
+    if (!address) return { props: { address: '' } }
+
     const { data, error } = await client.query<GetNotificationsQuery>({
       query: GetNotificationsDocument,
       variables: {
