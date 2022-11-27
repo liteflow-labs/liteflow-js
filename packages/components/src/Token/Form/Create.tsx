@@ -21,9 +21,9 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
-import { CreateNftStep, formatError, useConfig, useCreateNFT } from '@nft/hooks'
+import { CreateNftStep, formatError, useCreateNFT } from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import Dropzone from '../../Dropzone/Dropzone'
 import CreateCollectibleModal from '../../Modal/CreateCollectible'
@@ -59,6 +59,7 @@ type Props = {
   maxRoyalties: number
   onCreated: (id: string) => void
   onInputChange: (data: Partial<FormData>) => void
+  activateLazyMint: boolean
 }
 
 const TokenFormCreate: FC<Props> = ({
@@ -72,10 +73,9 @@ const TokenFormCreate: FC<Props> = ({
   maxRoyalties,
   onCreated,
   onInputChange,
+  activateLazyMint,
 }) => {
   const { t } = useTranslation('components')
-  const [isLazyMint, setIsLazyMint] = useState(false)
-  const config = useConfig()
   const toast = useToast()
   const {
     isOpen: loginIsOpen,
@@ -102,12 +102,6 @@ const TokenFormCreate: FC<Props> = ({
   })
   const res = useWatch({ control })
   useEffect(() => onInputChange(res), [res, onInputChange])
-
-  useEffect(() => {
-    config
-      .then(({ hasLazyMint }) => setIsLazyMint(hasLazyMint))
-      .catch(console.error)
-  }, [config])
 
   // const [transform] = useFileTransformer()
   const [createNFT, { activeStep, transactionHash }] = useCreateNFT(signer, {
@@ -358,7 +352,7 @@ const TokenFormCreate: FC<Props> = ({
         step={activeStep}
         blockExplorer={blockExplorer}
         transactionHash={transactionHash}
-        isLazyMint={isLazyMint}
+        isLazyMint={activateLazyMint}
       />
     </Stack>
   )

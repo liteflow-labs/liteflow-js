@@ -18,14 +18,16 @@ import {
 } from '@nft/components'
 import type { Props as NFTCardProps } from '@nft/components/dist/Token/Card'
 import type { FormData } from '@nft/components/dist/Token/Form/Create'
-import { useSession } from '@nft/hooks'
+import { useConfig, useSession } from '@nft/hooks'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
+import { useEffect } from '@storybook/addons'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useMemo, useState } from 'react'
 import {
+  Config,
   FetchAccountDocument,
   FetchAccountQuery,
   useFetchAccountQuery,
@@ -75,7 +77,6 @@ export const Template: NextPage<
       walletConnect: boolean
       networkName: string
     }
-    activateUnlockableContent: boolean
     maxRoyalties?: number
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
@@ -85,7 +86,6 @@ export const Template: NextPage<
   explorer,
   uploadUrl,
   login,
-  activateUnlockableContent,
   traits,
   currentAccount,
   maxRoyalties = 30,
@@ -95,6 +95,8 @@ export const Template: NextPage<
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const { account, ready, signer } = useSession()
+  const configPromise = useConfig()
+  const [config, setConfig] = useState<Config>()
   const toast = useToast()
   const { data } = useFetchAccountQuery({
     variables: {
@@ -155,6 +157,11 @@ export const Template: NextPage<
     },
     [push, t, toast],
   )
+
+  useEffect(() => {
+    void configPromise.then(setConfig)
+    return () => setConfig(undefined)
+  }, [configPromise])
 
   if (restrictMintToVerifiedAccount && !creator.verified) {
     return (
@@ -233,8 +240,9 @@ export const Template: NextPage<
           onCreated={onCreated}
           onInputChange={setFormData}
           login={login}
-          activateUnlockableContent={activateUnlockableContent}
+          activateUnlockableContent={config?.hasUnlockableContent || false}
           maxRoyalties={maxRoyalties}
+          activateLazyMint={config?.hasLazyMint || false}
         />
       </Flex>
     </>
