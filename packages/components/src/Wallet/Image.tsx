@@ -26,7 +26,6 @@ const AccountImage: VFC<{
   const customTag = { Image: Image as any }
   return (
     <customTag.Image
-      ref={ref}
       src={image}
       alt={address}
       width={size || defaultSize}
