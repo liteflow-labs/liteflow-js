@@ -4,7 +4,7 @@
 
 #### Breaking Changes
 
-- `AssetForm` template does not require the `activateLazyMint` props anymore [](https://github.com/liteflow-labs/libraries/pull/)
+- `AssetForm` template does not require the `activateLazyMint` and `activateUnlockableContent` props anymore [#65](https://github.com/liteflow-labs/libraries/pull/65)
 
 #### Added
 
