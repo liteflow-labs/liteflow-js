@@ -42,13 +42,14 @@ type IProps = {
 
 const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
   const { t } = useTranslation('components')
-  const ListItem = (history: IProps['histories'][0]) => {
+  const ListItem = (history: IProps['histories'][0], i: number) => {
     switch (history.action) {
       case 'LISTING':
         invariant(history.unitPrice, 'unitPrice is required')
         return (
           <ListingListItem
             {...history}
+            key={i}
             currency={history.currency}
             unitPrice={history.unitPrice}
           />
@@ -60,6 +61,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
         return (
           <PurchaseListItem
             {...history}
+            key={i}
             currency={history.currency}
             unitPrice={history.unitPrice}
             toAddress={history.toAddress}
@@ -75,6 +77,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
           return (
             <MintListItem
               {...history}
+              key={i}
               blockExplorer={blockExplorer}
               toAddress={history.toAddress}
             />
@@ -83,13 +86,14 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
         return (
           <TransferListItem
             {...history}
+            key={i}
             toAddress={history.toAddress}
             blockExplorer={blockExplorer}
           />
         )
 
       case 'LAZYMINT':
-        return <LazyMintListItem {...history} />
+        return <LazyMintListItem {...history} key={i} />
     }
   }
   if (histories.length === 0)
@@ -98,7 +102,7 @@ const HistoryList: VFC<IProps> = ({ histories, blockExplorer }) => {
         {t('history.none')}
       </Text>
     )
-  return <List>{histories.map((history) => ListItem(history))}</List>
+  return <List>{histories.map((history, i) => ListItem(history, i))}</List>
 }
 
 export default HistoryList
