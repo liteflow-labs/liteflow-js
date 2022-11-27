@@ -37,7 +37,8 @@ const TokenMedia: VFC<
     setImageError(false)
   }, [image])
 
-  if (animationUrl)
+  if (animationUrl) {
+    const { objectFit, src, ...videoProps } = props as ImageProps
     return (
       <video
         src={animationUrl}
@@ -46,9 +47,10 @@ const TokenMedia: VFC<
         muted
         loop
         controls={controls}
-        {...(props as Omit<VideoHTMLAttributes<any>, 'src'>)}
+        {...(videoProps as Omit<VideoHTMLAttributes<any>, 'src'>)}
       />
     )
+  }
   if (image) {
     const rest = props as Omit<ImageProps, 'src'>
     if (imageError)
