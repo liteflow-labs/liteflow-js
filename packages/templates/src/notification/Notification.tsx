@@ -11,17 +11,18 @@ import {
   GetNotificationsQuery,
   useGetNotificationsQuery,
 } from '../graphql'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import { concatToQuery } from '../utils/concat'
 
 export type Props = {
-  address: string
+  currentAccount: string | null
 }
 
 export const server = (url: string): GetServerSideProps<Props> =>
   wrapServerSideProps<Props>(url, async (ctx, client) => {
     const address = ctx.user.address
-    if (!address) return { props: { address: '' } }
+    if (!address) return { props: { currentAccount: null } }
 
     const { data, error } = await client.query<GetNotificationsQuery>({
       query: GetNotificationsDocument,
@@ -34,23 +35,25 @@ export const server = (url: string): GetServerSideProps<Props> =>
     if (!data.notifications) return { notFound: true }
     return {
       props: {
-        address,
+        currentAccount: address,
       },
     }
   })
 
-export const Template: VFC<Props> = ({ address }) => {
+export const Template: VFC<Props> = ({ currentAccount }) => {
   const { t } = useTranslation('templates')
-  useLoginRedirect()
-  const { account } = useSession()
+  const { account, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
+  useLoginRedirect(ready)
   const [_, setCookies] = useCookies()
   const [loading, setLoading] = useState(false)
 
   const { data, fetchMore } = useGetNotificationsQuery({
     variables: {
       cursor: null,
-      address,
+      address: currentAccount || '',
     },
+    skip: !currentAccount,
   })
 
   const notifications = useMemo(() => data?.notifications?.nodes || [], [data])

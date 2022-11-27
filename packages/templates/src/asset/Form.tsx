@@ -33,6 +33,7 @@ import {
   useFetchAccountQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useLocalFileURL from '../hooks/useLocalFileURL'
 
 export type Props = {
@@ -94,7 +95,8 @@ export const Template: NextPage<
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  const { account, ready, signer } = useSession()
+  const { account, signer, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
   const configPromise = useConfig()
   const [config, setConfig] = useState<Config>()
   const toast = useToast()

@@ -25,8 +25,13 @@ import {
   FetchAccountVerificationStatusQueryVariables,
   useFetchAccountVerificationStatusQuery,
 } from '../graphql'
+import useEagerConnect from '../hooks/useEagerConnect'
 
-export const server = (url: string): GetServerSideProps =>
+export type Props = {
+  currentAccount: string | null
+}
+
+export const server = (url: string): GetServerSideProps<Props> =>
   wrapServerSideProps(url, async (context, client) => {
     const { data, error } = await client.query<
       FetchAccountVerificationStatusQuery,
@@ -39,16 +44,27 @@ export const server = (url: string): GetServerSideProps =>
     })
     if (error) throw error
     if (!data) throw new Error('data is falsy')
-    return { props: {} }
+    return {
+      props: {
+        currentAccount: context.user.address,
+      },
+    }
   })
 
-export const Template: NextPage<{
-  restrictMintToVerifiedAccount?: boolean
-  reportEmail?: string
-}> = ({ restrictMintToVerifiedAccount = false, reportEmail }) => {
+export const Template: NextPage<
+  Props & {
+    restrictMintToVerifiedAccount?: boolean
+    reportEmail?: string
+  }
+> = ({
+  currentAccount,
+  restrictMintToVerifiedAccount = false,
+  reportEmail,
+}) => {
   const { t } = useTranslation('templates')
   const { back } = useRouter()
-  const { account, ready } = useSession()
+  const { account, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
   const { data } = useFetchAccountVerificationStatusQuery({
     variables: {
       account: account?.toLowerCase() || '',

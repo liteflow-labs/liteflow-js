@@ -18,6 +18,7 @@ import React, { useCallback, useMemo, VFC } from 'react'
 import invariant from 'ts-invariant'
 import { CheckoutDocument, CheckoutQuery, useCheckoutQuery } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import {
   convertAsset,
@@ -29,6 +30,7 @@ import {
 export type Props = {
   offerId: string
   now: string
+  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -59,6 +61,7 @@ export const server = (url: string): GetServerSideProps<Props> =>
       props: {
         offerId,
         now: now.toJSON(),
+        currentAccount: ctx.user.address,
         meta: {
           title: t('offers.checkout.meta.title', data.offer.asset),
           description: t('offers.checkout.meta.description', {
@@ -87,12 +90,13 @@ export const Template: VFC<
       networkName: string
     }
   }
-> = ({ now, offerId, explorer, allowTopUp, login }) => {
+> = ({ now, offerId, explorer, allowTopUp, login, currentAccount }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
 
-  const { account, signer } = useSession()
+  const { account, signer, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 
@@ -103,7 +107,7 @@ export const Template: VFC<
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, ready)
 
   const offer = useMemo(() => data?.offer, [data])
   const asset = useMemo(() => offer?.asset, [offer])

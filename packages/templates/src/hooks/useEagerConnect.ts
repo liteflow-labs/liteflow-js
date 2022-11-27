@@ -1,7 +1,7 @@
 import { useWeb3React } from '@web3-react/core'
 import { useCallback, useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import { ISessionContext } from './useSession'
+import { ISessionContext } from '@nft/hooks/src/useSession'
 
 // Uniswap eager connect: https://github.com/Uniswap/uniswap-interface/blob/main/src/hooks/web3.ts#L15
 export default function useEagerConnect(

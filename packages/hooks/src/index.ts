@@ -10,7 +10,6 @@ import useConfig from './useConfig'
 import useCreateAuction from './useCreateAuction'
 import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
-import useEagerConnect from './useEagerConnect'
 import useInvitation from './useInvitation'
 import useIsLoggedIn from './useIsLoggedIn'
 import type { ISessionContext } from './useSession'
@@ -69,8 +68,6 @@ export {
    */
   /** @deprecated */
   useBalance,
-  /** @deprecated */
-  useEagerConnect,
   /** @deprecated */
   useActivateWallet,
   /** @deprecated */

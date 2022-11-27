@@ -28,7 +28,7 @@ import {
   TokenCard,
   wrapServerSideProps,
 } from '@nft/components'
-import { parsePrice, removeEmptyFromObject } from '@nft/hooks'
+import { parsePrice, removeEmptyFromObject, useSession } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -50,6 +50,7 @@ import {
   Uint256Filter,
   useFetchAllErc721And1155Query,
 } from '../graphql'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import usePaginate from '../hooks/usePaginate'
 import {
@@ -80,6 +81,7 @@ export type Props = {
   orderBy: AssetsOrderBy
   // Search
   search: string | null
+  currentAccount: string | null
 }
 
 type FormData = {
@@ -311,6 +313,7 @@ export const server = (
           currencyId: selectedCurrency?.id || null,
         },
         search,
+        currentAccount: ctx.user.address,
       },
     }
   })
@@ -330,9 +333,12 @@ export const Template: VFC<
   orderBy,
   filter,
   limits,
+  currentAccount,
 }) => {
   const { t } = useTranslation('templates')
   const date = useMemo(() => new Date(now), [now])
+  const { connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
   const { data, refetch } = useFetchAllErc721And1155Query({
     variables: {
       now: date,
@@ -342,7 +348,7 @@ export const Template: VFC<
       filter: queryFilter,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, ready)
 
   const [changePage, changeLimit, { loading: pageLoading }] = usePaginate()
 

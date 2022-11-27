@@ -14,6 +14,7 @@ import {
   FetchOnSaleAssetsQuery,
   useFetchOnSaleAssetsQuery,
 } from '../graphql'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import usePaginate from '../hooks/usePaginate'
 import {
@@ -35,6 +36,7 @@ export type Props = {
   offset: number
   // OrderBy
   orderBy: AssetsOrderBy
+  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -81,6 +83,7 @@ export const server = (
         page,
         offset,
         orderBy,
+        currentAccount: ctx.user.address,
         meta: {
           title: data.account?.name || userAddress,
           description: data.account?.description || '',
@@ -99,11 +102,13 @@ export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
   orderBy,
   userAddress,
   loginUrlForReferral,
+  currentAccount,
 }) => {
   const { t } = useTranslation('templates')
   const { pathname, replace, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer } = useSession()
+  const { account, signer, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useFetchOnSaleAssetsQuery({
@@ -115,7 +120,7 @@ export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, ready)
 
   const userAccount = useMemo(
     () => convertFullUser(data?.account || null, userAddress),

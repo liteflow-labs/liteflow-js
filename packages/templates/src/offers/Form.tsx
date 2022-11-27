@@ -34,6 +34,7 @@ import {
   useOfferForAssetQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import {
   convertAsset,
@@ -122,9 +123,10 @@ export const Template: VFC<
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  useLoginRedirect()
   const toast = useToast()
-  const { account, signer, ready } = useSession()
+  const { account, signer, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
+  useLoginRedirect(ready)
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 

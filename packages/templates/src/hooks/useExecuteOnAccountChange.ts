@@ -2,8 +2,11 @@ import { useSession } from '@nft/hooks'
 import { useEffect, useRef } from 'react'
 
 // Hook to execute the `reloadFn` when the `account` from `useSession` changes.
-export default function useExecuteOnAccountChange(reloadFn: () => any): void {
-  const { account, ready } = useSession()
+export default function useExecuteOnAccountChange(
+  reloadFn: () => any,
+  ready: boolean,
+): void {
+  const { account } = useSession()
   const ref = useRef(true)
   useEffect(() => {
     if (!ready) return

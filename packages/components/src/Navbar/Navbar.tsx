@@ -411,7 +411,7 @@ const Navbar: VFC<{
 }> = ({ allowTopUp, logo, router, login, multiLang, disableMinting }) => {
   const { t } = useTranslation('components')
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { account, deactivate, ready, signer } = useSession()
+  const { account, deactivate, signer } = useSession()
   const { asPath, query, push, isReady } = router
   const { register, setValue, handleSubmit } = useForm<FormData>()
   const [addFund, { loading: addingFund }] = useAddFund(signer)
@@ -422,7 +422,7 @@ const Navbar: VFC<{
       account: account?.toLowerCase() || '',
       lastNotification: new Date(lastNotification || 0),
     },
-    skip: !account || !ready,
+    skip: !account,
   })
 
   useEffect(() => {

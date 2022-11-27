@@ -28,6 +28,7 @@ import {
   useFetchHomePageQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useOrderById from '../hooks/useOrderById'
 import {
   convertAsset,
@@ -106,7 +107,8 @@ export const Template: FC<
   }
 > = ({ now, limit, featuredTokens, tokens, explorer, currentAccount }) => {
   const { t } = useTranslation('templates')
-  const { account, signer, ready } = useSession()
+  const { account, signer, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
   const toast = useToast()
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch, error } = useFetchHomePageQuery({

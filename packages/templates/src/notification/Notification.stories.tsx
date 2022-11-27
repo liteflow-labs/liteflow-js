@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Notification.Template> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  address: '0x0000000000000000000000000000000000000000',
+  currentAccount: '0x0000000000000000000000000000000000000000',
 }
 
 Default.parameters = {
@@ -24,7 +24,7 @@ Default.parameters = {
         request: {
           query: GetNotificationsDocument,
           variables: {
-            address: Default.args.address,
+            address: Default.args.currentAccount,
           },
         },
         result: require('./Notification.default.mock.json'),

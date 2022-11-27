@@ -26,6 +26,7 @@ import {
   useFeesForBidQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
+import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import {
   convertAsset,
@@ -37,6 +38,7 @@ import {
 export type Props = {
   assetId: string
   now: string
+  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -73,6 +75,7 @@ export const server = (url: string): GetServerSideProps<Props> =>
       props: {
         assetId,
         now: now.toJSON(),
+        currentAccount: ctx.user.address,
         meta: {
           title: t('offers.bid.meta.title', data.asset),
           description: t('offers.bid.meta.description', {
@@ -110,11 +113,13 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   login,
+  currentAccount,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer } = useSession()
+  const { account, signer, connectors } = useSession()
+  const ready = useEagerConnect(connectors, currentAccount)
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useBidOnAssetQuery({
@@ -123,7 +128,7 @@ export const Template: VFC<
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, ready)
 
   const fees = useFeesForBidQuery({
     variables: {

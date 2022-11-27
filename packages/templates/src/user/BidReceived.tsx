@@ -46,6 +46,7 @@ import {
   useFetchUserBidsReceivedQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
+import useEagerConnect from '../hooks/useEagerConnect'
 import usePaginate from '../hooks/usePaginate'
 import { convertBidFull, convertFullUser } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
@@ -58,6 +59,7 @@ export type Props = {
   limit: number
   offset: number
   orderBy: OfferOpenBuysOrderBy
+  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -102,6 +104,7 @@ export const server = (
         orderBy,
         userAddress,
         now: now.toJSON(),
+        currentAccount: context.user.address,
         meta: {
           title: data.account?.name || userAddress,
           description: data.account?.description || '',
@@ -129,10 +132,12 @@ export const Template: VFC<
   userAddress,
   loginUrlForReferral,
   explorer,
+  currentAccount,
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
-  const { account, signer } = useSession()
+  const { account, signer, connectors } = useSession()
+  useEagerConnect(connectors, currentAccount)
   const [changePage, changeLimit] = usePaginate()
   const [accept, { activeStep, transactionHash }] = useAcceptOffer(signer)
   const toast = useToast()

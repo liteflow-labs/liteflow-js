@@ -11,6 +11,7 @@ import { UnsupportedChainIdError } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
+import useEagerConnect from '../hooks/useEagerConnect'
 
 type Props = {
   email: boolean
@@ -30,7 +31,8 @@ export const Template: VFC<Props> = ({
   const { t } = useTranslation('templates')
   const { back, query, replace } = useRouter()
   const referral = Array.isArray(query.ref) ? query.ref[0] : query.ref
-  const { account, signer, error } = useSession()
+  const { account, signer, error, connectors } = useSession()
+  useEagerConnect(connectors, null)
   const { accept } = useInvitation(signer)
   const toast = useToast()
   const [errorFromLogin, setErrorFromLogin] = useState<Error>()
