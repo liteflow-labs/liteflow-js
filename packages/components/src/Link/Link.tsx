@@ -17,7 +17,7 @@ const Link = forwardRef<any, IProps>((props, ref) => {
     )
   }
   return (
-    <NextLink ref={ref} passHref href={href}>
+    <NextLink passHref href={href}>
       <ChakraLink ref={ref} {...rest}>
         {children}
       </ChakraLink>
