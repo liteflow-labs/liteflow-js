@@ -1,0 +1,36 @@
+---
+title: 'Configuration'
+layout: 'full'
+---
+
+## Configuration
+
+### Environmental variables
+
+| Variable                                | Description                                                             | Value example                             |
+| --------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------- |
+| NEXT_PUBLIC_ETHEREUM_PROVIDER           | URL of the web3 provider used                                           | https://eth-mainnet.g.alchemy.com/v2/XXXX |
+| NEXT_PUBLIC_BLOCKCHAIN_EXPLORER_URL     | URL of the blockchain explorer to use                                   | https://etherscan.io/                     |
+| NEXT_PUBLIC_BLOCKCHAIN_EXPLORER_NAME    | Name of the blockchain explorer to use                                  | Etherscan                                 |
+| NEXT_PUBLIC_MAGIC_API_KEY               | Magic.link API key if the email wallet is activated                     | pk_live_XXX                               |
+| NEXT_PUBLIC_FEATURED_TOKEN              | List of NFTs to highlight on the homepage (separated by a comma)        | 1-0x...-123...,1-0x...-456,1-0x...789     |
+| NEXT_PUBLIC_GRAPHQL_URL                 | Liteflow graphql endpoint                                               | https://api.acme.com/graphql              |
+| NEXT_PUBLIC_UPLOAD_URL                  | Liteflow upload API endpoint                                            | https://api.acme.com/uploadToIPFS         |
+| NEXT_PUBLIC_CHAIN_ID                    | Chain ID used for the application                                       | 1                                         |
+| NEXT_PUBLIC_NETWORK_NAME                | Name of the blockchain network                                          | Ethereum mainnet                          |
+| NEXT_PUBLIC_REPORT_EMAIL                | Email to use for report                                                 | report@acme.com                           |
+| NEXT_PUBLIC_HOME_TOKENS                 | List of tokens to display in the featured tokens (separated by a comma) | 1-0x...-123...,1-0x...-456,1-0x...789     |
+| NEXT_PUBLIC_BUGSNAG_API_KEY             | Key for Bugsnag to track errors                                         | xxxxxx                                    |
+| PINATA_GATEWAY                          | Pinata gateway used for pin files                                       | acme.mypinata.cloud                       |
+| NEXT_PUBLIC_OFFER_VALIDITY_IN_SECONDS   | Duration in second of a valid offer                                     | 2419200                                   |
+| NEXT_PUBLIC_AUCTION_VALIDITY_IN_SECONDS | Duration in second of a valid bid for an auction                        | 604800                                    |
+| NEXT_PUBLIC_BASE_URL                    | Base URL for your platform                                              | https://marketplace.acme.com              |
+| NEXT_PUBLIC_GA_MEASUREMENT_ID           | Google analytics ID                                                     | G-XXX                                     |
+
+[View the env example file](https://github.com/liteflow-labs/marketplace-template/blob/main/.env.example)
+
+### App configuration
+
+To configure behaviors and texts of your application, you can edit the file [App file](https://github.com/liteflow-labs/marketplace-template/blob/main/pages/_app.tsx) that contains the information for the footer, metadata, wallet connectors, and so on.
+
+You can also configure the page's templates in the different [pages](https://github.com/liteflow-labs/marketplace-template/tree/main/pages).

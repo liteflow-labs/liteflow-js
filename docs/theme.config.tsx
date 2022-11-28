@@ -57,6 +57,9 @@ const config: DocsThemeConfig = {
     prev: true,
     next: true,
   },
+  sidebar: {
+    defaultMenuCollapseLevel: 0,
+  },
   footer: {
     text: `${new Date().getFullYear()} © Liteflow`,
   },
