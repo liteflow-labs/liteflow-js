@@ -5,16 +5,15 @@ import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, VFC } from 'react'
 import { useGetAccountQuery } from '../graphql'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 
 export const Template: VFC<{
   uploadUrl: string
-}> = ({ uploadUrl }) => {
+  ready: boolean
+}> = ({ uploadUrl, ready }) => {
   const { t } = useTranslation('templates')
   const { push } = useRouter()
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, null)
+  const { account, signer } = useSession()
   useLoginRedirect(ready)
 
   const toast = useToast()

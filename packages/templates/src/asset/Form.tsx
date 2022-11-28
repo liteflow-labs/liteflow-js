@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import {
   Alert,
   AlertIcon,
@@ -33,7 +37,6 @@ import {
   useFetchAccountQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useLocalFileURL from '../hooks/useLocalFileURL'
 
 export type Props = {
@@ -72,15 +75,16 @@ export const Template: NextPage<
     }
     uploadUrl: string
     login: {
-      email: boolean
-      metamask: boolean
-      coinbase: boolean
-      walletConnect: boolean
+      email: EmailConnector
+      injected: InjectedConnector
+      walletConnect: WalletConnectConnector
+      coinbase: WalletLinkConnector
       networkName: string
     }
     maxRoyalties?: number
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
+    ready: boolean
   }
 > = ({
   multiple,
@@ -92,11 +96,11 @@ export const Template: NextPage<
   maxRoyalties = 30,
   restrictMintToVerifiedAccount = false,
   reportEmail,
+  ready,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
   const configPromise = useConfig()
   const [config, setConfig] = useState<Config>()
   const toast = useToast()

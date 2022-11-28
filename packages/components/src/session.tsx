@@ -1,10 +1,5 @@
 import { Signer } from '@ethersproject/abstract-signer'
-import {
-  ISessionContext,
-  SessionContext,
-  useAuthenticate,
-  useSigner,
-} from '@nft/hooks'
+import { SessionContext, useAuthenticate, useSigner } from '@nft/hooks'
 import { useWeb3React } from '@web3-react/core'
 import decode, { JwtPayload } from 'jwt-decode'
 import React, { FC, useCallback, useEffect, useMemo } from 'react'
@@ -40,11 +35,9 @@ export const currentAccount = (cookies: {
   return res.address
 }
 
-export type Props = {
-  connectors: ISessionContext['connectors']
-}
+export type Props = {}
 
-const Session: FC<Props> = ({ connectors, ...props }) => {
+const Session: FC<Props> = ({ ...props }) => {
   const ssr = typeof window === 'undefined'
   const { account, deactivate, error } = useWeb3React()
   const signer = useSigner()
@@ -120,7 +113,6 @@ const Session: FC<Props> = ({ connectors, ...props }) => {
         account: loggedInUser,
         error,
         signer,
-        connectors,
         deactivate: logout,
         authenticateWallet,
       }}

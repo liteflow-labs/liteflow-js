@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import {
   Box,
   Flex,
@@ -24,10 +28,10 @@ import WalletWalletConnect from '../Wallet/Connectors/WalletConnect'
 type Props = {
   isOpen: boolean
   onClose: () => void
-  email: boolean
-  metamask: boolean
-  coinbase: boolean
-  walletConnect: boolean
+  email?: EmailConnector
+  injected?: InjectedConnector
+  coinbase?: WalletLinkConnector
+  walletConnect?: WalletConnectConnector
   networkName: string
 }
 
@@ -36,7 +40,7 @@ const LoginModal: FC<Props> = ({
   onClose,
   email,
   coinbase,
-  metamask,
+  injected,
   walletConnect,
   networkName,
 }) => {
@@ -50,8 +54,8 @@ const LoginModal: FC<Props> = ({
   )
 
   const hasStandardWallet = useMemo(
-    () => metamask || coinbase || walletConnect,
-    [metamask, coinbase, walletConnect],
+    () => injected || coinbase || walletConnect,
+    [injected, coinbase, walletConnect],
   )
 
   useEffect(() => {
@@ -73,7 +77,7 @@ const LoginModal: FC<Props> = ({
             {t('modal.login.description')}
           </Text>
 
-          {email && <WalletEmail />}
+          {email && <WalletEmail connector={email} />}
           {email && hasStandardWallet && (
             <Box position="relative" mt={6} mb={2}>
               <Flex
@@ -111,7 +115,7 @@ const LoginModal: FC<Props> = ({
           )}
           {hasStandardWallet && (
             <Flex direction={{ base: 'column', md: 'row' }} gap={3}>
-              {metamask && (
+              {injected && (
                 <Stack
                   cursor="pointer"
                   w="full"
@@ -125,7 +129,10 @@ const LoginModal: FC<Props> = ({
                   }}
                   transition="box-shadow 0.3s ease-in-out"
                 >
-                  <WalletMetamask onError={setErrorFromLogin} />
+                  <WalletMetamask
+                    connector={injected}
+                    onError={setErrorFromLogin}
+                  />
                 </Stack>
               )}
               {coinbase && (
@@ -142,7 +149,10 @@ const LoginModal: FC<Props> = ({
                   }}
                   transition="box-shadow 0.3s ease-in-out"
                 >
-                  <WalletCoinbase onError={setErrorFromLogin} />
+                  <WalletCoinbase
+                    connector={coinbase}
+                    onError={setErrorFromLogin}
+                  />
                 </Stack>
               )}
               {walletConnect && (
@@ -159,7 +169,10 @@ const LoginModal: FC<Props> = ({
                   }}
                   transition="box-shadow 0.3s ease-in-out"
                 >
-                  <WalletWalletConnect onError={setErrorFromLogin} />
+                  <WalletWalletConnect
+                    connector={walletConnect}
+                    onError={setErrorFromLogin}
+                  />
                 </Stack>
               )}
             </Flex>

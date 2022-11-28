@@ -34,7 +34,6 @@ import {
   useOfferForAssetQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import {
   convertAsset,
@@ -112,6 +111,7 @@ export const Template: VFC<
     }
     offerValidity: number
     auctionValidity: number
+    ready: boolean
   }
 > = ({
   now,
@@ -120,12 +120,12 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   currentAccount,
+  ready,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
   useLoginRedirect(ready)
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)

@@ -1,8 +1,9 @@
-import { useSession } from '@nft/hooks'
+import { InjectedConnector } from '@web3-react/injected-connector'
 import React, { VFC } from 'react'
 import WalletBase from './_base'
 
 type Props = {
+  connector: InjectedConnector
   onError: (error?: Error) => void
   onAuthenticated?: () => void
 }
@@ -215,13 +216,11 @@ export const IconMetamask = (
   </svg>
 )
 
-const WalletMetamask: VFC<Props> = ({ onError, onAuthenticated }) => {
-  const {
-    connectors: { injected: connector },
-  } = useSession()
-  if (!connector)
-    throw new Error('injected connector is not initialized in the session')
-
+const WalletMetamask: VFC<Props> = ({
+  connector,
+  onError,
+  onAuthenticated,
+}) => {
   return (
     <WalletBase
       connector={connector}

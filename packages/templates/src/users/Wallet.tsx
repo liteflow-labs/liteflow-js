@@ -7,34 +7,29 @@ import {
   WalletCurrenciesDocument,
   WalletCurrenciesQuery,
 } from '../graphql'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 
-export type Props = {
-  currentAccount: string | null
-}
+export type Props = {}
 
 export const server = (url: string): GetServerSideProps<Props> =>
-  wrapServerSideProps<Props>(url, async (context, client) => {
+  wrapServerSideProps<Props>(url, async (_, client) => {
     const { data, error } = await client.query<WalletCurrenciesQuery>({
       query: WalletCurrenciesDocument,
     })
     if (error) throw error
     if (!data.currencies?.nodes) return { notFound: true }
     return {
-      props: {
-        currentAccount: context.user.address,
-      },
+      props: {},
     }
   })
 
 export const Template: VFC<
   Props & {
     networkName: string
+    ready: boolean
   }
-> = ({ networkName, currentAccount }) => {
-  const { account, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+> = ({ networkName, ready }) => {
+  const { account } = useSession()
   useLoginRedirect(ready)
   const { data } = useWalletCurrenciesQuery()
   const currencies = useMemo(() => data?.currencies?.nodes, [data])

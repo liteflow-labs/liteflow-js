@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { Box, Flex, Heading, Icon, Stack, useToast } from '@chakra-ui/react'
 import { BigNumber } from '@ethersproject/bignumber'
 import {
@@ -26,7 +30,6 @@ import {
   useFeesForBidQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import {
   convertAsset,
@@ -38,7 +41,6 @@ import {
 export type Props = {
   assetId: string
   now: string
-  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -75,7 +77,6 @@ export const server = (url: string): GetServerSideProps<Props> =>
       props: {
         assetId,
         now: now.toJSON(),
-        currentAccount: ctx.user.address,
         meta: {
           title: t('offers.bid.meta.title', data.asset),
           description: t('offers.bid.meta.description', {
@@ -98,12 +99,13 @@ export const Template: VFC<
     auctionValidity: number
     offerValidity: number
     login: {
-      email: boolean
-      metamask: boolean
-      coinbase: boolean
-      walletConnect: boolean
+      email: EmailConnector
+      injected: InjectedConnector
+      walletConnect: WalletConnectConnector
+      coinbase: WalletLinkConnector
       networkName: string
     }
+    ready: boolean
   }
 > = ({
   now,
@@ -113,13 +115,12 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   login,
-  currentAccount,
+  ready,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useBidOnAssetQuery({

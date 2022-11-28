@@ -1,8 +1,9 @@
-import { useSession } from '@nft/hooks'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import React, { VFC } from 'react'
 import WalletBase from './_base'
 
 type Props = {
+  connector: WalletConnectConnector
   onError: (error?: Error) => void
   onAuthenticated?: () => void
 }
@@ -16,15 +17,11 @@ export const IconWalletConnect = (
   </svg>
 )
 
-const WalletWalletConnect: VFC<Props> = ({ onError, onAuthenticated }) => {
-  const {
-    connectors: { walletConnect: connector },
-  } = useSession()
-  if (!connector)
-    throw new Error(
-      'wallet connect connector is not initialized in the session',
-    )
-
+const WalletWalletConnect: VFC<Props> = ({
+  connector,
+  onError,
+  onAuthenticated,
+}) => {
   return (
     <WalletBase
       connector={connector}

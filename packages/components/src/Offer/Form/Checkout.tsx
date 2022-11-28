@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import {
   Alert,
   AlertDescription,
@@ -50,10 +54,10 @@ type Props = {
   multiple?: boolean
   allowTopUp: boolean
   login: {
-    email: boolean
-    metamask: boolean
-    coinbase: boolean
-    walletConnect: boolean
+    email: EmailConnector
+    injected: InjectedConnector
+    walletConnect: WalletConnectConnector
+    coinbase: WalletLinkConnector
     networkName: string
   }
 }

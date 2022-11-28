@@ -36,7 +36,6 @@ import {
   useFetchUserTradeSoldQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import usePaginate from '../hooks/usePaginate'
 import { convertFullUser, convertTrade } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
@@ -49,7 +48,6 @@ export type Props = {
   limit: number
   offset: number
   orderBy: TradesOrderBy
-  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -94,7 +92,6 @@ export const server = (
         orderBy,
         userAddress,
         now: now.toJSON(),
-        currentAccount: context.user.address,
         meta: {
           title: data.account?.name || userAddress,
           description: data.account?.description || '',
@@ -122,13 +119,11 @@ export const Template: VFC<
   loginUrlForReferral,
   explorer,
   limits,
-  currentAccount,
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer, connectors } = useSession()
-  useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
 
   const date = useMemo(() => new Date(now), [now])
   const { data } = useFetchUserTradeSoldQuery({

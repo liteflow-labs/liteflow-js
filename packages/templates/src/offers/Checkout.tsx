@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { Box, Flex, Heading, Stack, useToast } from '@chakra-ui/react'
 import { BigNumber } from '@ethersproject/bignumber'
 import {
@@ -18,7 +22,6 @@ import React, { useCallback, useMemo, VFC } from 'react'
 import invariant from 'ts-invariant'
 import { CheckoutDocument, CheckoutQuery, useCheckoutQuery } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import {
   convertAsset,
@@ -30,7 +33,6 @@ import {
 export type Props = {
   offerId: string
   now: string
-  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -61,7 +63,6 @@ export const server = (url: string): GetServerSideProps<Props> =>
       props: {
         offerId,
         now: now.toJSON(),
-        currentAccount: ctx.user.address,
         meta: {
           title: t('offers.checkout.meta.title', data.offer.asset),
           description: t('offers.checkout.meta.description', {
@@ -83,20 +84,20 @@ export const Template: VFC<
     }
     allowTopUp: boolean
     login: {
-      email: boolean
-      metamask: boolean
-      coinbase: boolean
-      walletConnect: boolean
+      email: EmailConnector
+      injected: InjectedConnector
+      walletConnect: WalletConnectConnector
+      coinbase: WalletLinkConnector
       networkName: string
     }
+    ready: boolean
   }
-> = ({ now, offerId, explorer, allowTopUp, login, currentAccount }) => {
+> = ({ now, offerId, explorer, allowTopUp, login, ready }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
 
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 

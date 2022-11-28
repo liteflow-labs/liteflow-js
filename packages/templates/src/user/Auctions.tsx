@@ -37,7 +37,6 @@ import {
   useFetchUserAuctionsQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import usePaginate from '../hooks/usePaginate'
 import {
   convertAuctionFull,
@@ -54,7 +53,6 @@ export type Props = {
   limit: number
   offset: number
   orderBy: AuctionsOrderBy
-  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -99,7 +97,6 @@ export const server = (
         orderBy,
         userAddress,
         now: now.toJSON(),
-        currentAccount: context.user.address,
         meta: {
           title: data.account?.name || userAddress,
           description: data.account?.description || '',
@@ -127,12 +124,10 @@ export const Template: VFC<
   page,
   userAddress,
   loginUrlForReferral,
-  currentAccount,
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
-  const { account, signer, connectors } = useSession()
-  useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
   const [changePage, changeLimit] = usePaginate()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
   const toast = useToast()

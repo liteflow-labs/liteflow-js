@@ -14,7 +14,6 @@ import {
   FetchCreatedAssetsQuery,
   useFetchCreatedAssetsQuery,
 } from '../graphql'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useExecuteOnAccountChange from '../hooks/useExecuteOnAccountChange'
 import usePaginate from '../hooks/usePaginate'
 import {
@@ -36,7 +35,6 @@ export type Props = {
   offset: number
   // OrderBy
   orderBy: AssetsOrderBy
-  currentAccount: string | null
   meta: {
     title: string
     description: string
@@ -83,7 +81,6 @@ export const server = (
         page,
         offset,
         orderBy,
-        currentAccount: ctx.user.address,
         meta: {
           title: data.account?.name || userAddress,
           description: data.account?.description || '',
@@ -93,7 +90,9 @@ export const server = (
     }
   })
 
-export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
+export const Template: NextPage<
+  Omit<Props, 'meta'> & { limits: number[]; ready: boolean }
+> = ({
   now,
   limits,
   limit,
@@ -102,13 +101,12 @@ export const Template: NextPage<Omit<Props, 'meta'> & { limits: number[] }> = ({
   orderBy,
   userAddress,
   loginUrlForReferral,
-  currentAccount,
+  ready,
 }) => {
   const { t } = useTranslation('templates')
   const { pathname, replace, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useFetchCreatedAssetsQuery({

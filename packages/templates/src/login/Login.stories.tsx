@@ -13,9 +13,9 @@ const Template: ComponentStory<typeof Login.Template> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  email: false,
-  metamask: false,
-  walletConnect: false,
-  coinbase: false,
+  email: undefined,
+  injected: undefined,
+  walletConnect: undefined,
+  coinbase: undefined,
   networkName: 'Ropsten',
 }

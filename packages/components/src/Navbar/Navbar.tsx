@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { gql } from '@apollo/client'
 import {
   Accordion,
@@ -401,10 +405,10 @@ const Navbar: VFC<{
     events: MittEmitter<'routeChangeStart'>
   }
   login: {
-    email: boolean
-    metamask: boolean
-    coinbase: boolean
-    walletConnect: boolean
+    email: EmailConnector
+    injected: InjectedConnector
+    walletConnect: WalletConnectConnector
+    coinbase: WalletLinkConnector
     networkName: string
   }
   multiLang?: MultiLang

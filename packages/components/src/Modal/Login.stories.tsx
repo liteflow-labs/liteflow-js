@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import React, { ComponentMeta, ComponentStory } from '@storybook/react'
 import Login from './Login'
 
@@ -11,9 +15,12 @@ const Template: ComponentStory<typeof Login> = (args) => <Login {...args} />
 export const Default = Template.bind({})
 Default.args = {
   isOpen: true,
-  email: true,
-  metamask: true,
-  coinbase: true,
-  walletConnect: true,
-  networkName: 'BSC Mainnet',
+  email: new EmailConnector({
+    apiKey: 'xxx',
+    options: { network: { chainId: 1, rpcUrl: 'xxx' } },
+  }),
+  injected: new InjectedConnector({}),
+  coinbase: new WalletLinkConnector({ appName: 'xxx', url: 'xxx' }),
+  walletConnect: new WalletConnectConnector({}),
+  networkName: 'Mainnet',
 }

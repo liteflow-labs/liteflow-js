@@ -11,7 +11,6 @@ import {
   GetNotificationsQuery,
   useGetNotificationsQuery,
 } from '../graphql'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import { concatToQuery } from '../utils/concat'
 
@@ -40,10 +39,13 @@ export const server = (url: string): GetServerSideProps<Props> =>
     }
   })
 
-export const Template: VFC<Props> = ({ currentAccount }) => {
+export const Template: VFC<
+  Props & {
+    ready: boolean
+  }
+> = ({ currentAccount, ready }) => {
   const { t } = useTranslation('templates')
-  const { account, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account } = useSession()
   useLoginRedirect(ready)
   const [_, setCookies] = useCookies()
   const [loading, setLoading] = useState(false)

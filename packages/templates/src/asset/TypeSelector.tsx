@@ -25,7 +25,6 @@ import {
   FetchAccountVerificationStatusQueryVariables,
   useFetchAccountVerificationStatusQuery,
 } from '../graphql'
-import useEagerConnect from '../hooks/useEagerConnect'
 
 export type Props = {
   currentAccount: string | null
@@ -55,16 +54,12 @@ export const Template: NextPage<
   Props & {
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
+    ready: boolean
   }
-> = ({
-  currentAccount,
-  restrictMintToVerifiedAccount = false,
-  reportEmail,
-}) => {
+> = ({ restrictMintToVerifiedAccount = false, reportEmail, ready }) => {
   const { t } = useTranslation('templates')
   const { back } = useRouter()
-  const { account, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account } = useSession()
   const { data } = useFetchAccountVerificationStatusQuery({
     variables: {
       account: account?.toLowerCase() || '',

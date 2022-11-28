@@ -52,7 +52,6 @@ import {
   useFetchAssetQuery,
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
-import useEagerConnect from '../hooks/useEagerConnect'
 import useNow from '../hooks/useNow'
 import {
   convertAuctionFull,
@@ -140,11 +139,18 @@ export const Template: VFC<
       url: string
     }
     reportEmail: string
+    ready: boolean
   }
-> = ({ assetId, explorer, now: nowProp, reportEmail, currentAccount }) => {
+> = ({
+  assetId,
+  explorer,
+  now: nowProp,
+  reportEmail,
+  currentAccount,
+  ready,
+}) => {
   const { t } = useTranslation('templates')
-  const { account, signer, connectors } = useSession()
-  const ready = useEagerConnect(connectors, currentAccount)
+  const { account, signer } = useSession()
   const { query } = useRouter()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
   const [showPreview, setShowPreview] = useState(false)

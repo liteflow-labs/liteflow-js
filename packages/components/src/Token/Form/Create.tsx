@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import {
   Button,
   Checkbox,
@@ -49,10 +53,10 @@ type Props = {
   blockExplorer: BlockExplorer
   uploadUrl: string
   login: {
-    email: boolean
-    metamask: boolean
-    coinbase: boolean
-    walletConnect: boolean
+    email?: EmailConnector
+    injected?: InjectedConnector
+    coinbase?: WalletLinkConnector
+    walletConnect?: WalletConnectConnector
     networkName: string
   }
   activateUnlockableContent: boolean
