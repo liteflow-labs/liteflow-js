@@ -1,4 +1,4 @@
-# NFT Hooks
+# React Hooks
 
 ## Installation
 
