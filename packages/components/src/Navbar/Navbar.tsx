@@ -71,7 +71,7 @@ type MultiLang = {
 // Mobile navigation item
 const NavItemMobile: FC<HTMLAttributes<any> & { as?: As<any> | undefined }> = ({
   children,
-  as = 'a',
+  as = 'span',
   ...props
 }) => {
   return (
