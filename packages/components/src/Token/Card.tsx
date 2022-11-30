@@ -109,17 +109,15 @@ const NFTCard: VFC<Props> = ({
       </Flex>
       <Stack spacing={3} p={6}>
         <Link href={href}>
-          <a>
-            <Heading
-              as="h4"
-              variant="heading2"
-              color="brand.black"
-              title={asset.name}
-              isTruncated
-            >
-              {asset.name}
-            </Heading>
-          </a>
+          <Heading
+            as="h4"
+            variant="heading2"
+            color="brand.black"
+            title={asset.name}
+            isTruncated
+          >
+            {asset.name}
+          </Heading>
         </Link>
         <Avatar
           address={creator.address}

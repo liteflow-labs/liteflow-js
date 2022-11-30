@@ -32,18 +32,11 @@ const WalletBalanceList: VFC<IProps> = ({ account, currencies }) => {
           key={x.id}
           withSeparator={i < currenciesArr.length - 1}
           image={<Image src={x.image} width={40} height={40} />}
-          label={
-            <Flex
-              w="full"
-              direction={{ base: 'column', md: 'row' }}
-              align={{ md: 'center' }}
-              justify={{ md: 'space-between' }}
-            >
-              <span>{x.name}</span>
-              <Text as="span" color="brand.black" fontWeight="medium">
-                <WalletBalance account={account} currency={x} />
-              </Text>
-            </Flex>
+          label={x.name}
+          action={
+            <Text as="span" color="brand.black" fontWeight="medium">
+              <WalletBalance account={account} currency={x} />
+            </Text>
           }
         />
       ))}

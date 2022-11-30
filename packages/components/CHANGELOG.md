@@ -14,6 +14,12 @@
 
 #### Fixed
 
+- Fix issue with react key [#88](https://github.com/liteflow-labs/liteflow-js/pull/88)
+- Add missing ref to components [#88](https://github.com/liteflow-labs/liteflow-js/pull/88)
+- Fix double link on menu for mobile and cards [#88](https://github.com/liteflow-labs/liteflow-js/pull/88)
+- Remove invalid attribute for videos [#88](https://github.com/liteflow-labs/liteflow-js/pull/88)
+- Fix structure for wallet balances [#88](https://github.com/liteflow-labs/liteflow-js/pull/88)
+
 #### Security
 
 ## [v1.0.0-beta.8](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.8) - 2022-11-15
