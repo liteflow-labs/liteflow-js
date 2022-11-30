@@ -8,9 +8,11 @@ import { HiOutlineClipboard } from '@react-icons/all-files/hi/HiOutlineClipboard
 import useTranslation from 'next-translate/useTranslation'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
 import LoginModal from '../Modal/Login'
+import { Signer } from '@ethersproject/abstract-signer'
 
 type Props = {
   loginUrl: string
+  signer: Signer | undefined
   login: {
     email?: EmailConnector
     injected?: InjectedConnector
@@ -20,10 +22,10 @@ type Props = {
   }
 }
 
-const ReferralForm: VFC<Props> = ({ login, loginUrl }) => {
+const ReferralForm: VFC<Props> = ({ login, loginUrl, signer }) => {
   const { t } = useTranslation('components')
   const toast = useToast()
-  const { signer, account } = useSession()
+  const { account } = useSession()
   const { create, creating } = useInvitation(signer)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [url, setUrl] = useState<string>()

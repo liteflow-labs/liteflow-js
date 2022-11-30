@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import { useToast } from '@chakra-ui/react'
 import { Account, UserFormEdit } from '@nft/components'
 import { useSession } from '@nft/hooks'
@@ -9,11 +10,12 @@ import useLoginRedirect from '../hooks/useLoginRedirect'
 
 export const Template: VFC<{
   uploadUrl: string
+  signer: Signer | undefined
   ready: boolean
-}> = ({ uploadUrl, ready }) => {
+}> = ({ uploadUrl, signer, ready }) => {
   const { t } = useTranslation('templates')
   const { push } = useRouter()
-  const { account, signer } = useSession()
+  const { account } = useSession()
   useLoginRedirect(ready)
 
   const toast = useToast()

@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import {
   AspectRatio,
   Box,
@@ -140,6 +141,7 @@ export const Template: VFC<
     }
     reportEmail: string
     ready: boolean
+    signer: Signer | undefined
   }
 > = ({
   assetId,
@@ -148,9 +150,10 @@ export const Template: VFC<
   reportEmail,
   currentAccount,
   ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
-  const { account, signer } = useSession()
+  const { account } = useSession()
   const { query } = useRouter()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
   const [showPreview, setShowPreview] = useState(false)

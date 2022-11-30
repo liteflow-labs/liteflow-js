@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import {
   Button,
   Flex,
@@ -104,6 +105,7 @@ export const Template: FC<
       url: string
     }
     ready: boolean
+    signer: Signer | undefined
   }
 > = ({
   now,
@@ -113,9 +115,10 @@ export const Template: FC<
   explorer,
   currentAccount,
   ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
-  const { account, signer } = useSession()
+  const { account } = useSession()
   const toast = useToast()
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch, error } = useFetchHomePageQuery({

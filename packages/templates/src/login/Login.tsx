@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import { EmailConnector } from '@nft/email-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -22,6 +23,7 @@ type Props = {
   walletConnect: WalletConnectConnector
   coinbase: WalletLinkConnector
   networkName: string
+  signer: Signer | undefined
 }
 
 export const Template: VFC<Props> = ({
@@ -30,11 +32,12 @@ export const Template: VFC<Props> = ({
   injected,
   walletConnect,
   networkName,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, query, replace } = useRouter()
   const referral = Array.isArray(query.ref) ? query.ref[0] : query.ref
-  const { account, signer, error } = useSession()
+  const { account, error } = useSession()
   const { accept } = useInvitation(signer)
   const toast = useToast()
   const [errorFromLogin, setErrorFromLogin] = useState<Error>()

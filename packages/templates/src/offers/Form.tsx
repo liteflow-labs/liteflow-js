@@ -1,3 +1,4 @@
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import {
   Flex,
   FormControl,
@@ -112,6 +113,7 @@ export const Template: VFC<
     offerValidity: number
     auctionValidity: number
     ready: boolean
+    signer: (Signer & TypedDataSigner) | undefined
   }
 > = ({
   now,
@@ -121,11 +123,12 @@ export const Template: VFC<
   offerValidity,
   currentAccount,
   ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer } = useSession()
+  const { account } = useSession()
   useLoginRedirect(ready)
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)

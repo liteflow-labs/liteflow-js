@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import {
   Box,
   Flex,
@@ -104,6 +105,7 @@ export const server = (
 export const Template: VFC<
   Omit<Props, 'meta'> & {
     limits: number[]
+    signer: Signer | undefined
     explorer: {
       name: string
       url: string
@@ -119,11 +121,12 @@ export const Template: VFC<
   loginUrlForReferral,
   explorer,
   limits,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer } = useSession()
+  const { account } = useSession()
 
   const date = useMemo(() => new Date(now), [now])
   const { data } = useFetchUserTradeSoldQuery({

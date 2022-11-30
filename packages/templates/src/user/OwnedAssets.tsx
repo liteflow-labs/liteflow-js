@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import { Text } from '@chakra-ui/react'
 import { TokenGrid, wrapServerSideProps } from '@nft/components'
 import { useSession } from '@nft/hooks'
@@ -91,7 +92,11 @@ export const server = (
   })
 
 export const Template: NextPage<
-  Omit<Props, 'meta'> & { limits: number[]; ready: boolean }
+  Omit<Props, 'meta'> & {
+    limits: number[]
+    signer: Signer | undefined
+    ready: boolean
+  }
 > = ({
   now,
   limit,
@@ -102,11 +107,12 @@ export const Template: NextPage<
   userAddress,
   loginUrlForReferral,
   ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { pathname, replace, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer } = useSession()
+  const { account } = useSession()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useFetchOwnedAssetsQuery({

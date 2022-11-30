@@ -1,10 +1,9 @@
-import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
+import { Signer } from '@ethersproject/abstract-signer'
 import { createContext, useContext } from 'react'
 
 export type ISessionContext = {
   account?: string | null
   error?: Error
-  signer?: Signer & TypedDataSigner
   deactivate: () => void
   authenticateWallet: (signer: Signer) => Promise<void>
 }

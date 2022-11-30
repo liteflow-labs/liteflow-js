@@ -1,3 +1,4 @@
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { EmailConnector } from '@nft/email-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -106,6 +107,7 @@ export const Template: VFC<
       networkName: string
     }
     ready: boolean
+    signer: (Signer & TypedDataSigner) | undefined
   }
 > = ({
   now,
@@ -116,11 +118,12 @@ export const Template: VFC<
   offerValidity,
   login,
   ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer } = useSession()
+  const { account } = useSession()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useBidOnAssetQuery({

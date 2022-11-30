@@ -1,3 +1,4 @@
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { EmailConnector } from '@nft/email-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -85,6 +86,7 @@ export const Template: NextPage<
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
     ready: boolean
+    signer: (Signer & TypedDataSigner) | undefined
   }
 > = ({
   multiple,
@@ -97,10 +99,11 @@ export const Template: NextPage<
   restrictMintToVerifiedAccount = false,
   reportEmail,
   ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  const { account, signer } = useSession()
+  const { account } = useSession()
   const configPromise = useConfig()
   const [config, setConfig] = useState<Config>()
   const toast = useToast()

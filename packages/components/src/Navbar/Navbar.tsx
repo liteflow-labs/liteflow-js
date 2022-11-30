@@ -49,6 +49,7 @@ import Link from '../Link/Link'
 import LoginModal from '../Modal/Login'
 import Select from '../Select/Select'
 import AccountImage from '../Wallet/Image'
+import { Signer } from '@ethersproject/abstract-signer'
 
 gql`
   query NavbarAccount($account: Address!, $lastNotification: Datetime!) {
@@ -411,11 +412,20 @@ const Navbar: VFC<{
     coinbase: WalletLinkConnector
     networkName: string
   }
+  signer: Signer | undefined
   multiLang?: MultiLang
-}> = ({ allowTopUp, logo, router, login, multiLang, disableMinting }) => {
+}> = ({
+  allowTopUp,
+  logo,
+  router,
+  login,
+  multiLang,
+  disableMinting,
+  signer,
+}) => {
   const { t } = useTranslation('components')
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { account, deactivate, signer } = useSession()
+  const { account, deactivate } = useSession()
   const { asPath, query, push, isReady } = router
   const { register, setValue, handleSubmit } = useForm<FormData>()
   const [addFund, { loading: addingFund }] = useAddFund(signer)
