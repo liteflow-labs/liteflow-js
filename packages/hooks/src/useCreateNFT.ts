@@ -6,6 +6,7 @@ import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
 import { Standard } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
+import useConfig from './useConfig'
 import useIPFSUploader from './useIPFSUploader'
 import { convertTx } from './utils/transaction'
 
@@ -85,7 +86,6 @@ type createNftFn = (data: {
   amount?: number
   royalties?: number
   traits?: { type: string; value: string }[]
-  isLazyMint?: boolean
 }) => Promise<string>
 
 export default function useCreateNFT(
@@ -99,6 +99,7 @@ export default function useCreateNFT(
   },
 ] {
   const { sdk } = useContext(LiteflowContext)
+  const config = useConfig()
   const [transactionHash, setTransactionHash] = useState<string>()
   const [activeStep, setActiveProcess] = useState<CreateNftStep>(
     CreateNftStep.INITIAL,
@@ -167,8 +168,11 @@ export default function useCreateNFT(
       amount,
       royalties,
       traits,
-      isLazyMint,
     }) => {
+      invariant(
+        !isPrivate || (isPrivate && (await config).hasUnlockableContent),
+        ErrorMessages.FEATURE_DISABLED_UNLOCKABLE_CONTENT,
+      )
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
 
@@ -182,7 +186,7 @@ export default function useCreateNFT(
         })
 
         // lazy minting
-        if (isLazyMint) {
+        if ((await config).hasLazyMint) {
           const assetToCreate = {
             standard,
             creatorAddress: account.toLowerCase(),
@@ -274,7 +278,7 @@ export default function useCreateNFT(
         setTransactionHash(undefined)
       }
     },
-    [sdk, signer, pollOwnership, uploadMedia],
+    [sdk, signer, pollOwnership, uploadMedia, config],
   )
 
   return [createNft, { activeStep, transactionHash }]

@@ -27,7 +27,6 @@ export default function Component() {
       isAnimation: false, // set to true if content file is a video. Require to set preview
       isPrivate: false, // set to true if content is private. Require to set preview.
       // optional
-      isLazyMint: true, // mints the NFT using lazy minting
       amount: 1, // number of NFT to create. Require Standard.ERC1155
       royalties: 10, // royalty amount in percentage
       preview: azukiImagePreview, // preview in the case of private or animation content uploaded by user
@@ -86,7 +85,6 @@ useCreateNFT(
     preview?: File
     isAnimation: boolean
     isPrivate: boolean
-    isLazyMint: boolean
     amount?: number
     royalties?: number
     traits?: { type: string; value: string }[]
@@ -113,7 +111,6 @@ Arguments:
   preview?: File,                               // preview in the case of private or animation content uploaded by user
   isAnimation: boolean,                         // set to true if content file is a video. Require to set preview
   isPrivate: boolean,                           // set to true if content is private. Require to set preview.
-  isLazyMint: boolean,                          // set to true if you want the NFT to be lazy minted
   amount?: number,                              // number of NFT to create. Require Standard.ERC1155
   royalties?: number,                           // royalty amount in percentage
   traits?: { type: string, value: string }[]    // Array of traits associated to the NFT

@@ -131,7 +131,6 @@ const TokenFormCreate: FC<Props> = ({
         amount: multiple ? parseInt(data.amount) : 1,
         royalties: parseFloat(data.royalties),
         traits: [{ type: 'Category', value: data.category }],
-        isLazyMint: activateLazyMint,
       })
 
       onCreated(assetId)
