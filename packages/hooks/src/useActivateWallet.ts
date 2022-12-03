@@ -2,7 +2,6 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { useWeb3React } from '@web3-react/core'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { useCallback, useEffect, useState } from 'react'
-import useSession from './useSession'
 import useSigner from './useSigner'
 
 /**
@@ -21,9 +20,7 @@ export default function useActivateWallet(onAuthenticated?: () => void): {
 } {
   const { activate, error } = useWeb3React()
   const signer = useSigner()
-  const { authenticateWallet } = useSession()
 
-  const [authenticating, setAuthenticating] = useState(false)
   const [activatingConnector, setActivatingConnector] =
     useState<AbstractConnector | null>(null)
 
@@ -37,22 +34,8 @@ export default function useActivateWallet(onAuthenticated?: () => void): {
   useEffect(() => {
     if (!signer) return
     if (!activatingConnector) return
-    if (authenticating) return
-    setAuthenticating(true)
-    void authenticateWallet(signer)
-      .finally(() => {
-        setActivatingConnector(null)
-        setAuthenticating(false)
-      })
-      .then(onAuthenticated)
-  }, [
-    signer,
-    authenticateWallet,
-    activatingConnector,
-    authenticating,
-    setAuthenticating,
-    onAuthenticated,
-  ])
+    onAuthenticated && onAuthenticated()
+  }, [signer, activatingConnector, onAuthenticated])
 
   const activateWithConnector = useCallback(
     async (connector: AbstractConnector) => {
