@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { BackButton, Link, wrapServerSideProps } from '@nft/components'
+import { BackButton, Link } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
 import { IoImageOutline } from '@react-icons/all-files/io5/IoImageOutline'
@@ -25,6 +25,7 @@ import {
   FetchAccountVerificationStatusQueryVariables,
   useFetchAccountVerificationStatusQuery,
 } from '../graphql'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   currentAccount: string | null

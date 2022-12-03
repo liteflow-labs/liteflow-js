@@ -1,4 +1,4 @@
-import { Account, WalletAccount, wrapServerSideProps } from '@nft/components'
+import { Account, WalletAccount } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import React, { useMemo, VFC } from 'react'
@@ -7,6 +7,7 @@ import {
   WalletCurrenciesDocument,
   WalletCurrenciesQuery,
 } from '../graphql'
+import { wrapServerSideProps } from '../props'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 
 export type Props = {}

@@ -12,7 +12,6 @@ import {
   Price,
   TokenCard,
   UserAvatar,
-  wrapServerSideProps,
 } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
@@ -30,6 +29,7 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   offerId: string

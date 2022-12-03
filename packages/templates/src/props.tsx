@@ -9,7 +9,7 @@ import {
 } from '@apollo/client'
 import decode, { JwtPayload } from 'jwt-decode'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { COOKIE_JWT_TOKEN } from './session'
+import { COOKIE_JWT_TOKEN } from '@nft/components/src/session'
 
 type UserProp = {
   address: string | null
@@ -95,7 +95,7 @@ export function wrapServerSideProps<T extends { [key: string]: unknown }>(
   }
 }
 
-export function wrapServerSidePropsResult<T extends { [key: string]: unknown }>(
+function wrapServerSidePropsResult<T extends { [key: string]: unknown }>(
   context: GetServerSidePropsContextWithUser,
   client: ApolloClient<NormalizedCacheObject>,
   pageProps: GetServerSidePropsResult<T>,

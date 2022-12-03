@@ -1,6 +1,6 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { Text } from '@chakra-ui/react'
-import { TokenGrid, wrapServerSideProps } from '@nft/components'
+import { TokenGrid } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
@@ -26,6 +26,7 @@ import {
 } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   userAddress: string

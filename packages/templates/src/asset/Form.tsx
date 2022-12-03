@@ -14,13 +14,7 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react'
-import {
-  BackButton,
-  Link,
-  TokenCard,
-  TokenFormCreate,
-  wrapServerSideProps,
-} from '@nft/components'
+import { BackButton, Link, TokenCard, TokenFormCreate } from '@nft/components'
 import type { Props as NFTCardProps } from '@nft/components/dist/Token/Card'
 import type { FormData } from '@nft/components/dist/Token/Form/Create'
 import { useConfig, useSession } from '@nft/hooks'
@@ -39,6 +33,7 @@ import {
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
 import useLocalFileURL from '../hooks/useLocalFileURL'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   multiple: boolean

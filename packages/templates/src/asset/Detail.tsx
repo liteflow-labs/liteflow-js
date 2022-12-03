@@ -33,7 +33,6 @@ import {
   TokenMedia,
   TokenMetadata,
   TraitList,
-  wrapServerSideProps,
 } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { FaInfoCircle } from '@react-icons/all-files/fa/FaInfoCircle'
@@ -62,6 +61,7 @@ import {
   convertSaleFull,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   assetId: string

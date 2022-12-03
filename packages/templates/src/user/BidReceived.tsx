@@ -23,7 +23,6 @@ import {
   Pagination,
   Price,
   Select,
-  wrapServerSideProps,
 } from '@nft/components'
 import {
   AcceptOfferStep,
@@ -51,6 +50,7 @@ import usePaginate from '../hooks/usePaginate'
 import { convertBidFull, convertFullUser } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   userAddress: string

@@ -12,7 +12,6 @@ import {
   OfferFormBid,
   Price,
   TokenCard,
-  wrapServerSideProps,
 } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { HiOutlineClock } from '@react-icons/all-files/hi/HiOutlineClock'
@@ -38,6 +37,7 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   assetId: string

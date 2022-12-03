@@ -21,13 +21,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import {
-  Empty,
-  Pagination,
-  Select,
-  TokenCard,
-  wrapServerSideProps,
-} from '@nft/components'
+import { Empty, Pagination, Select, TokenCard } from '@nft/components'
 import { parsePrice, removeEmptyFromObject } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
@@ -58,6 +52,7 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   now: string

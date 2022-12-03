@@ -1,5 +1,5 @@
 import { Button, Heading, Icon, Stack, Text } from '@chakra-ui/react'
-import { Empty, Notification, wrapServerSideProps } from '@nft/components'
+import { Empty, Notification } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { FaBell } from '@react-icons/all-files/fa/FaBell'
 import { GetServerSideProps } from 'next'
@@ -13,6 +13,7 @@ import {
 } from '../graphql'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import { concatToQuery } from '../utils/concat'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   currentAccount: string | null

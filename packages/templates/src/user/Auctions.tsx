@@ -22,7 +22,6 @@ import {
   SaleAuctionAction,
   SaleAuctionStatus,
   Select,
-  wrapServerSideProps,
 } from '@nft/components'
 import { dateFromNow, formatError, useIsLoggedIn, useSession } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
@@ -46,6 +45,7 @@ import {
 } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   userAddress: string

@@ -9,13 +9,7 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react'
-import {
-  Link,
-  Slider,
-  TokenCard,
-  TokenHeader,
-  wrapServerSideProps,
-} from '@nft/components'
+import { Link, Slider, TokenCard, TokenHeader } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { HiArrowNarrowRight } from '@react-icons/all-files/hi/HiArrowNarrowRight'
 import { GetServerSideProps } from 'next'
@@ -41,6 +35,7 @@ import {
   convertSaleFull,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   now: string

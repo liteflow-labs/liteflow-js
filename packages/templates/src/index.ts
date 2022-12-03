@@ -20,6 +20,7 @@ import * as UserTradePurchased from './user/TradePurchased'
 import * as UserTradeSold from './user/TradeSold'
 import * as UserForm from './users/Form'
 import * as UserWallet from './users/Wallet'
+export * from './props'
 
 export {
   AssetDetail,

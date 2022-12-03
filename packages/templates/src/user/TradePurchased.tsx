@@ -14,14 +14,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import {
-  Image,
-  Link,
-  Pagination,
-  Price,
-  Select,
-  wrapServerSideProps,
-} from '@nft/components'
+import { Image, Link, Pagination, Price, Select } from '@nft/components'
 import { dateFromNow, formatAddress, useSession } from '@nft/hooks'
 import { HiExternalLink } from '@react-icons/all-files/hi/HiExternalLink'
 import { GetServerSideProps } from 'next'
@@ -41,6 +34,7 @@ import usePaginate from '../hooks/usePaginate'
 import { convertFullUser, convertTrade } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   userAddress: string

@@ -15,7 +15,6 @@ import {
   SaleAuctionForm,
   SaleDirectForm,
   TokenCard,
-  wrapServerSideProps,
 } from '@nft/components'
 import { useSession } from '@nft/hooks'
 import { AiOutlineDollarCircle } from '@react-icons/all-files/ai/AiOutlineDollarCircle'
@@ -42,6 +41,7 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
 
 export type Props = {
   assetId: string
