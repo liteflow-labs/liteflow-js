@@ -9,7 +9,8 @@ import {
 } from '@apollo/client'
 import decode, { JwtPayload } from 'jwt-decode'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { COOKIE_JWT_TOKEN } from '@nft/components/src/session'
+
+const COOKIE_JWT_TOKEN = 'jwt-token'
 
 type UserProp = {
   address: string | null
