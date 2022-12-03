@@ -3,7 +3,6 @@ import BugsnagPluginReact from '@bugsnag/plugin-react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Dict } from '@chakra-ui/utils'
 import React, { ComponentType, Fragment, PropsWithChildren } from 'react'
-import Session from './session'
 
 type Props = PropsWithChildren<{
   theme: Dict
@@ -14,7 +13,6 @@ export default function LiteflowNFTApp({
   theme,
   bugsnagAPIKey,
   children,
-  ...sessionProps
 }: Props): JSX.Element {
   if (bugsnagAPIKey) {
     Bugsnag.start({
@@ -28,9 +26,7 @@ export default function LiteflowNFTApp({
 
   return (
     <ErrorBoundary>
-      <ChakraProvider theme={theme}>
-        <Session {...sessionProps}>{children}</Session>
-      </ChakraProvider>
+      <ChakraProvider theme={theme}>{children}</ChakraProvider>
     </ErrorBoundary>
   )
 }

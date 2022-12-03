@@ -30,7 +30,6 @@ import {
   formatError,
   useCancelOffer,
   useIsLoggedIn,
-  useSession,
 } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
@@ -50,6 +49,7 @@ import { convertFullUser, convertSaleFull } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   userAddress: string
@@ -134,7 +134,7 @@ export const Template: VFC<
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const [changePage, changeLimit] = usePaginate()
   const [cancel, { activeStep, transactionHash }] = useCancelOffer(signer)
   const toast = useToast()

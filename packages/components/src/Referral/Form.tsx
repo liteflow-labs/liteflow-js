@@ -3,12 +3,13 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { Button, Icon, Text, useDisclosure, useToast } from '@chakra-ui/react'
-import { formatError, useInvitation, useSession } from '@nft/hooks'
+import { formatError, useInvitation } from '@nft/hooks'
 import { HiOutlineClipboard } from '@react-icons/all-files/hi/HiOutlineClipboard'
 import useTranslation from 'next-translate/useTranslation'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
 import LoginModal from '../Modal/Login'
 import { Signer } from '@ethersproject/abstract-signer'
+import { useWeb3React } from '@web3-react/core'
 
 type Props = {
   loginUrl: string
@@ -25,7 +26,7 @@ type Props = {
 const ReferralForm: VFC<Props> = ({ login, loginUrl, signer }) => {
   const { t } = useTranslation('components')
   const toast = useToast()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const { create, creating } = useInvitation(signer)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [url, setUrl] = useState<string>()

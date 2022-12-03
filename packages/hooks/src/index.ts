@@ -12,8 +12,6 @@ import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
 import useInvitation from './useInvitation'
 import useIsLoggedIn from './useIsLoggedIn'
-import type { ISessionContext } from './useSession'
-import useSession from './useSession'
 import useSigner from './useSigner'
 import useUpdateAccount from './useUpdateAccount'
 import useVerifyAccount from './useVerifyAccount'
@@ -32,7 +30,6 @@ import { removeEmptyFromObject } from './utils/removeEmptyFromObject'
 
 export { LiteflowProvider } from './context'
 export type { LiteflowProviderProps } from './context'
-export { SessionContext } from './useSession'
 export {
   /**
    * Stable
@@ -71,8 +68,6 @@ export {
   /** @deprecated */
   useActivateWallet,
   /** @deprecated */
-  useSession,
-  /** @deprecated */
   useSigner,
   /** @deprecated */
   useIsLoggedIn,
@@ -92,4 +87,3 @@ export {
   parsePrice,
   formatError,
 }
-export type { ISessionContext }

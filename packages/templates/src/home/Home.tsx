@@ -10,7 +10,6 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { Link, Slider, TokenCard, TokenHeader } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { HiArrowNarrowRight } from '@react-icons/all-files/hi/HiArrowNarrowRight'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
@@ -36,6 +35,7 @@ import {
   convertUser,
 } from '../utils/convert'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   now: string
@@ -113,7 +113,7 @@ export const Template: FC<
   signer,
 }) => {
   const { t } = useTranslation('templates')
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const toast = useToast()
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch, error } = useFetchHomePageQuery({

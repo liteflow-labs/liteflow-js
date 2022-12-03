@@ -16,7 +16,6 @@ import {
   SaleDirectForm,
   TokenCard,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { AiOutlineDollarCircle } from '@react-icons/all-files/ai/AiOutlineDollarCircle'
 import { HiOutlineClock } from '@react-icons/all-files/hi/HiOutlineClock'
 import { GetServerSideProps } from 'next'
@@ -42,6 +41,7 @@ import {
   convertUser,
 } from '../utils/convert'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   assetId: string
@@ -128,7 +128,7 @@ export const Template: VFC<
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   useLoginRedirect(ready)
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)

@@ -2,25 +2,14 @@ import { EmailConnector } from '@nft/email-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import { SessionContext } from '@nft/hooks'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { withReactContext } from 'storybook-react-context'
 import { FetchAccountDocument } from '../graphql'
 import * as AssetForm from './Form'
 
 export default {
   title: 'Pages/Asset/Form',
   component: AssetForm.Template,
-  decorators: [
-    withReactContext({
-      Context: SessionContext,
-      initialState: {
-        account: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
-        ready: true,
-      },
-    }),
-  ],
   parameters: {
     apolloClient: {
       mocks: [

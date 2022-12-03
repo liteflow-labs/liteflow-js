@@ -1,6 +1,5 @@
 import { Button, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { Empty, Notification } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { FaBell } from '@react-icons/all-files/fa/FaBell'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
@@ -14,6 +13,7 @@ import {
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import { concatToQuery } from '../utils/concat'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   currentAccount: string | null
@@ -46,7 +46,7 @@ export const Template: VFC<
   }
 > = ({ currentAccount, ready }) => {
   const { t } = useTranslation('templates')
-  const { account } = useSession()
+  const { account } = useWeb3React()
   useLoginRedirect(ready)
   const [_, setCookies] = useCookies()
   const [loading, setLoading] = useState(false)

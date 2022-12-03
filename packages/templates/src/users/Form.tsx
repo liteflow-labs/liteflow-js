@@ -1,12 +1,12 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { useToast } from '@chakra-ui/react'
 import { Account, UserFormEdit } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useCallback, VFC } from 'react'
 import { useGetAccountQuery } from '../graphql'
 import useLoginRedirect from '../hooks/useLoginRedirect'
+import { useWeb3React } from '@web3-react/core'
 
 export const Template: VFC<{
   uploadUrl: string
@@ -15,7 +15,7 @@ export const Template: VFC<{
 }> = ({ uploadUrl, signer, ready }) => {
   const { t } = useTranslation('templates')
   const { push } = useRouter()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   useLoginRedirect(ready)
 
   const toast = useToast()

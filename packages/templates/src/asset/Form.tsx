@@ -17,9 +17,9 @@ import {
 import { BackButton, Link, TokenCard, TokenFormCreate } from '@nft/components'
 import type { Props as NFTCardProps } from '@nft/components/dist/Token/Card'
 import type { FormData } from '@nft/components/dist/Token/Form/Create'
-import { useConfig, useSession } from '@nft/hooks'
+import { useConfig } from '@nft/hooks'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
-import { useEffect } from '@storybook/addons'
+import { useEffect } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -34,6 +34,7 @@ import {
 import useBlockExplorer from '../hooks/useBlockExplorer'
 import useLocalFileURL from '../hooks/useLocalFileURL'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   multiple: boolean
@@ -98,7 +99,7 @@ export const Template: NextPage<
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const configPromise = useConfig()
   const [config, setConfig] = useState<Config>()
   const toast = useToast()

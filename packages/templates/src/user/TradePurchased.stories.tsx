@@ -1,7 +1,5 @@
-import { SessionContext } from '@nft/hooks'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { withReactContext } from 'storybook-react-context'
 import {
   FetchUserTradePurchasedDocument,
   FetchUserTradePurchasedQueryVariables,
@@ -11,15 +9,6 @@ import * as UserTradePurchased from './TradePurchased'
 export default {
   title: 'Pages/User/TradePurchased',
   component: UserTradePurchased.Template,
-  decorators: [
-    withReactContext({
-      Context: SessionContext,
-      initialState: {
-        account: '0x6da89d36ba7cd6c371629b0724c2e17abf4049ee',
-        ready: true,
-      },
-    }),
-  ],
 } as ComponentMeta<typeof UserTradePurchased.Template>
 
 const Template: ComponentStory<typeof UserTradePurchased.Template> = (args) => (

@@ -34,7 +34,6 @@ import {
   TokenMetadata,
   TraitList,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { FaInfoCircle } from '@react-icons/all-files/fa/FaInfoCircle'
 import { HiOutlineDotsHorizontal } from '@react-icons/all-files/hi/HiOutlineDotsHorizontal'
 import { HiOutlineExternalLink } from '@react-icons/all-files/hi/HiOutlineExternalLink'
@@ -62,6 +61,7 @@ import {
   convertUser,
 } from '../utils/convert'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   assetId: string
@@ -153,7 +153,7 @@ export const Template: VFC<
   signer,
 }) => {
   const { t } = useTranslation('templates')
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const { query } = useRouter()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
   const [showPreview, setShowPreview] = useState(false)

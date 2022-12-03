@@ -13,7 +13,6 @@ import {
   TokenCard,
   UserAvatar,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import getT from 'next-translate/getT'
 import useTranslation from 'next-translate/useTranslation'
@@ -30,6 +29,7 @@ import {
   convertUser,
 } from '../utils/convert'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   offerId: string
@@ -99,7 +99,7 @@ export const Template: VFC<
   const { back, push } = useRouter()
   const toast = useToast()
 
-  const { account } = useSession()
+  const { account } = useWeb3React()
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 

@@ -1,7 +1,6 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { Text } from '@chakra-ui/react'
 import { TokenGrid } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -27,6 +26,7 @@ import {
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   userAddress: string
@@ -113,7 +113,7 @@ export const Template: NextPage<
   const { t } = useTranslation('templates')
   const { pathname, replace, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account } = useSession()
+  const { account } = useWeb3React()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useFetchOnSaleAssetsQuery({

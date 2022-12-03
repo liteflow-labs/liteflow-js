@@ -1,4 +1,4 @@
-import { useSession } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { UrlObject } from 'url'
@@ -12,7 +12,7 @@ export default function useLoginRedirect(
   url?: UrlObject,
 ): void {
   const { replace, asPath } = useRouter()
-  const { account } = useSession()
+  const { account } = useWeb3React()
 
   useEffect(() => {
     if (!ready) return

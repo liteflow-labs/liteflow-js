@@ -10,10 +10,10 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { BackButton, Link } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
 import { IoImageOutline } from '@react-icons/all-files/io5/IoImageOutline'
 import { IoImagesOutline } from '@react-icons/all-files/io5/IoImagesOutline'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -60,7 +60,7 @@ export const Template: NextPage<
 > = ({ restrictMintToVerifiedAccount = false, reportEmail, ready }) => {
   const { t } = useTranslation('templates')
   const { back } = useRouter()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const { data } = useFetchAccountVerificationStatusQuery({
     variables: {
       account: account?.toLowerCase() || '',

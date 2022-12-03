@@ -15,7 +15,7 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { Image, Link, Pagination, Price, Select } from '@nft/components'
-import { dateFromNow, formatAddress, useSession } from '@nft/hooks'
+import { dateFromNow, formatAddress } from '@nft/hooks'
 import { HiExternalLink } from '@react-icons/all-files/hi/HiExternalLink'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
@@ -35,6 +35,7 @@ import { convertFullUser, convertTrade } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
 import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   userAddress: string
@@ -120,7 +121,7 @@ export const Template: VFC<
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 
   const date = useMemo(() => new Date(now), [now])
