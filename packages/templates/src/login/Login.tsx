@@ -19,10 +19,10 @@ import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState, VFC } from 'react'
 
 type Props = {
-  email: EmailConnector
-  injected: InjectedConnector
-  walletConnect: WalletConnectConnector
-  coinbase: WalletLinkConnector
+  email?: EmailConnector
+  injected?: InjectedConnector
+  walletConnect?: WalletConnectConnector
+  coinbase?: WalletLinkConnector
   networkName: string
   signer: Signer | undefined
 }

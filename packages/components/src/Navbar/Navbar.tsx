@@ -407,10 +407,10 @@ const Navbar: VFC<{
     events: MittEmitter<'routeChangeStart'>
   }
   login: {
-    email: EmailConnector
-    injected: InjectedConnector
-    walletConnect: WalletConnectConnector
-    coinbase: WalletLinkConnector
+    email?: EmailConnector
+    injected?: InjectedConnector
+    walletConnect?: WalletConnectConnector
+    coinbase?: WalletLinkConnector
     networkName: string
   }
   signer: Signer | undefined

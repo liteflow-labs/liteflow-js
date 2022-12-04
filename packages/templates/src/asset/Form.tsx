@@ -72,10 +72,10 @@ export const Template: NextPage<
     }
     uploadUrl: string
     login: {
-      email: EmailConnector
-      injected: InjectedConnector
-      walletConnect: WalletConnectConnector
-      coinbase: WalletLinkConnector
+      email?: EmailConnector
+      injected?: InjectedConnector
+      walletConnect?: WalletConnectConnector
+      coinbase?: WalletLinkConnector
       networkName: string
     }
     maxRoyalties?: number

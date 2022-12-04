@@ -85,10 +85,10 @@ export const Template: VFC<
     }
     allowTopUp: boolean
     login: {
-      email: EmailConnector
-      injected: InjectedConnector
-      walletConnect: WalletConnectConnector
-      coinbase: WalletLinkConnector
+      email?: EmailConnector
+      injected?: InjectedConnector
+      walletConnect?: WalletConnectConnector
+      coinbase?: WalletLinkConnector
       networkName: string
     }
     ready: boolean

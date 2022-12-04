@@ -100,10 +100,10 @@ export const Template: VFC<
     auctionValidity: number
     offerValidity: number
     login: {
-      email: EmailConnector
-      injected: InjectedConnector
-      walletConnect: WalletConnectConnector
-      coinbase: WalletLinkConnector
+      email?: EmailConnector
+      injected?: InjectedConnector
+      walletConnect?: WalletConnectConnector
+      coinbase?: WalletLinkConnector
       networkName: string
     }
     ready: boolean
