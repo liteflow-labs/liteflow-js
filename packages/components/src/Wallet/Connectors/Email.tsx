@@ -8,23 +8,26 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { useActivateWallet } from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { AbstractConnector } from '@web3-react/abstract-connector'
 
 type Props = {
   connector: EmailConnector
-  onAuthenticated?: () => void
+  activate: (
+    connector: AbstractConnector,
+    onError?: ((error: Error) => void) | undefined,
+    throwErrors?: boolean | undefined,
+  ) => Promise<void>
 }
 
 type FormData = {
   email: string
 }
 
-const WalletEmail: FC<Props> = ({ connector, onAuthenticated }) => {
+const WalletEmail: FC<Props> = ({ connector, activate }) => {
   const { t } = useTranslation('components')
-  const { activate } = useActivateWallet(onAuthenticated)
 
   const {
     register,
@@ -33,7 +36,7 @@ const WalletEmail: FC<Props> = ({ connector, onAuthenticated }) => {
   } = useForm<FormData>()
 
   const handle = handleSubmit(async (data) => {
-    await activate(connector.withEmail(data.email))
+    await activate(connector.withEmail(data.email), undefined, true)
   })
 
   return (

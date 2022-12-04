@@ -1,6 +1,5 @@
 import useAcceptAuction, { AcceptAuctionStep } from './useAcceptAuction'
 import useAcceptOffer, { AcceptOfferStep } from './useAcceptOffer'
-import useActivateWallet from './useActivateWallet'
 import useAddFund from './useAddFund'
 import useAuctionStatus from './useAuctionStatus'
 import useAuthenticate from './useAuthenticate'
@@ -12,7 +11,6 @@ import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
 import useInvitation from './useInvitation'
 import useIsLoggedIn from './useIsLoggedIn'
-import useSigner from './useSigner'
 import useUpdateAccount from './useUpdateAccount'
 import useVerifyAccount from './useVerifyAccount'
 import { isSameAddress } from './utils/address'
@@ -65,10 +63,6 @@ export {
    */
   /** @deprecated */
   useBalance,
-  /** @deprecated */
-  useActivateWallet,
-  /** @deprecated */
-  useSigner,
   /** @deprecated */
   useIsLoggedIn,
   /**

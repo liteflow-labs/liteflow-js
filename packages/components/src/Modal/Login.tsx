@@ -44,7 +44,7 @@ const LoginModal: FC<Props> = ({
   networkName,
 }) => {
   const { t } = useTranslation('components')
-  const { account, error } = useWeb3React()
+  const { account, error, activate } = useWeb3React()
   const [errorFromLogin, setErrorFromLogin] = useState<Error>()
 
   const invalidNetwork = useMemo(
@@ -76,7 +76,7 @@ const LoginModal: FC<Props> = ({
             {t('modal.login.description')}
           </Text>
 
-          {email && <WalletEmail connector={email} />}
+          {email && <WalletEmail connector={email} activate={activate} />}
           {email && hasStandardWallet && (
             <Box position="relative" mt={6} mb={2}>
               <Flex
@@ -130,6 +130,7 @@ const LoginModal: FC<Props> = ({
                 >
                   <WalletMetamask
                     connector={injected}
+                    activate={activate}
                     onError={setErrorFromLogin}
                   />
                 </Stack>
@@ -149,6 +150,7 @@ const LoginModal: FC<Props> = ({
                   transition="box-shadow 0.3s ease-in-out"
                 >
                   <WalletCoinbase
+                    activate={activate}
                     connector={coinbase}
                     onError={setErrorFromLogin}
                   />
@@ -169,6 +171,7 @@ const LoginModal: FC<Props> = ({
                   transition="box-shadow 0.3s ease-in-out"
                 >
                   <WalletWalletConnect
+                    activate={activate}
                     connector={walletConnect}
                     onError={setErrorFromLogin}
                   />

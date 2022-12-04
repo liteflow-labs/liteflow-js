@@ -1,3 +1,4 @@
+import { AbstractConnector } from '@web3-react/abstract-connector'
 import { Signer } from '@ethersproject/abstract-signer'
 import { EmailConnector } from '@nft/email-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
@@ -37,7 +38,7 @@ export const Template: VFC<Props> = ({
   const { t } = useTranslation('templates')
   const { back, query, replace } = useRouter()
   const referral = Array.isArray(query.ref) ? query.ref[0] : query.ref
-  const { account, error } = useWeb3React()
+  const { account, error, activate } = useWeb3React()
   const { accept } = useInvitation(signer)
   const toast = useToast()
   const [errorFromLogin, setErrorFromLogin] = useState<Error>()
@@ -47,22 +48,30 @@ export const Template: VFC<Props> = ({
     [errorFromLogin],
   )
 
-  const handleAuthenticated = useCallback(async () => {
-    if (!referral) return
-    try {
-      await accept(referral)
-      toast({
-        title: t('login.successes.invitation'),
-        status: 'success',
-      })
-    } catch (error) {
-      console.warn(error)
-      toast({
-        title: t('login.errors.invitation'),
-        status: 'warning',
-      })
-    }
-  }, [accept, referral, t, toast])
+  const handleAuthenticated = useCallback(
+    async (
+      connector: AbstractConnector,
+      onError?: (error: Error) => void,
+      throwErrors?: boolean,
+    ) => {
+      try {
+        await activate(connector, onError, throwErrors)
+        if (!referral) return
+        await accept(referral)
+        toast({
+          title: t('login.successes.invitation'),
+          status: 'success',
+        })
+      } catch (error) {
+        console.warn(error)
+        toast({
+          title: t('login.errors.invitation'),
+          status: 'warning',
+        })
+      }
+    },
+    [accept, referral, t, toast, activate],
+  )
 
   const redirect = useCallback(() => {
     if (query.redirectTo && !Array.isArray(query.redirectTo))
@@ -106,10 +115,7 @@ export const Template: VFC<Props> = ({
         justify="center"
       >
         {email && (
-          <EmailComponent
-            connector={email}
-            onAuthenticated={handleAuthenticated}
-          />
+          <EmailComponent connector={email} activate={handleAuthenticated} />
         )}
 
         {email && hasStandardWallet && (
@@ -166,7 +172,7 @@ export const Template: VFC<Props> = ({
                 <MetamaskComponent
                   connector={injected}
                   onError={setErrorFromLogin}
-                  onAuthenticated={handleAuthenticated}
+                  activate={handleAuthenticated}
                 />
               </Stack>
             )}
@@ -187,7 +193,7 @@ export const Template: VFC<Props> = ({
                 <CoinbaseComponent
                   connector={coinbase}
                   onError={setErrorFromLogin}
-                  onAuthenticated={handleAuthenticated}
+                  activate={handleAuthenticated}
                 />
               </Stack>
             )}
@@ -208,7 +214,7 @@ export const Template: VFC<Props> = ({
                 <WalletConnectComponent
                   connector={walletConnect}
                   onError={setErrorFromLogin}
-                  onAuthenticated={handleAuthenticated}
+                  activate={activate}
                 />
               </Stack>
             )}
