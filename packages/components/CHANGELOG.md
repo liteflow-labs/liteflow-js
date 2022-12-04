@@ -4,13 +4,29 @@
 
 #### Breaking Changes
 
+- Components with login feature accept connectors instead of booleans [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+- Components requiring the user account now require an optional `signer` in props [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+- Pass `connector` to wallet components [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+- Wallet components accept the `activate` function instead of the `onAuthenticated` callback [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+- Remove providers from `LiteflowNFTApp` components [#90](https://github.com/liteflow-labs/liteflow-js/pull/90):
+  - `ApolloProvider` is removed and needs to be initialized by the application
+  - `Web3ReactProvider` is removed and needs to be initialized by the application
+  - `CookiesProvider` is removed and needs to be initialized by the application
+  - `LiteflowProvider` is removed and needs to be initialized by the application
+  - `Session` is removed and the session handling should be handled by the application
+
 #### Added
 
 #### Changed
 
+- Replace use of `useSession` by `useWeb3React` [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+
 #### Deprecated
 
 #### Removed
+
+- Remove client (aka Apollo client) configs [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+- Remove props helpers for server side [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
 
 #### Fixed
 

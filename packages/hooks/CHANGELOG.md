@@ -4,6 +4,9 @@
 
 #### Breaking Changes
 
+- Remove deprecated `useEagerConnect`, `useActivateWallet`, `useSession`, `useSigner` [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+  - Have a look to https://github.com/liteflow-labs/marketplace-template/pull/44 to follow the migration or https://github.com/liteflow-labs/minimal-app
+
 #### Added
 
 - Add `useConfig` hook to return the configuration of the platform [#65](https://github.com/liteflow-labs/libraries/pull/65)
@@ -12,6 +15,7 @@
   - `hasSocialFeatures` is true when all the social features (likes, comments...) are activated
   - `hasTopUp` is true when fiat on ramp is activated
   - `hasUnlockableContent` is true when unlockable content is activated
+- Add `currentAddress` to the general context [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
 
 #### Changed
 
