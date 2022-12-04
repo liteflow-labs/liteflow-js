@@ -22,7 +22,6 @@
     "@emotion/styled": "^11.0.0",
     "@ethersproject/abstract-signer": "^5.0.14",
     "@ethersproject/bignumber": "^5.5.0",
-    "@ethersproject/providers": "^5.5.0",
     "@ethersproject/units": "^5.5.0",
     "@metamask/jazzicon": "^2.0.0",
     "@nft/email-connector": "*",
@@ -33,7 +32,6 @@
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.1.9",
     "@web3-react/walletlink-connector": "^6.1.9",
-    "bignumber.js": "^9.0.2",
     "dayjs": "^1.11.0",
     "embla-carousel-react": "^5.0.1",
     "framer-motion": "^5.6.0",
@@ -45,8 +43,7 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.0",
     "react-hook-form": "^7.17.2",
-    "ts-invariant": "^0.9.4",
-    "universal-cookie": "^4.0.4"
+    "ts-invariant": "^0.9.4"
   },
   "devDependencies": {
     "@chakra-ui/storybook-addon": "^1.0.3",
