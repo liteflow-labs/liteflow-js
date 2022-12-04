@@ -20,24 +20,12 @@ Here is an example with a next application.
 
 ```tsx
 import LiteflowNFTApp from '@nft/components'
-import { InjectedConnector } from '@web3-react/injected-connector'
 import type { AppProps } from 'next/app'
 import { theme } from '../styles/theme'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <LiteflowNFTApp
-      ssr={typeof window === 'undefined'}
-      endpointUri={'YOUR_LITEFLOW_GRAPHQL_ENDPOINT'}
-      cache={pageProps[APOLLO_STATE_PROP_NAME]}
-      user={pageProps.user}
-      connectors={{
-        injected: new InjectedConnector({
-          supportedChainIds: [1],
-        }),
-      }}
-      theme={theme}
-    >
+    <LiteflowNFTApp theme={theme}>
       <Component {...pageProps} />
     </LiteflowNFTApp>
   )
