@@ -1,6 +1,5 @@
 import { Box, Center, Icon, Stack, Text } from '@chakra-ui/react'
 import { FaImage } from '@react-icons/all-files/fa/FaImage'
-import useTranslation from 'next-translate/useTranslation'
 import Image, { ImageProps } from 'next/image'
 import React, { useEffect, useState, VFC, VideoHTMLAttributes } from 'react'
 
@@ -30,8 +29,6 @@ const TokenMedia: VFC<
   }
 
   const [imageError, setImageError] = useState(false)
-  const { t } = useTranslation('templates')
-
   // reset when image change. Needed when component is recycled
   useEffect(() => {
     setImageError(false)
@@ -59,7 +56,7 @@ const TokenMedia: VFC<
           <Stack align="center" spacing={3}>
             <Icon as={FaImage} color="gray.500" w="5em" h="4em" />
             <Text color="gray.500" fontWeight="600">
-              {t('asset.detail.errors.image')}
+              An issue occurred
             </Text>
           </Stack>
         </Center>
