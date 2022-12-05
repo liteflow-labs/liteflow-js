@@ -6,7 +6,6 @@ This repository contains the list of all the tools required to launch an NFT mar
 
 - [Hooks](./packages/hooks/): React hooks to interact with the Liteflow API
 - [Components](./packages/components/): UI library containing themable components
-- [Templates](./packages/templates/): Opinionated implementation of full featured templates for quick
 
 ## Documentation
 

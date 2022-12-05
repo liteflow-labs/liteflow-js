@@ -14,9 +14,9 @@
     "test": "npm run test -ws --if-present",
     "postinstall": "npm run graphql-codegen",
     "build": "npm run build -ws --if-present",
-    "watch": "npm run build && concurrently -n email-connector,hooks,components,templates --kill-others \"npm run watch -w packages/email-connector\" \"npm run watch -w packages/hooks\" \"npm run watch -w packages/components\" \"npm run watch -w packages/templates\"",
+    "watch": "npm run build && concurrently -n email-connector,hooks,components --kill-others \"npm run watch -w packages/email-connector\" \"npm run watch -w packages/hooks\" \"npm run watch -w packages/components\"",
     "graphql-codegen": "npm run graphql-codegen -ws --if-present",
-    "check-translation": "node ./check-translations ./packages/templates templates.json && node ./check-translations ./packages/components components.json",
+    "check-translation": "node ./check-translations ./packages/components components.json",
     "prerelease": "lerna publish $VERSION --no-private --force-publish --dist-tag latest --sync-workspace-lock --no-git-tag-version --yes"
   },
   "workspaces": [
