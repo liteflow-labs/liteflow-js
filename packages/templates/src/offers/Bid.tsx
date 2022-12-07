@@ -1,3 +1,8 @@
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { Box, Flex, Heading, Icon, Stack, useToast } from '@chakra-ui/react'
 import { BigNumber } from '@ethersproject/bignumber'
 import {
@@ -7,9 +12,7 @@ import {
   OfferFormBid,
   Price,
   TokenCard,
-  wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { HiOutlineClock } from '@react-icons/all-files/hi/HiOutlineClock'
 import { GetServerSideProps } from 'next'
 import getT from 'next-translate/getT'
@@ -33,6 +36,8 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   assetId: string
@@ -95,12 +100,14 @@ export const Template: VFC<
     auctionValidity: number
     offerValidity: number
     login: {
-      email: boolean
-      metamask: boolean
-      coinbase: boolean
-      walletConnect: boolean
+      email?: EmailConnector
+      injected?: InjectedConnector
+      walletConnect?: WalletConnectConnector
+      coinbase?: WalletLinkConnector
       networkName: string
     }
+    ready: boolean
+    signer: (Signer & TypedDataSigner) | undefined
   }
 > = ({
   now,
@@ -110,11 +117,13 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   login,
+  ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
 
   const date = useMemo(() => new Date(now), [now])
   const { data, refetch } = useBidOnAssetQuery({
@@ -123,7 +132,7 @@ export const Template: VFC<
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, ready)
 
   const fees = useFeesForBidQuery({
     variables: {

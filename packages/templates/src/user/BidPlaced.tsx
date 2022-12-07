@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import {
   Box,
   Button,
@@ -22,7 +23,6 @@ import {
   Pagination,
   Price,
   Select,
-  wrapServerSideProps,
 } from '@nft/components'
 import {
   CancelOfferStep,
@@ -30,7 +30,6 @@ import {
   formatError,
   useCancelOffer,
   useIsLoggedIn,
-  useSession,
 } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
@@ -49,6 +48,8 @@ import usePaginate from '../hooks/usePaginate'
 import { convertBidFull, convertFullUser } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
 import UserProfileTemplate from './Profile'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   userAddress: string
@@ -113,6 +114,7 @@ export const server = (
 export const Template: VFC<
   Omit<Props, 'meta'> & {
     limits: number[]
+    signer: Signer | undefined
     explorer: {
       name: string
       url: string
@@ -128,10 +130,11 @@ export const Template: VFC<
   page,
   userAddress,
   loginUrlForReferral,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
   const [changePage, changeLimit] = usePaginate()
   const [cancel, { activeStep, transactionHash }] = useCancelOffer(signer)
   const toast = useToast()

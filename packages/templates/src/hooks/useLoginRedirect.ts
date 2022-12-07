@@ -1,4 +1,4 @@
-import { useSession } from '@nft/hooks'
+import { useWeb3React } from '@web3-react/core'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { UrlObject } from 'url'
@@ -7,9 +7,12 @@ import { UrlObject } from 'url'
  * Hook redirecting a user to a login page when they are not logged in with their wallet
  * @param url -- url to redirect the user to when they are not logged in
  */
-export default function useLoginRedirect(url?: UrlObject): void {
+export default function useLoginRedirect(
+  ready: boolean,
+  url?: UrlObject,
+): void {
   const { replace, asPath } = useRouter()
-  const { account, ready } = useSession()
+  const { account } = useWeb3React()
 
   useEffect(() => {
     if (!ready) return

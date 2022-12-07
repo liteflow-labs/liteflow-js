@@ -1,3 +1,8 @@
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import {
   Alert,
   AlertIcon,
@@ -9,16 +14,10 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react'
-import {
-  BackButton,
-  Link,
-  TokenCard,
-  TokenFormCreate,
-  wrapServerSideProps,
-} from '@nft/components'
+import { BackButton, Link, TokenCard, TokenFormCreate } from '@nft/components'
 import type { Props as NFTCardProps } from '@nft/components/dist/Token/Card'
 import type { FormData } from '@nft/components/dist/Token/Form/Create'
-import { useConfig, useSession } from '@nft/hooks'
+import { useConfig } from '@nft/hooks'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
 import { useEffect } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
@@ -34,6 +33,8 @@ import {
 } from '../graphql'
 import useBlockExplorer from '../hooks/useBlockExplorer'
 import useLocalFileURL from '../hooks/useLocalFileURL'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   multiple: boolean
@@ -71,15 +72,17 @@ export const Template: NextPage<
     }
     uploadUrl: string
     login: {
-      email: boolean
-      metamask: boolean
-      coinbase: boolean
-      walletConnect: boolean
+      email?: EmailConnector
+      injected?: InjectedConnector
+      walletConnect?: WalletConnectConnector
+      coinbase?: WalletLinkConnector
       networkName: string
     }
     maxRoyalties?: number
     restrictMintToVerifiedAccount?: boolean
     reportEmail?: string
+    ready: boolean
+    signer: (Signer & TypedDataSigner) | undefined
   }
 > = ({
   multiple,
@@ -91,10 +94,12 @@ export const Template: NextPage<
   maxRoyalties = 30,
   restrictMintToVerifiedAccount = false,
   reportEmail,
+  ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  const { account, ready, signer } = useSession()
+  const { account } = useWeb3React()
   const configPromise = useConfig()
   const [config, setConfig] = useState<Config>()
   const toast = useToast()

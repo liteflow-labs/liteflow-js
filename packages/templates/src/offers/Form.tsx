@@ -1,3 +1,4 @@
+import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import {
   Flex,
   FormControl,
@@ -14,9 +15,7 @@ import {
   SaleAuctionForm,
   SaleDirectForm,
   TokenCard,
-  wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { AiOutlineDollarCircle } from '@react-icons/all-files/ai/AiOutlineDollarCircle'
 import { HiOutlineClock } from '@react-icons/all-files/hi/HiOutlineClock'
 import { GetServerSideProps } from 'next'
@@ -41,6 +40,9 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
+import { isSameAddress } from '@nft/hooks'
 
 export type Props = {
   assetId: string
@@ -111,6 +113,8 @@ export const Template: VFC<
     }
     offerValidity: number
     auctionValidity: number
+    ready: boolean
+    signer: (Signer & TypedDataSigner) | undefined
   }
 > = ({
   now,
@@ -119,12 +123,14 @@ export const Template: VFC<
   auctionValidity,
   offerValidity,
   currentAccount,
+  ready,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
-  useLoginRedirect()
   const toast = useToast()
-  const { account, signer, ready } = useSession()
+  const { account } = useWeb3React()
+  useLoginRedirect(ready)
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 
@@ -155,7 +161,8 @@ export const Template: VFC<
     [asset],
   )
 
-  const isCreator = asset && account ? asset.creator.address === account : false
+  const isCreator =
+    asset && account ? isSameAddress(asset.creator.address, account) : false
 
   const currencies = useMemo(() => data?.currencies?.nodes || [], [data])
 

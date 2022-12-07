@@ -5,10 +5,16 @@
 #### Breaking Changes
 
 - `AssetForm` template does not require the `activateLazyMint` and `activateUnlockableContent` props anymore [#65](https://github.com/liteflow-labs/libraries/pull/65)
+- Pass `ready` and `signer` props to most components to check if the application is ready and the current connected user [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+- Login components now accept connectors instead of boolean [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
 
 #### Added
 
+- Add props helper [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
+
 #### Changed
+
+- Replace use of `useSession` in favor of `useWeb3React` [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
 
 #### Deprecated
 

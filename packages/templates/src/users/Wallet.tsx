@@ -1,5 +1,4 @@
-import { Account, WalletAccount, wrapServerSideProps } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { Account, WalletAccount } from '@nft/components'
 import { GetServerSideProps } from 'next'
 import React, { useMemo, VFC } from 'react'
 import {
@@ -7,17 +6,11 @@ import {
   WalletCurrenciesDocument,
   WalletCurrenciesQuery,
 } from '../graphql'
+import { wrapServerSideProps } from '../props'
 import useLoginRedirect from '../hooks/useLoginRedirect'
+import { useWeb3React } from '@web3-react/core'
 
-export type Props = {
-  currencies: {
-    name: string
-    id: string
-    image: string
-    decimals: number
-    symbol: string
-  }[]
-}
+export type Props = {}
 
 export const server = (url: string): GetServerSideProps<Props> =>
   wrapServerSideProps<Props>(url, async (_, client) => {
@@ -26,14 +19,19 @@ export const server = (url: string): GetServerSideProps<Props> =>
     })
     if (error) throw error
     if (!data.currencies?.nodes) return { notFound: true }
-    return { props: { currencies: data.currencies.nodes } }
+    return {
+      props: {},
+    }
   })
 
-export const Template: VFC<{
-  networkName: string
-}> = ({ networkName }) => {
-  const { account } = useSession()
-  useLoginRedirect()
+export const Template: VFC<
+  Props & {
+    networkName: string
+    ready: boolean
+  }
+> = ({ networkName, ready }) => {
+  const { account } = useWeb3React()
+  useLoginRedirect(ready)
   const { data } = useWalletCurrenciesQuery()
   const currencies = useMemo(() => data?.currencies?.nodes, [data])
 
@@ -42,7 +40,7 @@ export const Template: VFC<{
   return (
     <Account currentTab="wallet">
       <WalletAccount
-        account={account}
+        account={account.toLowerCase()}
         currencies={currencies}
         networkName={networkName}
       />

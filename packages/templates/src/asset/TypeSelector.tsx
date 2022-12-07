@@ -9,11 +9,11 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { BackButton, Link, wrapServerSideProps } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { BackButton, Link } from '@nft/components'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
 import { IoImageOutline } from '@react-icons/all-files/io5/IoImageOutline'
 import { IoImagesOutline } from '@react-icons/all-files/io5/IoImagesOutline'
+import { useWeb3React } from '@web3-react/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -25,8 +25,13 @@ import {
   FetchAccountVerificationStatusQueryVariables,
   useFetchAccountVerificationStatusQuery,
 } from '../graphql'
+import { wrapServerSideProps } from '../props'
 
-export const server = (url: string): GetServerSideProps =>
+export type Props = {
+  currentAccount: string | null
+}
+
+export const server = (url: string): GetServerSideProps<Props> =>
   wrapServerSideProps(url, async (context, client) => {
     const { data, error } = await client.query<
       FetchAccountVerificationStatusQuery,
@@ -39,16 +44,23 @@ export const server = (url: string): GetServerSideProps =>
     })
     if (error) throw error
     if (!data) throw new Error('data is falsy')
-    return { props: {} }
+    return {
+      props: {
+        currentAccount: context.user.address,
+      },
+    }
   })
 
-export const Template: NextPage<{
-  restrictMintToVerifiedAccount?: boolean
-  reportEmail?: string
-}> = ({ restrictMintToVerifiedAccount = false, reportEmail }) => {
+export const Template: NextPage<
+  Props & {
+    restrictMintToVerifiedAccount?: boolean
+    reportEmail?: string
+    ready: boolean
+  }
+> = ({ restrictMintToVerifiedAccount = false, reportEmail, ready }) => {
   const { t } = useTranslation('templates')
   const { back } = useRouter()
-  const { account, ready } = useSession()
+  const { account } = useWeb3React()
   const { data } = useFetchAccountVerificationStatusQuery({
     variables: {
       account: account?.toLowerCase() || '',

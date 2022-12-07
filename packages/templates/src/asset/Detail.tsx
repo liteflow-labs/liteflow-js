@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import {
   AspectRatio,
   Box,
@@ -32,9 +33,7 @@ import {
   TokenMedia,
   TokenMetadata,
   TraitList,
-  wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { FaInfoCircle } from '@react-icons/all-files/fa/FaInfoCircle'
 import { HiOutlineDotsHorizontal } from '@react-icons/all-files/hi/HiOutlineDotsHorizontal'
 import { HiOutlineExternalLink } from '@react-icons/all-files/hi/HiOutlineExternalLink'
@@ -61,6 +60,8 @@ import {
   convertSaleFull,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   assetId: string
@@ -139,10 +140,20 @@ export const Template: VFC<
       url: string
     }
     reportEmail: string
+    ready: boolean
+    signer: Signer | undefined
   }
-> = ({ assetId, explorer, now: nowProp, reportEmail, currentAccount }) => {
+> = ({
+  assetId,
+  explorer,
+  now: nowProp,
+  reportEmail,
+  currentAccount,
+  ready,
+  signer,
+}) => {
   const { t } = useTranslation('templates')
-  const { account, signer, ready } = useSession()
+  const { account } = useWeb3React()
   const { query } = useRouter()
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
   const [showPreview, setShowPreview] = useState(false)

@@ -1,3 +1,4 @@
+import { EmailConnector } from '@nft/email-connector'
 import {
   Button,
   FormControl,
@@ -7,28 +8,26 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { useActivateWallet, useSession } from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { AbstractConnector } from '@web3-react/abstract-connector'
 
 type Props = {
-  onAuthenticated?: () => void
+  connector: EmailConnector
+  activate: (
+    connector: AbstractConnector,
+    onError?: ((error: Error) => void) | undefined,
+    throwErrors?: boolean | undefined,
+  ) => Promise<void>
 }
 
 type FormData = {
   email: string
 }
 
-const WalletEmail: FC<Props> = ({ onAuthenticated }) => {
+const WalletEmail: FC<Props> = ({ connector, activate }) => {
   const { t } = useTranslation('components')
-  const {
-    connectors: { email: connector },
-  } = useSession()
-  if (!connector)
-    throw new Error('email connector is not initialized in the session')
-
-  const { activate } = useActivateWallet(onAuthenticated)
 
   const {
     register,
@@ -37,7 +36,7 @@ const WalletEmail: FC<Props> = ({ onAuthenticated }) => {
   } = useForm<FormData>()
 
   const handle = handleSubmit(async (data) => {
-    await activate(connector.withEmail(data.email))
+    await activate(connector.withEmail(data.email), undefined, true)
   })
 
   return (

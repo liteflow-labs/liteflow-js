@@ -1,6 +1,5 @@
 import useAcceptAuction, { AcceptAuctionStep } from './useAcceptAuction'
 import useAcceptOffer, { AcceptOfferStep } from './useAcceptOffer'
-import useActivateWallet from './useActivateWallet'
 import useAddFund from './useAddFund'
 import useAuctionStatus from './useAuctionStatus'
 import useAuthenticate from './useAuthenticate'
@@ -10,12 +9,8 @@ import useConfig from './useConfig'
 import useCreateAuction from './useCreateAuction'
 import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
-import useEagerConnect from './useEagerConnect'
 import useInvitation from './useInvitation'
 import useIsLoggedIn from './useIsLoggedIn'
-import type { ISessionContext } from './useSession'
-import useSession from './useSession'
-import useSigner from './useSigner'
 import useUpdateAccount from './useUpdateAccount'
 import useVerifyAccount from './useVerifyAccount'
 import { isSameAddress } from './utils/address'
@@ -33,7 +28,6 @@ import { removeEmptyFromObject } from './utils/removeEmptyFromObject'
 
 export { LiteflowProvider } from './context'
 export type { LiteflowProviderProps } from './context'
-export { SessionContext } from './useSession'
 export {
   /**
    * Stable
@@ -70,14 +64,6 @@ export {
   /** @deprecated */
   useBalance,
   /** @deprecated */
-  useEagerConnect,
-  /** @deprecated */
-  useActivateWallet,
-  /** @deprecated */
-  useSession,
-  /** @deprecated */
-  useSigner,
-  /** @deprecated */
   useIsLoggedIn,
   /**
    * helpers
@@ -95,4 +81,3 @@ export {
   parsePrice,
   formatError,
 }
-export type { ISessionContext }

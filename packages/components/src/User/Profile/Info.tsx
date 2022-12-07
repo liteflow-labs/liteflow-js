@@ -10,18 +10,14 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { Signer } from '@ethersproject/abstract-signer'
-import {
-  formatError,
-  useInvitation,
-  useIsLoggedIn,
-  useSession,
-} from '@nft/hooks'
+import { formatError, useInvitation, useIsLoggedIn } from '@nft/hooks'
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
 import { HiBadgeCheck } from '@react-icons/all-files/hi/HiBadgeCheck'
 import { HiOutlineClipboard } from '@react-icons/all-files/hi/HiOutlineClipboard'
 import { HiOutlineGlobeAlt } from '@react-icons/all-files/hi/HiOutlineGlobeAlt'
 import { SiInstagram } from '@react-icons/all-files/si/SiInstagram'
 import { SiTwitter } from '@react-icons/all-files/si/SiTwitter'
+import { useWeb3React } from '@web3-react/core'
 import useTranslation from 'next-translate/useTranslation'
 import React, { useCallback, useEffect, useState, VFC } from 'react'
 import Link from '../../Link/Link'
@@ -51,7 +47,7 @@ const UserProfileInfo: VFC<{
   const { t } = useTranslation('components')
   const { create: createReferralLink, creating: creatingReferralLink } =
     useInvitation(signer)
-  const { account } = useSession()
+  const { account } = useWeb3React()
   const toast = useToast()
   const [referralUrl, setReferralUrl] = useState<string>()
 

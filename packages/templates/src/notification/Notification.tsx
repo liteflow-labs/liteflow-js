@@ -1,6 +1,5 @@
 import { Button, Heading, Icon, Stack, Text } from '@chakra-ui/react'
-import { Empty, Notification, wrapServerSideProps } from '@nft/components'
-import { useSession } from '@nft/hooks'
+import { Empty, Notification } from '@nft/components'
 import { FaBell } from '@react-icons/all-files/fa/FaBell'
 import { GetServerSideProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
@@ -13,15 +12,17 @@ import {
 } from '../graphql'
 import useLoginRedirect from '../hooks/useLoginRedirect'
 import { concatToQuery } from '../utils/concat'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
-  address: string
+  currentAccount: string | null
 }
 
 export const server = (url: string): GetServerSideProps<Props> =>
   wrapServerSideProps<Props>(url, async (ctx, client) => {
     const address = ctx.user.address
-    if (!address) return { props: { address: '' } }
+    if (!address) return { props: { currentAccount: null } }
 
     const { data, error } = await client.query<GetNotificationsQuery>({
       query: GetNotificationsDocument,
@@ -34,23 +35,28 @@ export const server = (url: string): GetServerSideProps<Props> =>
     if (!data.notifications) return { notFound: true }
     return {
       props: {
-        address,
+        currentAccount: address,
       },
     }
   })
 
-export const Template: VFC<Props> = ({ address }) => {
+export const Template: VFC<
+  Props & {
+    ready: boolean
+  }
+> = ({ currentAccount, ready }) => {
   const { t } = useTranslation('templates')
-  useLoginRedirect()
-  const { account } = useSession()
+  const { account } = useWeb3React()
+  useLoginRedirect(ready)
   const [_, setCookies] = useCookies()
   const [loading, setLoading] = useState(false)
 
   const { data, fetchMore } = useGetNotificationsQuery({
     variables: {
       cursor: null,
-      address,
+      address: currentAccount || '',
     },
+    skip: !currentAccount,
   })
 
   const notifications = useMemo(() => data?.notifications?.nodes || [], [data])
@@ -74,11 +80,15 @@ export const Template: VFC<Props> = ({ address }) => {
 
   useEffect(() => {
     if (!account) return
-    setCookies(`lastNotification-${account}`, new Date().toJSON(), {
-      secure: true,
-      sameSite: true,
-      path: '/',
-    })
+    setCookies(
+      `lastNotification-${account.toLowerCase()}`,
+      new Date().toJSON(),
+      {
+        secure: true,
+        sameSite: true,
+        path: '/',
+      },
+    )
   }, [account, setCookies])
 
   return (

@@ -49,7 +49,7 @@ Coinbase.args = {
   icon: IconCoinbase,
   name: 'Coinbase',
   onError: (error?: Error) => console.log(error),
-  onAuthenticated: () => console.log('authenticated'),
+  activate: async () => console.log('authenticated'),
 }
 
 export const Metamask = Template.bind({})
@@ -58,7 +58,7 @@ Metamask.args = {
   icon: IconMetamask,
   name: 'Metamask',
   onError: (error?: Error) => console.log(error),
-  onAuthenticated: () => console.log('authenticated'),
+  activate: async () => console.log('authenticated'),
 }
 
 export const WalletConnect = Template.bind({})
@@ -67,7 +67,7 @@ WalletConnect.args = {
   icon: IconWalletConnect,
   name: 'WalletConnect',
   onError: (error?: Error) => console.log(error),
-  onAuthenticated: () => console.log('authenticated'),
+  activate: async () => console.log('authenticated'),
 }
 
 export const Loading = Template.bind({})
@@ -78,5 +78,5 @@ Loading.args = {
   icon: IconCoinbase,
   name: 'Loading',
   onError: (error?: Error) => console.log(error),
-  onAuthenticated: () => console.log('authenticated'),
+  activate: async () => console.log('authenticated'),
 }

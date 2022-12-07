@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
-import useSession from './useSession'
+import { useMemo, useContext } from 'react'
+import { LiteflowContext } from './context'
 import { isSameAddress } from './utils/address'
 
 /**
@@ -8,11 +8,11 @@ import { isSameAddress } from './utils/address'
  * @returns boolean -- true if the address is the current account, false otherwise
  */
 export default function useIsLoggedIn(address: string): boolean {
-  const { account } = useSession()
+  const { currentAddress } = useContext(LiteflowContext)
 
   return useMemo(() => {
-    if (!account) return false
+    if (!currentAddress) return false
     if (!address) return false
-    return isSameAddress(account, address)
-  }, [account, address])
+    return isSameAddress(currentAddress, address)
+  }, [currentAddress, address])
 }

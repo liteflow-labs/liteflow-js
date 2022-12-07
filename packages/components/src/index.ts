@@ -54,8 +54,6 @@ import EmailConnector from './Wallet/Connectors/Email'
 import MetamaskConnector from './Wallet/Connectors/Metamask'
 import WalletConnectConnector from './Wallet/Connectors/WalletConnect'
 import WalletImage from './Wallet/Image'
-export * from './client'
-export * from './props'
 export {
   baseTheme,
   Account,

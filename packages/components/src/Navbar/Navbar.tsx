@@ -1,3 +1,7 @@
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { gql } from '@apollo/client'
 import {
   Accordion,
@@ -29,7 +33,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useAddFund, useSession } from '@nft/hooks'
+import { useAddFund } from '@nft/hooks'
 import { FaBell } from '@react-icons/all-files/fa/FaBell'
 import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown'
 import { HiOutlineMenu } from '@react-icons/all-files/hi/HiOutlineMenu'
@@ -45,6 +49,8 @@ import Link from '../Link/Link'
 import LoginModal from '../Modal/Login'
 import Select from '../Select/Select'
 import AccountImage from '../Wallet/Image'
+import { Signer } from '@ethersproject/abstract-signer'
+import { useWeb3React } from '@web3-react/core'
 
 gql`
   query NavbarAccount($account: Address!, $lastNotification: Datetime!) {
@@ -401,17 +407,27 @@ const Navbar: VFC<{
     events: MittEmitter<'routeChangeStart'>
   }
   login: {
-    email: boolean
-    metamask: boolean
-    coinbase: boolean
-    walletConnect: boolean
+    email?: EmailConnector
+    injected?: InjectedConnector
+    walletConnect?: WalletConnectConnector
+    coinbase?: WalletLinkConnector
     networkName: string
   }
+  signer: Signer | undefined
   multiLang?: MultiLang
-}> = ({ allowTopUp, logo, router, login, multiLang, disableMinting }) => {
+}> = ({
+  allowTopUp,
+  logo,
+  router,
+  login,
+  multiLang,
+  disableMinting,
+  signer,
+}) => {
   const { t } = useTranslation('components')
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { account, deactivate, ready, signer } = useSession()
+  const { account: accountWithChecksum, deactivate } = useWeb3React()
+  const account = accountWithChecksum?.toLowerCase()
   const { asPath, query, push, isReady } = router
   const { register, setValue, handleSubmit } = useForm<FormData>()
   const [addFund, { loading: addingFund }] = useAddFund(signer)
@@ -422,7 +438,7 @@ const Navbar: VFC<{
       account: account?.toLowerCase() || '',
       lastNotification: new Date(lastNotification || 0),
     },
-    skip: !account || !ready,
+    skip: !account,
   })
 
   useEffect(() => {

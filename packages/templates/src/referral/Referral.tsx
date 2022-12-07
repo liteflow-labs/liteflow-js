@@ -1,3 +1,8 @@
+import { Signer } from '@ethersproject/abstract-signer'
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import {
   Box,
   Flex,
@@ -23,12 +28,13 @@ type Props = {
   }
   loginUrl: string
   login: {
-    email: boolean
-    metamask: boolean
-    coinbase: boolean
-    walletConnect: boolean
+    email?: EmailConnector
+    injected?: InjectedConnector
+    walletConnect?: WalletConnectConnector
+    coinbase?: WalletLinkConnector
     networkName: string
   }
+  signer: Signer | undefined
 }
 
 export const Template: VFC<Props> = ({
@@ -36,6 +42,7 @@ export const Template: VFC<Props> = ({
   percentage,
   login,
   loginUrl,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   return (
@@ -47,7 +54,7 @@ export const Template: VFC<Props> = ({
         <Heading variant="subtitle" pb={4}>
           {t('referral.link')}
         </Heading>
-        <ReferralForm login={login} loginUrl={loginUrl} />
+        <ReferralForm login={login} loginUrl={loginUrl} signer={signer} />
       </div>
 
       <div>

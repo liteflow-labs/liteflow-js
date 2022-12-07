@@ -1,3 +1,4 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import {
   Box,
   Flex,
@@ -13,15 +14,8 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import {
-  Image,
-  Link,
-  Pagination,
-  Price,
-  Select,
-  wrapServerSideProps,
-} from '@nft/components'
-import { dateFromNow, formatAddress, useSession } from '@nft/hooks'
+import { Image, Link, Pagination, Price, Select } from '@nft/components'
+import { dateFromNow, formatAddress } from '@nft/hooks'
 import { HiExternalLink } from '@react-icons/all-files/hi/HiExternalLink'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
@@ -39,7 +33,9 @@ import useBlockExplorer from '../hooks/useBlockExplorer'
 import usePaginate from '../hooks/usePaginate'
 import { convertFullUser, convertTrade } from '../utils/convert'
 import { getLimit, getOffset, getOrder, getPage } from '../utils/params'
+import { wrapServerSideProps } from '../props'
 import UserProfileTemplate from './Profile'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   userAddress: string
@@ -104,6 +100,7 @@ export const server = (
 export const Template: VFC<
   Omit<Props, 'meta'> & {
     limits: number[]
+    signer: Signer | undefined
     explorer: {
       name: string
       url: string
@@ -119,11 +116,12 @@ export const Template: VFC<
   loginUrlForReferral,
   explorer,
   limits,
+  signer,
 }) => {
   const { t } = useTranslation('templates')
   const { replace, pathname, query } = useRouter()
   const [changePage, changeLimit] = usePaginate()
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
 
   const date = useMemo(() => new Date(now), [now])
   const { data } = useFetchUserTradeSoldQuery({

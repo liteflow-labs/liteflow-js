@@ -1,3 +1,4 @@
+import decode, { JwtPayload } from 'jwt-decode'
 import { gql, GraphQLClient } from 'graphql-request'
 import React, {
   createContext,
@@ -25,6 +26,7 @@ gql`
 export type LiteflowContext = {
   setAuthenticationToken: (token: string) => void
   resetAuthenticationToken: () => void
+  currentAddress: string | null
   sdk: Sdk
   config: Promise<Config>
 }
@@ -40,6 +42,7 @@ export const LiteflowContext = createContext<LiteflowContext>({
   resetAuthenticationToken() {
     throw new Error('not implemented')
   },
+  currentAddress: null,
   sdk: {} as Sdk,
   config: {} as Promise<Config>,
 })
@@ -55,6 +58,11 @@ export function LiteflowProvider({
     () => sdk.GetConfig().then(({ config }) => config),
     [sdk],
   )
+  const currentAddress = useMemo(() => {
+    if (!authenticationToken) return null
+    const res = decode<JwtPayload & { address: string }>(authenticationToken)
+    return res.address
+  }, [authenticationToken])
 
   const resetAuthenticationToken = useCallback(
     () => setAuthenticationToken(undefined),
@@ -75,6 +83,7 @@ export function LiteflowProvider({
       value={{
         resetAuthenticationToken,
         setAuthenticationToken,
+        currentAddress,
         sdk,
         config,
       }}

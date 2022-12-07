@@ -1,3 +1,8 @@
+import { Signer } from '@ethersproject/abstract-signer'
+import { EmailConnector } from '@nft/email-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { Box, Flex, Heading, Stack, useToast } from '@chakra-ui/react'
 import { BigNumber } from '@ethersproject/bignumber'
 import {
@@ -7,9 +12,7 @@ import {
   Price,
   TokenCard,
   UserAvatar,
-  wrapServerSideProps,
 } from '@nft/components'
-import { useSession } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import getT from 'next-translate/getT'
 import useTranslation from 'next-translate/useTranslation'
@@ -25,6 +28,8 @@ import {
   convertSale,
   convertUser,
 } from '../utils/convert'
+import { wrapServerSideProps } from '../props'
+import { useWeb3React } from '@web3-react/core'
 
 export type Props = {
   offerId: string
@@ -80,19 +85,21 @@ export const Template: VFC<
     }
     allowTopUp: boolean
     login: {
-      email: boolean
-      metamask: boolean
-      coinbase: boolean
-      walletConnect: boolean
+      email?: EmailConnector
+      injected?: InjectedConnector
+      walletConnect?: WalletConnectConnector
+      coinbase?: WalletLinkConnector
       networkName: string
     }
+    ready: boolean
+    signer: Signer | undefined
   }
-> = ({ now, offerId, explorer, allowTopUp, login }) => {
+> = ({ now, offerId, explorer, allowTopUp, login, ready, signer }) => {
   const { t } = useTranslation('templates')
   const { back, push } = useRouter()
   const toast = useToast()
 
-  const { account, signer } = useSession()
+  const { account } = useWeb3React()
 
   const blockExplorer = useBlockExplorer(explorer.name, explorer.url)
 
@@ -103,7 +110,7 @@ export const Template: VFC<
       now: date,
     },
   })
-  useExecuteOnAccountChange(refetch)
+  useExecuteOnAccountChange(refetch, ready)
 
   const offer = useMemo(() => data?.offer, [data])
   const asset = useMemo(() => offer?.asset, [offer])
