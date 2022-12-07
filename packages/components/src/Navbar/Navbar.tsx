@@ -426,7 +426,8 @@ const Navbar: VFC<{
 }) => {
   const { t } = useTranslation('components')
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { account, deactivate } = useWeb3React()
+  const { account: accountWithChecksum, deactivate } = useWeb3React()
+  const account = accountWithChecksum?.toLowerCase()
   const { asPath, query, push, isReady } = router
   const { register, setValue, handleSubmit } = useForm<FormData>()
   const [addFund, { loading: addingFund }] = useAddFund(signer)

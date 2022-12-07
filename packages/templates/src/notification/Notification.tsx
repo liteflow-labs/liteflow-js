@@ -80,11 +80,15 @@ export const Template: VFC<
 
   useEffect(() => {
     if (!account) return
-    setCookies(`lastNotification-${account}`, new Date().toJSON(), {
-      secure: true,
-      sameSite: true,
-      path: '/',
-    })
+    setCookies(
+      `lastNotification-${account.toLowerCase()}`,
+      new Date().toJSON(),
+      {
+        secure: true,
+        sameSite: true,
+        path: '/',
+      },
+    )
   }, [account, setCookies])
 
   return (

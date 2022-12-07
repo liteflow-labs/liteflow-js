@@ -22,7 +22,7 @@ export const Template: VFC<{
 
   const { data } = useGetAccountQuery({
     variables: {
-      address: account || '',
+      address: account?.toLowerCase() || '',
     },
     skip: !account,
   })

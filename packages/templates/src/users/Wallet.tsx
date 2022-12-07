@@ -40,7 +40,7 @@ export const Template: VFC<
   return (
     <Account currentTab="wallet">
       <WalletAccount
-        account={account}
+        account={account.toLowerCase()}
         currencies={currencies}
         networkName={networkName}
       />

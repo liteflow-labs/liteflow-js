@@ -42,6 +42,7 @@ import {
 } from '../utils/convert'
 import { wrapServerSideProps } from '../props'
 import { useWeb3React } from '@web3-react/core'
+import { isSameAddress } from '@nft/hooks'
 
 export type Props = {
   assetId: string
@@ -160,7 +161,8 @@ export const Template: VFC<
     [asset],
   )
 
-  const isCreator = asset && account ? asset.creator.address === account : false
+  const isCreator =
+    asset && account ? isSameAddress(asset.creator.address, account) : false
 
   const currencies = useMemo(() => data?.currencies?.nodes || [], [data])
 
