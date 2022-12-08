@@ -1,7 +1,0 @@
-query FetchAssetIdFromTokenId($tokenId: String!) {
-  assets(condition: { tokenId: $tokenId }, first: 1) {
-    nodes {
-      id
-    }
-  }
-}

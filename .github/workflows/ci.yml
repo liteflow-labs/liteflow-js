@@ -142,9 +142,6 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=6144
         run: npm run build-storybook -w packages/components
 
-      - name: Build templates
-        run: npm run build -w packages/templates
-
   test:
     runs-on: ubuntu-latest
     steps:
