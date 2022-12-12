@@ -18,12 +18,6 @@ npm run lint
 npm run lint:fix
 ```
 
-## Storybook
-
-```bash
-npm run storybook -w packages/components
-```
-
 ## Generate GraphQL types
 
 To generate the types for all the packages:

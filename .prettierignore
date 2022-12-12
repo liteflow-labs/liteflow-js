@@ -2,8 +2,6 @@
 
 packages/hooks/src/graphql.ts
 
-packages/components/src/graphql.ts
-
 **/dist
 
 .vercel/
