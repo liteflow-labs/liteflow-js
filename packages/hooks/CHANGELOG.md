@@ -4,6 +4,22 @@
 
 #### Breaking Changes
 
+#### Added
+
+#### Changed
+
+#### Deprecated
+
+#### Removed
+
+#### Fixed
+
+#### Security
+
+## [v1.0.0-beta.9](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.9) - 2022-12-12
+
+#### Breaking Changes
+
 - Remove deprecated `useEagerConnect`, `useActivateWallet`, `useSession`, `useSigner` [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
   - Have a look to https://github.com/liteflow-labs/marketplace-template/pull/44 to follow the migration or https://github.com/liteflow-labs/minimal-app
 
@@ -17,17 +33,9 @@
   - `hasUnlockableContent` is true when unlockable content is activated
 - Add `currentAddress` to the general context [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
 
-#### Changed
-
-#### Deprecated
-
-#### Removed
-
 #### Fixed
 
 - Add proper errors when calling a hook relying on a feature not activated [#65](https://github.com/liteflow-labs/libraries/pull/65)
-
-#### Security
 
 ## [v1.0.0-beta.8](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.8) - 2022-11-15
 
