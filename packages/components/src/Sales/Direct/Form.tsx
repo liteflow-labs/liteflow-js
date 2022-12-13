@@ -301,9 +301,6 @@ const SalesDirectForm: VFC<Props> = ({
                 {...register('quantity', {
                   required: t('sales.direct.form.validation.required'),
                   validate: (value) => {
-                    if (!/^\d+$/.test(value)) {
-                      return t('sales.direct.form.validation.integer')
-                    }
                     if (
                       parseFloat(value) < 1 ||
                       parseFloat(value) > quantityAvailable?.toNumber()
@@ -311,6 +308,9 @@ const SalesDirectForm: VFC<Props> = ({
                       return t('sales.direct.form.validation.in-range', {
                         quantityAvailable: quantityAvailable?.toNumber(),
                       })
+                    }
+                    if (!/^\d+$/.test(value)) {
+                      return t('sales.direct.form.validation.integer')
                     }
                   },
                 })}

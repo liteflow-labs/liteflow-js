@@ -313,9 +313,6 @@ const OfferFormBid: FC<Props> = (props) => {
                 {...register('quantity', {
                   required: t('offer.form.bid.validation.required'),
                   validate: (value) => {
-                    if (!/^\d+$/.test(value)) {
-                      return t('offer.form.bid.validation.integer')
-                    }
                     if (
                       parseInt(value, 10) < 1 ||
                       parseInt(value, 10) > parseInt(props.supply, 10)
@@ -323,6 +320,9 @@ const OfferFormBid: FC<Props> = (props) => {
                       return t('offer.form.bid.validation.in-range', {
                         quantityAvailable: parseInt(props.supply, 10),
                       })
+                    }
+                    if (!/^\d+$/.test(value)) {
+                      return t('offer.form.bid.validation.integer')
                     }
                   },
                 })}

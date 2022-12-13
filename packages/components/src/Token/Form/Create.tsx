@@ -272,11 +272,11 @@ const TokenFormCreate: FC<Props> = ({
                 {...register('amount', {
                   required: t('token.form.create.validation.required'),
                   validate: (value) => {
-                    if (!/^\d+$/.test(value)) {
-                      return t('token.form.create.validation.integer')
-                    }
                     if (parseFloat(value) < 1) {
                       return t('token.form.create.validation.positive')
+                    }
+                    if (!/^\d+$/.test(value)) {
+                      return t('token.form.create.validation.integer')
                     }
                   },
                 })}

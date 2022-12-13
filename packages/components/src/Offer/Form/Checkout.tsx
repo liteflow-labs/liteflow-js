@@ -149,9 +149,6 @@ const OfferFormCheckout: FC<Props> = ({
                 {...register('quantity', {
                   required: t('offer.form.checkout.validation.required'),
                   validate: (value) => {
-                    if (!/^\d+$/.test(value)) {
-                      return t('offer.form.checkout.validation.integer')
-                    }
                     if (
                       parseInt(value, 10) < 1 ||
                       parseInt(value, 10) >
@@ -160,6 +157,9 @@ const OfferFormCheckout: FC<Props> = ({
                       return t('offer.form.checkout.validation.in-range', {
                         available: parseInt(offer.availableQuantity, 10),
                       })
+                    }
+                    if (!/^\d+$/.test(value)) {
+                      return t('offer.form.checkout.validation.integer')
                     }
                   },
                 })}
