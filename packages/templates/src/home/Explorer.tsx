@@ -5,6 +5,7 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Grid,
   GridItem,
@@ -504,13 +505,15 @@ export const Template: VFC<
               />
 
               {currency && (
-                <Flex gap={3}>
+                <FormControl
+                  as={Flex}
+                  gap={3}
+                  isInvalid={!!errors.minPrice || !!errors.maxPrice}
+                >
                   <InputGroup>
                     <NumberInput
                       clampValueOnBlur={false}
-                      min={0}
                       step={Math.pow(10, -currency.decimals)}
-                      precision={currency.decimals}
                       allowMouseWheel
                       w="full"
                       isDisabled={isSubmitting}
@@ -518,8 +521,31 @@ export const Template: VFC<
                       format={(e) => e.toString()}
                     >
                       <NumberInputField
+                        id="minPrice"
                         placeholder={t('explore.form.min-price.placeholder')}
-                        {...register('minPrice')}
+                        {...register('minPrice', {
+                          validate: (value) => {
+                            if (!value) return
+                            const splitValue = value.toString().split('.')
+
+                            if (value < 0) {
+                              return t(
+                                'explore.form.min-price.validation.positive',
+                              )
+                            }
+                            if (
+                              splitValue[1] &&
+                              splitValue[1].length > currency.decimals
+                            ) {
+                              return t(
+                                'explore.form.min-price.validation.decimals',
+                                {
+                                  nbDecimals: currency.decimals,
+                                },
+                              )
+                            }
+                          },
+                        })}
                       />
                       <NumberInputStepper>
                         <NumberIncrementStepper />
@@ -531,9 +557,7 @@ export const Template: VFC<
                   <InputGroup>
                     <NumberInput
                       clampValueOnBlur={false}
-                      min={0}
                       step={Math.pow(10, -currency.decimals)}
-                      precision={currency.decimals}
                       allowMouseWheel
                       w="full"
                       isDisabled={isSubmitting}
@@ -541,8 +565,31 @@ export const Template: VFC<
                       format={(e) => e.toString()}
                     >
                       <NumberInputField
+                        id="maxPrice"
                         placeholder={t('explore.form.max-price.placeholder')}
-                        {...register('maxPrice')}
+                        {...register('maxPrice', {
+                          validate: (value) => {
+                            if (!value) return
+                            const splitValue = value.toString().split('.')
+
+                            if (value < 0) {
+                              return t(
+                                'explore.form.max-price.validation.positive',
+                              )
+                            }
+                            if (
+                              splitValue[1] &&
+                              splitValue[1].length > currency.decimals
+                            ) {
+                              return t(
+                                'explore.form.max-price.validation.decimals',
+                                {
+                                  nbDecimals: currency.decimals,
+                                },
+                              )
+                            }
+                          },
+                        })}
                       />
                       <NumberInputStepper>
                         <NumberIncrementStepper />
@@ -550,7 +597,19 @@ export const Template: VFC<
                       </NumberInputStepper>
                     </NumberInput>
                   </InputGroup>
-                </Flex>
+                  <Stack spacing={1}>
+                    {errors.minPrice && (
+                      <FormErrorMessage>
+                        {errors.minPrice.message}
+                      </FormErrorMessage>
+                    )}
+                    {errors.maxPrice && (
+                      <FormErrorMessage>
+                        {errors.maxPrice.message}
+                      </FormErrorMessage>
+                    )}
+                  </Stack>
+                </FormControl>
               )}
             </Stack>
 
