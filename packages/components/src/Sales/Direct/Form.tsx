@@ -124,14 +124,44 @@ const SalesDirectForm: VFC<Props> = ({
     return priceUnit.mul(feesPerTenThousand).div(10000)
   }, [price, priceUnit, feesPerTenThousand])
 
+  const amountFeesWithQuantity = useMemo(() => {
+    if (!quantity) return BigNumber.from(0)
+    try {
+      return amountFees.mul(quantity)
+    } catch {
+      console.error(`Cannot parse fees with quantity as BigNumber`)
+      return BigNumber.from(0)
+    }
+  }, [amountFees, quantity])
+
   const amountRoyalties = useMemo(() => {
     if (!price) return BigNumber.from(0)
     return priceUnit.mul(royaltiesPerTenThousand).div(10000)
   }, [price, priceUnit, royaltiesPerTenThousand])
 
+  const amountRoyaltiesWithQuantity = useMemo(() => {
+    if (!quantity) return BigNumber.from(0)
+    try {
+      return amountRoyalties.mul(quantity)
+    } catch {
+      console.error(`Cannot parse royalties with quantity as BigNumber`)
+      return BigNumber.from(0)
+    }
+  }, [amountRoyalties, quantity])
+
   const priceWithFees = useMemo(() => {
     return priceUnit.sub(amountFees).sub(isCreator ? 0 : amountRoyalties)
   }, [amountFees, priceUnit, amountRoyalties, isCreator])
+
+  const priceWithFeesWithQuantity = useMemo(() => {
+    if (!quantity) return BigNumber.from(0)
+    try {
+      return priceWithFees.mul(quantity)
+    } catch {
+      console.error(`Cannot parse price with fees and quantity as BigNumber`)
+      return BigNumber.from(0)
+    }
+  }, [priceWithFees, quantity])
 
   const onSubmit = handleSubmit(async ({ expiredAt }) => {
     if (activeStep !== CreateOfferStep.INITIAL) return
@@ -196,9 +226,7 @@ const SalesDirectForm: VFC<Props> = ({
         <InputGroup>
           <NumberInput
             clampValueOnBlur={false}
-            min={0}
             step={Math.pow(10, -currency.decimals)}
-            precision={currency.decimals}
             allowMouseWheel
             w="full"
             onChange={(x) => setValue('price', x)}
@@ -209,9 +237,21 @@ const SalesDirectForm: VFC<Props> = ({
               placeholder={t('sales.direct.form.price.placeholder')}
               {...register('price', {
                 required: t('sales.direct.form.validation.required'),
-                validate: (value) =>
-                  parseFloat(value) > 0 ||
-                  t('sales.direct.form.validation.positive'),
+                validate: (value) => {
+                  const splitValue = value.split('.')
+
+                  if (parseFloat(value) <= 0) {
+                    return t('sales.direct.form.validation.positive')
+                  }
+                  if (
+                    splitValue[1] &&
+                    splitValue[1].length > currency.decimals
+                  ) {
+                    return t('sales.direct.form.validation.decimals', {
+                      nbDecimals: currency.decimals,
+                    })
+                  }
+                },
               })}
             />
             <NumberInputStepper>
@@ -250,9 +290,6 @@ const SalesDirectForm: VFC<Props> = ({
           <InputGroup>
             <NumberInput
               clampValueOnBlur={false}
-              min={1}
-              max={quantityAvailable?.toNumber()}
-              step={1}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('quantity', x)}
@@ -263,6 +300,19 @@ const SalesDirectForm: VFC<Props> = ({
                 placeholder={t('sales.direct.form.quantity.placeholder')}
                 {...register('quantity', {
                   required: t('sales.direct.form.validation.required'),
+                  validate: (value) => {
+                    if (!/^\d+$/.test(value)) {
+                      return t('sales.direct.form.validation.integer')
+                    }
+                    if (
+                      parseFloat(value) < 1 ||
+                      parseFloat(value) > quantityAvailable?.toNumber()
+                    ) {
+                      return t('sales.direct.form.validation.in-range', {
+                        quantityAvailable: quantityAvailable?.toNumber(),
+                      })
+                    }
+                  },
                 })}
               />
               <NumberInputStepper>
@@ -394,7 +444,7 @@ const SalesDirectForm: VFC<Props> = ({
                 color="brand.black"
                 mx={1}
                 fontWeight="semibold"
-                amount={quantity ? amountFees.mul(quantity) : 0}
+                amount={amountFeesWithQuantity}
                 currency={currency}
               />
             </Text>
@@ -408,7 +458,7 @@ const SalesDirectForm: VFC<Props> = ({
                 color="brand.black"
                 ml={1}
                 fontWeight="semibold"
-                amount={quantity ? amountRoyalties.mul(quantity) : 0}
+                amount={amountRoyaltiesWithQuantity}
                 currency={currency}
               />
             </Text>
@@ -420,7 +470,7 @@ const SalesDirectForm: VFC<Props> = ({
                 color="brand.black"
                 mx={1}
                 fontWeight="semibold"
-                amount={quantity ? priceWithFees.mul(quantity) : 0}
+                amount={priceWithFeesWithQuantity}
                 currency={currency}
               />
             </Text>

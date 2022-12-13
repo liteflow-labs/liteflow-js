@@ -261,8 +261,6 @@ const TokenFormCreate: FC<Props> = ({
           <InputGroup>
             <NumberInput
               clampValueOnBlur={false}
-              min={0}
-              step={1}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('amount', x)}
@@ -273,6 +271,14 @@ const TokenFormCreate: FC<Props> = ({
                 placeholder={t('token.form.create.amount.placeholder')}
                 {...register('amount', {
                   required: t('token.form.create.validation.required'),
+                  validate: (value) => {
+                    if (!/^\d+$/.test(value)) {
+                      return t('token.form.create.validation.integer')
+                    }
+                    if (parseFloat(value) < 1) {
+                      return t('token.form.create.validation.positive')
+                    }
+                  },
                 })}
               />
               <NumberInputStepper>
@@ -286,7 +292,7 @@ const TokenFormCreate: FC<Props> = ({
           )}
         </FormControl>
       )}
-      <FormControl>
+      <FormControl isInvalid={!!errors.royalties}>
         <HStack spacing={1} mb={2}>
           <FormLabel htmlFor="royalties" m={0}>
             {t('token.form.create.royalties.label')}
@@ -298,18 +304,27 @@ const TokenFormCreate: FC<Props> = ({
         <InputGroup>
           <NumberInput
             clampValueOnBlur={false}
-            min={0}
-            max={maxRoyalties}
-            step={0.01}
             allowMouseWheel
             w="full"
+            step={0.5}
             onChange={(x) => setValue('royalties', x)}
             format={(e) => e.toString()}
           >
             <NumberInputField
               id="royalties"
               placeholder={t('token.form.create.royalties.placeholder')}
-              {...register('royalties')}
+              {...register('royalties', {
+                validate: (value) => {
+                  if (
+                    parseFloat(value) < 0 ||
+                    parseFloat(value) > maxRoyalties
+                  ) {
+                    return t('token.form.create.validation.in-range', {
+                      maxRoyalties,
+                    })
+                  }
+                },
+              })}
             />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -318,6 +333,9 @@ const TokenFormCreate: FC<Props> = ({
           </NumberInput>
           <InputRightElement mr={6} pointerEvents="none" children="%" />
         </InputGroup>
+        {errors.royalties && (
+          <FormErrorMessage>{errors.royalties.message}</FormErrorMessage>
+        )}
       </FormControl>
       <Select
         label={t('token.form.create.category.label')}
