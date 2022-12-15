@@ -70,8 +70,8 @@ export type Props = {
   // Filters
   queryFilter: AssetFilter[]
   filter: {
-    minPrice: string | null
-    maxPrice: string | null
+    minPrice: number | null
+    maxPrice: number | null
     categories: string[] | null
     collections: string[] | null
     offers: OfferFilter[] | null
@@ -87,8 +87,8 @@ type FormData = {
   categories: string[] | null
   collections: string[] | null
   offers: string[] | null
-  minPrice: string | null
-  maxPrice: string | null
+  minPrice: number | null
+  maxPrice: number | null
   currencyId: string | null
 }
 
@@ -523,9 +523,9 @@ export const Template: VFC<
                           {...register('minPrice', {
                             validate: (value) => {
                               if (!value) return
-                              const splitValue = value.split('.')
+                              const splitValue = value.toString().split('.')
 
-                              if (parseFloat(value) < 0) {
+                              if (value < 0) {
                                 return t(
                                   'explore.form.min-price.validation.positive',
                                 )
@@ -567,9 +567,9 @@ export const Template: VFC<
                           {...register('maxPrice', {
                             validate: (value) => {
                               if (!value) return
-                              const splitValue = value.split('.')
+                              const splitValue = value.toString().split('.')
 
-                              if (parseFloat(value) < 0) {
+                              if (value < 0) {
                                 return t(
                                   'explore.form.max-price.validation.positive',
                                 )
