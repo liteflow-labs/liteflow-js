@@ -70,8 +70,8 @@ export type Props = {
   // Filters
   queryFilter: AssetFilter[]
   filter: {
-    minPrice: number | null
-    maxPrice: number | null
+    minPrice: string | null
+    maxPrice: string | null
     categories: string[] | null
     collections: string[] | null
     offers: OfferFilter[] | null
@@ -87,8 +87,8 @@ type FormData = {
   categories: string[] | null
   collections: string[] | null
   offers: string[] | null
-  minPrice: number | null
-  maxPrice: number | null
+  minPrice: string | null
+  maxPrice: string | null
   currencyId: string | null
 }
 
@@ -515,7 +515,7 @@ export const Template: VFC<
                         w="full"
                         isDisabled={isSubmitting}
                         onChange={(x: any) => setValue('minPrice', x)}
-                        format={(e) => e.toString()}
+                        min={0}
                       >
                         <NumberInputField
                           id="minPrice"
@@ -523,9 +523,9 @@ export const Template: VFC<
                           {...register('minPrice', {
                             validate: (value) => {
                               if (!value) return
-                              const splitValue = value.toString().split('.')
+                              const splitValue = value.split('.')
 
-                              if (value < 0) {
+                              if (parseFloat(value) < 0) {
                                 return t(
                                   'explore.form.min-price.validation.positive',
                                 )
@@ -559,7 +559,7 @@ export const Template: VFC<
                         w="full"
                         isDisabled={isSubmitting}
                         onChange={(x: any) => setValue('maxPrice', x)}
-                        format={(e) => e.toString()}
+                        min={0}
                       >
                         <NumberInputField
                           id="maxPrice"
@@ -567,9 +567,9 @@ export const Template: VFC<
                           {...register('maxPrice', {
                             validate: (value) => {
                               if (!value) return
-                              const splitValue = value.toString().split('.')
+                              const splitValue = value.split('.')
 
-                              if (value < 0) {
+                              if (parseFloat(value) < 0) {
                                 return t(
                                   'explore.form.max-price.validation.positive',
                                 )

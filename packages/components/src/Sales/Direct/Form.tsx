@@ -119,49 +119,29 @@ const SalesDirectForm: VFC<Props> = ({
   }, [currencies, currencyId])
   const priceUnit = parsePrice(price, currency.decimals)
 
+  const quantityBN = useMemo(() => {
+    if (!quantity) return BigNumber.from(0)
+    try {
+      return BigNumber.from(quantity)
+    } catch {
+      console.error(`Cannot parse quantity ${quantity} as BigNumber`)
+      return BigNumber.from(0)
+    }
+  }, [quantity])
+
   const amountFees = useMemo(() => {
     if (!price) return BigNumber.from(0)
     return priceUnit.mul(feesPerTenThousand).div(10000)
   }, [price, priceUnit, feesPerTenThousand])
-
-  const amountFeesWithQuantity = useMemo(() => {
-    if (!quantity) return BigNumber.from(0)
-    try {
-      return amountFees.mul(quantity)
-    } catch {
-      console.error(`Cannot parse fees with quantity as BigNumber`)
-      return BigNumber.from(0)
-    }
-  }, [amountFees, quantity])
 
   const amountRoyalties = useMemo(() => {
     if (!price) return BigNumber.from(0)
     return priceUnit.mul(royaltiesPerTenThousand).div(10000)
   }, [price, priceUnit, royaltiesPerTenThousand])
 
-  const amountRoyaltiesWithQuantity = useMemo(() => {
-    if (!quantity) return BigNumber.from(0)
-    try {
-      return amountRoyalties.mul(quantity)
-    } catch {
-      console.error(`Cannot parse royalties with quantity as BigNumber`)
-      return BigNumber.from(0)
-    }
-  }, [amountRoyalties, quantity])
-
   const priceWithFees = useMemo(() => {
     return priceUnit.sub(amountFees).sub(isCreator ? 0 : amountRoyalties)
   }, [amountFees, priceUnit, amountRoyalties, isCreator])
-
-  const priceWithFeesWithQuantity = useMemo(() => {
-    if (!quantity) return BigNumber.from(0)
-    try {
-      return priceWithFees.mul(quantity)
-    } catch {
-      console.error(`Cannot parse price with fees and quantity as BigNumber`)
-      return BigNumber.from(0)
-    }
-  }, [priceWithFees, quantity])
 
   const onSubmit = handleSubmit(async ({ expiredAt }) => {
     if (activeStep !== CreateOfferStep.INITIAL) return
@@ -230,7 +210,7 @@ const SalesDirectForm: VFC<Props> = ({
             allowMouseWheel
             w="full"
             onChange={(x) => setValue('price', x)}
-            format={(e) => e.toString()}
+            min={0}
           >
             <NumberInputField
               id="price"
@@ -293,7 +273,8 @@ const SalesDirectForm: VFC<Props> = ({
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('quantity', x)}
-              format={(e) => e.toString()}
+              min={1}
+              max={quantityAvailable?.toNumber()}
             >
               <NumberInputField
                 id="quantity"
@@ -306,7 +287,7 @@ const SalesDirectForm: VFC<Props> = ({
                       parseFloat(value) > quantityAvailable?.toNumber()
                     ) {
                       return t('sales.direct.form.validation.in-range', {
-                        quantityAvailable: quantityAvailable?.toNumber(),
+                        max: quantityAvailable?.toNumber(),
                       })
                     }
                     if (!/^\d+$/.test(value)) {
@@ -444,7 +425,7 @@ const SalesDirectForm: VFC<Props> = ({
                 color="brand.black"
                 mx={1}
                 fontWeight="semibold"
-                amount={amountFeesWithQuantity}
+                amount={amountFees.mul(quantityBN)}
                 currency={currency}
               />
             </Text>
@@ -458,7 +439,7 @@ const SalesDirectForm: VFC<Props> = ({
                 color="brand.black"
                 ml={1}
                 fontWeight="semibold"
-                amount={amountRoyaltiesWithQuantity}
+                amount={amountRoyalties.mul(quantityBN)}
                 currency={currency}
               />
             </Text>
@@ -470,7 +451,7 @@ const SalesDirectForm: VFC<Props> = ({
                 color="brand.black"
                 mx={1}
                 fontWeight="semibold"
-                amount={priceWithFeesWithQuantity}
+                amount={priceWithFees.mul(quantityBN)}
                 currency={currency}
               />
             </Text>

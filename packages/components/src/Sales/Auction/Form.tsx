@@ -158,7 +158,7 @@ const SalesAuctionForm: VFC<Props> = ({
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('price', x)}
-              format={(e) => e.toString()}
+              min={0}
             >
               <NumberInputField
                 id="price"
