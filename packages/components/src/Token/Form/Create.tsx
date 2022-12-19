@@ -261,10 +261,10 @@ const TokenFormCreate: FC<Props> = ({
           <InputGroup>
             <NumberInput
               clampValueOnBlur={false}
+              min={1}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('amount', x)}
-              min={1}
             >
               <NumberInputField
                 id="amount"
@@ -304,11 +304,11 @@ const TokenFormCreate: FC<Props> = ({
         <InputGroup>
           <NumberInput
             clampValueOnBlur={false}
-            allowMouseWheel
-            w="full"
             min={0}
             max={maxRoyalties}
             step={0.01}
+            allowMouseWheel
+            w="full"
             onChange={(x) => setValue('royalties', x)}
           >
             <NumberInputField

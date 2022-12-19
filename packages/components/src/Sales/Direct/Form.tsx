@@ -206,11 +206,11 @@ const SalesDirectForm: VFC<Props> = ({
         <InputGroup>
           <NumberInput
             clampValueOnBlur={false}
+            min={0}
             step={Math.pow(10, -currency.decimals)}
             allowMouseWheel
             w="full"
             onChange={(x) => setValue('price', x)}
-            min={0}
           >
             <NumberInputField
               id="price"
@@ -270,11 +270,11 @@ const SalesDirectForm: VFC<Props> = ({
           <InputGroup>
             <NumberInput
               clampValueOnBlur={false}
+              min={1}
+              max={quantityAvailable?.toNumber()}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('quantity', x)}
-              min={1}
-              max={quantityAvailable?.toNumber()}
             >
               <NumberInputField
                 id="quantity"

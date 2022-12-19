@@ -510,12 +510,12 @@ export const Template: VFC<
                     <InputGroup>
                       <NumberInput
                         clampValueOnBlur={false}
+                        min={0}
                         step={Math.pow(10, -currency.decimals)}
                         allowMouseWheel
                         w="full"
                         isDisabled={isSubmitting}
                         onChange={(x: any) => setValue('minPrice', x)}
-                        min={0}
                       >
                         <NumberInputField
                           id="minPrice"
@@ -554,12 +554,12 @@ export const Template: VFC<
                     <InputGroup>
                       <NumberInput
                         clampValueOnBlur={false}
+                        min={0}
                         step={Math.pow(10, -currency.decimals)}
                         allowMouseWheel
                         w="full"
                         isDisabled={isSubmitting}
                         onChange={(x: any) => setValue('maxPrice', x)}
-                        min={0}
                       >
                         <NumberInputField
                           id="maxPrice"

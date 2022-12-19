@@ -303,11 +303,11 @@ const OfferFormBid: FC<Props> = (props) => {
           <InputGroup>
             <NumberInput
               clampValueOnBlur={false}
+              min={1}
+              max={parseInt(props.supply, 10)}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('quantity', x)}
-              min={1}
-              max={parseInt(props.supply, 10)}
             >
               <NumberInputField
                 id="quantity"
