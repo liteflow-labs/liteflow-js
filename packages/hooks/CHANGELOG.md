@@ -6,6 +6,8 @@
 
 #### Added
 
+- Add new error message for user rejected transaction on wallet [#99](https://github.com/liteflow-labs/liteflow-js/pull/99)
+
 #### Changed
 
 #### Deprecated
