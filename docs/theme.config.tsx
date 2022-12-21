@@ -44,14 +44,11 @@ function Logo(): JSX.Element {
 const config: DocsThemeConfig = {
   head: Head,
   primaryHue: 146,
-  chat: {
-    icon: null,
-  },
   project: {
-    link: 'https://github.com/liteflow-labs/libraries',
+    link: 'https://github.com/liteflow-labs/liteflow-js',
   },
   docsRepositoryBase:
-    'https://github.com/liteflow-labs/libraries/blob/main/docs',
+    'https://github.com/liteflow-labs/liteflow-js/blob/main/docs',
   logo: Logo,
   navigation: {
     prev: true,

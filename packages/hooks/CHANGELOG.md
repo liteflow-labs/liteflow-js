@@ -10,6 +10,8 @@
 
 #### Changed
 
+- Change react library from dependency to peerDependencies and accept react 18 [#97](https://github.com/liteflow-labs/liteflow-js/pull/97)
+
 #### Deprecated
 
 #### Removed
@@ -23,7 +25,7 @@
 #### Breaking Changes
 
 - Remove deprecated `useEagerConnect`, `useActivateWallet`, `useSession`, `useSigner` [#90](https://github.com/liteflow-labs/liteflow-js/pull/90)
-  - Have a look to https://github.com/liteflow-labs/marketplace-template/pull/44 to follow the migration or https://github.com/liteflow-labs/minimal-app
+  - Have a look to https://github.com/liteflow-labs/starter-kit/pull/44 to follow the migration or https://github.com/liteflow-labs/minimal-app
 
 #### Added
 

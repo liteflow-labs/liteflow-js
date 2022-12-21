@@ -1,3 +1,3 @@
-.nx-text-primary-500 {
-  color: #02b14f;
+html[class~='light'] .nx-text-primary-600 {
+  color: hsl(var(--nextra-primary-hue) 100% 30% / var(--tw-text-opacity));
 }
