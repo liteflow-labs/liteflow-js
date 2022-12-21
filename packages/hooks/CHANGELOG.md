@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Change react library from dependency to peerDependencies and accept react 18 [#97](https://github.com/liteflow-labs/liteflow-js/pull/97)
+
 #### Deprecated
 
 #### Removed
