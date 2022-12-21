@@ -20,14 +20,15 @@ export default function Component() {
 
   const handleClick = async () => {
     await createNFT({
-      standard: 'ERC721', // can be Standard.ERC721 or Standard.ERC1155
+      chainId: 1, // chainId of the network to mint on
+      collection: '0x0000', // address of the collection to use
       name: 'Azuki #1', // name of the NFT
       description: 'Take the red bean to join the garden.', // description of the NFT
       content: azukiImage, // content file uploaded by the user
       isAnimation: false, // set to true if content file is a video. Require to set preview
       isPrivate: false, // set to true if content is private. Require to set preview.
       // optional
-      amount: 1, // number of NFT to create. Require Standard.ERC1155
+      amount: 1, // number of NFT to create. Require ERC1155
       royalties: 10, // royalty amount in percentage
       preview: azukiImagePreview, // preview in the case of private or animation content uploaded by user
       traits: [
@@ -78,7 +79,8 @@ useCreateNFT(
 ```tsx
 [
   ({
-    standard: Standard
+    chainId: number
+    collectionAddress: string
     name: string
     description: string
     content: File
@@ -104,14 +106,15 @@ Arguments:
 
 ```tsx
 {
-  standard: Standard,                           // can be Standard.ERC721 or Standard.ERC1155
+  chainId: Number,                              // id of the chain to mint on
+  collectionAddress: string,                    // address of the collection to mint on
   name: string,                                 // name of the NFT
   description: string,                          // description of the NFT
   content: File,                                // content file uploaded by the user
   preview?: File,                               // preview in the case of private or animation content uploaded by user
   isAnimation: boolean,                         // set to true if content file is a video. Require to set preview
   isPrivate: boolean,                           // set to true if content is private. Require to set preview.
-  amount?: number,                              // number of NFT to create. Require Standard.ERC1155
+  amount?: number,                              // number of NFT to create. Require ERC1155
   royalties?: number,                           // royalty amount in percentage
   traits?: { type: string, value: string }[]    // Array of traits associated to the NFT
 }
