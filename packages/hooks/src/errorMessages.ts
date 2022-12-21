@@ -35,5 +35,5 @@ export enum ErrorMessages {
 
   POLLING_TIMEOUT = 'Polling timeout. could not check ownership',
 
-  TRANSACTION_REJECTED_BY_USER = 'You rejected the transaction',
+  TRANSACTION_REJECTED_BY_USER = 'Transaction was cancelled',
 }
