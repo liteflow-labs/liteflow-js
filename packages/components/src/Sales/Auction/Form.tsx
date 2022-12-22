@@ -29,7 +29,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import {
   formatError,
   getHumanizedDate,
-  parsePrice,
+  parseBigNumber,
   useCreateAuction,
 } from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
@@ -91,7 +91,7 @@ const SalesAuctionForm: VFC<Props> = ({
     if (!c) throw new Error("Can't find currency")
     return c
   }, [currencies, currencyId])
-  const priceUnit = parsePrice(price, currency.decimals)
+  const priceUnit = parseBigNumber(price, currency.decimals)
 
   // TODO: Add check for approval of maker token
   const onSubmit = handleSubmit(async (data) => {
@@ -138,7 +138,7 @@ const SalesAuctionForm: VFC<Props> = ({
           />
         )}
 
-        <FormControl>
+        <FormControl isInvalid={!!errors.price}>
           <HStack spacing={1}>
             <FormLabel htmlFor="price" m={0}>
               {t('sales.auction.form.price.label')}
@@ -156,16 +156,28 @@ const SalesAuctionForm: VFC<Props> = ({
               clampValueOnBlur={false}
               min={0}
               step={Math.pow(10, -currency.decimals)}
-              precision={currency.decimals}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('price', x)}
-              format={(e) => e.toString()}
             >
               <NumberInputField
                 id="price"
                 placeholder={t('sales.auction.form.price.placeholder')}
-                {...register('price')}
+                {...register('price', {
+                  validate: (value) => {
+                    const splitValue = value.split('.')
+
+                    if (parseFloat(value) <= 0)
+                      return t('sales.auction.form.validation.positive')
+                    if (
+                      splitValue[1] &&
+                      splitValue[1].length > currency.decimals
+                    )
+                      return t('sales.auction.form.validation.decimals', {
+                        nbDecimals: currency.decimals,
+                      })
+                  },
+                })}
               />
               <NumberInputStepper>
                 <NumberIncrementStepper />
@@ -185,6 +197,9 @@ const SalesAuctionForm: VFC<Props> = ({
               }
             />
           </InputGroup>
+          {errors.price && (
+            <FormErrorMessage>{errors.price.message}</FormErrorMessage>
+          )}
         </FormControl>
       </Stack>
 

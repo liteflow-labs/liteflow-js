@@ -1,4 +1,5 @@
 import { VoidSigner } from '@ethersproject/abstract-signer'
+import { BigNumber } from '@ethersproject/bignumber'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import Form from './Form'
@@ -55,5 +56,6 @@ IsMultiple.args = {
   royaltiesPerTenThousand: 1000,
   isCreator: false,
   offerValidity: 2419200,
+  quantityAvailable: BigNumber.from(20),
   onCreated: () => console.log('onCreated'),
 }

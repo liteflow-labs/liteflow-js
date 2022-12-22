@@ -25,7 +25,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import {
   formatDateDatetime,
   formatError,
-  parsePrice,
+  parseBigNumber,
   useBalance,
   useCreateOffer,
 } from '@nft/hooks'
@@ -149,12 +149,12 @@ const OfferFormBid: FC<Props> = (props) => {
   }, [currencies, currencyId])
 
   const [balance] = useBalance(account, currency.id)
-  const priceUnit = parsePrice(price, currency.decimals)
+  const priceUnit = parseBigNumber(price, currency.decimals)
+  const quantityBN = parseBigNumber(quantity)
 
   const totalPrice = useMemo(() => {
-    if (!quantity) return BigNumber.from(0)
-    return priceUnit.mul(quantity)
-  }, [priceUnit, quantity])
+    return priceUnit.mul(quantityBN)
+  }, [priceUnit, quantityBN])
 
   const balanceZero = useMemo(() => {
     if (!balance) return false
@@ -178,7 +178,7 @@ const OfferFormBid: FC<Props> = (props) => {
       createOfferOnOpen()
       const id = await createOffer({
         type: 'BUY',
-        quantity: BigNumber.from(quantity),
+        quantity: quantityBN,
         unitPrice: priceUnit,
         assetId: assetId,
         currencyId: currency.id,
@@ -245,20 +245,25 @@ const OfferFormBid: FC<Props> = (props) => {
             clampValueOnBlur={false}
             min={0}
             step={Math.pow(10, -currency.decimals)}
-            precision={currency.decimals}
             allowMouseWheel
             w="full"
             onChange={(x) => setValue('bid', x)}
-            format={(e) => e.toString()}
           >
             <NumberInputField
               id="bid"
               placeholder={t('offer.form.bid.price.placeholder')}
               {...register('bid', {
                 required: t('offer.form.bid.validation.required'),
-                validate: (value) =>
-                  parseFloat(value) > 0 ||
-                  t('offer.form.bid.validation.positive'),
+                validate: (value) => {
+                  const splitValue = value.split('.')
+
+                  if (parseFloat(value) <= 0)
+                    return t('offer.form.bid.validation.positive')
+                  if (splitValue[1] && splitValue[1].length > currency.decimals)
+                    return t('offer.form.bid.validation.decimals', {
+                      nbDecimals: currency.decimals,
+                    })
+                },
               })}
             />
             <NumberInputStepper>
@@ -299,17 +304,28 @@ const OfferFormBid: FC<Props> = (props) => {
               clampValueOnBlur={false}
               min={1}
               max={parseInt(props.supply, 10)}
-              step={1}
               allowMouseWheel
               w="full"
               onChange={(x) => setValue('quantity', x)}
-              format={(e) => e.toString()}
             >
               <NumberInputField
                 id="quantity"
                 placeholder={t('offer.form.bid.quantity.placeholder')}
                 {...register('quantity', {
                   required: t('offer.form.bid.validation.required'),
+                  validate: (value) => {
+                    if (
+                      parseInt(value, 10) < 1 ||
+                      parseInt(value, 10) > parseInt(props.supply, 10)
+                    ) {
+                      return t('offer.form.bid.validation.in-range', {
+                        max: parseInt(props.supply, 10),
+                      })
+                    }
+                    if (!/^\d+$/.test(value)) {
+                      return t('offer.form.bid.validation.integer')
+                    }
+                  },
                 })}
               />
               <NumberInputStepper>
@@ -376,7 +392,7 @@ const OfferFormBid: FC<Props> = (props) => {
         <Summary
           currency={currency}
           price={priceUnit}
-          quantity={quantity}
+          quantity={quantityBN}
           isSingle={!props.multiple}
           feesOnTopPerTenThousand={feesPerTenThousand}
         />

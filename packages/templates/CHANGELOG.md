@@ -18,6 +18,8 @@
 
 #### Fixed
 
+- Fixed validations on number inputs accross the templates. [#96](https://github.com/liteflow-labs/liteflow-js/pull/96)
+
 #### Security
 
 ## [v1.0.0-beta.7](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.7) - 2022-11-03

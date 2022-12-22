@@ -18,7 +18,7 @@ Default.args = {
   },
   isSingle: true,
   price: BigNumber.from('400').mul(BigNumber.from(10).pow(18)),
-  quantity: 200,
+  quantity: BigNumber.from(200),
 }
 
 export const Multiple = Template.bind({})
