@@ -210,20 +210,12 @@ export default function useCreateNFT(
 
         // lazy minting
         if ((await config).hasLazyMint) {
-          const assetToCreate: LazyMintedAssetSignatureInput = {
+          const assetToCreate = {
             creatorAddress: account.toLowerCase(),
             royalties: royalties ? Math.round(royalties * 100) : null,
             supply: amount ? amount.toString() : '1',
             metadata: metadata,
-            // deprecated fields that are meant to be removed
-            standard: null,
-            animationUrl: null,
-            description: null,
-            image: null,
-            name: null,
-            traits: null,
-            unlockableContent: null,
-          }
+          } as LazyMintedAssetSignatureInput
 
           const { createLazyMintedAssetSignature } =
             await sdk.CreateLazyMintedAssetSignature({

@@ -4,7 +4,7 @@
 
 #### Breaking Changes
 
-- The `useCreateNFT` function has been updated to accept `chainId` and `collectionAddress` as arguments, rather than the previous `standard` attribute. To migrate your application to this new version, you will need to pass the desired collection to `useCreateNFT` by either fetching it dynamically or hardcoding it in your code.
+- The `useCreateNFT` function has been updated to accept `chainId` and `collectionAddress` as arguments, rather than the previous `standard` attribute. To migrate your application to this new version, you will need to pass the desired collection to `useCreateNFT` by either fetching it dynamically or hardcoding it in your code. [#102](https://github.com/liteflow-labs/liteflow-js/pull/102)
 
 #### Added
 

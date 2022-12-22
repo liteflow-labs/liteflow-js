@@ -21,7 +21,7 @@ export default function Component() {
   const handleClick = async () => {
     await createNFT({
       chainId: 1, // chainId of the network to mint on
-      collection: '0x0000', // address of the collection to use
+      collectionAddress: '0x0000', // address of the collection to use
       name: 'Azuki #1', // name of the NFT
       description: 'Take the red bean to join the garden.', // description of the NFT
       content: azukiImage, // content file uploaded by the user
