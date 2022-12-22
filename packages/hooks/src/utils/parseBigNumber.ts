@@ -3,7 +3,7 @@ import { BigNumber as BN } from 'bignumber.js'
 
 export const parseBigNumber = (
   value: string | undefined,
-  decimals: number,
+  decimals = 0,
 ): BigNumber => {
   if (!value) return BigNumber.from(0)
   try {
