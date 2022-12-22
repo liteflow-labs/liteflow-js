@@ -21,8 +21,12 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { Signer } from '@ethersproject/abstract-signer'
-import { BigNumber } from '@ethersproject/bignumber'
-import { formatError, useAcceptOffer, useBalance } from '@nft/hooks'
+import {
+  formatError,
+  parseBigNumber,
+  useAcceptOffer,
+  useBalance,
+} from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FC, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
@@ -97,15 +101,13 @@ const OfferFormCheckout: FC<Props> = ({
 
   const [balance] = useBalance(account, currency.id)
 
-  const priceUnit = useMemo(
-    () => BigNumber.from(offer.unitPrice),
-    [offer.unitPrice],
-  )
+  const priceUnit = parseBigNumber(offer.unitPrice)
+  const quantityBN = parseBigNumber(quantity)
 
   const canPurchase = useMemo(() => {
-    if (!balance || !quantity) return false
-    return balance.gte(priceUnit.mul(quantity))
-  }, [balance, priceUnit, quantity])
+    if (!balance || !quantityBN) return false
+    return balance.gte(priceUnit.mul(quantityBN))
+  }, [balance, priceUnit, quantityBN])
 
   const onSubmit = handleSubmit(async ({ quantity }) => {
     if (!offer) throw new Error('offer falsy')
@@ -186,7 +188,7 @@ const OfferFormCheckout: FC<Props> = ({
       <Summary
         currency={currency}
         price={priceUnit}
-        quantity={quantity}
+        quantity={quantityBN}
         isSingle={!multiple}
       />
 

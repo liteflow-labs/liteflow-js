@@ -30,7 +30,7 @@
 
 #### Fixed
 
-- Ensure that the `parsePrice` doesn't crash even with invalid input [#68](https://github.com/liteflow-labs/libraries/pull/68)
+- Ensure that the `parseBigNumber` doesn't crash even with invalid input [#68](https://github.com/liteflow-labs/libraries/pull/68)
 
 ## [v1.0.0-beta.6](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.6) - 2022-10-28
 
@@ -77,7 +77,7 @@
   - `useFileTransformer` [#2107](https://github.com/liteflow-labs/nft/pull/2107)
   - `useFormatAddress`: kept helper `formatAddress` [#2107](https://github.com/liteflow-labs/nft/pull/2107)
   - `useErrorFormatter`: kept helper `formatError` [#2107](https://github.com/liteflow-labs/nft/pull/2107)
-  - `useParsePrice`: kept helper `parsePrice` [#2107](https://github.com/liteflow-labs/nft/pull/2107)
+  - `useParsePrice`: kept helper `parseBigNumber` [#2107](https://github.com/liteflow-labs/nft/pull/2107)
   - `useBlockExplorer`: moved to template package but not exported [#2107](https://github.com/liteflow-labs/nft/pull/2107)
   - `useExecuteOnAccountChange`: moved to template package but not exported [#2107](https://github.com/liteflow-labs/nft/pull/2107)
   - `useLocalFileURL`: moved to template package but not exported [#2107](https://github.com/liteflow-labs/nft/pull/2107)

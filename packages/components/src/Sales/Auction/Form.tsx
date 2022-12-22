@@ -29,7 +29,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import {
   formatError,
   getHumanizedDate,
-  parsePrice,
+  parseBigNumber,
   useCreateAuction,
 } from '@nft/hooks'
 import useTranslation from 'next-translate/useTranslation'
@@ -91,7 +91,7 @@ const SalesAuctionForm: VFC<Props> = ({
     if (!c) throw new Error("Can't find currency")
     return c
   }, [currencies, currencyId])
-  const priceUnit = parsePrice(price, currency.decimals)
+  const priceUnit = parseBigNumber(price, currency.decimals)
 
   // TODO: Add check for approval of maker token
   const onSubmit = handleSubmit(async (data) => {

@@ -29,7 +29,7 @@ import {
   TokenCard,
   wrapServerSideProps,
 } from '@nft/components'
-import { parsePrice, removeEmptyFromObject } from '@nft/hooks'
+import { parseBigNumber, removeEmptyFromObject } from '@nft/hooks'
 import { GetServerSideProps } from 'next'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
@@ -146,7 +146,7 @@ const minPriceFilter = (
         availableQuantity: { greaterThan: '0' },
         currencyId: { equalTo: currency.id },
         unitPrice: {
-          greaterThanOrEqualTo: parsePrice(
+          greaterThanOrEqualTo: parseBigNumber(
             minPrice.toString(),
             currency.decimals,
           ).toString(),
@@ -167,7 +167,7 @@ const maxPriceFilter = (
         availableQuantity: { greaterThan: '0' },
         currencyId: { equalTo: currency.id },
         unitPrice: {
-          lessThanOrEqualTo: parsePrice(
+          lessThanOrEqualTo: parseBigNumber(
             maxPrice.toString(),
             currency.decimals,
           ).toString(),
@@ -505,8 +505,8 @@ export const Template: VFC<
               />
 
               {currency && (
-                <FormControl isInvalid={!!errors.minPrice || !!errors.maxPrice}>
-                  <Flex gap={3}>
+                <Flex gap={3}>
+                  <FormControl isInvalid={!!errors.minPrice}>
                     <InputGroup>
                       <NumberInput
                         clampValueOnBlur={false}
@@ -550,7 +550,13 @@ export const Template: VFC<
                         </NumberInputStepper>
                       </NumberInput>
                     </InputGroup>
-
+                    {errors.minPrice && (
+                      <FormErrorMessage>
+                        {errors.minPrice.message}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.maxPrice}>
                     <InputGroup>
                       <NumberInput
                         clampValueOnBlur={false}
@@ -566,7 +572,7 @@ export const Template: VFC<
                           placeholder={t('explore.form.max-price.placeholder')}
                           {...register('maxPrice', {
                             validate: (value) => {
-                              if (!value) return
+                              if (value === null) return
                               const splitValue = value.toString().split('.')
 
                               if (value < 0) {
@@ -594,20 +600,13 @@ export const Template: VFC<
                         </NumberInputStepper>
                       </NumberInput>
                     </InputGroup>
-                  </Flex>
-                  <Stack spacing={1} w="full">
-                    {errors.minPrice && (
-                      <FormErrorMessage>
-                        {errors.minPrice.message}
-                      </FormErrorMessage>
-                    )}
                     {errors.maxPrice && (
                       <FormErrorMessage>
                         {errors.maxPrice.message}
                       </FormErrorMessage>
                     )}
-                  </Stack>
-                </FormControl>
+                  </FormControl>
+                </Flex>
               )}
             </Stack>
 

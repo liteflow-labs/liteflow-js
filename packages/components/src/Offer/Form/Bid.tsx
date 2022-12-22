@@ -25,7 +25,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import {
   formatDateDatetime,
   formatError,
-  parsePrice,
+  parseBigNumber,
   useBalance,
   useCreateOffer,
 } from '@nft/hooks'
@@ -149,12 +149,12 @@ const OfferFormBid: FC<Props> = (props) => {
   }, [currencies, currencyId])
 
   const [balance] = useBalance(account, currency.id)
-  const priceUnit = parsePrice(price, currency.decimals)
+  const priceUnit = parseBigNumber(price, currency.decimals)
+  const quantityBN = parseBigNumber(quantity)
 
   const totalPrice = useMemo(() => {
-    if (!quantity) return BigNumber.from(0)
-    return priceUnit.mul(quantity)
-  }, [priceUnit, quantity])
+    return priceUnit.mul(quantityBN)
+  }, [priceUnit, quantityBN])
 
   const balanceZero = useMemo(() => {
     if (!balance) return false
@@ -178,7 +178,7 @@ const OfferFormBid: FC<Props> = (props) => {
       createOfferOnOpen()
       const id = await createOffer({
         type: 'BUY',
-        quantity: BigNumber.from(quantity),
+        quantity: quantityBN,
         unitPrice: priceUnit,
         assetId: assetId,
         currencyId: currency.id,
@@ -248,7 +248,6 @@ const OfferFormBid: FC<Props> = (props) => {
             allowMouseWheel
             w="full"
             onChange={(x) => setValue('bid', x)}
-            format={(e) => e.toString()}
           >
             <NumberInputField
               id="bid"
@@ -393,7 +392,7 @@ const OfferFormBid: FC<Props> = (props) => {
         <Summary
           currency={currency}
           price={priceUnit}
-          quantity={quantity}
+          quantity={quantityBN}
           isSingle={!props.multiple}
           feesOnTopPerTenThousand={feesPerTenThousand}
         />
