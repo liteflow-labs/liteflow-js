@@ -14,6 +14,7 @@
 #### Changed
 
 - Change react library from dependency to peerDependencies and accept react 18 [#97](https://github.com/liteflow-labs/liteflow-js/pull/97)
+- Updated `@nft/api-graphql` lib to `1.0.0-beta.9` (https://github.com/liteflow-labs/liteflow-js/pull/102)
 
 #### Deprecated
 
