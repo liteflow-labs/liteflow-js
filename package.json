@@ -10,7 +10,7 @@
     "lint:fix": "npm run eslint -- --fix && npm run prettier -- --write",
     "clean": "npm run clean -ws --if-present",
     "eslint": "eslint \"**/*.{ts,tsx}\"",
-    "prettier": "prettier \"**/*.{ts,tsx,json,md}\"",
+    "prettier": "prettier \"**/*.{js,ts,tsx,json,md}\"",
     "test": "npm run test -ws --if-present",
     "postinstall": "npm run graphql-codegen",
     "build": "npm run build -ws --if-present",
