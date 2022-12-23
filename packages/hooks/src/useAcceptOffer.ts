@@ -73,7 +73,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
   },
 ] {
   const { sdk } = useContext(LiteflowContext)
-  const [{ pollOwnership, checkOwnership }] = useCheckOwnership()
+  const { pollOwnership, checkOwnership } = useCheckOwnership()
 
   const [activeStep, setActiveProcess] = useState<AcceptOfferStep>(
     AcceptOfferStep.INITIAL,
