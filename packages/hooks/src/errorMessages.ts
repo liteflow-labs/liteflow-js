@@ -32,4 +32,6 @@ export enum ErrorMessages {
   OWNERSHIP_NOT_FOUND = 'Ownership not found',
 
   POLLING_TIMEOUT = 'Polling timeout. could not check ownership',
+
+  TRANSACTION_REJECTED_BY_USER = 'Transaction was cancelled',
 }
