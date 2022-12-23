@@ -4,39 +4,32 @@ import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-import { Standard } from './graphql'
+import { LazyMintedAssetSignatureInput } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import useConfig from './useConfig'
 import useIPFSUploader from './useIPFSUploader'
 import { convertTx } from './utils/transaction'
 
 gql`
-  mutation CreateAsset(
-    $input: AssetInputBis!
+  mutation CreateAssetTransaction(
+    $chainId: Int!
+    $collectionAddress: Address!
+    $metadata: MetadataInput!
     $creatorAddress: Address!
-    $amount: Uint256!
     $royalties: Int
+    $supply: Uint256!
   ) {
-    createAsset(input: { asset: $input }) {
-      asset {
-        id
-        token {
-          __typename
-          ... on ERC721 {
-            mint(owner: $creatorAddress, royalties: $royalties) {
-              ...Transaction
-            }
-          }
-          ... on ERC1155 {
-            mint(
-              owner: $creatorAddress
-              amount: $amount
-              royalties: $royalties
-            ) {
-              ...Transaction
-            }
-          }
-        }
+    createAssetTransaction(
+      chainId: $chainId
+      collectionAddress: $collectionAddress
+      creatorAddress: $creatorAddress
+      metadata: $metadata
+      royalties: $royalties
+      supply: $supply
+    ) {
+      assetId
+      transaction {
+        ...Transaction
       }
     }
   }
@@ -44,9 +37,17 @@ gql`
 
 gql`
   mutation CreateLazyMintedAssetSignature(
+    $chainId: Int!
+    $collectionAddress: Address!
     $asset: LazyMintedAssetSignatureInput!
   ) {
-    createLazyMintedAssetSignature(input: { asset: $asset }) {
+    createLazyMintedAssetSignature(
+      input: {
+        chainId: $chainId
+        collectionAddress: $collectionAddress
+        asset: $asset
+      }
+    ) {
       eip712Data
     }
   }
@@ -54,10 +55,19 @@ gql`
 
 gql`
   mutation CreateLazyMintedAsset(
+    $chainId: Int!
+    $collectionAddress: Address!
     $asset: LazyMintedAssetInput!
     $signature: String!
   ) {
-    createLazyMintedAsset(input: { asset: $asset, signature: $signature }) {
+    createLazyMintedAsset(
+      input: {
+        chainId: $chainId
+        collectionAddress: $collectionAddress
+        asset: $asset
+        signature: $signature
+      }
+    ) {
       asset {
         id
       }
@@ -76,7 +86,8 @@ export enum CreateNftStep {
 }
 
 type createNftFn = (data: {
-  standard: Standard
+  chainId: number
+  collectionAddress: string
   name: string
   description: string
   content: File
@@ -158,13 +169,14 @@ export default function useCreateNFT(
 
   const createNft: createNftFn = useCallback(
     async ({
+      chainId,
+      collectionAddress,
       name,
       description,
       content,
       preview,
       isAnimation,
       isPrivate,
-      standard,
       amount,
       royalties,
       traits,
@@ -184,23 +196,30 @@ export default function useCreateNFT(
           isAnimation,
           isPrivate,
         })
+        const assetToCreate = {
+          creatorAddress: account.toLowerCase(),
+          royalties: royalties ? Math.round(royalties * 100) : null,
+          supply: amount ? amount.toString() : '1',
+          metadata: {
+            name,
+            image: media.image,
+            description,
+            animationUrl: media.animationUrl,
+            unlockableContent: media.unlockableContent,
+            attributes: (traits || []).map((x) => ({
+              traitType: x.type,
+              value: x.value,
+            })),
+          },
+        }
 
         // lazy minting
         if ((await config).hasLazyMint) {
-          const assetToCreate = {
-            standard,
-            creatorAddress: account.toLowerCase(),
-            description,
-            name,
-            traits: traits || null,
-            ...media,
-            supply: amount ? amount.toString() : '1',
-            royalties: royalties ? Math.round(royalties * 100) : null,
-          }
-
           const { createLazyMintedAssetSignature } =
             await sdk.CreateLazyMintedAssetSignature({
-              asset: assetToCreate,
+              chainId: chainId,
+              collectionAddress: collectionAddress,
+              asset: assetToCreate as LazyMintedAssetSignatureInput, // TODO: remove this cast when attributes from the API are removed
             })
 
           invariant(
@@ -218,10 +237,12 @@ export default function useCreateNFT(
           // send signature to api
           setActiveProcess(CreateNftStep.LAZYMINT_PENDING)
           const { createLazyMintedAsset } = await sdk.CreateLazyMintedAsset({
+            chainId: chainId,
+            collectionAddress: collectionAddress,
             signature,
             asset: {
               tokenId: message.tokenId,
-              ...assetToCreate,
+              ...(assetToCreate as LazyMintedAssetSignatureInput), // TODO: remove this cast when attributes from the API are removed
             },
           })
           invariant(
@@ -231,30 +252,20 @@ export default function useCreateNFT(
           return createLazyMintedAsset.asset.id
         }
 
-        const { createAsset } = await sdk.CreateAsset({
-          input: {
-            standard,
-            creatorAddress: account.toLowerCase(),
-            description,
-            name,
-            traits: traits || null,
-            ...media,
-          },
-          creatorAddress: account.toLowerCase(),
-          amount: amount ? amount.toString() : '1',
-          royalties: royalties ? Math.round(royalties * 100) : 0,
+        const { createAssetTransaction } = await sdk.CreateAssetTransaction({
+          chainId: chainId,
+          collectionAddress: collectionAddress,
+          ...assetToCreate,
         })
-        const asset = createAsset?.asset
-        invariant(asset, ErrorMessages.ASSET_CREATION_FAILED)
         invariant(
-          asset.token.__typename === 'ERC721' ||
-            asset.token.__typename === 'ERC1155',
-          ErrorMessages.ASSET_INVALID_STANDARD,
+          createAssetTransaction,
+          ErrorMessages.ASSET_TRANSACTION_CREATION_FAILED,
         )
-        invariant(asset.token.mint, ErrorMessages.ASSET_NO_MINT)
 
         setActiveProcess(CreateNftStep.TRANSACTION_SIGNATURE)
-        const tx = await signer.sendTransaction(convertTx(asset.token.mint))
+        const tx = await signer.sendTransaction(
+          convertTx(createAssetTransaction.transaction),
+        )
         setTransactionHash(tx.hash)
         setActiveProcess(CreateNftStep.TRANSACTION_PENDING)
         // waiting for transaction to be mined
@@ -266,13 +277,13 @@ export default function useCreateNFT(
         // poll the api until the ownership is updated
         console.info('polling api to check ownership...')
         await pollOwnership({
-          assetId: asset.id,
+          assetId: createAssetTransaction.assetId,
           ownerAddress: account.toLowerCase(),
           initialQuantity: '0',
         })
         console.info('polling done')
 
-        return asset.id
+        return createAssetTransaction.assetId
       } finally {
         setActiveProcess(CreateNftStep.INITIAL)
         setTransactionHash(undefined)
