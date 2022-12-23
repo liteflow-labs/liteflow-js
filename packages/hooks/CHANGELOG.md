@@ -4,6 +4,8 @@
 
 #### Breaking Changes
 
+- Removed parsePrice from package. [#106](https://github.com/liteflow-labs/liteflow-js/pull/106)
+
 #### Added
 
 - Add new error message for user rejected transaction on wallet [#99](https://github.com/liteflow-labs/liteflow-js/pull/99)
