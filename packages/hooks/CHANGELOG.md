@@ -4,6 +4,22 @@
 
 #### Breaking Changes
 
+#### Added
+
+#### Changed
+
+#### Deprecated
+
+#### Removed
+
+#### Fixed
+
+#### Security
+
+## [v1.0.0-beta.10](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.10) - 2022-12-23
+
+#### Breaking Changes
+
 - The `useCreateNFT` function has been updated to accept `chainId` and `collectionAddress` as arguments, rather than the previous `standard` attribute. To migrate your application to this new version, you will need to pass the desired collection to `useCreateNFT` by either fetching it dynamically or hardcoding it in your code. [#102](https://github.com/liteflow-labs/liteflow-js/pull/102)
 - Removed parsePrice from package. [#106](https://github.com/liteflow-labs/liteflow-js/pull/106)
 
@@ -16,14 +32,6 @@
 - Change react library from dependency to peerDependencies and accept react 18 [#97](https://github.com/liteflow-labs/liteflow-js/pull/97)
 - Updated `@nft/api-graphql` lib to `1.0.0-beta.9` (https://github.com/liteflow-labs/liteflow-js/pull/102)
 - Improve types check [#109](https://github.com/liteflow-labs/liteflow-js/pull/109)
-
-#### Deprecated
-
-#### Removed
-
-#### Fixed
-
-#### Security
 
 ## [v1.0.0-beta.9](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.9) - 2022-12-12
 
