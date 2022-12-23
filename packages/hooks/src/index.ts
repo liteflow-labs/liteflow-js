@@ -23,7 +23,6 @@ import {
 import { formatAddress } from './utils/formatAddress'
 import { formatError } from './utils/formatError'
 import { formatSocial } from './utils/formatSocial'
-import { parsePrice } from './utils/parsePrice'
 import { removeEmptyFromObject } from './utils/removeEmptyFromObject'
 
 export { LiteflowProvider } from './context'
@@ -78,6 +77,5 @@ export {
   formatSocial,
   isSameAddress,
   removeEmptyFromObject,
-  parsePrice,
   formatError,
 }
