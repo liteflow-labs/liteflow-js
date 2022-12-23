@@ -116,7 +116,7 @@ export default function useCreateNFT(
     CreateNftStep.INITIAL,
   )
   const [uploadFile] = useIPFSUploader(uploadUrl)
-  const [{ pollOwnership }] = useCheckOwnership()
+  const { pollOwnership } = useCheckOwnership()
 
   const uploadMedia = useCallback(
     async ({

@@ -91,9 +91,7 @@ export class EmailConnector extends AbstractConnector {
     }
 
     const provider = this.magic.rpcProvider
-    const account = await provider
-      .enable()
-      .then((accounts: string[]): string => accounts[0])
+    const account = await provider.enable().then((accounts) => accounts[0])
 
     return { provider, chainId: this.chainId, account }
   }
@@ -111,7 +109,7 @@ export class EmailConnector extends AbstractConnector {
     if (!this.magic) return null
     return this.magic.rpcProvider
       .send('eth_accounts')
-      .then((accounts: string[]): string => accounts[0])
+      .then((accounts) => accounts[0] || null)
   }
 
   public deactivate(): void {

@@ -13,7 +13,14 @@
     "sourceMap": true,
     "jsx": "react",
     "lib": ["DOM", "ESNext"],
-    "noEmit": false
+    "noEmit": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": ["node_modules", "dist"]
 }
