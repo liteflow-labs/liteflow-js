@@ -4,7 +4,7 @@ import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-import { LazyMintedAssetSignatureInput, MetadataInput } from './graphql'
+import { LazyMintedAssetSignatureInput } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
 import useConfig from './useConfig'
 import useIPFSUploader from './useIPFSUploader'
@@ -196,32 +196,30 @@ export default function useCreateNFT(
           isAnimation,
           isPrivate,
         })
-        const metadata: MetadataInput = {
-          name,
-          image: media.image,
-          description,
-          animationUrl: media.animationUrl,
-          unlockableContent: media.unlockableContent,
-          attributes: (traits || []).map((x) => ({
-            traitType: x.type,
-            value: x.value,
-          })),
+        const assetToCreate = {
+          creatorAddress: account.toLowerCase(),
+          royalties: royalties ? Math.round(royalties * 100) : null,
+          supply: amount ? amount.toString() : '1',
+          metadata: {
+            name,
+            image: media.image,
+            description,
+            animationUrl: media.animationUrl,
+            unlockableContent: media.unlockableContent,
+            attributes: (traits || []).map((x) => ({
+              traitType: x.type,
+              value: x.value,
+            })),
+          },
         }
 
         // lazy minting
         if ((await config).hasLazyMint) {
-          const assetToCreate = {
-            creatorAddress: account.toLowerCase(),
-            royalties: royalties ? Math.round(royalties * 100) : null,
-            supply: amount ? amount.toString() : '1',
-            metadata: metadata,
-          } as LazyMintedAssetSignatureInput
-
           const { createLazyMintedAssetSignature } =
             await sdk.CreateLazyMintedAssetSignature({
               chainId: chainId,
               collectionAddress: collectionAddress,
-              asset: assetToCreate,
+              asset: assetToCreate as LazyMintedAssetSignatureInput, // TODO: remove this cast when attributes from the API are removed
             })
 
           invariant(
@@ -244,7 +242,7 @@ export default function useCreateNFT(
             signature,
             asset: {
               tokenId: message.tokenId,
-              ...assetToCreate,
+              ...(assetToCreate as LazyMintedAssetSignatureInput), // TODO: remove this cast when attributes from the API are removed
             },
           })
           invariant(
@@ -257,10 +255,7 @@ export default function useCreateNFT(
         const { createAssetTransaction } = await sdk.CreateAssetTransaction({
           chainId: chainId,
           collectionAddress: collectionAddress,
-          creatorAddress: account.toLowerCase(),
-          metadata: metadata,
-          supply: amount ? amount.toString() : '1',
-          royalties: royalties ? Math.round(royalties * 100) : 0,
+          ...assetToCreate,
         })
         invariant(
           createAssetTransaction,
