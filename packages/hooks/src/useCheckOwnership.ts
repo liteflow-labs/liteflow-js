@@ -32,7 +32,7 @@ export default function useCheckOwnership(): {
     max?: number
     interval?: number
   }) => Promise<void>
-}[] {
+} {
   const { sdk } = useContext(LiteflowContext)
   const checkOwnership = useCallback<CheckOwnershipFunction>(
     async (assetId: string, ownerAddress: string) => {
@@ -41,14 +41,15 @@ export default function useCheckOwnership(): {
         ownerAddress: ownerAddress.toLowerCase(),
       })
       invariant(ownerships, ErrorMessages.OWNERSHIP_NOT_FOUND)
-      if (ownerships.nodes.length === 0)
+      if (ownerships.nodes[0]) {
         return {
-          isOwner: false,
-          quantity: '0',
+          isOwner: true,
+          quantity: ownerships.nodes[0].quantity,
         }
+      }
       return {
-        isOwner: true,
-        quantity: ownerships.nodes[0].quantity,
+        isOwner: false,
+        quantity: '0',
       }
     },
     [sdk],
@@ -88,5 +89,5 @@ export default function useCheckOwnership(): {
     [checkOwnership],
   )
 
-  return [{ checkOwnership, pollOwnership }]
+  return { checkOwnership, pollOwnership }
 }
