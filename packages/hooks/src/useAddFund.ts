@@ -3,8 +3,8 @@ import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
-import useConfig from './useConfig'
 import { ErrorMessages } from './errorMessages'
+import useConfig from './useConfig'
 
 gql`
   mutation CreateWyrePayment($address: Address!) {
