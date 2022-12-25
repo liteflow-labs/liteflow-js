@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Fix imports order by updating `prettier` and `prettier-plugin-organize-imports` [#114](https://github.com/liteflow-labs/liteflow-js/pull/114)
+
 #### Security
 
 ## [v1.0.0-beta.10](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.10) - 2022-12-23
