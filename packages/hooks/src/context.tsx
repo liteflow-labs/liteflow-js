@@ -1,5 +1,5 @@
-import decode, { JwtPayload } from 'jwt-decode'
 import { gql, GraphQLClient } from 'graphql-request'
+import decode, { JwtPayload } from 'jwt-decode'
 import React, {
   createContext,
   PropsWithChildren,
