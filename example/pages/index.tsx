@@ -5,7 +5,7 @@ import { useCallback } from 'react'
 import { useSigner } from 'wagmi'
 import styles from '../styles/app.module.css'
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const { data: signer } = useSigner()
   const [_create] = useCreateOffer(
     signer as (Signer & TypedDataSigner) | undefined,

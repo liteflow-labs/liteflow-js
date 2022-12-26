@@ -31,13 +31,14 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('./example/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-
 
+      - name: Build dependency
+        run: npm install && npm run build
+
       - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm --prefix example install
 
       - name: Lint
@@ -73,13 +74,14 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-${{ hashFiles('./example/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-node${{ env.node-version }}-npm${{ env.npm-version }}-
 
+      - name: Build dependency
+        run: npm install && npm run build
+
       - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm --prefix example install
 
       - name: Prepare env

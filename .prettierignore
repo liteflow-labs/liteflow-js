@@ -5,3 +5,5 @@ packages/hooks/src/graphql.ts
 **/dist
 
 .vercel/
+
+**/.next

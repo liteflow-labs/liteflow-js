@@ -10,18 +10,19 @@
   },
   "dependencies": {
     "@nft/hooks": "file:../packages/hooks",
-    "@rainbow-me/rainbowkit": "^0.5.1",
-    "ethers": "^5.7.0",
-    "next": "^12.1.6",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "wagmi": "^0.6.5"
+    "@rainbow-me/rainbowkit": "^0.8.1",
+    "ethers": "^5.7.2",
+    "next": "^13.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "wagmi": "^0.9.5"
   },
   "devDependencies": {
-    "eslint": "^8.24.0",
-    "eslint-config-next": "^12.3.1",
+    "@types/react": "^18.0.26",
+    "eslint": "^8.30.0",
+    "eslint-config-next": "^13.1.1",
     "eslint-config-prettier": "^8.5.0",
-    "prettier": "^2.7.1",
-    "typescript": "^4.6.4"
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
   }
 }

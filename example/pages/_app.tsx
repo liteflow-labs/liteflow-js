@@ -1,19 +1,22 @@
-import styles from '../styles/app.module.css'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
+import {
+  ConnectButton,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
 import { AppProps } from 'next/app'
-import {
-  chain,
-  configureChains,
-  useAccount,
-  createClient,
-  WagmiConfig,
-  useDisconnect,
-} from 'wagmi'
-import { publicProvider } from 'wagmi/providers/public'
 import { PropsWithChildren } from 'react'
-import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
+import {
+  configureChains,
+  createClient,
+  useAccount,
+  useDisconnect,
+  WagmiConfig,
+} from 'wagmi'
+import * as chain from 'wagmi/chains'
+import { publicProvider } from 'wagmi/providers/public'
+import styles from '../styles/app.module.css'
 
 const { chains, provider } = configureChains(
   [chain[process.env.NEXT_PUBLIC_CHAIN_NAME]], // Pass the name of the Wagmi supported chain. See "chain" types or (https://wagmi.sh/docs/providers/configuring-chains#chains)
@@ -31,7 +34,7 @@ const wagmiClient = createClient({
   provider,
 })
 
-function AccountProvider(props: PropsWithChildren) {
+function AccountProvider(props: PropsWithChildren<{}>) {
   const [authenticate, { setAuthenticationToken, resetAuthenticationToken }] =
     useAuthenticate()
   const { disconnect } = useDisconnect()
@@ -75,7 +78,7 @@ function AccountProvider(props: PropsWithChildren) {
   return <>{props.children}</>
 }
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} coolMode>
