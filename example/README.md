@@ -1,12 +1,8 @@
 # Liteflow SDK Minimal App
 
-This is the Minimal App example on how to setup your project with Liteflow's [SDK](https://liteflow.gitbook.io/docs/). This implementation uses [Next.js](https://nextjs.org/) as well as third-party libraries like [Wagmi](https://wagmi.sh/) and [RainbowKit](https://www.rainbowkit.com/) for wallet interactions but feel free to implement in any project using [React](https://reactjs.org/) and your preferred web3 provider.
+This is the Minimal App example on how to setup your project with Liteflow's [SDK](https://docs.liteflow.com). This implementation uses [Next.js](https://nextjs.org/) as well as third-party libraries like [Wagmi](https://wagmi.sh/) and [RainbowKit](https://www.rainbowkit.com/) for wallet interactions but feel free to implement in any project using [React](https://reactjs.org/) and your preferred web3 provider.
 
 ## Getting Started
-
-First, you will need to get an [NPM Auth Token](https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow#set-the-token-as-an-environment-variable-on-the-cicd-server) provided by the Liteflow team to authorize SDK's package installation. See our documentation about the [token installation](https://docs.liteflow.com/docs/#installation).
-
-Once this is in place, you are now able to run:
 
 ```bash
 npm install
@@ -41,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Learn More
 
-If you want to learn more about Lifeflow's SDK make sure to visit our [documentation](https://liteflow.gitbook.io/docs/).
+If you want to learn more about Lifeflow's SDK make sure to visit our [documentation](https://docs.liteflow.com).
 
 ## Support
 
