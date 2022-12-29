@@ -13,7 +13,6 @@ gql`
   query OfferWithApprovalAndFill(
     $offerId: UUID!
     $taker: Address!
-    $quantity: Uint256!
     $amount: Uint256!
   ) {
     offer(id: $offerId) {
@@ -41,7 +40,22 @@ gql`
           }
         }
       }
-      fill(account: $taker, quantity: $quantity) {
+    }
+  }
+`
+
+gql`
+  mutation CreateOfferFillTransaction(
+    $offerId: String!
+    $accountAddress: Address!
+    $quantity: Uint256!
+  ) {
+    createOfferFillTransaction(
+      offerId: $offerId
+      accountAddress: $accountAddress
+      quantity: $quantity
+    ) {
+      transaction {
         ...Transaction
       }
     }
@@ -90,7 +104,6 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         const { offer } = await sdk.OfferWithApprovalAndFill({
           offerId: id,
           taker: account.toLowerCase(),
-          quantity: quantity.toString(),
           amount: BigNumber.from(unitPrice).mul(quantity).toString(),
         })
         invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
@@ -131,6 +144,14 @@ export default function useAcceptOffer(signer: Signer | undefined): [
             ? offer.takerAddress || account.toLowerCase()
             : offer.makerAddress
 
+        // fetch fill transaction
+        const { createOfferFillTransaction } =
+          await sdk.CreateOfferFillTransaction({
+            accountAddress: account.toLowerCase(),
+            offerId: id,
+            quantity: quantity.toString(),
+          })
+
         // fetch initial quantity
         const { quantity: initialQuantity } = await checkOwnership(
           assetId,
@@ -139,7 +160,9 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
         setActiveProcess(AcceptOfferStep.TRANSACTION_SIGNATURE)
         // sign and broadcast the transaction
-        const tx = await signer.sendTransaction(convertTx(offer.fill))
+        const tx = await signer.sendTransaction(
+          convertTx(createOfferFillTransaction.transaction),
+        )
         setTransactionHash(tx.hash)
         setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
         console.info(`waiting for transaction with hash ${tx.hash}...`)
