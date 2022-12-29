@@ -13,33 +13,17 @@ gql`
   query OfferWithApprovalAndFill(
     $offerId: UUID!
     $taker: Address!
-    $quantity: Uint256!
-    $amount: Uint256!
+    $quantity: Uint256! # $amount: Uint256!
   ) {
     offer(id: $offerId) {
       type
       makerAddress
       takerAddress
       assetId
-      currency {
-        approval(account: $taker, amount: $amount) {
-          ...Transaction
-        }
-      }
+      currencyId
       asset {
-        token {
-          __typename
-          ... on ERC721 {
-            approval(account: $taker) {
-              ...Transaction
-            }
-          }
-          ... on ERC1155 {
-            approval(account: $taker) {
-              ...Transaction
-            }
-          }
-        }
+        chainId
+        collectionAddress
       }
       fill(account: $taker, quantity: $quantity) {
         ...Transaction
@@ -91,7 +75,6 @@ export default function useAcceptOffer(signer: Signer | undefined): [
           offerId: id,
           taker: account.toLowerCase(),
           quantity: quantity.toString(),
-          amount: BigNumber.from(unitPrice).mul(quantity).toString(),
         })
         invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
@@ -99,14 +82,22 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         let approval: TransactionFragment | null
         if (offer.type === 'SALE') {
           // accepting an offer of type sale, approval is on the currency
-          approval = offer.currency.approval
+          const { createCurrencyApprovalTransaction } =
+            await sdk.CreateCurrencyApprovalTransaction({
+              accountAddress: account.toLowerCase(),
+              currencyId: offer.currencyId,
+              amount: BigNumber.from(unitPrice).mul(quantity).toString(),
+            })
+          approval = createCurrencyApprovalTransaction.transaction
         } else {
           // accepting an offer of type buy, approval is on the asset
-          approval = // typescript check
-            offer.asset.token.__typename === 'ERC721' ||
-            offer.asset.token.__typename === 'ERC1155'
-              ? offer.asset.token.approval
-              : null
+          const { createCollectionApprovalTransaction } =
+            await sdk.CreateCollectionApprovalTransaction({
+              accountAddress: account.toLowerCase(),
+              chainId: offer.asset.chainId,
+              collectionAddress: offer.asset.collectionAddress,
+            })
+          approval = createCollectionApprovalTransaction.transaction
         }
         if (approval) {
           try {

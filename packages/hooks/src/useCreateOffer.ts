@@ -9,34 +9,14 @@ import { OfferType, TransactionFragment } from './graphql'
 import { convertTx } from './utils/transaction'
 
 gql`
-  mutation CreateOffer(
-    $input: OfferInputBis!
-    $makerAddress: Address!
-    $amount: Uint256!
-  ) {
+  mutation CreateOffer($input: OfferInputBis!) {
     createOffer(input: { offer: $input }) {
       offer {
         id
         eip712Data
         asset {
-          token {
-            __typename
-            ... on ERC721 {
-              approval(account: $makerAddress) {
-                ...Transaction
-              }
-            }
-            ... on ERC1155 {
-              approval(account: $makerAddress) {
-                ...Transaction
-              }
-            }
-          }
-        }
-        currency {
-          approval(account: $makerAddress, amount: $amount) {
-            ...Transaction
-          }
+          chainId
+          collectionAddress
         }
       }
     }
@@ -48,6 +28,42 @@ gql`
     publishOffer(input: { id: $offerId, signature: $signature }) {
       offer {
         id
+      }
+    }
+  }
+`
+
+gql`
+  mutation CreateCurrencyApprovalTransaction(
+    $accountAddress: Address!
+    $amount: Uint256!
+    $currencyId: String!
+  ) {
+    createCurrencyApprovalTransaction(
+      accountAddress: $accountAddress
+      amount: $amount
+      currencyId: $currencyId
+    ) {
+      transaction {
+        ...Transaction
+      }
+    }
+  }
+`
+
+gql`
+  mutation CreateCollectionApprovalTransaction(
+    $accountAddress: Address!
+    $chainId: Int!
+    $collectionAddress: String!
+  ) {
+    createCollectionApprovalTransaction(
+      accountAddress: $accountAddress
+      chainId: $chainId
+      collectionAddress: $collectionAddress
+    ) {
+      transaction {
+        ...Transaction
       }
     }
   }
@@ -120,24 +136,30 @@ export default function useCreateOffer(
             auctionId: auctionId || null,
             expiredAt: expiredAt,
           },
-          makerAddress: account.toLowerCase(),
-          amount: quantity.mul(unitPrice).toString(),
         })
         invariant(createOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
-        const { id: offerId, eip712Data, asset, currency } = createOffer.offer
+        const { id: offerId, eip712Data, asset } = createOffer.offer
 
         setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         let approval: TransactionFragment | null
         if (type === 'SALE') {
           // creating a new offer of type sale, approval is on the asset
-          approval = // typescript check
-            asset.token.__typename === 'ERC721' ||
-            asset.token.__typename === 'ERC1155'
-              ? asset.token.approval
-              : null
+          const { createCollectionApprovalTransaction } =
+            await sdk.CreateCollectionApprovalTransaction({
+              accountAddress: account.toLowerCase(),
+              chainId: asset.chainId,
+              collectionAddress: asset.collectionAddress,
+            })
+          approval = createCollectionApprovalTransaction.transaction
         } else {
           // creating a new offer of type buy, approval is on the currency
-          approval = currency.approval
+          const { createCurrencyApprovalTransaction } =
+            await sdk.CreateCurrencyApprovalTransaction({
+              accountAddress: account.toLowerCase(),
+              currencyId: currencyId,
+              amount: quantity.mul(unitPrice).toString(),
+            })
+          approval = createCurrencyApprovalTransaction.transaction
         }
         if (approval) {
           try {

@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Use mutations `createCurrencyApprovalTransaction` and `createCollectionApprovalTransaction` instead of `token.approval` and `currency.approval` in `useCreateOffer` and `useAcceptOffer` hooks [#117](https://github.com/liteflow-labs/liteflow-js/pull/117)
+
 #### Deprecated
 
 #### Removed
