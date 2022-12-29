@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Use use `createOfferFillTransaction` instead of deprecated `offer.fill` in `useAcceptOffer` hook [#118](https://github.com/liteflow-labs/liteflow-js/pull/118)
+
 #### Deprecated
 
 #### Removed
