@@ -9,43 +9,60 @@ import { OfferType, TransactionFragment } from './graphql'
 import { convertTx } from './utils/transaction'
 
 gql`
-  mutation CreateOffer(
-    $input: OfferInputBis!
+  query FetchAssetAndCurrency(
+    $assetId: String!
+    $currencyId: String!
     $makerAddress: Address!
     $amount: Uint256!
   ) {
-    createOffer(input: { offer: $input }) {
-      offer {
-        id
-        eip712Data
-        asset {
-          token {
-            __typename
-            ... on ERC721 {
-              approval(account: $makerAddress) {
-                ...Transaction
-              }
-            }
-            ... on ERC1155 {
-              approval(account: $makerAddress) {
-                ...Transaction
-              }
-            }
-          }
-        }
-        currency {
-          approval(account: $makerAddress, amount: $amount) {
+    asset(id: $assetId) {
+      token {
+        __typename
+        ... on ERC721 {
+          approval(account: $makerAddress) {
             ...Transaction
           }
         }
+        ... on ERC1155 {
+          approval(account: $makerAddress) {
+            ...Transaction
+          }
+        }
+      }
+    }
+    currency(id: $currencyId) {
+      approval(account: $makerAddress, amount: $amount) {
+        ...Transaction
       }
     }
   }
 `
 
 gql`
-  mutation PublishOffer($offerId: UUID!, $signature: String!) {
-    publishOffer(input: { id: $offerId, signature: $signature }) {
+  mutation CreateOfferSignature($offer: OfferInputBis!) {
+    createOfferSignature(input: { offer: $offer }) {
+      eip712Data
+      timestamp
+      salt
+    }
+  }
+`
+
+gql`
+  mutation CreateOffer(
+    $offer: OfferInputBis!
+    $timestamp: Int!
+    $salt: String!
+    $signature: String!
+  ) {
+    createOffer(
+      input: {
+        offer: $offer
+        timestamp: $timestamp
+        salt: $salt
+        signature: $signature
+      }
+    ) {
       offer {
         id
       }
@@ -108,24 +125,17 @@ export default function useCreateOffer(
       const account = await signer.getAddress()
 
       try {
-        const { createOffer } = await sdk.CreateOffer({
-          input: {
-            type,
-            makerAddress: account.toLowerCase(),
-            assetId: assetId,
-            currencyId: currencyId,
-            quantity: quantity.toString(),
-            unitPrice: unitPrice.toString(),
-            takerAddress: takerAddress?.toLowerCase() || null,
-            auctionId: auctionId || null,
-            expiredAt: expiredAt,
-          },
+        // fetch asset and currency
+        const { asset, currency } = await sdk.FetchAssetAndCurrency({
+          assetId: assetId,
+          currencyId: currencyId,
           makerAddress: account.toLowerCase(),
           amount: quantity.mul(unitPrice).toString(),
         })
-        invariant(createOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
-        const { id: offerId, eip712Data, asset, currency } = createOffer.offer
+        invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
+        invariant(currency, ErrorMessages.OFFER_CREATION_FAILED)
 
+        // approval if needed
         setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         let approval: TransactionFragment | null
         if (type === 'SALE') {
@@ -154,19 +164,37 @@ export default function useCreateOffer(
           }
         }
 
+        // fetch offer signature
         setActiveProcess(CreateOfferStep.SIGNATURE)
+        const offer = {
+          type,
+          makerAddress: account.toLowerCase(),
+          assetId: assetId,
+          currencyId: currencyId,
+          quantity: quantity.toString(),
+          unitPrice: unitPrice.toString(),
+          takerAddress: takerAddress?.toLowerCase() || null,
+          auctionId: auctionId || null,
+          expiredAt: expiredAt,
+        }
+        const { createOfferSignature } = await sdk.CreateOfferSignature({
+          offer,
+        })
+        const { eip712Data, timestamp, salt } = createOfferSignature
+
         // sign data
         const { domain, types, message /*, primaryType */ } = eip712Data
         delete types.EIP712Domain // Hack: remove primary type from types to allow ethers detect the main type "Order" (aka: primaryType)
         const signature = await signer._signTypedData(domain, types, message)
 
-        // send signature to api
-        const { publishOffer } = await sdk.PublishOffer({
-          offerId,
+        // create offer
+        const { createOffer } = await sdk.CreateOffer({
+          offer,
           signature,
+          salt,
+          timestamp,
         })
-        invariant(publishOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
-        return publishOffer.offer.id
+        return createOffer.offer.id
       } finally {
         setActiveProcess(CreateOfferStep.INITIAL)
       }
