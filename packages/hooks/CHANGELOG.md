@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Use new flow of offer creation using the new mutation `createOfferSignature` [#119](https://github.com/liteflow-labs/liteflow-js/pull/119)
+
 #### Deprecated
 
 #### Removed
