@@ -41,14 +41,12 @@ export default function useInvitation(signer: Signer | undefined): {
   creating: boolean
 } {
   const { sdk } = useContext(LiteflowContext)
-  const config = useConfig()
+  const getConfig = useConfig()
   const [accepting, setAccepting] = useState(false)
   const [creating, setCreating] = useState(false)
   const create = useCallback(async () => {
-    invariant(
-      (await config).hasReferralSystem,
-      ErrorMessages.FEATURE_DISABLED_REFERRAL,
-    )
+    const { hasReferralSystem } = await getConfig()
+    invariant(hasReferralSystem, ErrorMessages.FEATURE_DISABLED_REFERRAL)
     invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setCreating(true)
@@ -67,14 +65,12 @@ export default function useInvitation(signer: Signer | undefined): {
     } finally {
       setCreating(false)
     }
-  }, [sdk, signer, config])
+  }, [sdk, signer, getConfig])
 
   const accept = useCallback(
     async (invitationId: string) => {
-      invariant(
-        (await config).hasReferralSystem,
-        ErrorMessages.FEATURE_DISABLED_REFERRAL,
-      )
+      const { hasReferralSystem } = await getConfig()
+      invariant(hasReferralSystem, ErrorMessages.FEATURE_DISABLED_REFERRAL)
       try {
         setAccepting(true)
         const { acceptInvitation } = await sdk.AcceptInvitation({
@@ -89,7 +85,7 @@ export default function useInvitation(signer: Signer | undefined): {
         setAccepting(false)
       }
     },
-    [sdk, config],
+    [sdk, getConfig],
   )
 
   return { create, accept, accepting, creating }

@@ -4,6 +4,9 @@
 
 #### Breaking Changes
 
+- Update `useConfig` return parameter from `Promise<Config>` to `() => Promise<Config>` [#]()
+  - Make sure to update your codebase with `const getConfig = useConfig(); ... await getConfig()`
+
 #### Added
 
 #### Changed
@@ -14,6 +17,7 @@
 
 #### Fixed
 
+- Fix issue on initial render on SSR due to pending promise [#]()
 - Fix imports order by updating `prettier` and `prettier-plugin-organize-imports` [#114](https://github.com/liteflow-labs/liteflow-js/pull/114)
 
 #### Security

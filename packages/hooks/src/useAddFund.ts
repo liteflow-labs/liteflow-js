@@ -20,10 +20,11 @@ export default function useAddFund(
 ): [() => Promise<void>, { loading: boolean }] {
   const { sdk } = useContext(LiteflowContext)
   const [loading, setLoading] = useState(false)
-  const config = useConfig()
+  const getConfig = useConfig()
 
   const addFunds = useCallback(async () => {
-    invariant((await config).hasTopUp, ErrorMessages.FEATURE_DISABLED_TOP_UP)
+    const { hasTopUp } = await getConfig()
+    invariant(hasTopUp, ErrorMessages.FEATURE_DISABLED_TOP_UP)
     invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setLoading(true)
@@ -36,6 +37,6 @@ export default function useAddFund(
     } finally {
       setLoading(false)
     }
-  }, [sdk, signer, config])
+  }, [sdk, signer, getConfig])
   return [addFunds, { loading }]
 }

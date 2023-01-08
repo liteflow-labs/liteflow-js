@@ -28,7 +28,7 @@ export type LiteflowContext = {
   resetAuthenticationToken: () => void
   currentAddress: string | null
   sdk: Sdk
-  config: Promise<Config>
+  config: () => Promise<Config>
 }
 
 export type LiteflowProviderProps = {
@@ -44,7 +44,7 @@ export const LiteflowContext = createContext<LiteflowContext>({
   },
   currentAddress: null,
   sdk: {} as Sdk,
-  config: {} as Promise<Config>,
+  config: () => ({} as Promise<Config>),
 })
 
 export function LiteflowProvider({
@@ -54,10 +54,13 @@ export function LiteflowProvider({
   const [authenticationToken, setAuthenticationToken] = useState<string>()
   const client = useMemo(() => new GraphQLClient(endpoint), [endpoint])
   const sdk = useMemo(() => getSdk(client), [client])
-  const config = useMemo(
-    () => sdk.GetConfig().then(({ config }) => config),
-    [sdk],
-  )
+  const [configPromise, setConfigPromise] = useState<Promise<Config>>()
+  const config = useCallback(() => {
+    if (configPromise) return configPromise
+    const promise = sdk.GetConfig().then(({ config }) => config)
+    setConfigPromise(promise)
+    return promise
+  }, [sdk, configPromise, setConfigPromise])
   const currentAddress = useMemo(() => {
     if (!authenticationToken) return null
     const res = decode<JwtPayload & { address: string }>(authenticationToken)

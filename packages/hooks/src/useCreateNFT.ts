@@ -110,7 +110,7 @@ export default function useCreateNFT(
   },
 ] {
   const { sdk } = useContext(LiteflowContext)
-  const config = useConfig()
+  const getConfig = useConfig()
   const [transactionHash, setTransactionHash] = useState<string>()
   const [activeStep, setActiveProcess] = useState<CreateNftStep>(
     CreateNftStep.INITIAL,
@@ -181,8 +181,9 @@ export default function useCreateNFT(
       royalties,
       traits,
     }) => {
+      const { hasLazyMint, hasUnlockableContent } = await getConfig()
       invariant(
-        !isPrivate || (isPrivate && (await config).hasUnlockableContent),
+        !isPrivate || (isPrivate && hasUnlockableContent),
         ErrorMessages.FEATURE_DISABLED_UNLOCKABLE_CONTENT,
       )
       invariant(signer, ErrorMessages.SIGNER_FALSY)
@@ -214,7 +215,7 @@ export default function useCreateNFT(
         }
 
         // lazy minting
-        if ((await config).hasLazyMint) {
+        if (hasLazyMint) {
           const { createLazyMintedAssetSignature } =
             await sdk.CreateLazyMintedAssetSignature({
               chainId: chainId,
@@ -289,7 +290,7 @@ export default function useCreateNFT(
         setTransactionHash(undefined)
       }
     },
-    [sdk, signer, pollOwnership, uploadMedia, config],
+    [sdk, signer, pollOwnership, uploadMedia, getConfig],
   )
 
   return [createNft, { activeStep, transactionHash }]
