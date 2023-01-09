@@ -24,7 +24,11 @@ export default function useConfig(): ConfigResult {
       .then(({ config }) => setConfig(config))
       .catch(setError)
       .finally(() => setLoading(false))
-    return () => setConfig(undefined)
+    return () => {
+      setError(undefined)
+      setLoading(false)
+      setConfig(undefined)
+    }
   }, [setConfig, setError, sdk])
 
   return {
