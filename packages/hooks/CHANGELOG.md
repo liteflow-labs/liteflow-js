@@ -4,9 +4,6 @@
 
 #### Breaking Changes
 
-- Update `useConfig` return parameter from `Promise<Config>` to `{ data?: Config, error?: Error }` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
-  - Make sure to update your codebase with `const { data } = useConfig();`
-
 #### Added
 
 #### Changed
@@ -15,14 +12,25 @@
 
 #### Removed
 
+#### Fixed
+
+#### Security
+
+## [v1.0.0-beta.11](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.11) - 2023-01-09
+
+#### Breaking Changes
+
+- Update `useConfig` return parameter from `Promise<Config>` to `{ data?: Config, error?: Error, loading: boolean }` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
+  - Make sure to update your codebase with `const { data } = useConfig();`
+
+#### Removed
+
 - `config` has been removed from the `LiteflowContext` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
 
 #### Fixed
 
-- Fix issue on initial render on SSR due to pending promise [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
 - Fix imports order by updating `prettier` and `prettier-plugin-organize-imports` [#114](https://github.com/liteflow-labs/liteflow-js/pull/114)
-
-#### Security
+- Fix issue on initial render on SSR due to pending promise [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
 
 ## [v1.0.0-beta.10](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.10) - 2022-12-23
 
