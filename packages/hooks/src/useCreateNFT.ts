@@ -6,7 +6,6 @@ import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
 import { LazyMintedAssetSignatureInput } from './graphql'
 import useCheckOwnership from './useCheckOwnership'
-import useConfig from './useConfig'
 import useIPFSUploader from './useIPFSUploader'
 import { convertTx } from './utils/transaction'
 
@@ -110,7 +109,6 @@ export default function useCreateNFT(
   },
 ] {
   const { sdk } = useContext(LiteflowContext)
-  const getConfig = useConfig()
   const [transactionHash, setTransactionHash] = useState<string>()
   const [activeStep, setActiveProcess] = useState<CreateNftStep>(
     CreateNftStep.INITIAL,
@@ -181,7 +179,9 @@ export default function useCreateNFT(
       royalties,
       traits,
     }) => {
-      const { hasLazyMint, hasUnlockableContent } = await getConfig()
+      const {
+        config: { hasLazyMint, hasUnlockableContent },
+      } = await sdk.GetConfig()
       invariant(
         !isPrivate || (isPrivate && hasUnlockableContent),
         ErrorMessages.FEATURE_DISABLED_UNLOCKABLE_CONTENT,
@@ -290,7 +290,7 @@ export default function useCreateNFT(
         setTransactionHash(undefined)
       }
     },
-    [sdk, signer, pollOwnership, uploadMedia, getConfig],
+    [sdk, signer, pollOwnership, uploadMedia],
   )
 
   return [createNft, { activeStep, transactionHash }]
