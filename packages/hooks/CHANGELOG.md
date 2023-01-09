@@ -15,6 +15,8 @@
 
 #### Removed
 
+- `config` has been removed from the `LiteflowContext` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
+
 #### Fixed
 
 - Fix issue on initial render on SSR due to pending promise [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
