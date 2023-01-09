@@ -4,6 +4,9 @@
 
 #### Breaking Changes
 
+- Update `useConfig` return parameter from `Promise<Config>` to `{ data?: Config, error?: Error }` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
+  - Make sure to update your codebase with `const { data } = useConfig();`
+
 #### Added
 
 #### Changed
@@ -12,8 +15,11 @@
 
 #### Removed
 
+- `config` has been removed from the `LiteflowContext` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
+
 #### Fixed
 
+- Fix issue on initial render on SSR due to pending promise [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
 - Fix imports order by updating `prettier` and `prettier-plugin-organize-imports` [#114](https://github.com/liteflow-labs/liteflow-js/pull/114)
 
 #### Security
