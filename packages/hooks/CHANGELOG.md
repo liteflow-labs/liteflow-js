@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Invalid jwt with expired date [#123](https://github.com/liteflow-labs/liteflow-js/pull/123)
+
 #### Security
 
 ## [v1.0.0-beta.11](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.11) - 2023-01-09
