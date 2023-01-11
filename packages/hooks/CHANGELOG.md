@@ -6,6 +6,9 @@
 
 #### Added
 
+- Added new stable hook `useIsLoggedIn` to check is an address is logged in on the SDK [#122](https://github.com/liteflow-labs/liteflow-js/pull/122)
+  - Check https://docs.liteflow.com/hooks/useIsLoggedIn for more detail
+
 #### Changed
 
 #### Deprecated
