@@ -7,7 +7,7 @@ import { isSameAddress } from './utils/address'
  * @param address -- address to test
  * @returns boolean -- true if the address is the current account, false otherwise
  */
-export default function useIsLoggedIn(address: string): boolean {
+export default function useIsLoggedIn(address: string | undefined): boolean {
   const { currentAddress } = useContext(LiteflowContext)
 
   return useMemo(() => {
