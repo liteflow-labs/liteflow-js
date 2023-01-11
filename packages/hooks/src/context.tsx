@@ -55,6 +55,7 @@ export function LiteflowProvider({
   const currentAddress = useMemo(() => {
     if (!authenticationToken) return null
     const res = decode<JwtPayload & { address: string }>(authenticationToken)
+    if (res.exp && res.exp < Math.ceil(Date.now() / 1000)) return null
     return res.address
   }, [authenticationToken])
 
