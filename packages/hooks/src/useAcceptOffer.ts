@@ -13,7 +13,7 @@ gql`
   query OfferWithApprovalAndFill(
     $offerId: UUID!
     $taker: Address!
-    $quantity: Uint256! # $amount: Uint256!
+    $quantity: Uint256!
   ) {
     offer(id: $offerId) {
       type
