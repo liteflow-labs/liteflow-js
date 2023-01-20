@@ -10,12 +10,17 @@ function AccountProvider(props: PropsWithChildren<{}>) {
   const { disconnect } = useDisconnect()
   useAccount({
     async onConnect({ connector }) {
-      try {
-        const signer = await connector.getSigner()
-        await authenticate(signer)
-      } catch (e) {
-        disconnect()
+      const login = async () => {
+        try {
+          const signer = await connector.getSigner()
+          await authenticate(signer)
+        } catch (e) {
+          disconnect()
+        }
       }
+      connector.on('change', login)
+      connector.on('disconnect', () => connector.off('change', login))
+      await login()
     },
     onDisconnect() {
       resetAuthenticationToken()
