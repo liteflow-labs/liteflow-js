@@ -43,6 +43,7 @@ export {
   useInvitation,
   useUpdateAccount,
   useVerifyAccount,
+  useIsLoggedIn,
   AcceptAuctionStep,
   AcceptOfferStep,
   CancelOfferStep,
@@ -62,8 +63,6 @@ export {
    */
   /** @deprecated */
   useBalance,
-  /** @deprecated */
-  useIsLoggedIn,
   /**
    * helpers
    * Helper functions that are likely to change either by moving into a dedicated
