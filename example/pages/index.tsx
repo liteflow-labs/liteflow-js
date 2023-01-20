@@ -1,14 +1,12 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { useCreateOffer, useIsLoggedIn } from '@nft/hooks'
 import { BigNumber } from 'ethers'
-import { useCallback } from 'react'
-import { useAccount, useConnect, useDisconnect, useSigner } from 'wagmi'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect } from 'react'
+import { useAccount, useDisconnect, useSigner } from 'wagmi'
 
 export default function Home(): JSX.Element {
-  const {
-    connect,
-    connectors: [connector],
-  } = useConnect()
+  const { push } = useRouter()
   const { disconnect } = useDisconnect()
   const { address } = useAccount()
   const { data: signer } = useSigner<Signer & TypedDataSigner>()
@@ -29,14 +27,18 @@ export default function Home(): JSX.Element {
     alert(id)
   }, [createOffer])
 
-  return isLoggedIn ? (
+  useEffect(() => {
+    if (isLoggedIn) return
+    void push('/login')
+  }, [isLoggedIn, push])
+
+  if (!isLoggedIn) return null
+  return (
     <>
       <button onClick={create}>Create offer</button>
       <button style={{ marginTop: '1em' }} onClick={() => disconnect()}>
         Disconnect
       </button>
     </>
-  ) : (
-    <button onClick={() => connect({ connector })}>Connect</button>
   )
 }
