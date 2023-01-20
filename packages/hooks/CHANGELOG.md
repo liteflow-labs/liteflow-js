@@ -6,9 +6,13 @@
 
 #### Added
 
+- Added new stable hook `useIsLoggedIn` to check is an address is logged in on the SDK [#122](https://github.com/liteflow-labs/liteflow-js/pull/122)
+  - Check https://docs.liteflow.com/hooks/useIsLoggedIn for more detail
+
 #### Changed
 
 - Use new flow of offer creation using the new mutation `createOfferSignature` [#119](https://github.com/liteflow-labs/liteflow-js/pull/119)
+- Update dependency `@nft/api-graphql` to `v1.0.0-beta.10` [#129](https://github.com/liteflow-labs/liteflow-js/pull/129)
 
 #### Deprecated
 
@@ -16,9 +20,25 @@
 
 #### Fixed
 
-- Fix imports order by updating `prettier` and `prettier-plugin-organize-imports` [#114](https://github.com/liteflow-labs/liteflow-js/pull/114)
+- Invalid jwt with expired date [#123](https://github.com/liteflow-labs/liteflow-js/pull/123)
 
 #### Security
+
+## [v1.0.0-beta.11](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.11) - 2023-01-09
+
+#### Breaking Changes
+
+- Update `useConfig` return parameter from `Promise<Config>` to `{ data?: Config, error?: Error, loading: boolean }` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
+  - Make sure to update your codebase with `const { data } = useConfig();`
+
+#### Removed
+
+- `config` has been removed from the `LiteflowContext` [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
+
+#### Fixed
+
+- Fix imports order by updating `prettier` and `prettier-plugin-organize-imports` [#114](https://github.com/liteflow-labs/liteflow-js/pull/114)
+- Fix issue on initial render on SSR due to pending promise [#120](https://github.com/liteflow-labs/liteflow-js/pull/120)
 
 ## [v1.0.0-beta.10](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.10) - 2022-12-23
 
