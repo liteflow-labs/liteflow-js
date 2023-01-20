@@ -10,5 +10,6 @@
   "useCreateOffer": "useCreateOffer",
   "useInvitation": "useInvitation",
   "useUpdateAccount": "useUpdateAccount",
-  "useVerifyAccount": "useVerifyAccount"
+  "useVerifyAccount": "useVerifyAccount",
+  "useIsLoggedIn": "useIsLoggedIn"
 }
