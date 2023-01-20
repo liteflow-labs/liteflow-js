@@ -1,19 +1,24 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
-import { useCreateOffer } from '@nft/hooks'
+import { useCreateOffer, useIsLoggedIn } from '@nft/hooks'
 import { BigNumber } from 'ethers'
 import { useCallback } from 'react'
-import { useSigner } from 'wagmi'
-import styles from '../styles/app.module.css'
+import { useAccount, useConnect, useDisconnect, useSigner } from 'wagmi'
 
 export default function Home(): JSX.Element {
-  const { data: signer } = useSigner()
-  const [_create] = useCreateOffer(
-    signer as (Signer & TypedDataSigner) | undefined,
-  )
+  const {
+    connect,
+    connectors: [connector],
+  } = useConnect()
+  const { disconnect } = useDisconnect()
+  const { address } = useAccount()
+  const { data: signer } = useSigner<Signer & TypedDataSigner>()
+  const isLoggedIn = useIsLoggedIn(address)
+
+  const [createOffer] = useCreateOffer(signer)
 
   const create = useCallback(async () => {
     const price = parseFloat(prompt('Price of the offer'))
-    const id = await _create({
+    const id = await createOffer({
       type: 'BUY',
       assetId: process.env.NEXT_PUBLIC_ASSET_ID, // Pass a desired asset ID,
       currencyId: process.env.NEXT_PUBLIC_CURRENCY_ID, // Pass the desired currency ID
@@ -22,15 +27,16 @@ export default function Home(): JSX.Element {
       unitPrice: BigNumber.from(price * 1e6), // Replace `1e6` by the right number of decimals of the used currency to shift the price to unit.
     })
     alert(id)
-  }, [_create])
+  }, [createOffer])
 
-  return (
+  return isLoggedIn ? (
     <>
-      {signer && (
-        <a className={styles.btn} onClick={create}>
-          Create offer
-        </a>
-      )}
+      <button onClick={create}>Create offer</button>
+      <button style={{ marginTop: '1em' }} onClick={() => disconnect()}>
+        Disconnect
+      </button>
     </>
+  ) : (
+    <button onClick={() => connect({ connector })}>Connect</button>
   )
 }
