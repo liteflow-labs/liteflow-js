@@ -1,9 +1,30 @@
 import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
 import { AppProps } from 'next/app'
 import { PropsWithChildren } from 'react'
-import { useAccount, useDisconnect, WagmiConfig } from 'wagmi'
-import { client } from '../connector'
+import {
+  configureChains,
+  createClient,
+  goerli,
+  mainnet,
+  useAccount,
+  useDisconnect,
+  WagmiConfig,
+} from 'wagmi'
+import { bsc, bscTestnet, polygon, polygonMumbai } from 'wagmi/chains'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { publicProvider } from 'wagmi/providers/public'
 import styles from '../styles/app.module.css'
+
+export const { chains, provider } = configureChains(
+  [mainnet, goerli, bscTestnet, bsc, polygon, polygonMumbai],
+  [publicProvider()],
+)
+
+export const client = createClient({
+  autoConnect: true,
+  connectors: [new InjectedConnector()],
+  provider,
+})
 
 function AccountProvider(props: PropsWithChildren<{}>) {
   const [authenticate, { resetAuthenticationToken }] = useAuthenticate()
