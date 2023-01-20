@@ -69,4 +69,4 @@ function NFT() {
 }
 ```
 
-Want to learn more? Check out the [example](https://github.com/liteflow-labs/minimal-app/) to learn how to setup Liteflow and continue on reading the documentation.
+Want to learn more? Check out the [example](https://github.com/liteflow-labs/liteflow-js/tree/main/example) to learn how to setup Liteflow and continue on reading the documentation.
