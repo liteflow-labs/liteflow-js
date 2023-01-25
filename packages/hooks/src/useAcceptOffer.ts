@@ -10,7 +10,7 @@ import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
 gql`
-  query OfferWithApprovalAndFill(
+  query OfferWithApproval(
     $offerId: UUID!
     $taker: Address!
     $amount: Uint256!
@@ -101,7 +101,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
       try {
         // fetch approval from api
-        const { offer } = await sdk.OfferWithApprovalAndFill({
+        const { offer } = await sdk.OfferWithApproval({
           offerId: id,
           taker: account.toLowerCase(),
           amount: BigNumber.from(unitPrice).mul(quantity).toString(),
