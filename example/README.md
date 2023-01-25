@@ -1,6 +1,6 @@
 # Liteflow SDK Minimal App
 
-This is the Minimal App example on how to setup your project with Liteflow's [SDK](https://docs.liteflow.com). This implementation uses [Next.js](https://nextjs.org/) as well as third-party libraries like [Wagmi](https://wagmi.sh/) and [RainbowKit](https://www.rainbowkit.com/) for wallet interactions but feel free to implement in any project using [React](https://reactjs.org/) and your preferred web3 provider.
+This is the Minimal App example on how to setup your project with Liteflow's [SDK](https://docs.liteflow.com). This implementation uses [Next.js](https://nextjs.org/) as well as third-party libraries like [Wagmi](https://wagmi.sh/) for wallet interactions but feel free to implement in any project using [React](https://reactjs.org/) and your preferred web3 provider.
 
 ## Getting Started
 
@@ -11,14 +11,8 @@ npm install
 Copy the `.env.example`, rename to `.env.local` and fill in the environment variables according to your setup.
 
 ```
-# Replace with your app name
-NEXT_PUBLIC_APP_NAME="Acme Marketplace"
-
 # Replace with your API endpoint
 NEXT_PUBLIC_ENDPOINT="https://api.acme.com/graphql"
-
-# Replace with your desired chain supported by Wagmi (https://wagmi.sh/docs/providers/configuring-chains)
-NEXT_PUBLIC_CHAIN_NAME="polygonMumbai"
 
 # Replace with a valid Asset ID
 NEXT_PUBLIC_ASSET_ID="80001-0xe3fe92dfe68f4b074ee7daca7c700e7a11a11397-60249402084987642306602912823737587855293854847399126862551129956955539542019"
