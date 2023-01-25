@@ -150,7 +150,10 @@ export default function useCreateOffer(
 
         if (type === 'SALE') {
           // creating a new offer of type sale, approval is on the asset
-          await approveCollection(asset)
+          await approveCollection({
+            chainId: asset.chainId,
+            collectionAddress: asset.collectionAddress,
+          })
         } else {
           // creating a new offer of type buy, approval is on the currency
           await approveCurrency({

@@ -130,7 +130,10 @@ export default function useAcceptOffer(signer: Signer | undefined): [
           })
         } else {
           // accepting an offer of type buy, approval is on the asset
-          await approveCollection(offer.asset)
+          await approveCollection({
+            chainId: offer.asset.chainId,
+            collectionAddress: offer.asset.collectionAddress,
+          })
         }
 
         // determine the asset id to check ownership from
