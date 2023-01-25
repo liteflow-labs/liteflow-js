@@ -10,7 +10,7 @@ import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
 gql`
-  query OfferWithApproval($offerId: UUID!, $taker: Address!) {
+  query FetchOffer($offerId: UUID!, $taker: Address!) {
     offer(id: $offerId) {
       type
       makerAddress
@@ -82,7 +82,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
       try {
         // fetch approval from api
-        const { offer } = await sdk.OfferWithApproval({
+        const { offer } = await sdk.FetchOffer({
           offerId: id,
           taker: account.toLowerCase(),
         })
