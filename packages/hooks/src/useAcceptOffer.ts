@@ -1,11 +1,14 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-import { TransactionFragment } from './graphql'
+import useApproveCollection, {
+  ApproveCollectionStep,
+} from './useApproveCollection'
+import useApproveCurrency, { ApproveCurrencyStep } from './useApproveCurrency'
 import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
@@ -69,11 +72,42 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 ] {
   const { sdk } = useContext(LiteflowContext)
   const { pollOwnership, checkOwnership } = useCheckOwnership()
-
   const [activeStep, setActiveProcess] = useState<AcceptOfferStep>(
     AcceptOfferStep.INITIAL,
   )
   const [transactionHash, setTransactionHash] = useState<string>()
+  const [approveCurrency, { activeStep: approveCurrencyActiveStep }] =
+    useApproveCurrency(signer)
+  const [approveCollection, { activeStep: approveCollectionActiveStep }] =
+    useApproveCollection(signer)
+
+  // sync approve currency active step
+  useEffect(() => {
+    switch (approveCurrencyActiveStep) {
+      case ApproveCurrencyStep.PENDING: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
+        break
+      }
+      case ApproveCurrencyStep.SIGNATURE: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
+        break
+      }
+    }
+  }, [approveCurrencyActiveStep])
+
+  // sync approve collection active step
+  useEffect(() => {
+    switch (approveCollectionActiveStep) {
+      case ApproveCollectionStep.PENDING: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
+        break
+      }
+      case ApproveCollectionStep.SIGNATURE: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
+        break
+      }
+    }
+  }, [approveCollectionActiveStep])
 
   const acceptOffer: acceptOfferFn = useCallback(
     async ({ id, unitPrice }, quantity) => {
@@ -89,40 +123,15 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         // check if operator is authorized
-        let approval: TransactionFragment | null
         if (offer.type === 'SALE') {
           // accepting an offer of type sale, approval is on the currency
-          const { createCurrencyApprovalTransaction } =
-            await sdk.CreateCurrencyApprovalTransaction({
-              accountAddress: account.toLowerCase(),
-              currencyId: offer.currencyId,
-              amount: BigNumber.from(unitPrice).mul(quantity).toString(),
-            })
-          approval = createCurrencyApprovalTransaction.transaction
+          await approveCurrency({
+            currencyId: offer.currencyId,
+            amount: BigNumber.from(unitPrice).mul(quantity),
+          })
         } else {
           // accepting an offer of type buy, approval is on the asset
-          const { createCollectionApprovalTransaction } =
-            await sdk.CreateCollectionApprovalTransaction({
-              accountAddress: account.toLowerCase(),
-              chainId: offer.asset.chainId,
-              collectionAddress: offer.asset.collectionAddress,
-            })
-          approval = createCollectionApprovalTransaction.transaction
-        }
-        if (approval) {
-          try {
-            setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
-            // must authorize operator by executing a transaction
-            console.info(`must authorized operator first`)
-            const tx = await signer.sendTransaction(convertTx(approval))
-            setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
-            setTransactionHash(tx.hash)
-            console.info(`waiting for transaction with hash ${tx.hash}...`)
-            await tx.wait()
-            console.info(`transaction validated`)
-          } finally {
-            setTransactionHash(undefined)
-          }
+          await approveCollection(offer.asset)
         }
 
         // determine the asset id to check ownership from
@@ -171,7 +180,14 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         setTransactionHash(undefined)
       }
     },
-    [sdk, signer, checkOwnership, pollOwnership],
+    [
+      signer,
+      sdk,
+      checkOwnership,
+      pollOwnership,
+      approveCurrency,
+      approveCollection,
+    ],
   )
 
   return [acceptOffer, { activeStep, transactionHash }]
