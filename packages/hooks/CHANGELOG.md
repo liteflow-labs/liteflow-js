@@ -11,6 +11,7 @@
 
 #### Changed
 
+- Use use `createOfferFillTransaction` instead of deprecated `offer.fill` in `useAcceptOffer` hook [#118](https://github.com/liteflow-labs/liteflow-js/pull/118)
 - Update dependency `@nft/api-graphql` to `v1.0.0-beta.10` [#129](https://github.com/liteflow-labs/liteflow-js/pull/129)
 
 #### Deprecated
