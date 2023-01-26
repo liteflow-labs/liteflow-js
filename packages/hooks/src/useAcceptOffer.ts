@@ -76,10 +76,20 @@ export default function useAcceptOffer(signer: Signer | undefined): [
     AcceptOfferStep.INITIAL,
   )
   const [transactionHash, setTransactionHash] = useState<string>()
-  const [approveCurrency, { activeStep: approveCurrencyActiveStep }] =
-    useApproveCurrency(signer)
-  const [approveCollection, { activeStep: approveCollectionActiveStep }] =
-    useApproveCollection(signer)
+  const [
+    approveCurrency,
+    {
+      activeStep: approveCurrencyActiveStep,
+      transactionHash: approveCurrencyTransactionHash,
+    },
+  ] = useApproveCurrency(signer)
+  const [
+    approveCollection,
+    {
+      activeStep: approveCollectionActiveStep,
+      transactionHash: approveCollectionTransactionHash,
+    },
+  ] = useApproveCollection(signer)
 
   // sync approve currency active step
   useEffect(() => {
@@ -108,6 +118,16 @@ export default function useAcceptOffer(signer: Signer | undefined): [
       }
     }
   }, [approveCollectionActiveStep])
+
+  // sync approve currency transaction hash
+  useEffect(() => {
+    setTransactionHash(approveCurrencyTransactionHash)
+  }, [approveCurrencyTransactionHash])
+
+  // sync approve collection transaction hash
+  useEffect(() => {
+    setTransactionHash(approveCollectionTransactionHash)
+  }, [approveCollectionTransactionHash])
 
   const acceptOffer: acceptOfferFn = useCallback(
     async ({ id, unitPrice }, quantity) => {
