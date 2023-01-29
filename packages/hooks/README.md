@@ -15,7 +15,6 @@ Here are a few provider tested and supported:
 
 - [WAGMI](https://wagmi.sh/)
 - [Web3React](https://github.com/Uniswap/web3-react)
-- [RainbowKit](https://www.rainbowkit.com/)
 
 ### 2. Wrap app with `LiteflowProvider`
 
@@ -45,16 +44,11 @@ import { useSigner } from 'wagmi' // or your favorite web3 wallet
 
 function NFT() {
   const { data: signer } = useSigner()
-
   const [authenticate] = useAuthenticate()
   const [createOffer] = useCreateOffer(signer)
 
-  useEffect(() => {
-    if (!signer) return
-    void authenticate(signer)
-  }, [signer, authenticate])
-
   const handleClick = async () => {
+    await authenticate(signer)
     const offerId = await createOffer({
       type: OfferType.Buy,
       quantity: BigNumber.from(1),

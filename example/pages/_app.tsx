@@ -1,76 +1,49 @@
 import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
-import {
-  ConnectButton,
-  getDefaultWallets,
-  RainbowKitProvider,
-} from '@rainbow-me/rainbowkit'
-import '@rainbow-me/rainbowkit/styles.css'
 import { AppProps } from 'next/app'
 import { PropsWithChildren } from 'react'
 import {
   configureChains,
   createClient,
+  goerli,
+  mainnet,
   useAccount,
   useDisconnect,
   WagmiConfig,
 } from 'wagmi'
-import * as chain from 'wagmi/chains'
+import { bsc, bscTestnet, polygon, polygonMumbai } from 'wagmi/chains'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 import { publicProvider } from 'wagmi/providers/public'
 import styles from '../styles/app.module.css'
 
-const { chains, provider } = configureChains(
-  [chain[process.env.NEXT_PUBLIC_CHAIN_NAME]], // Pass the name of the Wagmi supported chain. See "chain" types or (https://wagmi.sh/docs/providers/configuring-chains#chains)
+export const { chains, provider } = configureChains(
+  [mainnet, goerli, bscTestnet, bsc, polygon, polygonMumbai],
   [publicProvider()],
 )
 
-const { connectors } = getDefaultWallets({
-  appName: process.env.NEXT_PUBLIC_APP_NAME, // Pass the name of your app
-  chains,
-})
-
-const wagmiClient = createClient({
+export const client = createClient({
   autoConnect: true,
-  connectors,
+  connectors: [new InjectedConnector()],
   provider,
 })
 
 function AccountProvider(props: PropsWithChildren<{}>) {
-  const [authenticate, { setAuthenticationToken, resetAuthenticationToken }] =
-    useAuthenticate()
+  const [authenticate, { resetAuthenticationToken }] = useAuthenticate()
   const { disconnect } = useDisconnect()
   useAccount({
-    async onConnect({ address, connector }) {
-      // check if user is already authenticated, not only if its wallet is connected
-      if (
-        localStorage.getItem('authorization.address') === address &&
-        localStorage.getItem(`authorization.${address}`)
-      ) {
-        // since the user is already authenticated we can autoconnect
-        setAuthenticationToken(localStorage.getItem(`authorization.${address}`))
-        // TODO: should check the expiration date of the jwt token to make sure it's still valid
-        return
-      }
-
-      // authenticate user
-      const signer = await connector.getSigner()
-      authenticate(signer)
-        .then(({ jwtToken }) => {
-          localStorage.setItem('authorization.address', address)
-          localStorage.setItem(`authorization.${address}`, jwtToken)
-          console.log('user authenticated')
-        })
-        .catch((error) => {
-          console.error(error)
-
-          // disconnect wallet on error
+    async onConnect({ connector }) {
+      const login = async () => {
+        try {
+          const signer = await connector.getSigner()
+          await authenticate(signer)
+        } catch (e) {
           disconnect()
-        })
+        }
+      }
+      connector.on('change', login)
+      connector.on('disconnect', () => connector.off('change', login))
+      await login()
     },
     onDisconnect() {
-      // remove authorization and authentication data
-      const address = localStorage.getItem('authorization.address')
-      localStorage.removeItem(`authorization.${address}`)
-      localStorage.removeItem('authorization.address')
       resetAuthenticationToken()
     },
   })
@@ -80,17 +53,14 @@ function AccountProvider(props: PropsWithChildren<{}>) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains} coolMode>
-        <LiteflowProvider endpoint={process.env.NEXT_PUBLIC_ENDPOINT}>
-          <AccountProvider>
-            <div className={styles.app}>
-              <ConnectButton />
-              <Component {...pageProps} />
-            </div>
-          </AccountProvider>
-        </LiteflowProvider>
-      </RainbowKitProvider>
+    <WagmiConfig client={client}>
+      <LiteflowProvider endpoint={process.env.NEXT_PUBLIC_ENDPOINT}>
+        <AccountProvider>
+          <div className={styles.app}>
+            <Component {...pageProps} />
+          </div>
+        </AccountProvider>
+      </LiteflowProvider>
     </WagmiConfig>
   )
 }

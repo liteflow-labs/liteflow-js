@@ -1,47 +1,45 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-import { TransactionFragment } from './graphql'
+import useApproveCollection, {
+  ApproveCollectionStep,
+} from './useApproveCollection'
+import useApproveCurrency, { ApproveCurrencyStep } from './useApproveCurrency'
 import useCheckOwnership from './useCheckOwnership'
 import { convertTx } from './utils/transaction'
 
 gql`
-  query OfferWithApprovalAndFill(
-    $offerId: UUID!
-    $taker: Address!
-    $quantity: Uint256!
-    $amount: Uint256!
-  ) {
+  query FetchOffer($offerId: UUID!) {
     offer(id: $offerId) {
       type
       makerAddress
       takerAddress
       assetId
-      currency {
-        approval(account: $taker, amount: $amount) {
-          ...Transaction
-        }
-      }
+      currencyId
       asset {
-        token {
-          __typename
-          ... on ERC721 {
-            approval(account: $taker) {
-              ...Transaction
-            }
-          }
-          ... on ERC1155 {
-            approval(account: $taker) {
-              ...Transaction
-            }
-          }
-        }
+        chainId
+        collectionAddress
       }
-      fill(account: $taker, quantity: $quantity) {
+    }
+  }
+`
+
+gql`
+  mutation CreateOfferFillTransaction(
+    $offerId: String!
+    $accountAddress: Address!
+    $quantity: Uint256!
+  ) {
+    createOfferFillTransaction(
+      offerId: $offerId
+      accountAddress: $accountAddress
+      quantity: $quantity
+    ) {
+      transaction {
         ...Transaction
       }
     }
@@ -74,11 +72,62 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 ] {
   const { sdk } = useContext(LiteflowContext)
   const { pollOwnership, checkOwnership } = useCheckOwnership()
-
   const [activeStep, setActiveProcess] = useState<AcceptOfferStep>(
     AcceptOfferStep.INITIAL,
   )
   const [transactionHash, setTransactionHash] = useState<string>()
+  const [
+    approveCurrency,
+    {
+      activeStep: approveCurrencyActiveStep,
+      transactionHash: approveCurrencyTransactionHash,
+    },
+  ] = useApproveCurrency(signer)
+  const [
+    approveCollection,
+    {
+      activeStep: approveCollectionActiveStep,
+      transactionHash: approveCollectionTransactionHash,
+    },
+  ] = useApproveCollection(signer)
+
+  // sync approve currency active step
+  useEffect(() => {
+    switch (approveCurrencyActiveStep) {
+      case ApproveCurrencyStep.PENDING: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
+        break
+      }
+      case ApproveCurrencyStep.SIGNATURE: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
+        break
+      }
+    }
+  }, [approveCurrencyActiveStep])
+
+  // sync approve collection active step
+  useEffect(() => {
+    switch (approveCollectionActiveStep) {
+      case ApproveCollectionStep.PENDING: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
+        break
+      }
+      case ApproveCollectionStep.SIGNATURE: {
+        setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
+        break
+      }
+    }
+  }, [approveCollectionActiveStep])
+
+  // sync approve currency transaction hash
+  useEffect(() => {
+    setTransactionHash(approveCurrencyTransactionHash)
+  }, [approveCurrencyTransactionHash])
+
+  // sync approve collection transaction hash
+  useEffect(() => {
+    setTransactionHash(approveCollectionTransactionHash)
+  }, [approveCollectionTransactionHash])
 
   const acceptOffer: acceptOfferFn = useCallback(
     async ({ id, unitPrice }, quantity) => {
@@ -87,41 +136,24 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
       try {
         // fetch approval from api
-        const { offer } = await sdk.OfferWithApprovalAndFill({
+        const { offer } = await sdk.FetchOffer({
           offerId: id,
-          taker: account.toLowerCase(),
-          quantity: quantity.toString(),
-          amount: BigNumber.from(unitPrice).mul(quantity).toString(),
         })
         invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
 
         // check if operator is authorized
-        let approval: TransactionFragment | null
         if (offer.type === 'SALE') {
           // accepting an offer of type sale, approval is on the currency
-          approval = offer.currency.approval
+          await approveCurrency({
+            currencyId: offer.currencyId,
+            amount: BigNumber.from(unitPrice).mul(quantity),
+          })
         } else {
           // accepting an offer of type buy, approval is on the asset
-          approval = // typescript check
-            offer.asset.token.__typename === 'ERC721' ||
-            offer.asset.token.__typename === 'ERC1155'
-              ? offer.asset.token.approval
-              : null
-        }
-        if (approval) {
-          try {
-            setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
-            // must authorize operator by executing a transaction
-            console.info(`must authorized operator first`)
-            const tx = await signer.sendTransaction(convertTx(approval))
-            setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
-            setTransactionHash(tx.hash)
-            console.info(`waiting for transaction with hash ${tx.hash}...`)
-            await tx.wait()
-            console.info(`transaction validated`)
-          } finally {
-            setTransactionHash(undefined)
-          }
+          await approveCollection({
+            chainId: offer.asset.chainId,
+            collectionAddress: offer.asset.collectionAddress,
+          })
         }
 
         // determine the asset id to check ownership from
@@ -131,6 +163,14 @@ export default function useAcceptOffer(signer: Signer | undefined): [
             ? offer.takerAddress || account.toLowerCase()
             : offer.makerAddress
 
+        // fetch fill transaction
+        const { createOfferFillTransaction } =
+          await sdk.CreateOfferFillTransaction({
+            accountAddress: account.toLowerCase(),
+            offerId: id,
+            quantity: quantity.toString(),
+          })
+
         // fetch initial quantity
         const { quantity: initialQuantity } = await checkOwnership(
           assetId,
@@ -139,7 +179,9 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
         setActiveProcess(AcceptOfferStep.TRANSACTION_SIGNATURE)
         // sign and broadcast the transaction
-        const tx = await signer.sendTransaction(convertTx(offer.fill))
+        const tx = await signer.sendTransaction(
+          convertTx(createOfferFillTransaction.transaction),
+        )
         setTransactionHash(tx.hash)
         setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
         console.info(`waiting for transaction with hash ${tx.hash}...`)
@@ -160,7 +202,14 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         setTransactionHash(undefined)
       }
     },
-    [sdk, signer, checkOwnership, pollOwnership],
+    [
+      signer,
+      sdk,
+      checkOwnership,
+      pollOwnership,
+      approveCurrency,
+      approveCollection,
+    ],
   )
 
   return [acceptOffer, { activeStep, transactionHash }]
