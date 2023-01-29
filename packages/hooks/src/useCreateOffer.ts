@@ -148,13 +148,12 @@ export default function useCreateOffer(
       const account = await signer.getAddress()
 
       try {
-        // fetch asset and currency
-        const { asset } = await sdk.FetchAssetForOffer({ assetId })
-        invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
-
         // approval if needed
         setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         if (type === 'SALE') {
+          // fetch asset
+          const { asset } = await sdk.FetchAssetForOffer({ assetId })
+          invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
           // creating a new offer of type sale, approval is on the asset
           await approveCollection({
             chainId: asset.chainId,
