@@ -1,42 +1,25 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { BigNumber } from '@ethersproject/bignumber'
 import { gql } from 'graphql-request'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-import { OfferType, TransactionFragment } from './graphql'
-import { convertTx } from './utils/transaction'
+import { OfferType } from './graphql'
+import useApproveCollection, {
+  ApproveCollectionStep,
+} from './useApproveCollection'
+import useApproveCurrency, { ApproveCurrencyStep } from './useApproveCurrency'
 
 gql`
-  mutation CreateOffer(
-    $input: OfferInputBis!
-    $makerAddress: Address!
-    $amount: Uint256!
-  ) {
+  mutation CreateOffer($input: OfferInputBis!) {
     createOffer(input: { offer: $input }) {
       offer {
         id
         eip712Data
         asset {
-          token {
-            __typename
-            ... on ERC721 {
-              approval(account: $makerAddress) {
-                ...Transaction
-              }
-            }
-            ... on ERC1155 {
-              approval(account: $makerAddress) {
-                ...Transaction
-              }
-            }
-          }
-        }
-        currency {
-          approval(account: $makerAddress, amount: $amount) {
-            ...Transaction
-          }
+          chainId
+          collectionAddress
         }
       }
     }
@@ -79,10 +62,51 @@ export default function useCreateOffer(
   },
 ] {
   const { sdk } = useContext(LiteflowContext)
-  const [transactionHash, setTransactionHash] = useState<string>()
   const [activeStep, setActiveProcess] = useState<CreateOfferStep>(
     CreateOfferStep.INITIAL,
   )
+  const [
+    approveCurrency,
+    {
+      activeStep: approveCurrencyActiveStep,
+      transactionHash: approveCurrencyTransactionHash,
+    },
+  ] = useApproveCurrency(signer)
+  const [
+    approveCollection,
+    {
+      activeStep: approveCollectionActiveStep,
+      transactionHash: approveCollectionTransactionHash,
+    },
+  ] = useApproveCollection(signer)
+
+  // sync approve currency active step
+  useEffect(() => {
+    switch (approveCurrencyActiveStep) {
+      case ApproveCurrencyStep.PENDING: {
+        setActiveProcess(CreateOfferStep.APPROVAL_PENDING)
+        break
+      }
+      case ApproveCurrencyStep.SIGNATURE: {
+        setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
+        break
+      }
+    }
+  }, [approveCurrencyActiveStep])
+
+  // sync approve collection active step
+  useEffect(() => {
+    switch (approveCollectionActiveStep) {
+      case ApproveCollectionStep.PENDING: {
+        setActiveProcess(CreateOfferStep.APPROVAL_PENDING)
+        break
+      }
+      case ApproveCollectionStep.SIGNATURE: {
+        setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
+        break
+      }
+    }
+  }, [approveCollectionActiveStep])
 
   const createAndPublishOffer = useCallback(
     async ({
@@ -120,38 +144,22 @@ export default function useCreateOffer(
             auctionId: auctionId || null,
             expiredAt: expiredAt,
           },
-          makerAddress: account.toLowerCase(),
-          amount: quantity.mul(unitPrice).toString(),
         })
         invariant(createOffer?.offer, ErrorMessages.OFFER_CREATION_FAILED)
-        const { id: offerId, eip712Data, asset, currency } = createOffer.offer
+        const { id: offerId, eip712Data, asset } = createOffer.offer
 
-        setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
-        let approval: TransactionFragment | null
         if (type === 'SALE') {
           // creating a new offer of type sale, approval is on the asset
-          approval = // typescript check
-            asset.token.__typename === 'ERC721' ||
-            asset.token.__typename === 'ERC1155'
-              ? asset.token.approval
-              : null
+          await approveCollection({
+            chainId: asset.chainId,
+            collectionAddress: asset.collectionAddress,
+          })
         } else {
           // creating a new offer of type buy, approval is on the currency
-          approval = currency.approval
-        }
-        if (approval) {
-          try {
-            // must authorize operator by executing a transaction
-            console.info(`must authorized operator first`)
-            const tx = await signer.sendTransaction(convertTx(approval))
-            setActiveProcess(CreateOfferStep.APPROVAL_PENDING)
-            setTransactionHash(tx.hash)
-            console.info(`waiting for transaction with hash ${tx.hash}...`)
-            await tx.wait()
-            console.info(`transaction validated`)
-          } finally {
-            setTransactionHash(undefined)
-          }
+          await approveCurrency({
+            currencyId,
+            amount: quantity.mul(unitPrice),
+          })
         }
 
         setActiveProcess(CreateOfferStep.SIGNATURE)
@@ -171,8 +179,15 @@ export default function useCreateOffer(
         setActiveProcess(CreateOfferStep.INITIAL)
       }
     },
-    [sdk, signer],
+    [approveCollection, approveCurrency, sdk, signer],
   )
 
-  return [createAndPublishOffer, { activeStep, transactionHash }]
+  return [
+    createAndPublishOffer,
+    {
+      activeStep,
+      transactionHash:
+        approveCurrencyTransactionHash || approveCollectionTransactionHash,
+    },
+  ]
 }
