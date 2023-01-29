@@ -124,7 +124,7 @@ export default function useCreateOffer(
     }
   }, [approveCollectionActiveStep])
 
-  const createAndPublishOffer = useCallback(
+  const createOffer = useCallback(
     async ({
       type,
       quantity,
@@ -206,7 +206,7 @@ export default function useCreateOffer(
   )
 
   return [
-    createAndPublishOffer,
+    createOffer,
     {
       activeStep,
       transactionHash:
