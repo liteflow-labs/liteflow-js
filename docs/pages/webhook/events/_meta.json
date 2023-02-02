@@ -1,0 +1,6 @@
+{
+  "index": "Introduction",
+  "AUCTION_BID_CREATED": "AUCTION_BID_CREATED",
+  "BID_CREATED": "BID_CREATED",
+  "OFFER_CREATED": "OFFER_CREATED"
+}

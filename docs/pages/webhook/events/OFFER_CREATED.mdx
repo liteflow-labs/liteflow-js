@@ -1,0 +1,37 @@
+---
+title: 'OFFER_CREATED'
+---
+
+# OFFER_CREATED
+
+This event occurs whenever a new listing is created.
+
+## Event
+
+```ts
+type OFFER_CREATED = {
+  createdAt: IsoDate
+  id: string
+  asset: {
+    id: string
+    name: string
+  }
+  unitPrice: Uint256
+  currency: {
+    symbol: string
+    decimals: number
+  }
+  maker: {
+    address: string
+    username: string | null
+    email: string | null
+  }
+  taker: {
+    address: string
+    username: string | null
+    email: string | null
+  } | null
+  quantity: Uint256
+  expiredAt: IsoDate
+}
+```
