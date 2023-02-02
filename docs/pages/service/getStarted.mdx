@@ -1,0 +1,115 @@
+---
+title: 'Get started'
+---
+
+import { Tab, Tabs } from 'nextra-theme-docs'
+
+# Get started
+
+## Step 1: Identify the Desired Service
+
+Start by determining which service you want to respond to. A list of available services can be found in the relevant sections of the documentation.
+
+## Step 2: Establish a Service Endpoint
+
+Create a publicly accessible HTTP endpoint to receive incoming requests using the POST method. This endpoint should be able to return specific payloads based on the requested service.
+
+<Tabs items={['Next.js', 'Express']}>
+<Tab>
+```ts filename="./pages/api/service.ts"
+import { NextApiRequest, NextApiResponse } from 'next'
+
+export default async function service(
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> {
+  // ... get the arguments and send the result
+  const result = null
+  res.json(result).end()
+}
+```
+
+</Tab>
+<Tab>
+```ts filename="./index.ts"
+import { parseAndVerifyRequest } from '@nft/service'
+import express from 'express'
+const app = express()
+app.post('/service', async (req, res) => {
+  // ... get the arguments and send the result
+  const result = null
+  res.json(result).end()
+})
+```
+
+</Tab>
+</Tabs>
+
+## Step 3: Implement Request Handling
+
+To process requests from Liteflow, install the `@nft/service` library by running the following command:
+
+```
+
+npm i @nft/service
+
+```
+
+The library will parse and verify incoming requests to ensure they are from the Liteflow infrastructure. To secure communication between your app and Liteflow, you will need to provide your Liteflow secret.
+
+<Tabs items={['Next.js', 'Express']}>
+<Tab>
+```ts {1, 8-11, 17-21} filename="./pages/api/service.ts"
+import { parseAndVerifyRequest } from '@nft/service'
+import { NextApiRequest, NextApiResponse } from 'next'
+
+export default async function service(
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> {
+  const args = await parseAndVerifyRequest<SELECTED_SERVICE>(
+    req,
+    process.env.LITEFLOW_SECRET,
+  )
+  console.log(args)
+  // TODO: fill the result with the right value based on \`args\`
+  const result = null
+  res.json(result).end()
+}
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+````
+
+</Tab>
+<Tab>
+
+```ts {1, 6-9} filename="./index.ts"
+import { parseAndVerifyRequest } from '@nft/service'
+import express from 'express'
+const app = express()
+
+app.post('/service', async (req, res) => {
+  const args = await parseAndVerifyRequest<SELECTED_SERVICE>(
+    req,
+    process.env.LITEFLOW_SECRET,
+  )
+  console.log(args)
+  // TODO: fill the result with the right value based on \`args\`
+  const result = null
+  res.json(result).end()
+})
+```
+
+</Tab>
+</Tabs>
+
+## Step 4: Register the Service URL
+
+To integrate your service with your Liteflow account, navigate to the admin panel and add the newly created endpoint in the service section.
+
+#### Note for Local Development
+
+Please keep in mind that services must be publicly accessible and cannot be hosted on `localhost`. To test services during local development, you can use tools such as [ngrok](<(https://ngrok.com/)>) or [localtunnel](https://theboroer.github.io/localtunnel-www) to expose a local endpoint as a public URL.
