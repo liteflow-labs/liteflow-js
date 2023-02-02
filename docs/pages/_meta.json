@@ -1,6 +1,7 @@
 {
   "index": "Introduction",
   "graphql-api": "GraphQL API",
+  "webhook": "Webhook",
   "hooks": "React Hooks",
   "starter-kit": "Starter Kit"
 }
