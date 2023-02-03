@@ -6,9 +6,12 @@ title: 'AUCTION_BID_CREATED'
 
 This event occurs whenever a bid on an auction is created.
 
-## Event
+## Definition
 
 ```ts
+type Uint256 = string
+type IsoDate = string
+
 type AUCTION_BID_CREATED = {
   createdAt: IsoDate
   id: string
