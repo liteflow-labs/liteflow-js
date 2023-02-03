@@ -67,7 +67,7 @@ export default async function webhook(
 ): Promise<void> {
   const { data, timestamp, type } = await parseAndVerifyRequest<SELECTED_EVENT>(
     req,
-    process.env.LITEFLOW_SECRET,
+    process.env.LITEFLOW_WEBHOOK_SECRET,
   )
 
 // ...do something with the event
@@ -92,7 +92,7 @@ const app = express()
 app.post('/webhook', async (req, res) => {
   const { data, timestamp, type } = await parseAndVerifyRequest<SELECTED_EVENT>(
     req,
-    process.env.LITEFLOW_SECRET,
+    process.env.LITEFLOW_WEBHOOK_SECRET,
   )
   // ...do something with the event
   res.send()
@@ -105,12 +105,12 @@ app.listen(4242, () => console.log('Running on port 4242'))
 
 #### Built-in Retry Mechanisms
 
-Liteflow webhooks have built-in retry mechanisms for handling 3xx, 4xx, and 5xx response status codes.
+The Liteflow infrastructure will retry the webhook up to 5 times for any status code not `200`.
 
 ## Step 4: Register Your HTTPS URL
 
-To connect your webhook to your Liteflow account, go to your admin panel and add your newly created endpoint in the webhook section.
+To connect your webhook to your Liteflow backend, go to your dashboard and add your newly created endpoint in the webhook section.
 
 #### Local Development Considerations
 
-Webhooks must be publicly accessible and cannot be hosted on `localhost`. To test webhooks locally, you can use tools such as [ngrok](https://ngrok.com/) or [localtunnel](https://theboroer.github.io/localtunnel-www).
+Webhooks must be publicly accessible with an `https` url and cannot be hosted on `localhost`. To test webhooks locally, you can use tools such as [ngrok](https://ngrok.com/) or [localtunnel](https://theboroer.github.io/localtunnel-www).
