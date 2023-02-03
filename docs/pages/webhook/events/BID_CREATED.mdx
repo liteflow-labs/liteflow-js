@@ -38,3 +38,15 @@ type BID_CREATED = {
   expiredAt: IsoDate
 }
 ```
+
+## Usage
+
+```ts
+import { Events, parseAndVerifyRequest } from '@nft/webhook'
+
+const { data, type } = await parseAndVerifyRequest<'BID_CREATED'>(
+  req,
+  process.env.LITEFLOW_WEBHOOK_SECRET,
+)
+// data is type Events['BID_CREATED']
+```
