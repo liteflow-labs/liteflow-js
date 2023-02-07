@@ -6,14 +6,7 @@
 
 #### Added
 
-- Added new stable hook `useIsLoggedIn` to check is an address is logged in on the SDK [#122](https://github.com/liteflow-labs/liteflow-js/pull/122)
-  - Check https://docs.liteflow.com/hooks/useIsLoggedIn for more detail
-
 #### Changed
-
-- Use mutations `createCurrencyApprovalTransaction` and `createCollectionApprovalTransaction` instead of `token.approval` and `currency.approval` in `useCreateOffer` and `useAcceptOffer` hooks [#117](https://github.com/liteflow-labs/liteflow-js/pull/117)
-- Use use `createOfferFillTransaction` instead of deprecated `offer.fill` in `useAcceptOffer` hook [#118](https://github.com/liteflow-labs/liteflow-js/pull/118)
-- Update dependency `@nft/api-graphql` to `v1.0.0-beta.10` [#129](https://github.com/liteflow-labs/liteflow-js/pull/129)
 
 #### Deprecated
 
@@ -21,9 +14,25 @@
 
 #### Fixed
 
-- Invalid jwt with expired date [#123](https://github.com/liteflow-labs/liteflow-js/pull/123)
-
 #### Security
+
+## [v1.0.0-beta.12](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.12) - 2023-02-07
+
+#### Added
+
+- Added new stable hook `useIsLoggedIn` to check is an address is logged in on the SDK [#122](https://github.com/liteflow-labs/liteflow-js/pull/122)
+  - Check https://docs.liteflow.com/hooks/useIsLoggedIn for more detail
+
+#### Changed
+
+- Use mutations `createCurrencyApprovalTransaction` and `createCollectionApprovalTransaction` instead of `token.approval` and `currency.approval` in `useCreateOffer` and `useAcceptOffer` hooks [#117](https://github.com/liteflow-labs/liteflow-js/pull/117)
+- Use use `createOfferFillTransaction` instead of deprecated `offer.fill` in `useAcceptOffer` hook [#118](https://github.com/liteflow-labs/liteflow-js/pull/118)
+- Use new flow of offer creation using the new mutation `createOfferSignature` [#119](https://github.com/liteflow-labs/liteflow-js/pull/119)
+- Update dependency `@nft/api-graphql` to `v1.0.0-beta.11` [#129](https://github.com/liteflow-labs/liteflow-js/pull/129) [#119](https://github.com/liteflow-labs/liteflow-js/pull/119)
+
+#### Fixed
+
+- Invalid jwt with expired date [#123](https://github.com/liteflow-labs/liteflow-js/pull/123)
 
 ## [v1.0.0-beta.11](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.11) - 2023-01-09
 

@@ -6,9 +6,12 @@ title: 'AUCTION_BID_CREATED'
 
 This event occurs whenever a bid on an auction is created.
 
-## Event
+## Definition
 
 ```ts
+type Uint256 = string
+type IsoDate = string
+
 type AUCTION_BID_CREATED = {
   createdAt: IsoDate
   id: string
@@ -34,4 +37,16 @@ type AUCTION_BID_CREATED = {
   quantity: Uint256
   expiredAt: IsoDate
 }
+```
+
+## Usage
+
+```ts
+import { Events, parseAndVerifyRequest } from '@nft/webhook'
+
+const { data, type } = await parseAndVerifyRequest<'AUCTION_BID_CREATED'>(
+  req,
+  process.env.LITEFLOW_WEBHOOK_SECRET,
+)
+// data is type Events['AUCTION_BID_CREATED']
 ```
