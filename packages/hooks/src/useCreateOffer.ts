@@ -149,7 +149,6 @@ export default function useCreateOffer(
 
       try {
         // approval if needed
-        setActiveProcess(CreateOfferStep.APPROVAL_SIGNATURE)
         if (type === 'SALE') {
           // fetch asset
           const { asset } = await sdk.FetchAssetForOffer({ assetId })
