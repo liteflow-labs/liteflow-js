@@ -6,6 +6,20 @@
 
 #### Added
 
+#### Changed
+
+#### Deprecated
+
+#### Removed
+
+#### Fixed
+
+#### Security
+
+## [v1.0.0-beta.12](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.12) - 2023-02-07
+
+#### Added
+
 - Added new stable hook `useIsLoggedIn` to check is an address is logged in on the SDK [#122](https://github.com/liteflow-labs/liteflow-js/pull/122)
   - Check https://docs.liteflow.com/hooks/useIsLoggedIn for more detail
 
@@ -16,15 +30,9 @@
 - Use new flow of offer creation using the new mutation `createOfferSignature` [#119](https://github.com/liteflow-labs/liteflow-js/pull/119)
 - Update dependency `@nft/api-graphql` to `v1.0.0-beta.11` [#129](https://github.com/liteflow-labs/liteflow-js/pull/129) [#119](https://github.com/liteflow-labs/liteflow-js/pull/119)
 
-#### Deprecated
-
-#### Removed
-
 #### Fixed
 
 - Invalid jwt with expired date [#123](https://github.com/liteflow-labs/liteflow-js/pull/123)
-
-#### Security
 
 ## [v1.0.0-beta.11](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.11) - 2023-01-09
 
