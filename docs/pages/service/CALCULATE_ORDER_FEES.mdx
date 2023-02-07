@@ -63,10 +63,13 @@ export default async function fees(
   const fees =
     args.collectionAddress === COLLECTION_PARTNER
       ? [
-          { account: PLATFORM_ADDRESS, value: PLATFORM_ADDRESS - PARTNER_FEE },
-          { account: PARTNER_ADDRESS, value: PARTNER_FEE },
+          {
+            account: PLATFORM_ADDRESS,
+            value: (PLATFORM_FEE - PARTNER_FEE).toString(),
+          },
+          { account: PARTNER_ADDRESS, value: PARTNER_FEE.toString() },
         ]
-      : [{ account: PLATFORM_ADDRESS, value: PLATFORM_ADDRESS }]
+      : [{ account: PLATFORM_ADDRESS, value: PLATFORM_FEE.toString() }]
 
   res.status(200).json(fees)
 }
