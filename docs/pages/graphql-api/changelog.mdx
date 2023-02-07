@@ -1,0 +1,78 @@
+---
+title: 'Changelog'
+---
+
+# Changelog
+
+## v1.0.0-beta.11
+
+> Published the 2023-02-07
+
+#### Breaking Changes
+
+- Config and request's body of `WEBHOOK_CALCULATE_ORDER_FEES` changed. The request's body now directly contains the args instead of previously in payload
+  - When connecting as a callback, the payload contained the `type` and `payload`
+  - With service, the request contains directly the args
+  - Warning: All functions for `CALCULATE_ORDER_FEES` need to be updated to work properly
+
+#### Added
+
+- Adds mutation `createOfferSignature`
+- Add `value` and `precision` fields in response of `orderFees` query. The `value` is now a `String` to allow bigger number
+- Add new query `rate` and expose `rates` on `currency`
+
+#### Changed
+
+- Mutation `createOffer` now accept `signature`, `timestamp`, and `salt` to create an already signed offer
+- Update `getFees` mutation to accept additional optional parameters: `currencyId`, `quantity`, and `unitPrice`
+- `orderFees` query now accepts optional `assetId
+- Use service table to query service and not webhook
+
+#### Deprecated
+
+- Deprecates mutation `publishOffer` and resolver `offer.eip712Data` in favour of `createOfferSignature` and `createOffer` with signature
+- Deprecate `valuePerTenThousand` field in response of `orderFees` query in favour of `value` and `precision` fields
+
+#### Fixed
+
+- Fix mutation `updateAccount` by only updating values present in the query
+- Disable `followCollection` and `unfollowCollection` mutation when social plugin is disabled
+- Fix `collection.supply` by filtering out assets without owner
+
+## v1.0.0-beta.10
+
+> Published the 2023-01-10
+
+#### Breaking Changes
+
+- Un-exposes the `Asset.unlockableContent` field
+- Correctly type the inputs of type `URI`. They previously used the type `String`
+- Remove `standard` from `Asset`
+- Un-exposes the `Offer.signature` field but keep its filter.
+- Un-exposes queries `assetTrait` and `assetTraits`
+
+#### Added
+
+- Add mutation `createCollectionTransaction` to deploy new collection on blockchain
+- Add field `mintType` to collection
+- Add check of collection's `mintType` in mutations `createAssetTransaction`, `createLazyMintedAsset` and `createLazyMintedAssetSignature`
+- Add field `updatedAt` to collection
+- Add mutation `updateCollection`
+- Add field `tags` to `Collection`
+- Add mutations `createCurrencyApprovalTransaction` and `createCollectionApprovalTransaction`
+- Add `createOfferFillTransaction` mutation
+- Add Collection Following feature
+
+#### Changed
+
+- Prevents the refresh asset function from syncing non-minted assets
+- Applies consistent ERC1155 and ERC721 supply validation when creating lazy minted assets
+
+#### Deprecated
+
+- Deprecate `Asset.token`, `Currency.approval`, `ERC721.approval` and `ERC1155.approval` resolvers in favor of `createCurrencyApprovalTransaction` and `createCollectionApprovalTransaction` mutations
+- Deprecate `offer.fill` resolver. Use `createOfferFillTransaction` mutation instead
+
+#### Removed
+
+- Remove `ERC20` from `Standard`
