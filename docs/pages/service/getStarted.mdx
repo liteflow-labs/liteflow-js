@@ -59,7 +59,7 @@ The library will parse and verify incoming requests to ensure they are from the 
 
 <Tabs items={['Next.js', 'Express']}>
 <Tab>
-```ts {1, 8-11, 17-21} filename="./pages/api/service.ts"
+```ts {1, 8-11, 17-21} filename="./pages/api/SERVICE_TYPE.ts"
 import { parseAndVerifyRequest } from '@nft/service'
 import { NextApiRequest, NextApiResponse } from 'next'
 
@@ -91,7 +91,7 @@ import { parseAndVerifyRequest } from '@nft/service'
 import express from 'express'
 const app = express()
 
-app.post('/service', async (req, res) => {
+app.post('/SERVICE_TYPE', async (req, res) => {
   const args = await parseAndVerifyRequest<SELECTED_SERVICE>(
     req,
     process.env.LITEFLOW_SECRET,
