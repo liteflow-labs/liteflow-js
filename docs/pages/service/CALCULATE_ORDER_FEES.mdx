@@ -46,11 +46,7 @@ Consider the following example of a service that returns split fees for a specif
 import { CalculateOrderFeeResult, parseAndVerifyRequest } from '@nft/service'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-const PLATFORM_ADDRESS = '0x...'
-const PLATFORM_FEE = 500 // equivalent to 5% with a precision of 4
 const COLLECTION_PARTNER = '0x...'
-const PARTNER_ADDRESS = '0x...'
-const PARTNER_FEE = 200 // equivalent to 2% with a precision of 4
 
 export default async function fees(
   req: NextApiRequest,
@@ -63,13 +59,10 @@ export default async function fees(
   const fees =
     args.collectionAddress === COLLECTION_PARTNER
       ? [
-          {
-            account: PLATFORM_ADDRESS,
-            value: (PLATFORM_FEE - PARTNER_FEE).toString(),
-          },
-          { account: PARTNER_ADDRESS, value: PARTNER_FEE.toString() },
+          { account: '0x...', value: '300' }, // equivalent to 3% with a precision of 4 (value can be found in args.feePrecision)
+          { account: '0x...', value: '200' }, // equivalent to 3% with a precision of 4 (value can be found in args.feePrecision)
         ]
-      : [{ account: PLATFORM_ADDRESS, value: PLATFORM_FEE.toString() }]
+      : [{ account: '0x...', value: '500' }] // equivalent to 5% with a precision of 4 (value can be found in args.feePrecision)
 
   res.status(200).json(fees)
 }
