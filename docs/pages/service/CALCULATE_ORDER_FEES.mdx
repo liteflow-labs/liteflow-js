@@ -47,10 +47,10 @@ import { CalculateOrderFeeResult, parseAndVerifyRequest } from '@nft/service'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const PLATFORM_ADDRESS = '0x...'
-const PLATFORM_FEE = 500 // equivalent to 5% with a precision of 2
+const PLATFORM_FEE = 500 // equivalent to 5% with a precision of 4
 const COLLECTION_PARTNER = '0x...'
 const PARTNER_ADDRESS = '0x...'
-const PARTNER_FEE = 200 // equivalent to 2% with a precision of 2
+const PARTNER_FEE = 200 // equivalent to 2% with a precision of 4
 
 export default async function fees(
   req: NextApiRequest,
