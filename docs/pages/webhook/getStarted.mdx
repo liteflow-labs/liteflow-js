@@ -1,0 +1,116 @@
+---
+title: 'Get started'
+---
+
+import { Tab, Tabs } from 'nextra-theme-docs'
+
+# Get started
+
+## Step 1: Identify the Events to Monitor
+
+The first step is to determine the events you want to receive notifications for. You can find a list of available events [here](/webhook/events).
+
+## Step 2: Set up a Webhook Endpoint
+
+Create an HTTP endpoint to receive unauthenticated webhook requests using the POST method.
+
+<Tabs items={['Next.js', 'Express']}>
+<Tab>
+```ts filename="./pages/api/webhook.ts"
+import { NextApiRequest, NextApiResponse } from 'next'
+
+export default async function webhook(
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> {
+  // ... get and process the event
+  res.status(200).end()
+}
+
+````
+
+</Tab>
+<Tab>
+```ts filename="./index.ts"
+import express from 'express'
+const app = express()
+
+app.post('/webhook', async (req, res) => {
+  // ... get and process the event
+  res.send()
+})
+app.listen(4242, () => console.log('Running on port 4242'))
+````
+
+</Tab>
+</Tabs>
+
+## Step 3: Handle Requests from Liteflow
+
+To process events from Liteflow's webhooks, install the `@nft/webhook` library.
+
+```
+npm i @nft/webhook
+```
+
+The library will parse and verify the incoming requests to ensure they are coming from the Liteflow infrastructure. To secure the communication between your application and the Liteflow infrastructure, you will need your Liteflow secret.
+
+<Tabs items={['Next.js', 'Express']}>
+<Tab>
+```ts {1, 8-11, 18-22} filename="./pages/api/webhook.ts"
+import { parseAndVerifyRequest } from '@nft/webhook'
+import { NextApiRequest, NextApiResponse } from 'next'
+
+export default async function webhook(
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> {
+  const { data, timestamp, type } = await parseAndVerifyRequest<SELECTED_EVENT>(
+    req,
+    process.env.LITEFLOW_WEBHOOK_SECRET,
+  )
+
+// ...do something with the event
+
+res.status(200).end()
+}
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+```
+</Tab>
+<Tab>
+
+```ts {1, 6-10} filename="./index.ts"
+import { parseAndVerifyRequest } from '@nft/webhook'
+import express from 'express'
+const app = express()
+
+app.post('/webhook', async (req, res) => {
+  const { data, timestamp, type } = await parseAndVerifyRequest<SELECTED_EVENT>(
+    req,
+    process.env.LITEFLOW_WEBHOOK_SECRET,
+  )
+  // ...do something with the event
+  res.send()
+})
+app.listen(4242, () => console.log('Running on port 4242'))
+```
+
+</Tab>
+</Tabs>
+
+#### Built-in Retry Mechanisms
+
+The Liteflow infrastructure will retry the webhook up to 5 times for any status code not `200`.
+
+## Step 4: Register Your HTTPS URL
+
+To connect your webhook to your Liteflow backend, go to your dashboard and add your newly created endpoint in the webhook section.
+
+#### Local Development Considerations
+
+Webhooks must be publicly accessible with an `https` url and cannot be hosted on `localhost`. To test webhooks locally, you can use tools such as [ngrok](https://ngrok.com/) or [localtunnel](https://theboroer.github.io/localtunnel-www).
