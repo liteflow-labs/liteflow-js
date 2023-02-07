@@ -2,6 +2,7 @@
   "index": "Introduction",
   "graphql-api": "GraphQL API",
   "webhook": "Webhook",
+  "service": "Service",
   "hooks": "React Hooks",
   "starter-kit": "Starter Kit"
 }

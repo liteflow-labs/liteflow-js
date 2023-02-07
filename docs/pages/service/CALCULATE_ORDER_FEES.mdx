@@ -1,0 +1,75 @@
+---
+title: 'CALCULATE_ORDER_FEES'
+---
+
+import { Callout } from 'nextra-theme-docs'
+
+# Dynamic fees: `CALCULATE_ORDER_FEES`
+
+The `CALCULATE_ORDER_FEES` service is used to calculate fees in real-time, providing the ability to implement dynamic fee structures based on custom criteria.
+
+<Callout type="info">
+  Fees are calculated and settled when an offer is created, not when it's
+  purchased.
+</Callout>
+
+## Argument
+
+```ts
+type CalculateOrderFeeArgs = {
+  chainId: number | undefined
+  collectionAddress: string | undefined
+  tokenId: string | undefined
+  unitPrice: Uint256 | undefined
+  quantity: Uint256 | undefined
+  currencyAddress: string | undefined
+  currentUser: string | undefined
+  exchangeAddress: string
+  feesPrecision: number
+}
+```
+
+## Expected result
+
+```ts
+type CalculateOrderFeeResult = {
+  account: string
+  value: Uint96
+}[]
+```
+
+## Use Case Example
+
+Consider the following example of a service that returns split fees for a specific collection: the fee is always set at 5%, but if the order is from a partner collection, 2% of the 5% fee is redirected to the partner's collection.
+
+```ts
+import { CalculateOrderFeeResult, parseAndVerifyRequest } from '@nft/service'
+import { NextApiRequest, NextApiResponse } from 'next'
+
+const COLLECTION_PARTNER = '0x...'
+
+export default async function fees(
+  req: NextApiRequest,
+  res: NextApiResponse<CalculateOrderFeeResult>,
+): Promise<void> {
+  const args = await parseAndVerifyRequest<'CALCULATE_ORDER_FEES'>(
+    req,
+    process.env.LITEFLOW_WEBHOOK_SECRET,
+  )
+  const fees =
+    args.collectionAddress === COLLECTION_PARTNER
+      ? [
+          { account: '0x...', value: '300' }, // equivalent to 3% with a precision of 4 (value can be found in args.feePrecision)
+          { account: '0x...', value: '200' }, // equivalent to 3% with a precision of 4 (value can be found in args.feePrecision)
+        ]
+      : [{ account: '0x...', value: '500' }] // equivalent to 5% with a precision of 4 (value can be found in args.feePrecision)
+
+  res.status(200).json(fees)
+}
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+```
