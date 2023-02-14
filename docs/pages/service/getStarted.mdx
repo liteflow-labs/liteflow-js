@@ -69,7 +69,7 @@ export default async function service(
 ): Promise<void> {
   const args = await parseAndVerifyRequest<SELECTED_SERVICE>(
     req,
-    process.env.LITEFLOW_SECRET,
+    process.env.LITEFLOW_SERVICE_SECRET,
   )
   console.log(args)
   // TODO: fill the result with the right value based on \`args\`
@@ -94,7 +94,7 @@ const app = express()
 app.post('/SERVICE_TYPE', async (req, res) => {
   const args = await parseAndVerifyRequest<SELECTED_SERVICE>(
     req,
-    process.env.LITEFLOW_SECRET,
+    process.env.LITEFLOW_SERVICE_SECRET,
   )
   console.log(args)
   // TODO: fill the result with the right value based on \`args\`

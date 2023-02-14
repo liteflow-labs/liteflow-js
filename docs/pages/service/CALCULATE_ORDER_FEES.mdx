@@ -54,7 +54,7 @@ export default async function fees(
 ): Promise<void> {
   const args = await parseAndVerifyRequest<'CALCULATE_ORDER_FEES'>(
     req,
-    process.env.LITEFLOW_WEBHOOK_SECRET,
+    process.env.LITEFLOW_SERVICE_SECRET,
   )
   const fees =
     args.collectionAddress === COLLECTION_PARTNER
