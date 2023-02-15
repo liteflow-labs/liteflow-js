@@ -14,6 +14,8 @@
 
 #### Fixed
 
+- Fix future issues with config type and too permissive type [#138](https://github.com/liteflow-labs/liteflow-js/pull/138)
+
 #### Security
 
 ## [v1.0.0-beta.12](https://github.com/liteflow-labs/libraries/releases/tag/v1.0.0-beta.12) - 2023-02-07
