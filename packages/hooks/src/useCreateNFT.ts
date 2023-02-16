@@ -250,6 +250,15 @@ export default function useCreateNFT(
             createLazyMintedAsset?.asset,
             ErrorMessages.ASSET_LAZY_MINT_CREATION_FAILED,
           )
+          setActiveProcess(CreateNftStep.OWNERSHIP)
+          // poll the api until the ownership is updated
+          console.info('polling api to check ownership...')
+          await pollOwnership({
+            assetId: createLazyMintedAsset.asset.id,
+            ownerAddress: account.toLowerCase(),
+            initialQuantity: '0',
+          })
+          console.info('polling done')
           return createLazyMintedAsset.asset.id
         }
 

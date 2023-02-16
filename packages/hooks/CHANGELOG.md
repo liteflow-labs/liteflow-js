@@ -14,6 +14,7 @@
 
 #### Fixed
 
+- Fix issue with pending ownership on lazyminted assets [#137](https://github.com/liteflow-labs/liteflow-js/pull/137)
 - Fix future issues with config type and too permissive type [#138](https://github.com/liteflow-labs/liteflow-js/pull/138)
 
 #### Security
