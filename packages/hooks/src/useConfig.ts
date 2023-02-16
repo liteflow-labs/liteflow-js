@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { LiteflowContext } from './context'
-import { Config } from './graphql'
+import { GetConfigQuery } from './graphql'
 
 // This type can be reused for any other read-only hook
 type Result<T = any> = {
@@ -9,6 +9,7 @@ type Result<T = any> = {
   loading: boolean
 }
 
+type Config = Omit<GetConfigQuery['config'], '__typename'>
 export type ConfigResult = Result<Config>
 
 export default function useConfig(): ConfigResult {
