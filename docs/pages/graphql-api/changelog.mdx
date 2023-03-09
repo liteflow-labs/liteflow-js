@@ -4,6 +4,62 @@ title: 'Changelog'
 
 # Changelog
 
+## v1.0.0-beta.14
+
+> Published the 2023-03-09
+
+#### Breaking Changes
+
+- Fix missing plural on connection between `Account` and its `followers`
+
+#### Added
+
+- Add new filter `content: { match: XXX }` to Asset, Collection and Account and the `contentRank` associated and available for ordering (higher is better)
+
+## v1.0.0-beta.13
+
+> Published the 2023-03-01
+
+#### Added
+
+- Expose filter `isImported` on `Account`
+- Expose `CollectionTraitValue` and `CollectionTrait` to access collection's trait much faster
+
+#### Deprecated
+
+- Deprecate `Collection.traits`
+
+#### Fixed
+
+- Fix signature issue with Ledger by normalizing signature using `joinSignature` function from ethers.js
+
+## v1.0.0-beta.12
+
+> Published the 2023-02-28
+
+#### Breaking Changes
+
+- Require fields `chainId`, `collectionAddress` and `metadata` and remove deprecated fields from `createLazyMintedAsset` and `createLazyMintedAssetSignature`: `standard`, `name`, `description`, `animationUrl`, `image`, `traits`, `unlockableContent`. Deprecated since v1.0.0-beta.8.
+- Remove deprecated mutation `createAsset`. Deprecated since v1.0.0-beta.8.
+- Remove deprecated `mint` resolvers
+
+#### Added
+
+- Expose platform secrets in query `config`, require to be authenticated as an admin
+- Add APIs to manage webhooks and services, required to be authenticated as an admin
+- Add `importCollection` and `deleteCollection` mutations, required to be authenticated as an admin
+- Add user's role in the jwt
+- Add resolver `sync` on collection to expose info related to the synchronization of collection. Limited to admin.
+
+#### Removed
+
+- Remove envs `ERC721_ADDRESS` and `ERC1155_ADDRESS`
+
+#### Fixed
+
+- Fix fetch of royalties by using the Rarible Royalties Registry instead of the Collection's smart contract
+- Fix fetch of service's endpoint url in query `orderFees`
+
 ## v1.0.0-beta.11
 
 > Published the 2023-02-07
