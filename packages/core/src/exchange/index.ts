@@ -1,3 +1,4 @@
+import type { TransactionResponse } from '@ethersproject/abstract-provider'
 import type { Signer } from 'ethers'
 import { BigNumber } from 'ethers'
 import type { OfferInputBis, Sdk } from '../graphql'
@@ -17,8 +18,7 @@ import {
   toTransactionHash,
 } from '../utils/convert'
 import { signEIP712 } from '../utils/signature'
-import { approveCollection } from './approveCollection'
-import { approveCurrency } from './approveCurrency'
+import { sendTransaction } from '../utils/transaction'
 
 export type ListingState =
   | IState<'APPROVAL_SIGNATURE', {}>
@@ -93,8 +93,7 @@ export class Exchange {
     }
 
     onProgress?.({ type: 'APPROVAL_SIGNATURE', payload: {} })
-    const tx = await approveCurrency(
-      this.sdk,
+    const tx = await this.approveCurrency(
       {
         chain,
         currency: unitPrice.currency,
@@ -160,7 +159,7 @@ export class Exchange {
     }
 
     onProgress?.({ type: 'APPROVAL_SIGNATURE', payload: {} })
-    const tx = await approveCollection(this.sdk, { chain, collection }, signer)
+    const tx = await this.approveCollection({ chain, collection }, signer)
     if (tx) {
       onProgress?.({
         type: 'APPROVAL_PENDING',
@@ -188,5 +187,57 @@ export class Exchange {
       timestamp,
     })
     return id
+  }
+
+  private async approveCollection(
+    {
+      chain,
+      collection,
+    }: {
+      chain: ChainId
+      collection: Address
+    },
+    signer: Signer,
+  ): Promise<TransactionResponse | null> {
+    const address = await signer.getAddress()
+
+    const {
+      createCollectionApprovalTransaction: { transaction },
+    } = await this.sdk.CreateCollectionApprovalTransaction({
+      accountAddress: toAddress(address),
+      chainId: chain,
+      collectionAddress: toAddress(collection),
+    })
+
+    if (!transaction) return null
+
+    return sendTransaction(signer, transaction)
+  }
+
+  private async approveCurrency(
+    {
+      chain,
+      currency,
+      amount,
+    }: {
+      chain: ChainId
+      currency: Address
+      amount: Uint256
+    },
+    signer: Signer,
+  ): Promise<TransactionResponse | null> {
+    const address = await signer.getAddress()
+
+    const {
+      createCurrencyApprovalTransaction: { transaction },
+    } = await this.sdk.CreateCurrencyApprovalTransaction({
+      accountAddress: toAddress(address),
+      currencyId: toCurrencyId(chain, toAddress(currency)),
+      amount: amount.toString(),
+    })
+
+    if (!transaction) return null
+
+    return sendTransaction(signer, transaction)
   }
 }
