@@ -1,4 +1,4 @@
-import type { TypedDataDomain, TypedDataField } from 'ethers'
+import type { BigNumberish, TypedDataDomain, TypedDataField } from 'ethers'
 import type { PatchedRequestInit } from 'graphql-request/dist/types'
 
 export type ClientOption = {
@@ -16,6 +16,7 @@ export type TransactionHash = `0x${string}`
 export type ChainId = number
 export type Address = `0x${string}`
 export type UUID = string
+export type Uint256 = BigNumberish
 
 export interface IState<Type = string, Payload = any> {
   type: Type

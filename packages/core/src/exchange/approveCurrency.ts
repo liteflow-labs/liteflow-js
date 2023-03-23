@@ -1,14 +1,14 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider'
-import type { BigNumber, Signer } from 'ethers'
+import type { Signer } from 'ethers'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId } from '../types'
+import type { Address, ChainId, Uint256 } from '../types'
 import { toAddress, toCurrencyId } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 
 type CurrencyApproval = {
   chain: ChainId
   currency: Address
-  amount: BigNumber
+  amount: Uint256
 }
 
 export async function approveCurrency(

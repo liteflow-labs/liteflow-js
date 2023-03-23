@@ -17,7 +17,7 @@ config:
     Datetime: 'string'
     Cursor: 'string'
     JSON: './types#EIP712Data'
-    Uint256: 'ethers#BigNumberish'
+    Uint256: './types#Uint256'
     Address: './types#Address'
     TransactionHash: './types#TransactionHash'
     BigFloat: 'string'

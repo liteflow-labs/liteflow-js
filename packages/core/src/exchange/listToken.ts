@@ -7,6 +7,7 @@ import type {
   EIP712Data,
   IState,
   TransactionHash,
+  Uint256,
   UUID,
 } from '../types'
 import {
@@ -28,10 +29,10 @@ export type Listing = {
   collection: Address
   token: string
   unitPrice: {
-    amount: BigNumber
+    amount: Uint256
     currency: Address | null
   }
-  quantity?: BigNumber
+  quantity?: Uint256
   takerAddress?: Address
   expiredAt?: Date
 }

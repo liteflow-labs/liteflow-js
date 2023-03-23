@@ -1,5 +1,5 @@
 import type { Signer } from 'ethers'
-import { BigNumber, constants } from 'ethers'
+import { BigNumber } from 'ethers'
 import type { OfferInputBis, Sdk } from '../graphql'
 import type {
   Address,
@@ -7,6 +7,7 @@ import type {
   EIP712Data,
   IState,
   TransactionHash,
+  Uint256,
   UUID,
 } from '../types'
 import {
@@ -28,10 +29,10 @@ export type Bid = {
   collection: Address
   token: string
   unitPrice: {
-    amount: BigNumber
+    amount: Uint256
     currency: Address
   }
-  quantity?: BigNumber
+  quantity?: Uint256
   takerAddress?: Address
   expiredAt?: Date
   auctionId?: UUID
@@ -72,7 +73,9 @@ export async function placeBid(
     {
       chain,
       currency: unitPrice.currency,
-      amount: unitPrice.amount.mul(quantity || constants.One),
+      amount: BigNumber.from(unitPrice.amount).mul(
+        BigNumber.from(quantity || '1'),
+      ),
     },
     signer,
   )
