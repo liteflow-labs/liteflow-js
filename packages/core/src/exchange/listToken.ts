@@ -77,9 +77,10 @@ export async function listToken(
   const {
     createOfferSignature: { eip712Data, salt, timestamp },
   } = await sdk.CreateOfferSignature({ offer })
-  onProgress?.({ type: 'OFFER_SIGNATURE', payload: { signature: eip712Data } })
+  const eip712 = eip712Data as EIP712Data
+  onProgress?.({ type: 'OFFER_SIGNATURE', payload: { signature: eip712 } })
 
-  const signature = await signEIP712(signer, eip712Data)
+  const signature = await signEIP712(signer, eip712)
 
   const {
     createOffer: {

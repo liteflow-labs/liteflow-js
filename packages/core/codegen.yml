@@ -16,7 +16,7 @@ config:
     UUID: './types#UUID'
     Datetime: 'string'
     Cursor: 'string'
-    JSON: './types#EIP712Data'
+    JSON: 'unknown'
     Uint256: './types#Uint256'
     Address: './types#Address'
     TransactionHash: './types#TransactionHash'
