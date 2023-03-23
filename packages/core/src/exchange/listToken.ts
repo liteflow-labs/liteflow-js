@@ -33,21 +33,13 @@ export type Listing = {
     currency: Address | null
   }
   quantity?: Uint256
-  takerAddress?: Address
+  taker?: Address
   expiredAt?: Date
 }
 
 export async function listToken(
   sdk: Sdk,
-  {
-    chain,
-    collection,
-    token,
-    unitPrice,
-    quantity,
-    takerAddress,
-    expiredAt,
-  }: Listing,
+  { chain, collection, token, unitPrice, quantity, taker, expiredAt }: Listing,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
@@ -60,7 +52,7 @@ export async function listToken(
     currencyId: toCurrencyId(chain, unitPrice.currency),
     unitPrice: BigNumber.from(unitPrice.amount).toString(),
     quantity: BigNumber.from(quantity || '1').toString(),
-    takerAddress: takerAddress,
+    takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : undefined,
   }
 

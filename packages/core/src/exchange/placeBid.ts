@@ -33,7 +33,7 @@ export type Bid = {
     currency: Address
   }
   quantity?: Uint256
-  takerAddress?: Address
+  taker?: Address
   expiredAt?: Date
   auctionId?: UUID
 }
@@ -46,7 +46,7 @@ export async function placeBid(
     token,
     unitPrice,
     quantity,
-    takerAddress,
+    taker,
     expiredAt,
     auctionId,
   }: Bid,
@@ -62,7 +62,7 @@ export async function placeBid(
     currencyId: toCurrencyId(chain, unitPrice.currency),
     unitPrice: BigNumber.from(unitPrice.amount).toString(),
     quantity: BigNumber.from(quantity || '1').toString(),
-    takerAddress: takerAddress,
+    takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : null,
     auctionId: auctionId,
   }
