@@ -5,7 +5,7 @@ import type {
   Address,
   ChainId,
   EIP712Data,
-  IAction,
+  IState,
   TransactionHash,
   UUID,
 } from '../types'
@@ -18,10 +18,10 @@ import {
 import { signEIP712 } from '../utils/signature'
 import { approveCurrency } from './approveCurrency'
 
-export type Action =
-  | IAction<'APPROVAL_SIGNATURE', {}>
-  | IAction<'APPROVAL_PENDING', { txHash: TransactionHash }>
-  | IAction<'OFFER_SIGNATURE', { signature: EIP712Data }>
+export type State =
+  | IState<'APPROVAL_SIGNATURE', {}>
+  | IState<'APPROVAL_PENDING', { txHash: TransactionHash }>
+  | IState<'OFFER_SIGNATURE', { signature: EIP712Data }>
 
 export type Bid = {
   chain: ChainId
@@ -50,7 +50,7 @@ export async function placeBid(
     auctionId,
   }: Bid,
   signer: Signer,
-  onProgress?: (action: Action) => void,
+  onProgress?: (state: State) => void,
 ): Promise<UUID> {
   const address = await signer.getAddress()
 

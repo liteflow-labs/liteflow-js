@@ -14,7 +14,7 @@ export class Exchange {
   placeBid(
     bid: PlaceBid.Bid,
     signer: Signer,
-    onProgress?: (action: PlaceBid.Action) => void,
+    onProgress?: (state: PlaceBid.State) => void,
   ): Promise<UUID> {
     return PlaceBid.placeBid(this.sdk, bid, signer, onProgress)
   }
@@ -22,7 +22,7 @@ export class Exchange {
   listToken(
     listing: ListToken.Listing,
     signer: Signer,
-    onProgress?: (action: ListToken.Action) => void,
+    onProgress?: (state: ListToken.State) => void,
   ): Promise<UUID> {
     return ListToken.listToken(this.sdk, listing, signer, onProgress)
   }

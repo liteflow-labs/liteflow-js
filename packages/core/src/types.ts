@@ -17,7 +17,7 @@ export type ChainId = number
 export type Address = `0x${string}`
 export type UUID = string
 
-export interface IAction<T = string, V = any> {
-  type: T
-  payload: V
+export interface IState<Type = string, Payload = any> {
+  type: Type
+  payload: Payload
 }
