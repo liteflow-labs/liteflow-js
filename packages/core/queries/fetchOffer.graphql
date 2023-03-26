@@ -1,0 +1,24 @@
+query FetchOffer($offerId: UUID!) {
+  offer(id: $offerId) {
+    id
+    type
+    makerAddress
+    takerAddress
+    createdAt
+    expiredAt
+    orderHash
+    unitPrice
+    availableQuantity
+    asset {
+      collection {
+        chainId
+        address
+      }
+      tokenId
+    }
+    currency {
+      chainId
+      address
+    }
+  }
+}
