@@ -1,31 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
-import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
 import { Offer } from './graphql'
-import { convertTx } from './utils/transaction'
-
-gql`
-  mutation DeleteOffer($id: UUID!) {
-    deleteOffer(input: { id: $id }) {
-      offer {
-        id
-      }
-    }
-  }
-`
-
-gql`
-  query OfferWithCancel($offerId: UUID!, $taker: Address!) {
-    offer(id: $offerId) {
-      cancel(account: $taker) {
-        ...Transaction
-      }
-    }
-  }
-`
 
 export enum CancelOfferStep {
   INITIAL,
@@ -42,7 +20,7 @@ export default function useCancelOffer(signer: Signer | undefined): [
     transactionHash: string | undefined
   },
 ] {
-  const { sdk } = useContext(LiteflowContext)
+  const { client } = useContext(LiteflowContext)
   const [transactionHash, setTransactionHash] = useState<string>()
   const [activeStep, setActiveProcess] = useState<CancelOfferStep>(
     CancelOfferStep.INITIAL,
@@ -51,33 +29,19 @@ export default function useCancelOffer(signer: Signer | undefined): [
   const cancelOffer: CancelOfferFn = useCallback(
     async ({ id }) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
-      const account = await signer.getAddress()
-
-      try {
-        // fetch cancel tx from api
-        const { offer } = await sdk.OfferWithCancel({
-          offerId: id,
-          taker: account.toLowerCase(),
-        })
-        invariant(offer, ErrorMessages.OFFER_NOT_FOUND)
-
-        setActiveProcess(CancelOfferStep.TRANSACTION_SIGNATURE)
-        // sign and broadcast the transaction
-        const tx = await signer.sendTransaction(convertTx(offer.cancel))
-        setActiveProcess(CancelOfferStep.TRANSACTION_PENDING)
-        setTransactionHash(tx.hash)
-        console.info(`waiting for transaction with hash ${tx.hash}...`)
-        await tx.wait()
-        console.info(`transaction validated`)
-
-        // set the offer as cancelled on the api
-        await sdk.DeleteOffer({ id })
-      } finally {
-        setActiveProcess(CancelOfferStep.INITIAL)
-        setTransactionHash(undefined)
-      }
+      await client.exchange.cancelOffer(id, signer, (state) => {
+        switch (state.type) {
+          case 'TRANSACTION_SIGNATURE':
+            setActiveProcess(CancelOfferStep.TRANSACTION_SIGNATURE)
+            break
+          case 'TRANSACTION_PENDING':
+            setActiveProcess(CancelOfferStep.TRANSACTION_PENDING)
+            setTransactionHash(state.payload.txHash)
+            break
+        }
+      })
     },
-    [sdk, signer],
+    [client.exchange, signer],
   )
 
   return [cancelOffer, { activeStep, transactionHash }]

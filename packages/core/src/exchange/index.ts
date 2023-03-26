@@ -1,6 +1,8 @@
 import type { Signer } from 'ethers'
 import type { Sdk } from '../graphql'
 import type { UUID } from '../types'
+import type { State as CancelOfferState } from './cancelOffer'
+import { cancelOffer } from './cancelOffer'
 import type { Listing, State as ListTokenState } from './listToken'
 import { listToken } from './listToken'
 import type { Bid, State as PlaceBidState } from './placeBid'
@@ -27,5 +29,13 @@ export class Exchange {
     onProgress?: (state: ListTokenState) => void,
   ): Promise<UUID> {
     return listToken(this.sdk, listing, signer, onProgress)
+  }
+
+  async cancelOffer(
+    offerId: UUID,
+    signer: Signer,
+    onProgress?: (state: CancelOfferState) => void,
+  ): Promise<UUID> {
+    return cancelOffer(this.sdk, offerId, signer, onProgress)
   }
 }
