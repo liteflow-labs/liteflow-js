@@ -73,9 +73,9 @@ export async function placeBid(
     {
       chain,
       currency: unitPrice.currency,
-      amount: BigNumber.from(unitPrice.amount).mul(
-        BigNumber.from(quantity || '1'),
-      ),
+      amount: BigNumber.from(unitPrice.amount)
+        .mul(BigNumber.from(quantity || '1'))
+        .toString(),
     },
     signer,
   )

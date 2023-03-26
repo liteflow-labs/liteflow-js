@@ -1,8 +1,10 @@
 import type { Signer } from 'ethers'
 import type { Sdk } from '../graphql'
 import type { UUID } from '../types'
-import * as ListToken from './listToken'
-import * as PlaceBid from './placeBid'
+import type { Listing, State as ListTokenState } from './listToken'
+import { listToken } from './listToken'
+import type { Bid, State as PlaceBidState } from './placeBid'
+import { placeBid } from './placeBid'
 
 export class Exchange {
   private readonly sdk: Sdk
@@ -11,19 +13,19 @@ export class Exchange {
     this.sdk = sdk
   }
 
-  placeBid(
-    bid: PlaceBid.Bid,
+  async placeBid(
+    bid: Bid,
     signer: Signer,
-    onProgress?: (state: PlaceBid.State) => void,
+    onProgress?: (state: PlaceBidState) => void,
   ): Promise<UUID> {
-    return PlaceBid.placeBid(this.sdk, bid, signer, onProgress)
+    return placeBid(this.sdk, bid, signer, onProgress)
   }
 
-  listToken(
-    listing: ListToken.Listing,
+  async listToken(
+    listing: Listing,
     signer: Signer,
-    onProgress?: (state: ListToken.State) => void,
+    onProgress?: (state: ListTokenState) => void,
   ): Promise<UUID> {
-    return ListToken.listToken(this.sdk, listing, signer, onProgress)
+    return listToken(this.sdk, listing, signer, onProgress)
   }
 }
