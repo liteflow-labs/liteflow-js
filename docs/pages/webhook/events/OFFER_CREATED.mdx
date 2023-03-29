@@ -11,13 +11,21 @@ This event occurs whenever a new listing is created.
 ```ts
 type Uint256 = string
 type IsoDate = string
+type ChainId = number
+type Address = string
 
 type OFFER_CREATED = {
   createdAt: IsoDate
   id: string
+  type: 'BUY' | 'SALE'
   asset: {
     id: string
     name: string
+    collection: {
+      chainId: ChainId
+      address: Address
+      name: string
+    }
   }
   unitPrice: Uint256
   currency: {
