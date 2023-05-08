@@ -8,6 +8,8 @@
 
 #### Changed
 
+- Update dependency `@nft/api-graphql` to `v1.0.0-beta.16` [#152](https://github.com/liteflow-labs/liteflow-js/pull/152)
+
 #### Deprecated
 
 #### Removed
