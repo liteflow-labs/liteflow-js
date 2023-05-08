@@ -16,31 +16,29 @@ title: 'Changelog'
 
 #### Added
 
-- Add mutation `createCancelOfferTransaction`
-- Add fields `chainId`, `collectionAddress`, `tokenId` in type `CreateAssetTransactionPayload`
-- Add fields `chainId`, `collectionAddress`, `tokenId` in query `orderFees`
-- Add to mutation `refreshAsset` fields `chainId`, `collectionAddress` and `tokenId`
-- Add field `quantity` to type `Asset` with filter and order by functionalities
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `AssetWatch`
-- Add resolver `ownership(ownerAddress: String)` on type `Asset` to ease the fetch of a specific ownership
-- Add resolver `groupedByDate` on type `AccountsConnection`
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Ownership`
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Offer`, `OfferOpenBuy`, `OfferOpenSale` and mutation `createOffer`
-- Add field `totalCurrencyDistinctCount` on type `OfferOpenSalesConnection` that returns number of unique currencies from this connection ignoring before/after/first/last/offset
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Comment`
-- Add field `collection.quantity` to return the total editions of all NFTs of a collection, with filter and sort functionalities
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `AssetHistory`
-- Add fields `chainId`, `collectionAddress` and `tokenId` to query `ownership`
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Royalty`
-- Add resolver `groupedByDate` on type `TradesConnection`
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Auction` and mutation `createAuction`
-- Add resolver `groupedByDate` on type `CollectionsConnection`
-- Add resolver `groupedByDate` on type `OffersConnection`
-- Add fields `chainId`, `collectionAddress` and `tokenId` to mutations `watch` and `unwatch`
-- Add resolver `groupedByDate` on type `AssetsConnection`
-- Add fields `chainId`, `collectionAddress`, `tokenId` in mutation `createTransferAssetTransaction`
-- Add field `totalAvailableQuantitySum` on type `OfferOpenSalesConnection` that returns the sum of all the offers' available quantity from from the connection ignoring before/after/first/last/offset
-- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Like`
+- Add field `quantity` to type `Asset` with filter and order by functionalities [#2615](https://github.com/liteflow-labs/backend/pull/2615)
+- Add field `totalCurrencyDistinctCount` on type `OfferOpenSalesConnection` that returns number of unique currencies from this connection ignoring before/after/first/last/offset [#2618](https://github.com/liteflow-labs/backend/pull/2618)
+- Add field `collection.quantity` to return the total editions of all NFTs of a collection, with filter and sort functionalities [#2599](https://github.com/liteflow-labs/backend/pull/2599)
+- Add resolver `ownership(ownerAddress: String)` on type `Asset` to ease the fetch of a specific ownership [#2629](https://github.com/liteflow-labs/backend/pull/2629)
+- Add resolver `groupedByDate` on types `TradesConnection`, `CollectionsConnection`, `OffersConnection`, `AssetsConnection`, and `AccountsConnection` [#2652](https://github.com/liteflow-labs/backend/pull/2652) [#2659](https://github.com/liteflow-labs/backend/pull/2659) [#2656](https://github.com/liteflow-labs/backend/pull/2656) [#2658](https://github.com/liteflow-labs/backend/pull/2658) [#2657](https://github.com/liteflow-labs/backend/pull/2657)
+- Add field `totalAvailableQuantitySum` on type `OfferOpenSalesConnection` that returns the sum of all the offers' available quantity from from the connection ignoring before/after/first/last/offset [#2619](https://github.com/liteflow-labs/backend/pull/2619)
+- Add mutation `createCancelOfferTransaction` [#2639](https://github.com/liteflow-labs/backend/pull/2639)
+- Add fields `chainId`, `collectionAddress`, `tokenId` in many types, queries, and mutations:
+  - Type `CreateAssetTransactionPayload` [#2635](https://github.com/liteflow-labs/backend/pull/2635)
+  - Query `orderFees` [#2637](https://github.com/liteflow-labs/backend/pull/2637)
+  - Mutation `refreshAsset` [#2611](https://github.com/liteflow-labs/backend/pull/2611)
+  - Type `AssetWatch` [#2605](https://github.com/liteflow-labs/backend/pull/2605)
+  - Type `Ownership` [#2602](https://github.com/liteflow-labs/backend/pull/2602)
+  - Type `Offer`, `OfferOpenBuy`, `OfferOpenSale` and mutation `createOffer` [#2609](https://github.com/liteflow-labs/backend/pull/2609)
+  - Type `Comment` [#2606](https://github.com/liteflow-labs/backend/pull/2606)
+  - Type `AssetHistory` [#2614](https://github.com/liteflow-labs/backend/pull/2614)
+  - Query `ownership` [#2647](https://github.com/liteflow-labs/backend/pull/2647)
+  - Type `Royalty` [#2604](https://github.com/liteflow-labs/backend/pull/2604)
+  - Type `Auction` and mutation `createAuction` [#2608](https://github.com/liteflow-labs/backend/pull/2608)
+  - Mutations `watch` and `unwatch` [#2650](https://github.com/liteflow-labs/backend/pull/2650)
+  - Mutation `createTransferAssetTransaction` [#2636](https://github.com/liteflow-labs/backend/pull/2636)
+  - Type `Like` [#2607](https://github.com/liteflow-labs/backend/pull/2607)
+- Add new Organization table and database with a goal of centralizing the configuration of all platform in a single API that can be accessible through a new URL `/:organizationId/graphql`. Requires new envs `GENERAL_DATABASE_URL` and `DEFAULT_ORGANIZATION_ID`. [#2632](https://github.com/liteflow-labs/backend/pull/2632)
 
 #### Changed
 
