@@ -53,7 +53,9 @@ function NFT() {
       type: OfferType.Buy,
       quantity: BigNumber.from(1),
       unitPrice: BigNumber.from(1).mul(BigNumber.from(10).pow(18)), // this value is in base unit of the token. This is equivalent to 1 ETH. Use BigNumber
-      assetId: 'XXX',
+      chainId: 1,
+      collectionAddress: '0x0000',
+      tokenId: 'XXX',
       currencyId: 'XXX',
     })
     alert(`Offer created: ${offerId}`)
