@@ -22,3 +22,7 @@ config:
     Address: 'string'
     TransactionHash: 'string'
     BigFloat: 'string'
+    BigInt: 'string'
+    Bytes32: 'string'
+    FullText: 'string'
+    Int256: 'string'
