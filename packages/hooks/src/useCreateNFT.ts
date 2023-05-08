@@ -26,7 +26,9 @@ gql`
       royalties: $royalties
       supply: $supply
     ) {
-      assetId
+      chainId
+      collectionAddress
+      tokenId
       transaction {
         ...Transaction
       }
@@ -68,7 +70,9 @@ gql`
       }
     ) {
       asset {
-        id
+        chainId
+        collectionAddress
+        tokenId
       }
     }
   }
@@ -96,7 +100,11 @@ type createNftFn = (data: {
   amount?: number
   royalties?: number
   traits?: { type: string; value: string }[]
-}) => Promise<string>
+}) => Promise<{
+  chainId: number
+  collectionAddress: string
+  tokenId: string
+}>
 
 export default function useCreateNFT(
   signer: (Signer & TypedDataSigner) | undefined,
@@ -254,12 +262,18 @@ export default function useCreateNFT(
           // poll the api until the ownership is updated
           console.info('polling api to check ownership...')
           await pollOwnership({
-            assetId: createLazyMintedAsset.asset.id,
+            chainId: createLazyMintedAsset.asset.chainId,
+            collectionAddress: createLazyMintedAsset.asset.collectionAddress,
+            tokenId: createLazyMintedAsset.asset.tokenId,
             ownerAddress: account.toLowerCase(),
             initialQuantity: '0',
           })
           console.info('polling done')
-          return createLazyMintedAsset.asset.id
+          return {
+            chainId: createLazyMintedAsset.asset.chainId,
+            collectionAddress: createLazyMintedAsset.asset.collectionAddress,
+            tokenId: createLazyMintedAsset.asset.tokenId,
+          }
         }
 
         const { createAssetTransaction } = await sdk.CreateAssetTransaction({
@@ -287,13 +301,19 @@ export default function useCreateNFT(
         // poll the api until the ownership is updated
         console.info('polling api to check ownership...')
         await pollOwnership({
-          assetId: createAssetTransaction.assetId,
+          chainId: createAssetTransaction.chainId,
+          collectionAddress: createAssetTransaction.collectionAddress,
+          tokenId: createAssetTransaction.tokenId,
           ownerAddress: account.toLowerCase(),
           initialQuantity: '0',
         })
         console.info('polling done')
 
-        return createAssetTransaction.assetId
+        return {
+          chainId: createAssetTransaction.chainId,
+          collectionAddress: createAssetTransaction.collectionAddress,
+          tokenId: createAssetTransaction.tokenId,
+        }
       } finally {
         setActiveProcess(CreateNftStep.INITIAL)
         setTransactionHash(undefined)

@@ -18,12 +18,10 @@ gql`
       type
       makerAddress
       takerAddress
-      assetId
+      chainId
+      collectionAddress
+      tokenId
       currencyId
-      asset {
-        chainId
-        collectionAddress
-      }
     }
   }
 `
@@ -151,13 +149,12 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         } else {
           // accepting an offer of type buy, approval is on the asset
           await approveCollection({
-            chainId: offer.asset.chainId,
-            collectionAddress: offer.asset.collectionAddress,
+            chainId: offer.chainId,
+            collectionAddress: offer.collectionAddress,
           })
         }
 
         // determine the asset id to check ownership from
-        const assetId = offer.assetId
         const newOwner =
           offer.type === 'SALE'
             ? offer.takerAddress || account.toLowerCase()
@@ -173,7 +170,9 @@ export default function useAcceptOffer(signer: Signer | undefined): [
 
         // fetch initial quantity
         const { quantity: initialQuantity } = await checkOwnership(
-          assetId,
+          offer.chainId,
+          offer.collectionAddress,
+          offer.tokenId,
           newOwner,
         )
 
@@ -192,7 +191,9 @@ export default function useAcceptOffer(signer: Signer | undefined): [
         // poll the api until the ownership is updated
         console.info('polling api to check ownership...')
         await pollOwnership({
-          assetId,
+          chainId: offer.chainId,
+          collectionAddress: offer.collectionAddress,
+          tokenId: offer.tokenId,
           ownerAddress: newOwner,
           initialQuantity,
         })

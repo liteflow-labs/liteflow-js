@@ -4,10 +4,13 @@
 
 #### Breaking Changes
 
+- Update `useCheckOwnership`, `useCreateNFT`, and `useCreateOffer` hooks to use `chainId`, `collectionAddress` and `tokenId` instead of `assetId` [#152](https://github.com/liteflow-labs/liteflow-js/pull/152)
+
 #### Added
 
 #### Changed
 
+- Update `useAcceptOffer`, and `useCreateAuction` hooks to use `chainId`, `collectionAddress` and `tokenId` instead of `assetId` internally [#152](https://github.com/liteflow-labs/liteflow-js/pull/152)
 - Update dependency `@nft/api-graphql` to `v1.0.0-beta.16` [#152](https://github.com/liteflow-labs/liteflow-js/pull/152)
 
 #### Deprecated

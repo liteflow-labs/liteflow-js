@@ -16,7 +16,9 @@ gql`
 `
 
 type AuctionInput = {
-  assetId: string
+  chainId: number
+  collectionAddress: string
+  tokenId: string
   endAt: Date
   auctionValiditySeconds: number
   reserveAmount: string
@@ -36,7 +38,10 @@ export default function useCreateAuction(
         const account = await signer.getAddress()
         const { createAuction } = await sdk.CreateAuction({
           createAuctionInput: {
-            assetId: input.assetId,
+            assetId: null,
+            chainId: input.chainId,
+            collectionAddress: input.collectionAddress,
+            tokenId: input.tokenId,
             endAt: input.endAt,
             reserveAmount: input.reserveAmount,
             currencyId: input.currencyId,

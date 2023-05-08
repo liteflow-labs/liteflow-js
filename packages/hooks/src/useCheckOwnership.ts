@@ -6,9 +6,19 @@ import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
 
 gql`
-  query CheckOwnership($assetId: String!, $ownerAddress: Address!) {
+  query CheckOwnership(
+    $chainId: Int!
+    $collectionAddress: Address!
+    $tokenId: String!
+    $ownerAddress: Address!
+  ) {
     ownerships(
-      condition: { assetId: $assetId, ownerAddress: $ownerAddress }
+      condition: {
+        chainId: $chainId
+        collectionAddress: $collectionAddress
+        tokenId: $tokenId
+        ownerAddress: $ownerAddress
+      }
       first: 1
     ) {
       nodes {
@@ -19,14 +29,18 @@ gql`
 `
 
 export type CheckOwnershipFunction = (
-  assetId: string,
+  chainId: number,
+  collectionAddress: string,
+  tokenId: string,
   ownerAddress: string,
 ) => Promise<{ isOwner: boolean; quantity: string }>
 
 export default function useCheckOwnership(): {
   checkOwnership: CheckOwnershipFunction
   pollOwnership: (config: {
-    assetId: string
+    chainId: number
+    collectionAddress: string
+    tokenId: string
     ownerAddress: string
     initialQuantity: string
     max?: number
@@ -35,9 +49,16 @@ export default function useCheckOwnership(): {
 } {
   const { sdk } = useContext(LiteflowContext)
   const checkOwnership = useCallback<CheckOwnershipFunction>(
-    async (assetId: string, ownerAddress: string) => {
+    async (
+      chainId: number,
+      collectionAddress: string,
+      tokenId: string,
+      ownerAddress: string,
+    ) => {
       const { ownerships } = await sdk.CheckOwnership({
-        assetId,
+        chainId,
+        collectionAddress,
+        tokenId,
         ownerAddress: ownerAddress.toLowerCase(),
       })
       invariant(ownerships, ErrorMessages.OWNERSHIP_NOT_FOUND)
@@ -57,13 +78,17 @@ export default function useCheckOwnership(): {
 
   const pollOwnership = useCallback(
     async ({
-      assetId,
+      chainId,
+      collectionAddress,
+      tokenId,
       ownerAddress,
       initialQuantity,
       max,
       interval,
     }: {
-      assetId: string
+      chainId: number
+      collectionAddress: string
+      tokenId: string
       ownerAddress: string
       initialQuantity: string
       max?: number
@@ -75,7 +100,12 @@ export default function useCheckOwnership(): {
       let i = 0
       while (i < max) {
         // fetch
-        const { quantity } = await checkOwnership(assetId, ownerAddress)
+        const { quantity } = await checkOwnership(
+          chainId,
+          collectionAddress,
+          tokenId,
+          ownerAddress,
+        )
 
         // check if quantity changed compared to the initial one
         if (!BigNumber.from(quantity).eq(BigNumber.from(initialQuantity))) break

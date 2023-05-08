@@ -12,15 +12,6 @@ import useApproveCollection, {
 import useApproveCurrency, { ApproveCurrencyStep } from './useApproveCurrency'
 
 gql`
-  query FetchAssetForOffer($assetId: String!) {
-    asset(id: $assetId) {
-      chainId
-      collectionAddress
-    }
-  }
-`
-
-gql`
   mutation CreateOfferSignature($offer: OfferInputBis!) {
     createOfferSignature(input: { offer: $offer }) {
       eip712Data
@@ -66,7 +57,9 @@ export default function useCreateOffer(
     type: OfferType
     quantity: BigNumber
     unitPrice: BigNumber
-    assetId: string
+    chainId: number
+    collectionAddress: string
+    tokenId: string
     currencyId: string
     takerAddress?: string
     expiredAt: Date | null
@@ -129,7 +122,9 @@ export default function useCreateOffer(
       type,
       quantity,
       unitPrice,
-      assetId,
+      chainId,
+      collectionAddress,
+      tokenId,
       currencyId,
       takerAddress,
       expiredAt,
@@ -138,7 +133,9 @@ export default function useCreateOffer(
       type: OfferType
       quantity: BigNumber
       unitPrice: BigNumber
-      assetId: string
+      chainId: number
+      collectionAddress: string
+      tokenId: string
       currencyId: string
       takerAddress?: string
       expiredAt: Date | null
@@ -150,13 +147,10 @@ export default function useCreateOffer(
       try {
         // approval if needed
         if (type === 'SALE') {
-          // fetch asset
-          const { asset } = await sdk.FetchAssetForOffer({ assetId })
-          invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
           // creating a new offer of type sale, approval is on the asset
           await approveCollection({
-            chainId: asset.chainId,
-            collectionAddress: asset.collectionAddress,
+            chainId: chainId,
+            collectionAddress: collectionAddress,
           })
         } else {
           // creating a new offer of type buy, approval is on the currency
@@ -171,7 +165,10 @@ export default function useCreateOffer(
         const offer = {
           type,
           makerAddress: account.toLowerCase(),
-          assetId: assetId,
+          assetId: null,
+          chainId: chainId,
+          collectionAddress: collectionAddress,
+          tokenId: tokenId,
           currencyId: currencyId,
           quantity: quantity.toString(),
           unitPrice: unitPrice.toString(),
