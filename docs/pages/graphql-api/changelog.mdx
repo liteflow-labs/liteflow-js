@@ -4,6 +4,77 @@ title: 'Changelog'
 
 # Changelog
 
+## v1.0.0-beta.16
+
+> Published the 2023-05-04
+
+#### Breaking Changes
+
+- Mutation `createComment` now requires `chainId`, `collectionAddress` and `tokenId` instead of `assetId`
+- Mutations `createLike` and `deleteLike` now require `chainId`, `collectionAddress` and `tokenId` instead of `assetId`
+- Query `like` now require `chainId`, `collectionAddress` and `tokenId` instead of `assetId`
+
+#### Added
+
+- Add mutation `createCancelOfferTransaction`
+- Add fields `chainId`, `collectionAddress`, `tokenId` in type `CreateAssetTransactionPayload`
+- Add fields `chainId`, `collectionAddress`, `tokenId` in query `orderFees`
+- Add to mutation `refreshAsset` fields `chainId`, `collectionAddress` and `tokenId`
+- Add field `quantity` to type `Asset` with filter and order by functionalities
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `AssetWatch`
+- Add resolver `ownership(ownerAddress: String)` on type `Asset` to ease the fetch of a specific ownership
+- Add resolver `groupedByDate` on type `AccountsConnection`
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Ownership`
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Offer`, `OfferOpenBuy`, `OfferOpenSale` and mutation `createOffer`
+- Add field `totalCurrencyDistinctCount` on type `OfferOpenSalesConnection` that returns number of unique currencies from this connection ignoring before/after/first/last/offset
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Comment`
+- Add field `collection.quantity` to return the total editions of all NFTs of a collection, with filter and sort functionalities
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `AssetHistory`
+- Add fields `chainId`, `collectionAddress` and `tokenId` to query `ownership`
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Royalty`
+- Add resolver `groupedByDate` on type `TradesConnection`
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Auction` and mutation `createAuction`
+- Add resolver `groupedByDate` on type `CollectionsConnection`
+- Add resolver `groupedByDate` on type `OffersConnection`
+- Add fields `chainId`, `collectionAddress` and `tokenId` to mutations `watch` and `unwatch`
+- Add resolver `groupedByDate` on type `AssetsConnection`
+- Add fields `chainId`, `collectionAddress`, `tokenId` in mutation `createTransferAssetTransaction`
+- Add field `totalAvailableQuantitySum` on type `OfferOpenSalesConnection` that returns the sum of all the offers' available quantity from from the connection ignoring before/after/first/last/offset
+- Add fields `chainId`, `collectionAddress` and `tokenId` to type `Like`
+
+#### Changed
+
+- Changed value returned by `collection.supply`: it's now return the total number of NFTs of a collection. Also add filter and sort functionalities, and improve its performance by caching the values
+- Improve speed of fields `totalListed` and `floorPrice` on type `Collection`
+- Improve speed of order by `SALES_MIN_UNIT_PRICE_IN_REF` on query `assets`
+
+#### Deprecated
+
+- Deprecate resolver `cancel` on type `Offer` in favor of new mutation `createCancelOfferTransaction`
+- Deprecate `assetId` in favor of `chainId`, `collectionAddress`, `tokenId` in type `CreateAssetTransactionPayload`
+- Deprecate `assetId` in favor of `chainId`, `collectionAddress`, `tokenId` in query `orderFees`
+- Deprecate field `assetId` in mutation `refreshAsset` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `AssetWatch` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Ownership` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Offer`, `OfferOpenBuy`, `OfferOpenSale` and mutation `createOffer` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `AssetTrait` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Comment` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `AssetHistory` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` in query `ownership` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Royalty` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `id` in query `asset` in favor of `chainId`, `collectionAddress`, `tokenId`
+- Deprecate field `id` in mutation `deleteAsset` in favor of `chainId`, `collectionAddress`, `tokenId`
+- Deprecate field `assetId` on type `Auction` and mutation `createAuction` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` in mutations `watch` and `unwatch` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` in favor of `chainId`, `collectionAddress`, `tokenId` in mutation `createTransferAssetTransaction`
+- Deprecate field `assetId` on type `Like` in favor of `chainId`, `collectionAddress` and `tokenId`
+
+#### Removed
+
+- Remove mutation `registerLoginAccount`
+- Remove queries `currentAccount`, `currentAccountAddress` and `isAdmin`
+- Remove spaces at the beginning of lines in the authentication message
+
 ## v1.0.0-beta.15
 
 > Published the 2023-04-03
