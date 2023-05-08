@@ -13,12 +13,6 @@ Copy the `.env.example`, rename to `.env.local` and fill in the environment vari
 ```
 # Replace with your API endpoint
 NEXT_PUBLIC_ENDPOINT="https://api.acme.com/graphql"
-
-# Replace with a valid Asset ID
-NEXT_PUBLIC_ASSET_ID="80001-0xe3fe92dfe68f4b074ee7daca7c700e7a11a11397-60249402084987642306602912823737587855293854847399126862551129956955539542019"
-
-# Replace by your chain's supported currency ID
-NEXT_PUBLIC_CURRENCY_ID="80001-0x0fa8781a83bc094ea2a023e46826621b12e71b23"
 ```
 
 Then, run the development server:
