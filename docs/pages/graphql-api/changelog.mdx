@@ -4,6 +4,26 @@ title: 'Changelog'
 
 # Changelog
 
+## v1.0.0-beta.17
+
+> Published the 2023-05-17
+
+#### Added
+
+- Add field `status` to `Offer` with filter and order by features
+- Add `salesAndAuctions` filter on `assets` to allow faster filtering on sales and auctions
+- Add `deleteAccount` mutation. User can delete their own account
+- Add field `status` to `Auction` with filter and order by features
+- Add field `protocol` to `Trade`
+
+#### Changed
+
+- Always return `Account` even if it doesn't exist in the backend
+
+#### Deprecated
+
+- Deprecate filter `isImported` on `Account`
+
 ## v1.0.0-beta.16
 
 > Published the 2023-05-04
