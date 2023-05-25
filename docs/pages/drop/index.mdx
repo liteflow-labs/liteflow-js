@@ -1,0 +1,64 @@
+---
+title: 'Drop'
+---
+
+# Drop
+
+## Smart contract requirements
+
+The Liteflow Infrastructure requires the smart contract to implement at least a mint function and an optional minted function with specific inputs and outputs.
+
+### Mint function
+
+This function will be called by the user. It must mint and transfer the token to the user.
+
+The function must be `payable` and can have two optional arguments:
+
+| Type          |                                                                                                          Description |
+| :------------ | -------------------------------------------------------------------------------------------------------------------: |
+| `address`     |                                                                                 Address that will receive the token. |
+| `[u]int[256]` | Number of token to mint.<br />The type can be any `int` (`int8`, ..., `int256`) or `uint` (`uint8`, ..., `uint256`). |
+
+Both arguments are not required by the drop system but are strongly advised. If the function doesn't implement one or both, it/they will be omitted when generating the user transaction.
+
+Here is examples of compatible function:
+
+```
+function mint(address to, uint256 quantity) public payable
+function mint(uint256 quantity, address to) public payable
+function dropTo(address minter) public payable
+function mintToMsgSender(uint8 numberToMint) public payable
+function dropToken() public payable
+```
+
+<Callout type="warning" emoji="⚠️">
+  Liteflow Infrastructure does not enforce any check on the blockchain during
+  the execution of the transaction.
+  <br />
+  It is your responsibility as contract developer to enforce any checks you seem
+  necessary.
+</Callout>
+
+### Minted function
+
+This function must return the number of tokens minted by this drop.
+
+The function must be a `view`, have no `inputs`, and must return a unique output of type `[u]int[256]`.
+
+Here is examples of compatible function:
+
+```
+function mintCounter() view returns (uint8)
+function totalSupply() view returns (uint256)
+```
+
+If you plan to do only one public drop, then the function `totalSupply() view returns (uint256)` could be enough.
+
+<Callout type="warning" emoji="⚠️">
+  This function is not required but strongly advised in order to display and
+  properly calculate the remaining number of token that can be minted.
+  <br />
+  If not set, the Liteflow Infrastructure will use the number of tokens created
+  between the start date and the end date of the Drop which may result in
+  inconsistencies.
+</Callout>
