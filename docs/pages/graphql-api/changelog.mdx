@@ -4,6 +4,20 @@ title: 'Changelog'
 
 # Changelog
 
+## v1.0.0-beta.18
+
+> Published the 2023-05-26
+
+#### Added
+
+- Add new fields to `Drop`: `maxQuantityPerMint`, `supply`, `mintAbi`, and `mintedAbi`
+- Add `createDropMinTransaction` mutation
+- Add resolver `minted` on `Drop` to return the current number of minted token related to this drop
+
+#### Removed
+
+- Remove non nullability on `query.account`
+
 ## v1.0.0-beta.17
 
 > Published the 2023-05-17
