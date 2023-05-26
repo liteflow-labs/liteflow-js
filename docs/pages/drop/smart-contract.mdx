@@ -1,16 +1,14 @@
 ---
-title: 'Drop'
+title: 'Smart contract requirements'
 ---
 
 import { Callout } from 'nextra-theme-docs'
 
-# Drop
-
-## Smart contract requirements
+# Smart contract requirements
 
 The Liteflow Infrastructure requires the smart contract to implement at least a mint function and an optional minted function with specific inputs and outputs.
 
-### Mint function
+## Mint function
 
 This function will be called by the user. It must mint and transfer the token to the user.
 
@@ -19,7 +17,7 @@ The function must be `payable` and can have two optional arguments:
 | Type                       |                         Description |
 | :------------------------- | ----------------------------------: |
 | `address`                  | Address that will receive the token |
-| [`[u]int[x]`](#uintx-type) |             Number of token to mint |
+| [`integer`](#integer-type) |             Number of token to mint |
 
 Both arguments are not required by the drop system but are strongly advised. If the function doesn't implement one or both, it/they will be omitted when generating the user transaction.
 
@@ -41,11 +39,11 @@ necessary.
 
 </Callout>
 
-### Minted function
+## Minted function
 
 This function must return the number of tokens minted by this drop.
 
-The function must be a `view`, have no `inputs`, and must return a unique output of type [`[u]int[x]`](#uintx-type).
+The function must be a `view`, have no `inputs`, and must return a unique output of type [`integer`](#integer-type).
 
 Here is examples of compatible function:
 
@@ -63,6 +61,6 @@ If not set, the Liteflow Infrastructure will use the number of tokens created be
 
 </Callout>
 
-### `[u]int[x]` type
+## Integer type
 
-This type can be any `int` (`int8`, ..., `int256`) or `uint` (`uint8`, ..., `uint256`).
+The `integer` type can be any `int` (`int8`, ..., `int256`) or `uint` (`uint8`, ..., `uint256`).
