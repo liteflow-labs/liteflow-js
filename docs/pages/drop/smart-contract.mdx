@@ -59,6 +59,28 @@ If not set, the Liteflow Infrastructure will use the number of tokens created be
 
 </Callout>
 
+## Minted by wallet function
+
+This function must return the number of tokens minted by a specific wallet during this drop.
+
+The function must be a `view`, have one `input` type `address`, and must return a unique output of type [`integer`](#integer-type).
+
+Here is examples of compatible function:
+
+```
+function mintByWalletCounter(address minter) view returns (uint8)
+function balanceOf(address owner) view returns (uint256)
+```
+
+If you plan to do only one public drop, then the function `balanceOf(address owner) view returns (uint256)` could be enough.
+
+<Callout type="warning" emoji="⚠️">
+This function is not required **but strongly advised** in order to display and properly calculate the remaining number of token that can be minted.
+
+If not set, the Liteflow Infrastructure will use the number of tokens created between the start date and the end date of the Drop which may result in inconsistencies.
+
+</Callout>
+
 ## Integer type
 
 The `integer` type can be any `int` (`int8`, ..., `int256`) or `uint` (`uint8`, ..., `uint256`).
