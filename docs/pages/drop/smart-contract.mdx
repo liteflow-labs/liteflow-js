@@ -12,23 +12,21 @@ The Liteflow Infrastructure requires the smart contract to implement at least a 
 
 This function will be called by the user. It must mint and transfer the token to the user.
 
-The function must be `payable` and can have two optional arguments:
+The function must be `payable` and can have two arguments:
 
-| Type                       |                         Description |
-| :------------------------- | ----------------------------------: |
-| `address`                  | Address that will receive the token |
-| [`integer`](#integer-type) |             Number of token to mint |
+| Type                       |                                   Description |
+| :------------------------- | --------------------------------------------: |
+| [`integer`](#integer-type) |                       Number of token to mint |
+| `address`                  | Optional. Address that will receive the token |
 
-Both arguments are not required by the drop system but are strongly advised. If the function doesn't implement one or both, it/they will be omitted when generating the user transaction.
+The `address` arguments is not required but is strongly advised. If the function doesn't implement it, it will be omitted when generating the user transaction.
 
 Here is examples of compatible function:
 
 ```
 function mint(address to, uint256 quantity) public payable
 function mint(uint256 quantity, address to) public payable
-function dropTo(address minter) public payable
 function mintToMsgSender(uint8 numberToMint) public payable
-function dropToken() public payable
 ```
 
 <Callout type="warning" emoji="⚠️">
