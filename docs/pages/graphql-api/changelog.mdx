@@ -4,6 +4,132 @@ title: 'Changelog'
 
 # Changelog
 
+## v1.0.0-beta.18
+
+> Published the 2023-05-26
+
+#### Added
+
+- Add new fields to `Drop`: `maxQuantityPerMint`, `supply`, `mintAbi`, and `mintedAbi`
+- Add `createDropMinTransaction` mutation
+- Add resolver `minted` on `Drop` to return the current number of minted token related to this drop
+
+#### Removed
+
+- Remove non nullability on `query.account`
+
+## v1.0.0-beta.17
+
+> Published the 2023-05-17
+
+#### Added
+
+- Add field `status` to `Offer` with filter and order by features
+- Add `salesAndAuctions` filter on `assets` to allow faster filtering on sales and auctions
+- Add `deleteAccount` mutation. User can delete their own account
+- Add field `status` to `Auction` with filter and order by features
+- Add field `protocol` to `Trade`
+
+#### Changed
+
+- Always return `Account` even if it doesn't exist in the backend
+
+#### Deprecated
+
+- Deprecate filter `isImported` on `Account`
+
+## v1.0.0-beta.16
+
+> Published the 2023-05-04
+
+#### Breaking Changes
+
+- Mutation `createComment` now requires `chainId`, `collectionAddress` and `tokenId` instead of `assetId`
+- Mutations `createLike` and `deleteLike` now require `chainId`, `collectionAddress` and `tokenId` instead of `assetId`
+- Query `like` now require `chainId`, `collectionAddress` and `tokenId` instead of `assetId`
+
+#### Added
+
+- Add field `quantity` to type `Asset` with filter and order by functionalities
+- Add field `totalCurrencyDistinctCount` on type `OfferOpenSalesConnection` that returns number of unique currencies from this connection ignoring before/after/first/last/offset
+- Add field `collection.quantity` to return the total editions of all NFTs of a collection, with filter and sort functionalities
+- Add resolver `ownership(ownerAddress: String)` on type `Asset` to ease the fetch of a specific ownership
+- Add resolver `groupedByDate` on types `TradesConnection`, `CollectionsConnection`, `OffersConnection`, `AssetsConnection`, and `AccountsConnection`
+- Add field `totalAvailableQuantitySum` on type `OfferOpenSalesConnection` that returns the sum of all the offers' available quantity from from the connection ignoring before/after/first/last/offset
+- Add mutation `createCancelOfferTransaction`
+- Add fields `chainId`, `collectionAddress`, `tokenId` in many types, queries, and mutations:
+  - Type `CreateAssetTransactionPayload`
+  - Query `orderFees`
+  - Mutation `refreshAsset`
+  - Type `AssetWatch`
+  - Type `Ownership`
+  - Type `Offer`, `OfferOpenBuy`, `OfferOpenSale` and mutation `createOffer`
+  - Type `Comment`
+  - Type `AssetHistory`
+  - Query `ownership`
+  - Type `Royalty`
+  - Type `Auction` and mutation `createAuction`
+  - Mutations `watch` and `unwatch`
+  - Mutation `createTransferAssetTransaction`
+  - Type `Like`
+
+#### Changed
+
+- Changed value returned by `collection.supply`: it's now return the total number of NFTs of a collection. Also add filter and sort functionalities, and improve its performance by caching the values
+- Improve speed of fields `totalListed` and `floorPrice` on type `Collection`
+- Improve speed of order by `SALES_MIN_UNIT_PRICE_IN_REF` on query `assets`
+
+#### Deprecated
+
+- Deprecate resolver `cancel` on type `Offer` in favor of new mutation `createCancelOfferTransaction`
+- Deprecate `assetId` in favor of `chainId`, `collectionAddress`, `tokenId` in type `CreateAssetTransactionPayload`
+- Deprecate `assetId` in favor of `chainId`, `collectionAddress`, `tokenId` in query `orderFees`
+- Deprecate field `assetId` in mutation `refreshAsset` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `AssetWatch` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Ownership` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Offer`, `OfferOpenBuy`, `OfferOpenSale` and mutation `createOffer` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `AssetTrait` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Comment` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `AssetHistory` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` in query `ownership` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` on type `Royalty` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `id` in query `asset` in favor of `chainId`, `collectionAddress`, `tokenId`
+- Deprecate field `id` in mutation `deleteAsset` in favor of `chainId`, `collectionAddress`, `tokenId`
+- Deprecate field `assetId` on type `Auction` and mutation `createAuction` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` in mutations `watch` and `unwatch` in favor of `chainId`, `collectionAddress` and `tokenId`
+- Deprecate field `assetId` in favor of `chainId`, `collectionAddress`, `tokenId` in mutation `createTransferAssetTransaction`
+- Deprecate field `assetId` on type `Like` in favor of `chainId`, `collectionAddress` and `tokenId`
+
+#### Removed
+
+- Remove mutation `registerLoginAccount`
+- Remove queries `currentAccount`, `currentAccountAddress` and `isAdmin`
+- Remove spaces at the beginning of lines in the authentication message
+
+## v1.0.0-beta.15
+
+> Published the 2023-04-03
+
+#### Breaking Changes
+
+- Removed `isFollowed` and `isWatched` resolvers and filters from Account, Asset and Collection
+
+#### Added
+
+- New admin APIs:
+  - Add new `setRole` mutation only available to admins. This mutation let you change the role of any user and upgrade/downgrade them as admin.
+  - Add a new query `admins` returning the list of all the current admin of the platform
+- Add autogenerated `slug` to `Asset` to identify any asset with an url-friendly identifier. This identifier is composed of the asset's name and a few random characters.
+
+#### Changed
+
+- Type of `Ownership.quantity` changed from `Uint256` to `Int256`
+- Increase performance on resolvers on `Auction.winningOffer`, `collection.numberOfOwners`, `collection.totalListed`, `collection.supply`, and `asset.royalties`.
+
+#### Fixed
+
+- Fix results of filter `content: { match: XXX }` when the search contains multiple words, singular/plural and some other cases
+
 ## v1.0.0-beta.14
 
 > Published the 2023-03-09

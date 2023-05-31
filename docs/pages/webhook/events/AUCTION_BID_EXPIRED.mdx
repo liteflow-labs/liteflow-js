@@ -1,10 +1,10 @@
 ---
-title: 'AUCTION_BID_CREATED'
+title: 'AUCTION_BID_EXPIRED'
 ---
 
-# AUCTION_BID_CREATED
+# AUCTION_BID_EXPIRED
 
-This event occurs whenever a bid on an auction is created.
+This event occurs whenever a bid on an auction is expired
 
 ## Definition
 
@@ -14,7 +14,7 @@ type IsoDate = string
 type ChainId = number
 type Address = string
 
-type AUCTION_BID_CREATED = {
+type AUCTION_BID_EXPIRED = {
   createdAt: IsoDate
   id: string
   type: 'BUY' | 'SALE'
@@ -76,9 +76,9 @@ type AUCTION_BID_CREATED = {
 ```ts
 import { Events, parseAndVerifyRequest } from '@nft/webhook'
 
-const { data, type } = await parseAndVerifyRequest<'AUCTION_BID_CREATED'>(
+const { data, type } = await parseAndVerifyRequest<'AUCTION_BID_EXPIRED'>(
   req,
   process.env.LITEFLOW_WEBHOOK_SECRET,
 )
-// data is type Events['AUCTION_BID_CREATED']
+// data is type Events['AUCTION_BID_EXPIRED']
 ```
