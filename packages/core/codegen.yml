@@ -1,6 +1,7 @@
 schema: '../../node_modules/@nft/api-graphql/schema.graphql'
 documents:
   - './fragments/*.graphql'
+  - './queries/*.graphql'
   - './mutations/*.graphql'
 generates:
   src/graphql.ts:

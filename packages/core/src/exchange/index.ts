@@ -1,6 +1,11 @@
 import type { Signer } from 'ethers'
-import type { Sdk } from '../graphql'
-import type { UUID } from '../types'
+import invariant from 'ts-invariant'
+import type { FetchOfferQuery, Sdk } from '../graphql'
+import type { Uint256, UUID } from '../types'
+import type { State as AcceptOfferState } from './acceptOffer'
+import { acceptOffer } from './acceptOffer'
+import type { State as CancelOfferState } from './cancelOffer'
+import { cancelOffer } from './cancelOffer'
 import type { Listing, State as ListTokenState } from './listToken'
 import { listToken } from './listToken'
 import type { Bid, State as PlaceBidState } from './placeBid'
@@ -27,5 +32,51 @@ export class Exchange {
     onProgress?: (state: ListTokenState) => void,
   ): Promise<UUID> {
     return listToken(this.sdk, listing, signer, onProgress)
+  }
+
+  async cancelBid(
+    bidId: UUID,
+    signer: Signer,
+    onProgress?: (state: CancelOfferState) => void,
+  ): Promise<UUID> {
+    return cancelOffer(this.sdk, bidId, signer, onProgress)
+  }
+
+  async cancelListing(
+    listingId: UUID,
+    signer: Signer,
+    onProgress?: (state: CancelOfferState) => void,
+  ): Promise<UUID> {
+    return cancelOffer(this.sdk, listingId, signer, onProgress)
+  }
+
+  async acceptBid(
+    bidId: UUID,
+    quantity: Uint256,
+    signer: Signer,
+    onProgress?: (state: AcceptOfferState) => void,
+  ): Promise<UUID> {
+    debugger
+    return acceptOffer(this.sdk, bidId, quantity, signer, onProgress)
+  }
+
+  async buyToken(
+    listingId: UUID,
+    quantity: Uint256,
+    signer: Signer,
+    onProgress?: (state: AcceptOfferState) => void,
+  ): Promise<UUID> {
+    debugger
+    return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
+  }
+
+  // Low level API to retrieve an offer
+  // Offer can be either a bid or a listing
+  async getOffer(
+    offerId: UUID,
+  ): Promise<NonNullable<FetchOfferQuery['offer']>> {
+    const { offer } = await this.sdk.FetchOffer({ offerId })
+    invariant(offer, "Offer doesn't exist")
+    return offer
   }
 }
