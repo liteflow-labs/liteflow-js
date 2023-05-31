@@ -36,46 +36,57 @@ export default function useAcceptOffer(signer: Signer | undefined): [
   )
   const [transactionHash, setTransactionHash] = useState<string>()
 
+  const onProgress = useCallback(
+    (state) => {
+      switch (state.type) {
+        case 'APPROVAL_SIGNATURE': {
+          setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
+          break
+        }
+        case 'APPROVAL_PENDING': {
+          setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
+          setTransactionHash(state.payload.txHash)
+          break
+        }
+        case 'TRANSACTION_SIGNATURE': {
+          setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
+          break
+        }
+        case 'TRANSACTION_PENDING': {
+          setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
+          setTransactionHash(state.payload.txHash)
+          break
+        }
+        case 'OWNERSHIP': {
+          setActiveProcess(AcceptOfferStep.OWNERSHIP)
+          break
+        }
+        case 'OFFER_VALIDITY': {
+          console.log('validating offer...')
+        }
+      }
+    },
+    [setActiveProcess, setTransactionHash],
+  )
+
   const acceptOffer: acceptOfferFn = useCallback(
     async ({ id }, quantity) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
+      const offer = await client.exchange.getOffer(id)
+      invariant(offer)
 
       try {
-        await client.exchange.acceptOffer(id, quantity, signer, (state) => {
-          switch (state.type) {
-            case 'APPROVAL_SIGNATURE': {
-              setActiveProcess(AcceptOfferStep.APPROVAL_SIGNATURE)
-              break
-            }
-            case 'APPROVAL_PENDING': {
-              setActiveProcess(AcceptOfferStep.APPROVAL_PENDING)
-              setTransactionHash(state.payload.txHash)
-              break
-            }
-            case 'TRANSACTION_SIGNATURE': {
-              setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
-              break
-            }
-            case 'TRANSACTION_PENDING': {
-              setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
-              setTransactionHash(state.payload.txHash)
-              break
-            }
-            case 'OWNERSHIP': {
-              setActiveProcess(AcceptOfferStep.OWNERSHIP)
-              break
-            }
-            case 'OFFER_VALIDITY': {
-              console.log('validating offer...')
-            }
-          }
-        })
+        if (offer.type === 'SALE') {
+          await client.exchange.buyToken(id, quantity, signer, onProgress)
+        } else {
+          await client.exchange.acceptBid(id, quantity, signer, onProgress)
+        }
       } finally {
         setActiveProcess(AcceptOfferStep.INITIAL)
         setTransactionHash(undefined)
       }
     },
-    [signer, client.exchange],
+    [client, signer, onProgress],
   )
 
   return [acceptOffer, { activeStep, transactionHash }]

@@ -50,13 +50,24 @@ export class Exchange {
     return cancelOffer(this.sdk, listingId, signer, onProgress)
   }
 
-  async acceptOffer(
-    offerId: UUID,
+  async acceptBid(
+    bidId: UUID,
     quantity: Uint256,
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    return acceptOffer(this.sdk, offerId, quantity, signer, onProgress)
+    debugger
+    return acceptOffer(this.sdk, bidId, quantity, signer, onProgress)
+  }
+
+  async buyToken(
+    listingId: UUID,
+    quantity: Uint256,
+    signer: Signer,
+    onProgress?: (state: AcceptOfferState) => void,
+  ): Promise<UUID> {
+    debugger
+    return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
   }
 
   // Low level API to retrieve an offer
