@@ -1,0 +1,23 @@
+schema: '../../node_modules/@nft/api-graphql/schema.graphql'
+documents:
+  - './fragments/*.graphql'
+  - './mutations/*.graphql'
+generates:
+  src/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'
+    config:
+      enumsAsTypes: true
+config:
+  scalars:
+    URI: 'string'
+    UUID: './types#UUID'
+    Datetime: 'string'
+    Cursor: 'string'
+    JSON: 'unknown'
+    Uint256: './types#Uint256'
+    Address: './types#Address'
+    TransactionHash: './types#TransactionHash'
+    BigFloat: 'string'

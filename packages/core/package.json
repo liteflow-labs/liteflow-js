@@ -1,0 +1,29 @@
+{
+  "name": "@liteflow/core",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf node_modules/.cache dist tsconfig.tsbuildinfo",
+    "prepack": "npm run build",
+    "prebuild": "npm run graphql-codegen",
+    "build": "tsc --build",
+    "watch": "tsc --watch",
+    "graphql-codegen": "graphql-codegen --overwrite",
+    "test": "jest"
+  },
+  "dependencies": {
+    "graphql-request": "^5.0.0",
+    "ts-invariant": "^0.9.4"
+  },
+  "peerDependencies": {
+    "ethers": "^5.6.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.21.7",
+    "@graphql-codegen/typescript": "^1.23.0",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.5",
+    "@graphql-codegen/typescript-operations": "^1.18.4",
+    "@nft/api-graphql": "^1.0.0-beta.11"
+  }
+}

@@ -1,3 +1,4 @@
+import { Client } from '@liteflow/core'
 import { gql, GraphQLClient } from 'graphql-request'
 import decode, { JwtPayload } from 'jwt-decode'
 import React, {
@@ -28,6 +29,7 @@ export type LiteflowContext = {
   resetAuthenticationToken: () => void
   currentAddress: string | null
   sdk: Sdk
+  client: Client
 }
 
 export type LiteflowProviderProps = {
@@ -43,6 +45,7 @@ export const LiteflowContext = createContext<LiteflowContext>({
   },
   currentAddress: null,
   sdk: {} as Sdk,
+  client: {} as Client,
 })
 
 export function LiteflowProvider({
@@ -51,6 +54,15 @@ export function LiteflowProvider({
 }: PropsWithChildren<LiteflowProviderProps>): JSX.Element {
   const [authenticationToken, setAuthenticationToken] = useState<string>()
   const client = useMemo(() => new GraphQLClient(endpoint), [endpoint])
+  const coreClient = useMemo(
+    () =>
+      new Client(new URL(endpoint), {
+        headers: authenticationToken
+          ? { Authorization: `Bearer ${authenticationToken}` }
+          : undefined,
+      }),
+    [endpoint, authenticationToken],
+  )
   const sdk = useMemo(() => getSdk(client), [client])
   const currentAddress = useMemo(() => {
     if (!authenticationToken) return null
@@ -80,6 +92,7 @@ export function LiteflowProvider({
         setAuthenticationToken,
         currentAddress,
         sdk,
+        client: coreClient,
       }}
     >
       {children}
