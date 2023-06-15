@@ -2,10 +2,14 @@ import type { Signer } from 'ethers'
 import invariant from 'ts-invariant'
 import type { FetchOfferQuery, Sdk } from '../graphql'
 import type { Uint256, UUID } from '../types'
+import type { State as AcceptAuctionHighestBidState } from './acceptAuctionHighestBid'
+import { acceptAuctionHighestBid } from './acceptAuctionHighestBid'
 import type { State as AcceptOfferState } from './acceptOffer'
 import { acceptOffer } from './acceptOffer'
 import type { State as CancelOfferState } from './cancelOffer'
 import { cancelOffer } from './cancelOffer'
+import type { Auction } from './createAuction'
+import { createAuction } from './createAuction'
 import type { Listing, State as ListTokenState } from './listToken'
 import { listToken } from './listToken'
 import type { Bid, State as PlaceBidState } from './placeBid'
@@ -56,7 +60,6 @@ export class Exchange {
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    debugger
     return acceptOffer(this.sdk, bidId, quantity, signer, onProgress)
   }
 
@@ -66,8 +69,23 @@ export class Exchange {
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    debugger
     return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
+  }
+
+  async createAuction(
+    auction: Auction,
+    signer: Signer,
+    onProgress?: (state: ListTokenState) => void,
+  ): Promise<UUID> {
+    return createAuction(this.sdk, auction, signer, onProgress)
+  }
+
+  async acceptAuctionHighestBid(
+    auctionId: UUID,
+    signer: Signer,
+    onProgress?: (state: AcceptAuctionHighestBidState) => void,
+  ): Promise<UUID> {
+    return acceptAuctionHighestBid(this.sdk, auctionId, signer, onProgress)
   }
 
   // Low level API to retrieve an offer
