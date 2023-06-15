@@ -1,0 +1,21 @@
+mutation CreateLazyMintedAsset(
+  $chainId: Int!
+  $collectionAddress: Address!
+  $asset: LazyMintedAssetInput!
+  $signature: String!
+) {
+  createLazyMintedAsset(
+    input: {
+      chainId: $chainId
+      collectionAddress: $collectionAddress
+      asset: $asset
+      signature: $signature
+    }
+  ) {
+    asset {
+      chainId
+      collectionAddress
+      tokenId
+    }
+  }
+}
