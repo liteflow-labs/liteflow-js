@@ -1,15 +1,32 @@
 import { GraphQLClient } from 'graphql-request'
-import type { PatchedRequestInit } from 'graphql-request/dist/types'
+import { Asset } from './asset'
 import { Exchange } from './exchange'
 import type { Sdk } from './graphql'
 import { getSdk } from './graphql'
 
+type Options = {
+  readonly endpoint?: URL
+  readonly authorization?: string
+}
+
 export class Client {
   private readonly sdk: Sdk
   public readonly exchange: Exchange
+  public readonly asset: Asset
 
-  constructor(endpoint: URL, option: PatchedRequestInit = {}) {
-    this.sdk = getSdk(new GraphQLClient(endpoint.toString(), option))
+  constructor(apiKey: string, options: Options = {}) {
+    const endpoint = options.endpoint ?? new URL('https://api.liteflow.com')
+    const authorization = options.authorization ?? undefined
+    const graphqlEndpoint = new URL(`/${apiKey}/graphql`, endpoint)
+    const uploadEndpoint = new URL(`/${apiKey}/uploadToIPFS`, endpoint)
+    const graphQLClient = new GraphQLClient(graphqlEndpoint.toString(), {
+      headers: authorization
+        ? { Authorization: `Bearer ${authorization}` }
+        : undefined,
+    })
+
+    this.sdk = getSdk(graphQLClient)
     this.exchange = new Exchange(this.sdk)
+    this.asset = new Asset(this.sdk, uploadEndpoint)
   }
 }
