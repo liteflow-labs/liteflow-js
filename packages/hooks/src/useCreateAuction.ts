@@ -1,19 +1,9 @@
 import { Signer } from '@ethersproject/abstract-signer'
-import { gql } from 'graphql-request'
+import { toAddress } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-
-gql`
-  mutation CreateAuction($createAuctionInput: AuctionInput!) {
-    createAuction(input: { auction: $createAuctionInput }) {
-      auction {
-        id
-      }
-    }
-  }
-`
 
 type AuctionInput = {
   assetId: string
@@ -26,37 +16,44 @@ type AuctionInput = {
 export default function useCreateAuction(
   signer: Signer | undefined,
 ): [(input: AuctionInput) => Promise<string>, { loading: boolean }] {
-  const { sdk } = useContext(LiteflowContext)
+  const { sdk, client } = useContext(LiteflowContext)
   const [loading, setLoading] = useState(false)
   const createAuctionFn = useCallback(
     async (input: AuctionInput): Promise<string> => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
+      setLoading(true)
+
       try {
-        setLoading(true)
-        const account = await signer.getAddress()
-        const { createAuction } = await sdk.CreateAuction({
-          createAuctionInput: {
-            assetId: input.assetId,
+        const { asset, currency } = await sdk.FetchAssetForOffer({
+          assetId: input.assetId,
+          currencyId: input.currencyId,
+        })
+        invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
+        invariant(currency, ErrorMessages.OFFER_CREATION_FAILED)
+
+        const auctionId = await client.exchange.createAuction(
+          {
+            chain: asset.chainId,
+            collection: toAddress(asset.collectionAddress),
+            token: asset.tokenId,
+            reservePrice: {
+              amount: input.reserveAmount,
+              currency: currency.address ? toAddress(currency.address) : null,
+            },
             endAt: input.endAt,
-            reserveAmount: input.reserveAmount,
-            currencyId: input.currencyId,
-            creatorAddress: account.toLowerCase(),
-            expireAt: new Date(
+            expiredAt: new Date(
               new Date(input.endAt).getTime() +
                 input.auctionValiditySeconds * 1000,
             ),
           },
-        })
-        invariant(
-          createAuction?.auction?.id,
-          ErrorMessages.AUCTION_CREATION_FAILED,
+          signer,
         )
-        return createAuction.auction.id
+        return auctionId
       } finally {
         setLoading(false)
       }
     },
-    [sdk, signer],
+    [sdk, client, signer],
   )
   return [createAuctionFn, { loading }]
 }
