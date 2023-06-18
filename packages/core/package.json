@@ -9,8 +9,7 @@
     "prebuild": "npm run graphql-codegen",
     "build": "tsc --build",
     "watch": "tsc --watch",
-    "graphql-codegen": "graphql-codegen --overwrite",
-    "test": "jest"
+    "graphql-codegen": "graphql-codegen --overwrite"
   },
   "dependencies": {
     "graphql-request": "^5.0.0",
