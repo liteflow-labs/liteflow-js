@@ -1,7 +1,7 @@
 import type { Signer } from 'ethers'
-import type { Sdk } from '../graphql'
+import type { Address } from '../types'
 import type { Uploader } from '../uploader'
-import type { AccountInput, State } from './update'
+import type { AccountInput } from './update'
 import { update } from './update'
 
 export class Account {
@@ -13,9 +13,9 @@ export class Account {
     this.uploader = uploader
   }
 
-  async update(
-    account: AccountInput,
-    signer: Signer,
+  async update(account: AccountInput, signer: Signer): Promise<Address> {
+    return update(this.sdk, this.uploader, account, signer)
+  }
     onProgress?: (state: State) => void,
   ): Promise<any> {
     return update(this.sdk, this.uploader, account, signer, onProgress)

@@ -1,14 +1,8 @@
 import type { Signer } from 'ethers'
 import invariant from 'ts-invariant'
 import type { Sdk } from '../graphql'
-import type { Address, IState, TransactionHash } from '../types'
+import type { Address } from '../types'
 import type { Uploader } from '../uploader'
-
-export type State =
-  | IState<'UPLOAD', {}>
-  | IState<'TRANSACTION_SIGNATURE', {}>
-  | IState<'TRANSACTION_PENDING', { txHash: TransactionHash }>
-  | IState<'OWNERSHIP', {}>
 
 export type AccountInput = {
   name?: string
@@ -31,11 +25,9 @@ export async function update(
   uploader: Uploader,
   account: AccountInput,
   signer: Signer,
-  onProgress?: (state: State) => void,
 ): Promise<Address> {
   const address = await signer.getAddress()
 
-  onProgress?.({ type: 'UPLOAD', payload: {} })
   const [image, cover] = await Promise.all([
     uploader.publicUpload(account.image),
     uploader.publicUpload(account.cover),
