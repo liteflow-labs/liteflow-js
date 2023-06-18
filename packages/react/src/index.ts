@@ -3,7 +3,6 @@ import useAcceptOffer, { AcceptOfferStep } from './useAcceptOffer'
 import useAuctionStatus from './useAuctionStatus'
 import useAuthenticate from './useAuthenticate'
 import useCancelOffer, { CancelOfferStep } from './useCancelOffer'
-import useConfig from './useConfig'
 import useCreateAuction from './useCreateAuction'
 import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
@@ -25,7 +24,6 @@ export {
   useAuctionStatus,
   useAuthenticate,
   useCancelOffer,
-  useConfig,
   useCreateAuction,
   useCreateNFT,
   useCreateOffer,
