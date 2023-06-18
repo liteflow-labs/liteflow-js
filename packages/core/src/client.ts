@@ -1,8 +1,10 @@
 import { GraphQLClient } from 'graphql-request'
+import { Account } from './account'
 import { Asset } from './asset'
 import { Exchange } from './exchange'
 import type { Sdk } from './graphql'
 import { getSdk } from './graphql'
+import { Uploader } from './uploader'
 
 type Options = {
   readonly endpoint?: URL
@@ -11,8 +13,10 @@ type Options = {
 
 export class Client {
   private readonly sdk: Sdk
+  private readonly uploader: Uploader
   public readonly exchange: Exchange
   public readonly asset: Asset
+  public readonly account: Account
 
   constructor(apiKey: string, options: Options = {}) {
     const endpoint = options.endpoint ?? new URL('https://api.liteflow.com')
@@ -25,8 +29,10 @@ export class Client {
         : undefined,
     })
 
+    this.uploader = new Uploader(uploadEndpoint)
     this.sdk = getSdk(graphQLClient)
     this.exchange = new Exchange(this.sdk)
-    this.asset = new Asset(this.sdk, uploadEndpoint)
+    this.asset = new Asset(this.sdk, this.uploader)
+    this.account = new Account(this.sdk, this.uploader)
   }
 }

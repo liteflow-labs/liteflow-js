@@ -1,11 +1,13 @@
 import type { Signer } from 'ethers'
 import { BigNumber } from 'ethers'
+import invariant from 'ts-invariant'
 import { pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
 import type { Address, ChainId, IState, TransactionHash } from '../types'
+import type { Uploader } from '../uploader'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
-import type { MintedAsset, Uploader } from './type'
+import type { MintedAsset } from './type'
 
 export type State =
   | IState<'UPLOAD', {}>
@@ -28,10 +30,12 @@ export async function mint(
 
   onProgress?.({ type: 'UPLOAD', payload: {} })
   const [image, animationUrl, unlockableContent] = await Promise.all([
-    uploader(asset.metadata.image),
-    uploader(asset.metadata.animationUrl),
-    uploader(asset.metadata.unlockableContent, true),
+    uploader.publicUpload(asset.metadata.image),
+    uploader.publicUpload(asset.metadata.animationUrl),
+    uploader.privateUpload(asset.metadata.unlockableContent),
   ])
+
+  invariant(image, 'Image is required')
 
   const { createAssetTransaction } = await sdk.CreateAssetTransaction({
     chainId: asset.chain,
