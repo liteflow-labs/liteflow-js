@@ -1,4 +1,4 @@
-import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
+import { LiteflowProvider, useAuthenticate } from '@liteflow/react'
 import { AppProps } from 'next/app'
 import { PropsWithChildren } from 'react'
 import {

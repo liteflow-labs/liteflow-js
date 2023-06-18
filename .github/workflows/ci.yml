@@ -88,5 +88,5 @@ jobs:
       - name: Build core
         run: npm run build -w packages/core
 
-      - name: Build hooks
-        run: npm run build -w packages/hooks
+      - name: Build react
+        run: npm run build -w packages/react
