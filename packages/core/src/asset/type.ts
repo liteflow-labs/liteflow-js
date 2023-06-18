@@ -1,11 +1,6 @@
 import type { BigNumberish } from 'ethers'
 import type { Address, ChainId } from '../types'
 
-export type Uploader = (
-  file: File | URL | undefined,
-  isPrivate?: boolean,
-) => Promise<string>
-
 export type MintedAsset = {
   chain: ChainId
   collection: Address

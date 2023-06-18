@@ -1,7 +1,7 @@
 import type { Signer } from 'ethers'
-import invariant from 'ts-invariant'
 import type { Sdk } from '../graphql'
 import type { Address, ChainId } from '../types'
+import type { Uploader } from '../uploader'
 import type { State as LazymintState } from './lazymint'
 import { lazymint } from './lazymint'
 import type { State as MintState } from './mint'
@@ -10,11 +10,11 @@ import type { MintedAsset } from './type'
 
 export class Asset {
   private readonly sdk: Sdk
-  private readonly uploadEndpoint: URL
+  private readonly uploader: Uploader
 
-  constructor(sdk: Sdk, uploadEndpoint: URL) {
+  constructor(sdk: Sdk, uploader: Uploader) {
     this.sdk = sdk
-    this.uploadEndpoint = uploadEndpoint
+    this.uploader = uploader
   }
 
   async mint(
@@ -39,20 +39,5 @@ export class Asset {
     tokenId: string
   }> {
     return lazymint(this.sdk, this.uploader, asset, signer, onProgress)
-  }
-
-  private async uploader(file: File | URL | undefined, isPrivate = false) {
-    if (!file) return
-    if (file instanceof URL) return file.toString()
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('protected', isPrivate ? 'true' : 'false')
-    const response = await fetch(this.uploadEndpoint, {
-      method: 'POST',
-      body: formData,
-    })
-    const result = await response.json()
-    invariant(response.ok, `Upload failed: ${result.error}`)
-    return result.cid
   }
 }
