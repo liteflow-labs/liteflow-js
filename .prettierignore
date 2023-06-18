@@ -2,6 +2,7 @@
 
 packages/core/src/graphql.ts
 packages/hooks/src/graphql.ts
+packages/hooks/src/index.ts
 
 **/dist
 

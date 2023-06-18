@@ -1,6 +1,6 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { BigNumber } from '@ethersproject/bignumber'
-import { toAddress, TransactionHash } from '@liteflow/core'
+import { TransactionHash, toAddress } from '@liteflow/core'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'

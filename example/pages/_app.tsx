@@ -2,13 +2,13 @@ import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
 import { AppProps } from 'next/app'
 import { PropsWithChildren } from 'react'
 import {
+  WagmiConfig,
   configureChains,
   createClient,
   goerli,
   mainnet,
   useAccount,
   useDisconnect,
-  WagmiConfig,
 } from 'wagmi'
 import { bsc, bscTestnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { InjectedConnector } from 'wagmi/connectors/injected'

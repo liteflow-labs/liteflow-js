@@ -7,8 +7,8 @@ import type {
   EIP712Data,
   IState,
   TransactionHash,
-  Uint256,
   UUID,
+  Uint256,
 } from '../types'
 import {
   toAddress,
