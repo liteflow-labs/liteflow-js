@@ -1,6 +1,5 @@
 import { useContext, useMemo } from 'react'
 import { LiteflowContext } from './context'
-import { isSameAddress } from './utils/address'
 
 /**
  * Hook to determine if an address is the currently connected account.
@@ -13,6 +12,6 @@ export default function useIsLoggedIn(address: string | undefined): boolean {
   return useMemo(() => {
     if (!currentAddress) return false
     if (!address) return false
-    return isSameAddress(currentAddress, address)
+    return currentAddress.toLowerCase() === address.toLowerCase()
   }, [currentAddress, address])
 }
