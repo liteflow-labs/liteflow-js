@@ -1,5 +1,5 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
-import { useCreateOffer, useIsLoggedIn } from '@nft/hooks'
+import { useCreateOffer, useIsLoggedIn } from '@liteflow/react'
 import { BigNumber } from 'ethers'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'

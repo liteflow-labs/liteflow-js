@@ -12,6 +12,9 @@
     "graphql-codegen": "graphql-codegen --overwrite"
   },
   "dependencies": {
+    "@ethersproject/abstract-provider": "^5.7.0",
+    "@ethersproject/abstract-signer": "^5.7.0",
+    "@ethersproject/bignumber": "^5.7.0",
     "graphql-request": "^5.0.0",
     "ts-invariant": "^0.9.4"
   },

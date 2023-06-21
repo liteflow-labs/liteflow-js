@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-npm i @nft/hooks
+npm i @liteflow/react
 ```
 
 ## Quick Start
@@ -37,8 +37,8 @@ function App() {
 Every component inside the `LiteflowProvider` is now set up to use the Liteflow hooks.
 
 ```tsx
-import { useCreateOffer } from '@nft/hooks'
-import { OfferType } from '@nft/hooks/dist/graphql'
+import { useCreateOffer } from '@liteflow/react'
+import { OfferType } from '@liteflow/react/dist/graphql'
 import { BigNumber } from 'ethers'
 import { useSigner } from 'wagmi' // or your favorite web3 wallet
 
