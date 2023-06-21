@@ -13,16 +13,13 @@ export function toId(keys: (string | undefined | null)[]): string {
 }
 
 export function toAssetId(
-  chainId: ChainId,
+  chain: ChainId,
   address: Address,
   token: string,
 ): string {
-  return toId([chainId.toString(), address, token])
+  return toId([chain.toString(), address, token])
 }
 
-export function toCurrencyId(
-  chainId: ChainId,
-  address: Address | null,
-): string {
-  return toId([chainId.toString(), address])
+export function toCurrencyId(chain: ChainId, address: Address | null): string {
+  return toId([chain.toString(), address])
 }

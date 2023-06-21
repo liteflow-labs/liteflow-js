@@ -18,6 +18,16 @@ export type Address = `0x${string}`
 export type UUID = string
 export type Uint256 = BigNumberish
 
+export type PriceNative = {
+  amount: Uint256
+  currency: null
+}
+
+export type PriceERC20 = {
+  amount: Uint256
+  currency: Address
+}
+
 export interface IState<Type = string, Payload = any> {
   type: Type
   payload: Payload

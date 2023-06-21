@@ -123,7 +123,7 @@ export default function useCreateNFT(
 
         // lazy minting
         if (hasLazyMint) {
-          const { chain, collection, tokenId } = await client.asset.lazymint(
+          const { chain, collection, token } = await client.asset.lazymint(
             assetToCreate,
             signer,
             (state) => {
@@ -139,10 +139,10 @@ export default function useCreateNFT(
               }
             },
           )
-          return toAssetId(chain, collection, tokenId)
+          return toAssetId(chain, collection, token)
         }
 
-        const { chain, collection, tokenId } = await client.asset.mint(
+        const { chain, collection, token } = await client.asset.mint(
           assetToCreate,
           signer,
           (state) => {
@@ -161,7 +161,7 @@ export default function useCreateNFT(
           },
         )
 
-        return toAssetId(chain, collection, tokenId)
+        return toAssetId(chain, collection, token)
       } finally {
         setActiveProcess(CreateNftStep.INITIAL)
         setTransactionHash(undefined)

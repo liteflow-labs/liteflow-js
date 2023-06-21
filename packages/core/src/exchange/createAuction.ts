@@ -6,8 +6,8 @@ import type {
   Address,
   ChainId,
   IState,
+  PriceERC20,
   TransactionHash,
-  Uint256,
   UUID,
 } from '../types'
 import {
@@ -26,10 +26,7 @@ export type Auction = {
   chain: ChainId
   collection: Address
   token: string
-  reservePrice: {
-    amount: Uint256
-    currency: Address | null
-  }
+  reservePrice: PriceERC20
   endAt: Date
   expiredAt: Date
 }

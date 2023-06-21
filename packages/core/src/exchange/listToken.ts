@@ -6,6 +6,8 @@ import type {
   ChainId,
   EIP712Data,
   IState,
+  PriceERC20,
+  PriceNative,
   TransactionHash,
   UUID,
   Uint256,
@@ -28,10 +30,7 @@ export type Listing = {
   chain: ChainId
   collection: Address
   token: string
-  unitPrice: {
-    amount: Uint256
-    currency: Address | null
-  }
+  unitPrice: PriceNative | PriceERC20
   quantity?: Uint256
   taker?: Address
   expiredAt?: Date

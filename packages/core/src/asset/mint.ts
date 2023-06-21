@@ -24,7 +24,7 @@ export async function mint(
 ): Promise<{
   chain: ChainId
   collection: Address
-  tokenId: string
+  token: string
 }> {
   const account = await signer.getAddress()
 
@@ -78,6 +78,6 @@ export async function mint(
   return {
     chain: createAssetTransaction.chainId,
     collection: createAssetTransaction.collectionAddress,
-    tokenId: createAssetTransaction.tokenId,
+    token: createAssetTransaction.tokenId,
   }
 }

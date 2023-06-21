@@ -6,13 +6,13 @@ import { toAssetId } from '../utils/convert'
 
 export async function checkOwnership(
   sdk: Sdk,
-  chainId: ChainId,
+  chain: ChainId,
   collection: Address,
-  tokenId: string,
+  token: string,
   owner: Address,
 ): Promise<Uint256> {
   const { ownership } = await sdk.FetchQuantityOwned({
-    assetId: toAssetId(chainId, collection, tokenId),
+    assetId: toAssetId(chain, collection, token),
     ownerAddress: owner,
   })
   return ownership?.quantity ?? '0'
@@ -20,9 +20,9 @@ export async function checkOwnership(
 
 export async function pollOwnership(
   sdk: Sdk,
-  chainId: ChainId,
+  chain: ChainId,
   collection: Address,
-  tokenId: string,
+  token: string,
   owner: Address,
   initialQuantity: Uint256,
   max = 120,
@@ -32,13 +32,7 @@ export async function pollOwnership(
   let i = 0
   while (i < max) {
     // fetch
-    const quantity = await checkOwnership(
-      sdk,
-      chainId,
-      collection,
-      tokenId,
-      owner,
-    )
+    const quantity = await checkOwnership(sdk, chain, collection, token, owner)
 
     // check if quantity changed compared to the initial one
     if (!BigNumber.from(quantity).eq(BigNumber.from(initialQuantity))) break

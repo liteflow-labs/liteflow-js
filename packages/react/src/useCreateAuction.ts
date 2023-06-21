@@ -30,6 +30,7 @@ export default function useCreateAuction(
         })
         invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
         invariant(currency, ErrorMessages.OFFER_CREATION_FAILED)
+        invariant(currency.address, ErrorMessages.OFFER_CREATION_FAILED)
 
         const auctionId = await client.exchange.createAuction(
           {
@@ -38,7 +39,7 @@ export default function useCreateAuction(
             token: asset.tokenId,
             reservePrice: {
               amount: input.reserveAmount,
-              currency: currency.address ? toAddress(currency.address) : null,
+              currency: toAddress(currency.address),
             },
             endAt: input.endAt,
             expiredAt: new Date(

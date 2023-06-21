@@ -24,7 +24,7 @@ export class Asset {
   ): Promise<{
     chain: ChainId
     collection: Address
-    tokenId: string
+    token: string
   }> {
     return mint(this.sdk, this.uploader, asset, signer, onProgress)
   }
@@ -36,7 +36,7 @@ export class Asset {
   ): Promise<{
     chain: ChainId
     collection: Address
-    tokenId: string
+    token: string
   }> {
     return lazymint(this.sdk, this.uploader, asset, signer, onProgress)
   }

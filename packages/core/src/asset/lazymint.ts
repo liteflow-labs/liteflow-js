@@ -24,7 +24,7 @@ export async function lazymint(
 ): Promise<{
   chain: ChainId
   collection: Address
-  tokenId: string
+  token: string
 }> {
   const account = await signer.getAddress()
 
@@ -89,6 +89,6 @@ export async function lazymint(
   return {
     chain: createLazyMintedAsset.asset.chainId,
     collection: createLazyMintedAsset.asset.collectionAddress,
-    tokenId: createLazyMintedAsset.asset.tokenId,
+    token: createLazyMintedAsset.asset.tokenId,
   }
 }
