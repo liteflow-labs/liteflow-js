@@ -1,26 +1,17 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { BigNumber } from '@ethersproject/bignumber'
-import { TransactionHash, toAddress } from '@liteflow/core'
-import { gql } from 'graphql-request'
+import {
+  Address,
+  ChainId,
+  PriceERC20,
+  PriceNative,
+  TransactionHash,
+} from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
 import { OfferType } from './graphql'
-
-gql`
-  query FetchAssetForOffer($assetId: String!, $currencyId: String!) {
-    asset(id: $assetId) {
-      chainId
-      collectionAddress
-      tokenId
-    }
-    currency(id: $currencyId) {
-      chainId
-      address
-    }
-  }
-`
 
 export enum CreateOfferStep {
   INITIAL,
@@ -34,20 +25,21 @@ export default function useCreateOffer(
 ): [
   (data: {
     type: OfferType
+    chain: ChainId
+    collection: Address
+    token: string
     quantity: BigNumber
-    unitPrice: BigNumber
-    assetId: string
-    currencyId: string
-    takerAddress?: string
-    expiredAt: Date | null
-    auctionId?: string
+    unitPrice: PriceNative | PriceERC20
+    taker?: Address
+    expiredAt?: Date
+    auctionId?: UUID
   }) => Promise<string>,
   {
     activeStep: CreateOfferStep
-    transactionHash: string | undefined
+    transactionHash: TransactionHash | undefined
   },
 ] {
-  const { sdk, client } = useContext(LiteflowContext)
+  const { client } = useContext(LiteflowContext)
   const [activeStep, setActiveProcess] = useState<CreateOfferStep>(
     CreateOfferStep.INITIAL,
   )
@@ -70,63 +62,46 @@ export default function useCreateOffer(
   const createOffer = useCallback(
     async ({
       type,
+      chain,
+      collection,
+      token,
       quantity,
       unitPrice,
-      assetId,
-      currencyId,
-      takerAddress,
       expiredAt,
+      taker,
       auctionId,
     }: {
       type: OfferType
+      chain: ChainId
+      collection: Address
+      token: string
       quantity: BigNumber
-      unitPrice: BigNumber
-      assetId: string
-      currencyId: string
-      takerAddress?: string
-      expiredAt: Date | null
-      auctionId?: string
+      unitPrice: PriceNative | PriceERC20
+      taker?: Address
+      expiredAt?: Date
+      auctionId?: UUID
     }): Promise<string> => {
       setActiveProcess(CreateOfferStep.INITIAL)
       try {
         invariant(signer, ErrorMessages.SIGNER_FALSY)
-        const { asset, currency } = await sdk.FetchAssetForOffer({
-          assetId,
-          currencyId,
-        })
-        invariant(asset, ErrorMessages.OFFER_CREATION_FAILED)
-        invariant(currency, ErrorMessages.OFFER_CREATION_FAILED)
-
-        const offer = {
-          chain: asset.chainId,
-          collection: toAddress(asset.collectionAddress),
-          token: asset.tokenId,
-          quantity: quantity,
-          takerAddress: takerAddress ? toAddress(takerAddress) : undefined,
-          expiredAt: expiredAt || undefined,
-        }
 
         if (type === 'SALE')
           return client.exchange.listToken(
-            {
-              ...offer,
-              unitPrice: {
-                amount: unitPrice,
-                currency: currency.address ? toAddress(currency.address) : null,
-              },
-            },
+            { chain, collection, token, quantity, taker, expiredAt, unitPrice },
             signer,
             updateProgress,
           )
         if (type === 'BUY') {
-          invariant(currency.address)
+          invariant(unitPrice.currency)
           return client.exchange.placeBid(
             {
-              ...offer,
-              unitPrice: {
-                amount: unitPrice,
-                currency: toAddress(currency.address),
-              },
+              chain,
+              collection,
+              token,
+              quantity,
+              taker,
+              expiredAt,
+              unitPrice,
               auctionId,
             },
             signer,
@@ -139,7 +114,7 @@ export default function useCreateOffer(
         setActiveProcess(CreateOfferStep.INITIAL)
       }
     },
-    [sdk, signer, client, setActiveProcess, updateProgress],
+    [signer, client, setActiveProcess, updateProgress],
   )
 
   return [createOffer, { activeStep, transactionHash }]

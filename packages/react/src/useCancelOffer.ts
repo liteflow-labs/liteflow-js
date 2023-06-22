@@ -1,4 +1,5 @@
 import { Signer } from '@ethersproject/abstract-signer'
+import { TransactionHash } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
@@ -17,11 +18,11 @@ export default function useCancelOffer(signer: Signer | undefined): [
   CancelOfferFn,
   {
     activeStep: CancelOfferStep
-    transactionHash: string | undefined
+    transactionHash: TransactionHash | undefined
   },
 ] {
   const { client } = useContext(LiteflowContext)
-  const [transactionHash, setTransactionHash] = useState<string>()
+  const [transactionHash, setTransactionHash] = useState<TransactionHash>()
   const [activeStep, setActiveProcess] = useState<CancelOfferStep>(
     CancelOfferStep.INITIAL,
   )

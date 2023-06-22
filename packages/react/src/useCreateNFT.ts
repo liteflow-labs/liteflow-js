@@ -1,5 +1,5 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
-import { toAddress, toAssetId } from '@liteflow/core'
+import { Address, ChainId, TransactionHash, toAssetId } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
@@ -15,19 +15,26 @@ export enum CreateNftStep {
   LAZYMINT_PENDING,
 }
 
-type createNftFn = (data: {
-  chainId: number
-  collectionAddress: string
-  name: string
-  description: string
-  content: File
-  preview?: File
-  isAnimation: boolean
-  isPrivate: boolean
-  amount?: number
-  royalties?: number
-  traits?: { type: string; value: string }[]
-}) => Promise<string>
+type createNftFn = (
+  data: {
+    chain: ChainId
+    collection: Address
+    supply?: number
+    royalties?: number
+    metadata: {
+      name: string
+      description: string
+      attributes?: { traitType: string; value: string }[]
+      media: {
+        content: File
+        preview?: File
+        isAnimation: boolean
+        isPrivate: boolean
+      }
+    }
+  },
+  lazymint: boolean,
+) => Promise<string>
 
 export default function useCreateNFT(
   signer: (Signer & TypedDataSigner) | undefined,
@@ -39,11 +46,11 @@ export default function useCreateNFT(
   createNftFn,
   {
     activeStep: CreateNftStep
-    transactionHash: string | undefined
+    transactionHash: TransactionHash | undefined
   },
 ] {
-  const { sdk, client } = useContext(LiteflowContext)
-  const [transactionHash, setTransactionHash] = useState<string>()
+  const { client } = useContext(LiteflowContext)
+  const [transactionHash, setTransactionHash] = useState<TransactionHash>()
   const [activeStep, setActiveProcess] = useState<CreateNftStep>(
     CreateNftStep.INITIAL,
   )
@@ -78,52 +85,29 @@ export default function useCreateNFT(
   )
 
   const createNft: createNftFn = useCallback(
-    async ({
-      chainId,
-      collectionAddress,
-      name,
-      description,
-      content,
-      preview,
-      isAnimation,
-      isPrivate,
-      amount,
-      royalties,
-      traits,
-    }) => {
-      const {
-        config: { hasLazyMint },
-      } = await sdk.GetConfig()
+    async (
+      { chain, collection, metadata, supply, royalties },
+      lazymint = false,
+    ) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
 
+      const { media, ...restMetadata } = metadata
+
       try {
-        const media = await detectMedia({
-          content,
-          preview,
-          isAnimation,
-          isPrivate,
-        })
         const assetToCreate = {
-          chain: chainId,
-          collection: toAddress(collectionAddress),
-          royalties: royalties,
-          supply: amount,
+          chain,
+          collection,
+          royalties,
+          supply,
           metadata: {
-            name,
-            description,
-            image: media.image,
-            animationUrl: media.animationUrl,
-            unlockableContent: media.unlockableContent,
-            attributes: (traits || []).map((x) => ({
-              traitType: x.type,
-              value: x.value,
-            })),
+            ...restMetadata,
+            ...(await detectMedia(media)),
           },
         }
 
         // lazy minting
-        if (hasLazyMint) {
-          const { chain, collection, token } = await client.asset.lazymint(
+        if (lazymint) {
+          const asset = await client.asset.lazymint(
             assetToCreate,
             signer,
             (state) => {
@@ -139,10 +123,10 @@ export default function useCreateNFT(
               }
             },
           )
-          return toAssetId(chain, collection, token)
+          return toAssetId(asset.chain, asset.collection, asset.token)
         }
 
-        const { chain, collection, token } = await client.asset.mint(
+        const asset = await client.asset.mint(
           assetToCreate,
           signer,
           (state) => {
@@ -161,13 +145,13 @@ export default function useCreateNFT(
           },
         )
 
-        return toAssetId(chain, collection, token)
+        return toAssetId(asset.chain, asset.collection, asset.token)
       } finally {
         setActiveProcess(CreateNftStep.INITIAL)
         setTransactionHash(undefined)
       }
     },
-    [client.asset, sdk, signer, detectMedia],
+    [client.asset, signer, detectMedia],
   )
 
   return [createNft, { activeStep, transactionHash }]

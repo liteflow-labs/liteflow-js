@@ -1,5 +1,6 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumberish } from '@ethersproject/bignumber'
+import { TransactionHash, UUID } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
@@ -16,7 +17,7 @@ export enum AcceptOfferStep {
 
 type acceptOfferFn = (
   offer: {
-    id: string
+    id: UUID
     /** @deprecated `unitPrice` is not needed anymore */
     unitPrice?: BigNumberish
   },
@@ -27,14 +28,14 @@ export default function useAcceptOffer(signer: Signer | undefined): [
   acceptOfferFn,
   {
     activeStep: AcceptOfferStep
-    transactionHash: string | undefined
+    transactionHash: TransactionHash | undefined
   },
 ] {
   const { client } = useContext(LiteflowContext)
   const [activeStep, setActiveProcess] = useState<AcceptOfferStep>(
     AcceptOfferStep.INITIAL,
   )
-  const [transactionHash, setTransactionHash] = useState<string>()
+  const [transactionHash, setTransactionHash] = useState<TransactionHash>()
 
   const onProgress = useCallback(
     (state) => {

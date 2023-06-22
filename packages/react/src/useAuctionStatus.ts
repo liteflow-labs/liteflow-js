@@ -1,4 +1,5 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
+import { UUID } from '@liteflow/core'
 import { useEffect, useMemo, useState } from 'react'
 
 type TimelineStatus = {
@@ -19,7 +20,7 @@ export default function useAuctionStatus(
     endAt: string | Date
     expireAt: string | Date
     reserveAmount: BigNumberish
-    winningOffer: { id: string } | null | undefined
+    winningOffer: { id: UUID } | null | undefined
   },
   bestBid?: {
     amount: BigNumberish
