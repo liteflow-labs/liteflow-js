@@ -1,5 +1,5 @@
 import { Client } from '@liteflow/core'
-import { gql, GraphQLClient } from 'graphql-request'
+import { GraphQLClient } from 'graphql-request'
 import decode, { JwtPayload } from 'jwt-decode'
 import React, {
   createContext,
@@ -12,18 +12,6 @@ import React, {
 import invariant from 'ts-invariant'
 import type { Sdk } from './graphql'
 import { getSdk } from './graphql'
-
-gql`
-  query GetConfig {
-    config {
-      hasLazyMint
-      hasReferralSystem
-      hasSocialFeatures
-      hasTopUp
-      hasUnlockableContent
-    }
-  }
-`
 
 export type LiteflowContext = {
   setAuthenticationToken: (token: string) => void

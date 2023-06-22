@@ -43,10 +43,6 @@ export default function useInvitation(signer: Signer | undefined): {
   const [accepting, setAccepting] = useState(false)
   const [creating, setCreating] = useState(false)
   const create = useCallback(async () => {
-    const {
-      config: { hasReferralSystem },
-    } = await sdk.GetConfig()
-    invariant(hasReferralSystem, ErrorMessages.FEATURE_DISABLED_REFERRAL)
     invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setCreating(true)
@@ -69,10 +65,6 @@ export default function useInvitation(signer: Signer | undefined): {
 
   const accept = useCallback(
     async (invitationId: string) => {
-      const {
-        config: { hasReferralSystem },
-      } = await sdk.GetConfig()
-      invariant(hasReferralSystem, ErrorMessages.FEATURE_DISABLED_REFERRAL)
       try {
         setAccepting(true)
         const { acceptInvitation } = await sdk.AcceptInvitation({
