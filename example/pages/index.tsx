@@ -1,4 +1,5 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
+import { toAddress } from '@liteflow/core'
 import { useCreateOffer, useIsLoggedIn } from '@liteflow/react'
 import { BigNumber } from 'ethers'
 import { useRouter } from 'next/router'
@@ -18,11 +19,15 @@ export default function Home(): JSX.Element {
     const price = parseFloat(prompt('Price of the offer'))
     const id = await createOffer({
       type: 'BUY',
-      assetId: process.env.NEXT_PUBLIC_ASSET_ID, // Pass a desired asset ID,
-      currencyId: process.env.NEXT_PUBLIC_CURRENCY_ID, // Pass the desired currency ID
+      chain: Number(process.env.CHAIN), // Pass the chain ID,
+      collection: toAddress(process.env.NEXT_PUBLIC_COLLECTION), // Pass a desired collection address,
+      token: process.env.NEXT_PUBLIC_TOKEN, // Pass a desired asset ID,
       expiredAt: new Date(Date.now() + 1000 * 60 * 60),
       quantity: BigNumber.from(1),
-      unitPrice: BigNumber.from(price * 1e6), // Replace `1e6` by the right number of decimals of the used currency to shift the price to unit.
+      unitPrice: {
+        amount: BigNumber.from(price * 1e6), // Replace `1e6` by the right number of decimals of the used currency to shift the price to unit.
+        currency: toAddress(process.env.NEXT_PUBLIC_CURRENCY),
+      },
     })
     alert(id)
   }, [createOffer])
