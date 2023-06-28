@@ -1,0 +1,7 @@
+mutation DeleteOffer($id: UUID!) {
+  deleteOffer(input: { id: $id }) {
+    offer {
+      id
+    }
+  }
+}

@@ -1,0 +1,15 @@
+mutation CreateLazyMintedAssetSignature(
+  $chainId: Int!
+  $collectionAddress: Address!
+  $asset: LazyMintedAssetSignatureInput!
+) {
+  createLazyMintedAssetSignature(
+    input: {
+      chainId: $chainId
+      collectionAddress: $collectionAddress
+      asset: $asset
+    }
+  ) {
+    eip712Data
+  }
+}

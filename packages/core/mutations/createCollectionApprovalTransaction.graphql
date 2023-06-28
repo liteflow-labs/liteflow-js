@@ -1,0 +1,15 @@
+mutation CreateCollectionApprovalTransaction(
+  $accountAddress: Address!
+  $chainId: Int!
+  $collectionAddress: String!
+) {
+  createCollectionApprovalTransaction(
+    accountAddress: $accountAddress
+    chainId: $chainId
+    collectionAddress: $collectionAddress
+  ) {
+    transaction {
+      ...Transaction
+    }
+  }
+}

@@ -1,0 +1,15 @@
+mutation CreateCurrencyApprovalTransaction(
+  $accountAddress: Address!
+  $amount: Uint256!
+  $currencyId: String!
+) {
+  createCurrencyApprovalTransaction(
+    accountAddress: $accountAddress
+    amount: $amount
+    currencyId: $currencyId
+  ) {
+    transaction {
+      ...Transaction
+    }
+  }
+}

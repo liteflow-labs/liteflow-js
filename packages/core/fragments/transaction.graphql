@@ -1,0 +1,7 @@
+fragment Transaction on Transaction {
+  to
+  from
+  data
+  gasPrice
+  value
+}
