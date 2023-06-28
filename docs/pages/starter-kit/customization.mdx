@@ -8,20 +8,30 @@ The starter kit has a few customizations out of the box to quickly customize bas
 
 ## Application
 
-All metadata, like titles and descriptions, can be found directly in the head of all the pages in the `./pages` directory and in the `./pages/_app.tsx` file.
+All metadata, like titles and descriptions, can be found directly in the head of all the pages in the `./pages` directory and in the `environment.ts` file under the `SEO Configuration` section.
 
 The navigation can be updated in the `./pages/_app.tsx` or `./components/Navbar/Navbar.tsx`.
 
 The logo and images can be found in the `./public` directory.
 
+## Home page
+
+You can showcase elements on the home page by editing the `.environment.ts` file. You can update the following fields:
+
+- Featured NFTs
+- Featured collections
+- Featured users
+- Custom section with featured elements
+
 ## Wallet
 
 You can customize the wallet you want to activate for your marketplace directly in the `./connectors.ts` file. By default, the fork contains the following wallets:
 
-- Metamask/injected wallet
-- [Magic.link](https://magic.link/) wallet
+- Metamask / injected wallet
 - Coinbase
 - WalletConnect
+- [Magic.link](https://magic.link/) wallet
+- [Rainbow](https://rainbow.me/) wallet
 
 ## Theme
 
