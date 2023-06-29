@@ -1,4 +1,4 @@
-import { useIsLoggedIn } from '@nft/hooks'
+import { useIsLoggedIn } from '@liteflow/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useAccount, useConnect } from 'wagmi'

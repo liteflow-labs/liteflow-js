@@ -1,0 +1,19 @@
+mutation CreateOffer(
+  $offer: OfferInputBis!
+  $timestamp: Int!
+  $salt: String!
+  $signature: String!
+) {
+  createOffer(
+    input: {
+      offer: $offer
+      timestamp: $timestamp
+      salt: $salt
+      signature: $signature
+    }
+  ) {
+    offer {
+      id
+    }
+  }
+}

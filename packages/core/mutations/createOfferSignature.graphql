@@ -1,0 +1,7 @@
+mutation CreateOfferSignature($offer: OfferInputBis!) {
+  createOfferSignature(input: { offer: $offer }) {
+    eip712Data
+    timestamp
+    salt
+  }
+}
