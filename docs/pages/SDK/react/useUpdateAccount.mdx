@@ -9,8 +9,7 @@ Hook to update the user account's information.
 ## Usage
 
 ```tsx
-import { useUpdateAccount } from '@nft/hooks'
-import React from 'react'
+import { useUpdateAccount } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
@@ -46,9 +45,6 @@ export default function Component() {
 ```tsx
 useUpdateAccount(
   signer: Signer | undefined, // Ethers signer: https://docs.ethers.io/v5/api/signer/
-  {
-    uploadUrl: string, // Your Liteflow API upload url
-  }
 )
 ```
 

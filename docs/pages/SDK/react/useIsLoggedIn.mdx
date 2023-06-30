@@ -9,7 +9,7 @@ Hook to detect if an address is currently logged in on the Liteflow infrastructu
 ## Usage
 
 ```tsx
-import { useIsLoggedIn } from '@nft/hooks'
+import { useIsLoggedIn } from '@liteflow/react'
 import { useAccount } from 'wagmi'
 
 export default function Component() {

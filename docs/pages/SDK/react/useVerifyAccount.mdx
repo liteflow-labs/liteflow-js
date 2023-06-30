@@ -9,8 +9,7 @@ Hook to request to get the current user account verified by admins. This is an o
 ## Usage
 
 ```tsx
-import { useVerifyAccount } from '@nft/hooks'
-import React from 'react'
+import { useVerifyAccount } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)

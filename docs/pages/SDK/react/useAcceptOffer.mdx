@@ -12,8 +12,7 @@ Can only be executed by an owner of the related NFT if it's a bid, or by anyone 
 
 ```tsx
 import { BigNumber } from '@ethersproject/bignumber'
-import { AcceptOfferStep, useAcceptOffer } from '@nft/hooks'
-import React from 'react'
+import { AcceptOfferStep, useAcceptOffer } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
@@ -21,10 +20,7 @@ export default function Component() {
 
   const handleClick = async () => {
     await acceptOffer(
-      {
-        id: '66710e28-38d4-11ed-a261-0242ac120002', // ID of the offer
-        unitPrice: BigNumber.from(10), // The unit price of this offer. Used to check ERC20 allowance.
-      },
+      { id: '66710e28-38d4-11ed-a261-0242ac120002' }, // ID of the offer
       BigNumber.from(1), // The quantity of NFT to accept. Must be 1 for erc721, must be inferior (partial fill) or equal to offer's quantity for erc1155.
     )
   }
@@ -65,13 +61,7 @@ useAcceptOffer(
 
 ```tsx
 ;[
-  (
-    offer: {
-      id: string
-      unitPrice: BigNumberish
-    },
-    quantity: BigNumberish,
-  ) => Promise<void>, // acceptOffer. function to accept an Offer
+  (offer: { id: string }, quantity: BigNumberish) => Promise<void>, // acceptOffer. function to accept an Offer
   {
     activeStep: AcceptOfferStep, // returns different values depending on the current acceptation step
     transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain

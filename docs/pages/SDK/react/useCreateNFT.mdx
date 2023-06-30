@@ -9,8 +9,7 @@ Hook for creating an NFT, accessing the active process step as well as the trans
 ## Usage
 
 ```tsx
-import { CreateNftStep, useCreateNFT } from '@nft/hooks'
-import React from 'react'
+import { CreateNftStep, useCreateNFT } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
@@ -19,23 +18,28 @@ export default function Component() {
   })
 
   const handleClick = async () => {
-    await createNFT({
-      chainId: 1, // chainId of the network to mint on
-      collectionAddress: '0x0000', // address of the collection to use
-      name: 'Azuki #1', // name of the NFT
-      description: 'Take the red bean to join the garden.', // description of the NFT
-      content: azukiImage, // content file uploaded by the user
-      isAnimation: false, // set to true if content file is a video. Require to set preview
-      isPrivate: false, // set to true if content is private. Require to set preview.
-      // optional
-      amount: 1, // number of NFT to create. Require ERC1155
-      royalties: 10, // royalty amount in percentage
-      preview: azukiImagePreview, // preview in the case of private or animation content uploaded by user
-      traits: [
-        { type: 'Head', value: 'Cap' },
-        { type: 'Body', value: 'Samurai' },
-      ], // Array of traits associated to the NFT
-    })
+    const isLazyMinted = true
+    await createNFT(
+      {
+        chain: 1, // chainId of the network to mint on
+        collection: '0x0000', // address of the collection to use
+        metadata: {
+          name: 'Azuki #1', // name of the NFT
+          description: 'Take the red bean to join the garden.', // description of the NFT
+          attributes: [
+            { type: 'Head', value: 'Cap' },
+            { type: 'Body', value: 'Samurai' },
+          ], // Array of traits associated to the NFT
+          media: {
+            content: azukiImage, // content file uploaded by the user
+            preview: azukiImagePreview, // preview in the case of private or animation content uploaded by user
+            isAnimation: false, // set to true if content file is a video. Require to set preview
+            isPrivate: false, // set to true if content is private. Require to set preview.
+          },
+        },
+      },
+      isLazyMinted,
+    )
   }
 
   return (
@@ -68,9 +72,6 @@ export default function Component() {
 ```tsx
 useCreateNFT(
   signer: Signer & TypedDataSigner, // Ethers signer: https://docs.ethers.io/v5/api/signer/
-  {
-    uploadUrl: string, // Your Liteflow API upload url
-  }
 )
 ```
 
@@ -79,18 +80,22 @@ useCreateNFT(
 ```tsx
 [
   ({
-    chainId: number
-    collectionAddress: string
-    name: string
-    description: string
-    content: File
-    preview?: File
-    isAnimation: boolean
-    isPrivate: boolean
-    amount?: number
+    chain: ChainId
+    collection: Address
+    supply?: number
     royalties?: number
-    traits?: { type: string; value: string }[]
-  }) => Promise<string>, // createNFT function
+    metadata: {
+      name: string
+      description: string
+      attributes?: { traitType: string; value: string }[]
+      media: {
+        content: File
+        preview?: File
+        isAnimation: boolean
+        isPrivate: boolean
+      }
+    }
+  }, lazymint: boolean) => Promise<string>, // createNFT function
   {
     activeStep: CreateNftStep, // steps of the NFT creation process
     transactionHash: string | undefined // returns the transaction hash after transaction has been placed on the blockchain
@@ -106,17 +111,21 @@ Arguments:
 
 ```tsx
 {
-  chainId: Number,                              // id of the chain to mint on
-  collectionAddress: string,                    // address of the collection to mint on
-  name: string,                                 // name of the NFT
-  description: string,                          // description of the NFT
-  content: File,                                // content file uploaded by the user
-  preview?: File,                               // preview in the case of private or animation content uploaded by user
-  isAnimation: boolean,                         // set to true if content file is a video. Require to set preview
-  isPrivate: boolean,                           // set to true if content is private. Require to set preview.
-  amount?: number,                              // number of NFT to create. Require ERC1155
-  royalties?: number,                           // royalty amount in percentage
-  traits?: { type: string, value: string }[]    // Array of traits associated to the NFT
+  chain: ChainId,         // The chain to mint the asset on
+  collection: Address,    // The collection to mint the asset on
+  supply?: number,        // The supply of the asset. If not set, the asset will be minted as a 1 of 1 even for ERC1155
+  royalties?: number,     // The royalties to set on the asset. Royalties should be set in basis point so 5% should be 500
+  metadata: {
+    name: string,                                         // The name of the asset
+    description: string,                                  // The description of the asset
+    attributes?: { traitType: string, value: string }[]   // The attributes of the asset
+    media: {
+      content: File           // Content for the asset
+      preview?: File,         // Preview of the asset (if the content is private or an animation)
+      isAnimation: boolean,   // Set the content as animation
+      isPrivate: boolean,     // Set the content as private so only owners will be able to read it
+    }
+  }
 }
 ```
 

@@ -54,7 +54,7 @@ function AccountProvider(props: PropsWithChildren<{}>) {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={client}>
-      <LiteflowProvider endpoint={process.env.NEXT_PUBLIC_ENDPOINT}>
+      <LiteflowProvider endpoint={process.env.NEXT_LITEFLOW_API_KEY}>
         <AccountProvider>
           <div className={styles.app}>
             <Component {...pageProps} />

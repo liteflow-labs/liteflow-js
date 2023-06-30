@@ -1,3 +1,7 @@
+---
+title: 'Introduction'
+---
+
 # React SDK
 
 ## Installation
