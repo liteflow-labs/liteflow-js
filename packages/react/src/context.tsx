@@ -22,7 +22,7 @@ export type LiteflowContext = {
 
 export type LiteflowProviderProps = {
   apiKey: string
-  endpoint: string
+  endpoint?: string
 }
 
 export const LiteflowContext = createContext<LiteflowContext>({
