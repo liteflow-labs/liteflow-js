@@ -26,13 +26,53 @@ export type State =
   | IState<'OFFER_SIGNATURE', { signature: EIP712Data }>
 
 export type Bid = {
+  /**
+   * The chain of the asset to place a bid on
+   * @type ChainId
+   */
   chain: ChainId
+
+  /**
+   * The collection of the asset to place a bid on
+   * @type Address
+   */
   collection: Address
+
+  /**
+   * The token of the asset to place a bid on
+   * @type string
+   */
   token: string
+
+  /**
+   * The unit price of the asset to place a bid on (in ERC20)
+   * @type PriceERC20
+   */
   unitPrice: PriceERC20
+
+  /**
+   * The quantity of the asset to place a bid on
+   * @type Uint256
+   * @default 1
+   */
   quantity?: Uint256
+
+  /**
+   * The address of the taker
+   * @type Address
+   */
   taker?: Address
+
+  /**
+   * The expiration date of the bid
+   * @type Date
+   */
   expiredAt?: Date
+
+  /**
+   * The auction id of the bid
+   * @type UUID
+   */
   auctionId?: UUID
 }
 

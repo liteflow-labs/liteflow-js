@@ -7,7 +7,7 @@ import type { Address, ChainId, IState, TransactionHash } from '../types'
 import type { Uploader } from '../uploader'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
-import type { MintedAsset } from './type'
+import type { Asset } from './type'
 
 export type State =
   | IState<'UPLOAD', {}>
@@ -18,7 +18,7 @@ export type State =
 export async function mint(
   sdk: Sdk,
   uploader: Uploader,
-  asset: MintedAsset,
+  asset: Asset,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<{

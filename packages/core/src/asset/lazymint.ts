@@ -7,7 +7,7 @@ import type { Address, ChainId, EIP712Data, IState } from '../types'
 import type { Uploader } from '../uploader'
 import { toAddress } from '../utils/convert'
 import { signEIP712 } from '../utils/signature'
-import type { MintedAsset } from './type'
+import type { Asset } from './type'
 
 export type State =
   | IState<'UPLOAD', {}>
@@ -18,7 +18,7 @@ export type State =
 export async function lazymint(
   sdk: Sdk,
   uploader: Uploader,
-  asset: MintedAsset,
+  asset: Asset,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<{

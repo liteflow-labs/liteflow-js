@@ -27,12 +27,47 @@ export type State =
   | IState<'OFFER_SIGNATURE', { signature: EIP712Data }>
 
 export type Listing = {
+  /**
+   * The chain of the asset to be listed
+   * @type ChainId
+   */
   chain: ChainId
+
+  /**
+   * The collection of the asset to be listed
+   * @type Address
+   */
   collection: Address
+
+  /**
+   * The token of the asset to be listed
+   * @type string
+   */
   token: string
+
+  /**
+   * The unit price of the asset to be listed (in native currency or ERC20)
+   * @type PriceNative | PriceERC20
+   */
   unitPrice: PriceNative | PriceERC20
+
+  /**
+   * The quantity of the asset to be listed
+   * @type Uint256
+   * @default 1
+   */
   quantity?: Uint256
+
+  /**
+   * The address of the taker of the asset
+   * @type Address
+   */
   taker?: Address
+
+  /**
+   * The expiration date of the listing
+   * @type Date
+   */
   expiredAt?: Date
 }
 
