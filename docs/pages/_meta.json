@@ -3,6 +3,6 @@
   "graphql-api": "GraphQL API",
   "webhook": "Webhook",
   "service": "Service",
-  "SDK": "SDK",
+  "sdk": "SDK",
   "starter-kit": "Starter Kit"
 }
