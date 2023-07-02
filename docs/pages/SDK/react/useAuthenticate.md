@@ -4,7 +4,7 @@ title: 'useAuthenticate'
 
 # useAuthenticate
 
-Hook to authenticate a web3 wallet against the API. It returns a token that needs to be used as the `Authorization` header with the value Bearer `${jwtToken}`.
+Hook to authenticate a web3 wallet against the API. It returns a token that needs to be used as the `Authorization` header with the value `Bearer ${jwtToken}`.
 
 ## Usage
 
