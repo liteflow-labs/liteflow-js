@@ -1,18 +1,21 @@
 import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { toAddress } from '@liteflow/core'
-import { useCreateOffer, useIsLoggedIn } from '@liteflow/react'
+import { useAuthenticate, useCreateOffer, useIsLoggedIn } from '@liteflow/react'
 import { BigNumber } from 'ethers'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
-import { useAccount, useDisconnect, useSigner } from 'wagmi'
+import { useAccount, useConnect, useSigner } from 'wagmi'
 
 export default function Home(): JSX.Element {
   const { push } = useRouter()
-  const { disconnect } = useDisconnect()
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
+  const {
+    connect,
+    connectors: [connector],
+  } = useConnect()
+  const [authenticate] = useAuthenticate()
   const { data: signer } = useSigner<Signer & TypedDataSigner>()
   const isLoggedIn = useIsLoggedIn(address)
-
   const [createOffer] = useCreateOffer(signer)
 
   const create = useCallback(async () => {
@@ -32,18 +35,10 @@ export default function Home(): JSX.Element {
     alert(id)
   }, [createOffer])
 
-  useEffect(() => {
-    if (isLoggedIn) return
-    void push('/login')
-  }, [isLoggedIn, push])
-
-  if (!isLoggedIn) return null
-  return (
-    <>
-      <button onClick={create}>Create offer</button>
-      <button style={{ marginTop: '1em' }} onClick={() => disconnect()}>
-        Disconnect
-      </button>
-    </>
-  )
+  if (!isConnected)
+    return <button onClick={() => connect({ connector })}>Connect</button>
+  if (!signer) return <span>Connected without signer</span>
+  if (!isLoggedIn)
+    return <button onClick={() => authenticate(signer)}>Login</button>
+  return <button onClick={create}>Create offer</button>
 }
