@@ -1,3 +1,7 @@
 html[class~='light'] .nx-text-primary-600 {
   color: hsl(var(--nextra-primary-hue) 100% 30% / var(--tw-text-opacity));
 }
+
+li.\[word-break\:break-word\].nx-mt-5 {
+  margin-top: 0.5rem;
+}

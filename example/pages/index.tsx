@@ -3,7 +3,7 @@ import { toAddress } from '@liteflow/core'
 import { useAuthenticate, useCreateOffer, useIsLoggedIn } from '@liteflow/react'
 import { BigNumber } from 'ethers'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useAccount, useConnect, useSigner } from 'wagmi'
 
 export default function Home(): JSX.Element {
