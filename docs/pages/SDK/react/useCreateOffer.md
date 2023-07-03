@@ -28,6 +28,8 @@ export default function Component() {
         amount: BigNumber.from(1).mul(BigNumber.from(10).pow(18)), // this value is in base unit of the token. This is equivalent to 1 ETH. Use BigNumber
         currencyId: '0x19a4866a85c652eb4a2ed44c42e4cb2863a62d51', // Currency address
       },
+      taker: '0x0123456789012345678901234567890123456789',
+      expiredAt: new Date('2024-01-01'),
     })
   }
 

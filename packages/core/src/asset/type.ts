@@ -15,7 +15,7 @@ export type Asset = {
   collection: Address
 
   /**
-   * The royalties to set on the asset. Royalties should be set in basis point so 5% should be 500
+   * The royalties to set on the asset expressed in percentage (eg: 5%).
    * @type number
    * @default 0
    */

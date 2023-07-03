@@ -62,7 +62,8 @@ function PlaceBid() {
       chain: 1, // Ethereum
       collection: `0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d`,
       token: '100',
-      quantity: {
+      quantity: BigNumber.from(1),
+      unitPrice: {
         amount: BigNumber.from(1).mul(BigNumber.from(10).pow(18)), // this value is in base unit of the token. This is equivalent to 1 ETH. Use BigNumber
         currency: null, // currency can be set as an address to use ERC20 tokens
       },

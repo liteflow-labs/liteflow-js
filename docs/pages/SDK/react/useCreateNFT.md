@@ -23,6 +23,8 @@ export default function Component() {
       {
         chain: 1, // chainId of the network to mint on
         collection: '0x0000', // address of the collection to use
+        supply: 1, // supply of the asset (only needed for ERC1155)
+        royalties: 5, // royalty expressed in percentage (eg: 5%)
         metadata: {
           name: 'Azuki #1', // name of the NFT
           description: 'Take the red bean to join the garden.', // description of the NFT
@@ -114,7 +116,7 @@ Arguments:
   chain: ChainId,         // The chain to mint the asset on
   collection: Address,    // The collection to mint the asset on
   supply?: number,        // The supply of the asset. If not set, the asset will be minted as a 1 of 1 even for ERC1155
-  royalties?: number,     // The royalties to set on the asset. Royalties should be set in basis point so 5% should be 500
+  royalties?: number,     // The royalties to set on the asset expressed in percentage (eg: 5%)
   metadata: {
     name: string,                                         // The name of the asset
     description: string,                                  // The description of the asset
