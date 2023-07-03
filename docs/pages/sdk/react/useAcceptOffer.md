@@ -20,7 +20,7 @@ export default function Component() {
 
   const handleClick = async () => {
     await acceptOffer(
-      { id: '66710e28-38d4-11ed-a261-0242ac120002' }, // ID of the offer
+      '66710e28-38d4-11ed-a261-0242ac120002', // ID of the offer
       BigNumber.from(1), // The quantity of NFT to accept. Must be 1 for erc721, must be inferior (partial fill) or equal to offer's quantity for erc1155.
     )
   }
@@ -61,7 +61,7 @@ useAcceptOffer(
 
 ```tsx
 ;[
-  (offer: { id: string }, quantity: BigNumberish) => Promise<void>, // acceptOffer. function to accept an Offer
+  (offerId: string, quantity: BigNumberish) => Promise<void>, // acceptOffer. function to accept an Offer
   {
     activeStep: AcceptOfferStep, // returns different values depending on the current acceptation step
     transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
@@ -77,10 +77,7 @@ Arguments:
 
 ```tsx
 (
-  offer: {
-    id: string, // Id of the offer
-    unitPrice: BigNumberish // Price per NFT unit, the price is in the token unit (e.g: Ethereum's WEI) therefore needs to be a BigNumber
-  },
+  offerId: string, // Id of the offer
   quantity: BigNumberish, // Quantity of asset to accept. Use BigNumber
 )
 ```

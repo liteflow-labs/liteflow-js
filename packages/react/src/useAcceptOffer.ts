@@ -15,14 +15,7 @@ export enum AcceptOfferStep {
   OWNERSHIP,
 }
 
-type acceptOfferFn = (
-  offer: {
-    id: UUID
-    /** @deprecated `unitPrice` is not needed anymore */
-    unitPrice?: BigNumberish
-  },
-  quantity: BigNumberish,
-) => Promise<void>
+type acceptOfferFn = (offerId: UUID, quantity: BigNumberish) => Promise<void>
 
 export default function useAcceptOffer(signer: Signer | undefined): [
   acceptOfferFn,
@@ -71,7 +64,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
   )
 
   const acceptOffer: acceptOfferFn = useCallback(
-    async ({ id }, quantity) => {
+    async (id, quantity) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       const offer = await client.exchange.getOffer(id)
       invariant(offer)
