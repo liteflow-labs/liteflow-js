@@ -11,8 +11,7 @@ This action can only be executed by the creator of the auction.
 ## Usage
 
 ```tsx
-import { AcceptAuctionStep, useAcceptAuction } from '@nft/hooks'
-import React from 'react'
+import { AcceptAuctionStep, useAcceptAuction } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)

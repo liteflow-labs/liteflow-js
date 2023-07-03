@@ -4,7 +4,6 @@ import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
 import { ErrorMessages } from './errorMessages'
-import { Offer } from './graphql'
 
 export enum CancelOfferStep {
   INITIAL,
@@ -12,7 +11,7 @@ export enum CancelOfferStep {
   TRANSACTION_PENDING,
 }
 
-type CancelOfferFn = (offerId: Pick<Offer, 'id'>) => Promise<void>
+type CancelOfferFn = (offerId: UUID) => Promise<void>
 
 export default function useCancelOffer(signer: Signer | undefined): [
   CancelOfferFn,
@@ -44,7 +43,7 @@ export default function useCancelOffer(signer: Signer | undefined): [
   )
 
   const cancelOffer: CancelOfferFn = useCallback(
-    async ({ id }) => {
+    async (id) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       const offer = await client.exchange.getOffer(id)
       invariant(offer)

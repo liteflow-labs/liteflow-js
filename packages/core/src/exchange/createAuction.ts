@@ -23,11 +23,35 @@ export type State =
   | IState<'APPROVAL_PENDING', { txHash: TransactionHash }>
 
 export type Auction = {
+  /**
+   * The chain of the asset to be auctioned
+   * @type ChainId
+   */
   chain: ChainId
+  /**
+   * The collection of the asset to be auctioned
+   * @type Address
+   */
   collection: Address
+  /**
+   * The token of the asset to be auctioned
+   * @type string
+   */
   token: string
+  /**
+   * The reserve price of the auction
+   * @type PriceERC20
+   */
   reservePrice: PriceERC20
+  /**
+   * The end date of the auction
+   * @type Date
+   */
   endAt: Date
+  /**
+   * The expiration date of the auction
+   * @type Date
+   */
   expiredAt: Date
 }
 

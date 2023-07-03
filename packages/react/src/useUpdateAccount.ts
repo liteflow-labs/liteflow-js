@@ -26,10 +26,6 @@ type AccountInput = {
  */
 export default function useUpdateAccount(
   signer: Signer | undefined,
-  {}: {
-    /** @deprecated uploadUrl is not required anymore */
-    uploadUrl: string
-  },
 ): [(_: AccountInput) => Promise<string>, { loading: boolean }] {
   const { client } = useContext(LiteflowContext)
   const [loading, setLoading] = useState<boolean>(false)

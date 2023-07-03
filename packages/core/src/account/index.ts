@@ -15,10 +15,21 @@ export class Account {
     this.uploader = uploader
   }
 
+  /**
+   * Update an account
+   * @param {AccountInput} account - The account data to update
+   * @param {Signer} signer - The signer to use to update the account
+   * @returns {Promise<Address>} The address of the updated account
+   */
   async update(account: AccountInput, signer: Signer): Promise<Address> {
     return update(this.sdk, this.uploader, account, signer)
   }
 
+  /**
+   * Verify an account
+   * @param {Signer} signer - The signer to use to verify the account
+   * @returns {Promise<AccountVerificationStatus>} The verification status of the account
+   */
   async verify(signer: Signer): Promise<AccountVerificationStatus> {
     return verify(this.sdk, signer)
   }

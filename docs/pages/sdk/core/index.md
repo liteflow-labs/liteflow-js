@@ -1,3 +1,7 @@
+---
+title: 'Introduction'
+---
+
 # Core SDK
 
 This document provides a step-by-step guide on how to install and use the Liteflow Javascript SDK. The SDK allows you to access various modules such as Account, Asset, and Exchange.

@@ -9,15 +9,14 @@ Hook to cancel an offer, accessing the active process step as well as the transa
 ## Usage
 
 ```tsx
-import { CancelOfferStep, useCancelOffer } from '@nft/hooks'
-import React from 'react'
+import { CancelOfferStep, useCancelOffer } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
   const [cancelOffer, { activeStep, transactionHash }] = useCancelOffer(signer)
 
   const handleClick = async () => {
-    await cancelOffer({ id: '6191e7c8-38d5-11ed-a261-0242ac120002' })
+    await cancelOffer('6191e7c8-38d5-11ed-a261-0242ac120002')
   }
 
   return (
@@ -49,7 +48,7 @@ useCancelOffer(
 
 ```tsx
 ;[
-  (offerId: { id: string }) => Promise<void>, // cancelOffer. function to cancel an Offer
+  (offerId: string) => Promise<void>, // cancelOffer. function to cancel an Offer
   {
     activeStep: CancelOfferStep, // returns different values depending on the current cancellation step
     transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
@@ -64,9 +63,9 @@ Function to cancel an offer for an NFT.
 Arguments:
 
 ```tsx
-{
-  id: string
-}
+(
+  offerId: string
+)
 ```
 
 ### activeStep

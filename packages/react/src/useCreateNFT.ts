@@ -38,10 +38,6 @@ type createNftFn = (
 
 export default function useCreateNFT(
   signer: (Signer & TypedDataSigner) | undefined,
-  {}: {
-    /** @deprecated uploadUrl is not required anymore */
-    uploadUrl: string
-  },
 ): [
   createNftFn,
   {

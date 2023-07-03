@@ -9,7 +9,6 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import invariant from 'ts-invariant'
 import type { Sdk } from './graphql'
 import { getSdk } from './graphql'
 
@@ -22,11 +21,9 @@ export type LiteflowContext = {
 }
 
 export type LiteflowProviderProps = {
-  endpoint: string
+  apiKey: string
+  endpoint?: string
 }
-
-const uuidRegEx =
-  /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}/g
 
 export const LiteflowContext = createContext<LiteflowContext>({
   setAuthenticationToken(_token) {
@@ -41,20 +38,23 @@ export const LiteflowContext = createContext<LiteflowContext>({
 })
 
 export function LiteflowProvider({
-  endpoint,
+  apiKey,
+  endpoint = 'https://api.liteflow.com',
   children,
 }: PropsWithChildren<LiteflowProviderProps>): JSX.Element {
   const [authenticationToken, setAuthenticationToken] = useState<string>()
-  const client = useMemo(() => new GraphQLClient(endpoint), [endpoint])
-  const coreClient = useMemo(() => {
-    const url = new URL(endpoint)
-    const [apiKey] = url.pathname.match(uuidRegEx) || []
-    invariant(apiKey, 'invalid endpoint')
-    return new Client(apiKey, {
-      authorization: authenticationToken,
-      endpoint: new URL(`${url.protocol}//${url.host}`),
-    })
-  }, [endpoint, authenticationToken])
+  const client = useMemo(
+    () => new GraphQLClient(`${endpoint}/${apiKey}/graphql`),
+    [endpoint, apiKey],
+  )
+  const coreClient = useMemo(
+    () =>
+      new Client(apiKey, {
+        authorization: authenticationToken,
+        endpoint: new URL(endpoint),
+      }),
+    [endpoint, apiKey, authenticationToken],
+  )
   const sdk = useMemo(() => getSdk(client), [client])
   const currentAddress = useMemo(() => {
     if (!authenticationToken) return null

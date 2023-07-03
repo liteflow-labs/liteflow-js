@@ -4,13 +4,12 @@ title: 'useAuthenticate'
 
 # useAuthenticate
 
-Hook to authenticate a web3 wallet against the API. It returns a token that needs to be used as the `Authorization` header with the value Bearer `${jwtToken}`.
+Hook to authenticate a web3 wallet against the API. It returns a token that needs to be used as the `Authorization` header with the value `Bearer ${jwtToken}`.
 
 ## Usage
 
 ```tsx
-import { useAuthenticate } from '@nft/hooks'
-import React from 'react'
+import { useAuthenticate } from '@liteflow/react'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
