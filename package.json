@@ -1,6 +1,6 @@
 {
   "name": "liteflow",
-  "private": true,
+  "private": false,
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=7.0.0"

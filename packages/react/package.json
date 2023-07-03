@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rimraf node_modules/.cache dist tsconfig.tsbuildinfo",
     "prepack": "npm run build",
