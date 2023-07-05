@@ -71,7 +71,7 @@ export default function useCreateOffer(
     takerAddress?: string
     expiredAt: Date | null
     auctionId?: string
-    metadata?: JSON
+    metadata?: unknown
   }) => Promise<string>,
   {
     activeStep: CreateOfferStep
@@ -145,7 +145,7 @@ export default function useCreateOffer(
       takerAddress?: string
       expiredAt: Date | null
       auctionId?: string
-      metadata?: JSON
+      metadata?: unknown
     }): Promise<string> => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       const account = await signer.getAddress()
