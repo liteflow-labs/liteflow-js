@@ -182,7 +182,7 @@ export default function useCreateOffer(
           auctionId: auctionId || null,
           expiredAt: expiredAt,
           metadata: metadata,
-        }
+        } as any // ugly task cast to allow build
         const { createOfferSignature } = await sdk.CreateOfferSignature({
           offer,
         })

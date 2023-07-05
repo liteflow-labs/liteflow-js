@@ -45,7 +45,7 @@ export default function useCreateAuction(
               new Date(input.endAt).getTime() +
                 input.auctionValiditySeconds * 1000,
             ),
-          },
+          } as any, // ugly task cast to allow build
         })
         invariant(
           createAuction?.auction?.id,
