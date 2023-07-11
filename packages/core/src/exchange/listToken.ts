@@ -69,11 +69,26 @@ export type Listing = {
    * @type Date
    */
   expiredAt?: Date
+
+  /**
+   * The metadata associated to the bid
+   * @type unknown
+   */
+  metadata?: unknown
 }
 
 export async function listToken(
   sdk: Sdk,
-  { chain, collection, token, unitPrice, quantity, taker, expiredAt }: Listing,
+  {
+    chain,
+    collection,
+    token,
+    unitPrice,
+    quantity,
+    taker,
+    expiredAt,
+    metadata,
+  }: Listing,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
@@ -88,6 +103,7 @@ export async function listToken(
     quantity: BigNumber.from(quantity || '1').toString(),
     takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : undefined,
+    metadata: metadata,
   }
 
   onProgress?.({ type: 'APPROVAL_SIGNATURE', payload: {} })

@@ -33,6 +33,7 @@ export default function useCreateOffer(
     taker?: Address
     expiredAt?: Date
     auctionId?: UUID
+    metadata?: unknown
   }) => Promise<string>,
   {
     activeStep: CreateOfferStep
@@ -70,6 +71,7 @@ export default function useCreateOffer(
       expiredAt,
       taker,
       auctionId,
+      metadata,
     }: {
       type: OfferType
       chain: ChainId
@@ -80,6 +82,7 @@ export default function useCreateOffer(
       taker?: Address
       expiredAt?: Date
       auctionId?: UUID
+      metadata?: unknown
     }): Promise<string> => {
       setActiveProcess(CreateOfferStep.INITIAL)
       try {
@@ -87,7 +90,16 @@ export default function useCreateOffer(
 
         if (type === 'SALE')
           return client.exchange.listToken(
-            { chain, collection, token, quantity, taker, expiredAt, unitPrice },
+            {
+              chain,
+              collection,
+              token,
+              quantity,
+              taker,
+              expiredAt,
+              unitPrice,
+              metadata,
+            },
             signer,
             updateProgress,
           )
@@ -103,6 +115,7 @@ export default function useCreateOffer(
               expiredAt,
               unitPrice,
               auctionId,
+              metadata,
             },
             signer,
             updateProgress,
