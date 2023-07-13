@@ -1,4 +1,7 @@
 {
   "index": "Introduction",
+  "collection": "Import a collection",
+  "currency": "Add a currency",
+  "plugins": "Configure plugins",
   "drop": "Create a Drops"
 }
