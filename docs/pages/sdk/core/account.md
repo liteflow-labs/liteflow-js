@@ -1,3 +1,7 @@
+---
+title: 'Account'
+---
+
 # Account
 
 The `Account` module provides methods to update and verify an account.
