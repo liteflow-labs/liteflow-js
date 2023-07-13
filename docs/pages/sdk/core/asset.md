@@ -1,3 +1,7 @@
+---
+title: 'Asset'
+---
+
 # Asset
 
 The `Asset` module provides methods to mint assets either directly on-chain or off-chain (lazymint). Lazyminted assets are minted on-chain when they are purchased.
