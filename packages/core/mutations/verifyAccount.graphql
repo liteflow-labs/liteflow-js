@@ -1,0 +1,7 @@
+mutation VerifyAccount($input: CreateAccountVerificationInput!) {
+  createAccountVerification(input: $input) {
+    accountVerification {
+      status
+    }
+  }
+}

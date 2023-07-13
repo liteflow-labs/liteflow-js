@@ -1,0 +1,10 @@
+{
+  "index": "Installation",
+  "modules": {
+    "title": "Modules",
+    "type": "separator"
+  },
+  "exchange": "Exchange",
+  "asset": "Asset",
+  "account": "Account"
+}

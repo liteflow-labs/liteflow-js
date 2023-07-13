@@ -1,0 +1,24 @@
+mutation CreateAssetTransaction(
+  $chainId: Int!
+  $collectionAddress: Address!
+  $metadata: MetadataInput!
+  $creatorAddress: Address!
+  $royalties: Int
+  $supply: Uint256!
+) {
+  createAssetTransaction(
+    chainId: $chainId
+    collectionAddress: $collectionAddress
+    creatorAddress: $creatorAddress
+    metadata: $metadata
+    royalties: $royalties
+    supply: $supply
+  ) {
+    chainId
+    collectionAddress
+    tokenId
+    transaction {
+      ...Transaction
+    }
+  }
+}

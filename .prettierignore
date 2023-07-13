@@ -1,6 +1,7 @@
 **/node_modules
 
-packages/hooks/src/graphql.ts
+packages/core/src/graphql.ts
+packages/react/src/graphql.ts
 
 **/dist
 

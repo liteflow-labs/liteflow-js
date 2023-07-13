@@ -1,0 +1,5 @@
+query FetchQuantityOwned($assetId: String!, $ownerAddress: Address!) {
+  ownership(assetId: $assetId, ownerAddress: $ownerAddress) {
+    quantity
+  }
+}

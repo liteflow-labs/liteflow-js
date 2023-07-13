@@ -1,0 +1,15 @@
+mutation CreateOfferFillTransaction(
+  $offerId: String!
+  $accountAddress: Address!
+  $quantity: Uint256!
+) {
+  createOfferFillTransaction(
+    offerId: $offerId
+    accountAddress: $accountAddress
+    quantity: $quantity
+  ) {
+    transaction {
+      ...Transaction
+    }
+  }
+}

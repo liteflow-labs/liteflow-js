@@ -1,14 +1,11 @@
-import { LiteflowProvider, useAuthenticate } from '@nft/hooks'
+import { LiteflowProvider } from '@liteflow/react'
 import { AppProps } from 'next/app'
-import { PropsWithChildren } from 'react'
 import {
+  WagmiConfig,
   configureChains,
   createClient,
   goerli,
   mainnet,
-  useAccount,
-  useDisconnect,
-  WagmiConfig,
 } from 'wagmi'
 import { bsc, bscTestnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { InjectedConnector } from 'wagmi/connectors/injected'
@@ -26,40 +23,13 @@ export const client = createClient({
   provider,
 })
 
-function AccountProvider(props: PropsWithChildren<{}>) {
-  const [authenticate, { resetAuthenticationToken }] = useAuthenticate()
-  const { disconnect } = useDisconnect()
-  useAccount({
-    async onConnect({ connector }) {
-      const login = async () => {
-        try {
-          const signer = await connector.getSigner()
-          await authenticate(signer)
-        } catch (e) {
-          disconnect()
-        }
-      }
-      connector.on('change', login)
-      connector.on('disconnect', () => connector.off('change', login))
-      await login()
-    },
-    onDisconnect() {
-      resetAuthenticationToken()
-    },
-  })
-
-  return <>{props.children}</>
-}
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={client}>
-      <LiteflowProvider endpoint={process.env.NEXT_PUBLIC_ENDPOINT}>
-        <AccountProvider>
-          <div className={styles.app}>
-            <Component {...pageProps} />
-          </div>
-        </AccountProvider>
+      <LiteflowProvider apiKey={process.env.NEXT_PUBLIC_LITEFLOW_API_KEY}>
+        <div className={styles.app}>
+          <Component {...pageProps} />
+        </div>
       </LiteflowProvider>
     </WagmiConfig>
   )
