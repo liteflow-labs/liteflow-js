@@ -27,7 +27,7 @@
     "@graphql-codegen/typescript": "^1.23.0",
     "@graphql-codegen/typescript-graphql-request": "^4.5.5",
     "@graphql-codegen/typescript-operations": "^1.18.4",
-    "@nft/api-graphql": "^1.0.0-beta.29",
+    "@nft/api-graphql": "^1.0.0-beta.33",
     "@types/react": "^17.0.51",
     "eslint-plugin-react-hooks": "^4.2.0"
   },
