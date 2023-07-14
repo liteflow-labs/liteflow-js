@@ -45,7 +45,7 @@ necessary.
 
 This function must return the number of tokens minted by this drop.
 
-The function must be a `view`, have no `inputs`, and must return a unique output of type [`integer`](#integer-type).
+The function must be a `view`, have no `inputs`, and must return a unique output of type `int` or `uint`.
 
 Here is examples of compatible function:
 
@@ -67,7 +67,7 @@ If not set, the Liteflow Infrastructure will use the number of tokens created be
 
 This function must return the number of tokens minted by a specific wallet during this drop.
 
-The function must be a `view`, have one `input` type `address`, and must return a unique output of type [`integer`](#integer-type).
+The function must be a `view`, have one `input` type `address`, and must return a unique output of type `int` or `uint`.
 
 Here is examples of compatible function:
 
