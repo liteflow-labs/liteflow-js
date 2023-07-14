@@ -72,9 +72,9 @@ export type Listing = {
 
   /**
    * The metadata associated to the bid
-   * @type unknown
+   * @type Record<string, unknown>
    */
-  metadata?: unknown
+  metadata?: Record<string, unknown>
 }
 
 export async function listToken(

@@ -78,7 +78,7 @@ useCreateOffer(
     taker?: Address
     expiredAt?: Date
     auctionId?: UUID
-    metadata?: unknown
+    metadata?: Record<string, unknown>
   }) => Promise<string>, // createOffer. function to create an Offer
   {
     activeStep: CreateOfferStep, // returns different values depending on the current creation step
@@ -107,7 +107,7 @@ Arguments `createOfferFn`:
   taker?: Taker,      // Optional, wallet address of the offer's receiver. This allows to create an offer that only a specific wallet can accept.
   expiredAt?: Date,   // Optional date at which the offer expired. If not set, the API will enforce one. If offer is on an auction, this date is always set by the API.
   auctionId?: UUID    // Optional, Id of the auction to create the offer on.
-  metadata?: unknown  // Optional, payload to save alongside the offer
+  metadata?: Record<string, unknown>  // Optional, payload to save alongside the offer
 }
 ```
 

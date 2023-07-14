@@ -33,7 +33,7 @@ export default function useCreateOffer(
     taker?: Address
     expiredAt?: Date
     auctionId?: UUID
-    metadata?: unknown
+    metadata?: Record<string, unknown>
   }) => Promise<string>,
   {
     activeStep: CreateOfferStep
@@ -82,7 +82,7 @@ export default function useCreateOffer(
       taker?: Address
       expiredAt?: Date
       auctionId?: UUID
-      metadata?: unknown
+      metadata?: Record<string, unknown>
     }): Promise<string> => {
       setActiveProcess(CreateOfferStep.INITIAL)
       try {
