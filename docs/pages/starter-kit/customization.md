@@ -1,5 +1,5 @@
 ---
-title: ‘Customization’
+title: 'Customization'
 ---
 
 # Customization
