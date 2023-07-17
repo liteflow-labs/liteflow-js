@@ -1,3 +1,7 @@
+---
+title: 'Exchange'
+---
+
 # Exchange
 
 The `Exchange` module provides a set of methods to interact with the marketplace. It allows you to place bids, list tokens for sale, cancel bids or listings, accept bids, buy tokens, create auctions, and accept the highest bid on an auction.

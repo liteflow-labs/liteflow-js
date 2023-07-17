@@ -26,7 +26,7 @@ export default function Component() {
       quantity: BigNumber.from(1), // Quantity of asset to offer. Must be 1 for offer on ERC721. Use BigNumber
       unitPrice: {
         amount: BigNumber.from(1).mul(BigNumber.from(10).pow(18)), // this value is in base unit of the token. This is equivalent to 1 ETH. Use BigNumber
-        currencyId: '0x19a4866a85c652eb4a2ed44c42e4cb2863a62d51', // Currency address
+        currency: '0x19a4866a85c652eb4a2ed44c42e4cb2863a62d51', // Currency address
       },
       taker: '0x0123456789012345678901234567890123456789',
       expiredAt: new Date('2024-01-01'),
@@ -78,6 +78,7 @@ useCreateOffer(
     taker?: Address
     expiredAt?: Date
     auctionId?: UUID
+    metadata?: Record<string, unknown>
   }) => Promise<string>, // createOffer. function to create an Offer
   {
     activeStep: CreateOfferStep, // returns different values depending on the current creation step
@@ -106,6 +107,7 @@ Arguments `createOfferFn`:
   taker?: Taker,      // Optional, wallet address of the offer's receiver. This allows to create an offer that only a specific wallet can accept.
   expiredAt?: Date,   // Optional date at which the offer expired. If not set, the API will enforce one. If offer is on an auction, this date is always set by the API.
   auctionId?: UUID    // Optional, Id of the auction to create the offer on.
+  metadata?: Record<string, unknown>  // Optional, payload to save alongside the offer
 }
 ```
 

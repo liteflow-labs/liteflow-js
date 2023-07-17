@@ -74,6 +74,12 @@ export type Bid = {
    * @type UUID
    */
   auctionId?: UUID
+
+  /**
+   * The metadata associated to the bid
+   * @type Record<string, unknown>
+   */
+  metadata?: Record<string, unknown>
 }
 
 export async function placeBid(
@@ -87,6 +93,7 @@ export async function placeBid(
     taker,
     expiredAt,
     auctionId,
+    metadata,
   }: Bid,
   signer: Signer,
   onProgress?: (state: State) => void,
@@ -103,6 +110,7 @@ export async function placeBid(
     takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : null,
     auctionId: auctionId,
+    metadata: metadata,
   }
 
   onProgress?.({ type: 'APPROVAL_SIGNATURE', payload: {} })
