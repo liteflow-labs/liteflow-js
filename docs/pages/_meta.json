@@ -4,5 +4,6 @@
   "webhook": "Webhook",
   "service": "Service",
   "sdk": "SDK",
-  "starter-kit": "Starter Kit"
+  "starter-kit": "Starter Kit",
+  "dashboard": "Dashboard"
 }
