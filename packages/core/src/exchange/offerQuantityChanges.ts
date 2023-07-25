@@ -2,7 +2,6 @@ import { BigNumber } from '@ethersproject/bignumber'
 import invariant from 'ts-invariant'
 import type { Sdk } from '../graphql'
 import type { Address, ChainId, Uint256 } from '../types'
-import { toAssetId } from '../utils/convert'
 
 export async function checkOwnership(
   sdk: Sdk,
@@ -11,11 +10,13 @@ export async function checkOwnership(
   token: string,
   owner: Address,
 ): Promise<Uint256> {
-  const { ownership } = await sdk.FetchQuantityOwned({
-    assetId: toAssetId(chain, collection, token),
+  const { asset } = await sdk.FetchQuantityOwned({
+    chainId: chain,
+    collectionAddress: collection,
+    tokenId: token,
     ownerAddress: owner,
   })
-  return ownership?.quantity ?? '0'
+  return asset?.ownership?.quantity ?? '0'
 }
 
 export async function pollOwnership(
