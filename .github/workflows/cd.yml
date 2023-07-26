@@ -45,6 +45,5 @@ jobs:
 
       - name: Build and publish Node packages
         env:
-          VERSION: ${{ github.event.release.tag_name }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_PUBLISH }}
         run: npm run prerelease
