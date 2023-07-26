@@ -1,5 +1,11 @@
 # @liteflow/core
 
+## 1.1.1
+
+### Patch Changes
+
+- [#173](https://github.com/liteflow-labs/liteflow-js/pull/173) [`7404c72`](https://github.com/liteflow-labs/liteflow-js/commit/7404c7254a523eaa794f4e9c992f9bf08001809b) Thanks [@antho1404](https://github.com/antho1404)! - Fetch ownership and asset when checking changes of ownership/minting
+
 ## 1.1.0
 
 ### Minor Changes
