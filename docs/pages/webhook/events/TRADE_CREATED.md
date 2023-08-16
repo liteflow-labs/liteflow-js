@@ -13,6 +13,11 @@ type Uint256 = string
 type IsoDate = string
 type ChainId = number
 type Address = string
+enum ExchangeProtocol {
+  UNKNOWN = 'UNKNOWN',
+  LITEFLOW = 'LITEFLOW',
+  SEAPORT = 'SEAPORT',
+}
 
 type TRADE_CREATED = {
   transactionHash: Uint256
@@ -49,7 +54,7 @@ type TRADE_CREATED = {
     } | null
     quantity: Uint256
     expiredAt: IsoDate
-  }
+  } | null
   buyer: {
     address: Address
     username: string | null
@@ -67,6 +72,7 @@ type TRADE_CREATED = {
     symbol: string
     decimals: number
   }
+  protocol: ExchangeProtocol
 }
 ```
 
