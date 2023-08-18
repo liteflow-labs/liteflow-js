@@ -6,7 +6,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.37
 
-> 2023-08-18
+> Published the 2023-08-18
 
 #### Changed
 
@@ -15,7 +15,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.36
 
-> 2023-08-10
+> Published the 2023-08-10
 
 #### Fixed
 
@@ -23,7 +23,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.35
 
-> 2023-07-24
+> Published the 2023-07-24
 
 #### Changed
 
@@ -31,7 +31,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.33
 
-> 2023-07-10
+> Published the 2023-07-10
 
 #### Added
 
@@ -48,7 +48,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.31
 
-> 2023-06-21
+> Published the 2023-06-21
 
 #### Added
 
@@ -56,7 +56,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.28
 
-> 2023-06-16
+> Published the 2023-06-16
 
 #### Added
 
@@ -64,7 +64,7 @@ title: 'Changelog'
 
 ## v1.0.0-beta.26
 
-> 2023-06-13
+> Published the 2023-06-13
 
 #### Added
 
