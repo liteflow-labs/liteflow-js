@@ -4,6 +4,78 @@ title: 'Changelog'
 
 # Changelog
 
+## v1.0.0-beta.37
+
+> 2023-08-18
+
+#### Changed
+
+- Speed up resolver collections' number of owners
+- Speed up resolver collections' total volume
+
+## v1.0.0-beta.36
+
+> 2023-08-10
+
+#### Fixed
+
+- Fix issue with accounts in queries `topBuyers` and `topSellers`
+
+## v1.0.0-beta.35
+
+> 2023-07-24
+
+#### Changed
+
+- Allow free mint and simple mint function in drops
+
+## v1.0.0-beta.33
+
+> 2023-07-10
+
+#### Added
+
+- Expose Organization's metadata in `config` query
+- Expose Collection's metadata
+- Expose Offer's metadata
+- Add optional metadata to `createOffer` mutation, `orderFees` query
+- Expose Transfers
+- Add connection between Ownership and Collection
+
+#### Fixed
+
+- Fix mutation `createTransferAssetTransaction`
+
+## v1.0.0-beta.31
+
+> 2023-06-21
+
+#### Added
+
+- Add `abi` field to `Drop`
+
+## v1.0.0-beta.28
+
+> 2023-06-16
+
+#### Added
+
+- Expose filter on Drop metadata field
+
+## v1.0.0-beta.26
+
+> 2023-06-13
+
+#### Added
+
+- Add `metadata` to `Drop`
+- Add `isAllowed(minter: Address!): Boolean!` resolver to `Drop` to tell if a minter is in the allow list
+- Add `maxQuantity(minter: Address!): Uint256` resolver to `Drop` to return the max quantity a minter can mint
+
+## Changed
+
+- Only expose `allowList` to admins in `Drop`
+
 ## v1.0.0-beta.20
 
 > Published the 2023-05-31
