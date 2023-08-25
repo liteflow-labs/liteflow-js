@@ -24,6 +24,18 @@ async mint(
 }>
 ```
 
+### mintDrop
+
+This method allows you to mint a drop directly on-chain.
+
+```ts
+async mintDrop(
+  dropId: UUID,
+  signer: Signer,
+  onProgress?: (state: MintDropState) => void,
+): Promise<UUID>
+```
+
 ### lazymint
 
 This method allows you to mint an asset off-chain. The asset will be minted on-chain later when it is purchased.
@@ -40,6 +52,6 @@ async lazymint(
 }>
 ```
 
-Each method in the `Asset` class returns a `Promise` that resolves to an object containing the `chain`, `collection`, and `token` of the minted asset.
+Each method in the `Asset` class returns a `Promise` that resolves to an object containing the `chain`, `collection`, and `token` of the minted asset. The `mintDrop` method returns a `Promise` that resolves to a `UUID` representing the ID of the drop that was minted.
 
-The `asset` parameter is the asset data to mint. The `signer` parameter is an instance of `Signer` used to sign transactions. The `onProgress` parameter is an optional callback function that can be used to track the progress of the operation.
+The `asset` parameter is the asset data to mint. The `dropId` parameter is the id of the drop to mint. The `signer` parameter is an instance of `Signer` used to sign transactions. The `onProgress` parameter is an optional callback function that can be used to track the progress of the operation.
