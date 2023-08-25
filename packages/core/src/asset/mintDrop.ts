@@ -1,5 +1,5 @@
+import { Interface } from '@ethersproject/abi'
 import type { Signer } from 'ethers'
-import { Interface } from 'ethers/lib/utils'
 import invariant from 'ts-invariant'
 import { checkOwnership, pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
