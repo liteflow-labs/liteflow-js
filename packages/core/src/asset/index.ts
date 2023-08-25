@@ -44,14 +44,14 @@ export class Asset {
    * @param {Uint256} quantity - The quantity of the drop to mint
    * @param {Signer} signer - The signer to use to mint the drop
    * @param {(state: MintDropState) => void} onProgress - Callback to track the minting progress
-   * @returns {Promise<UUID>} The ID of the minted drop
+   * @returns {Promise<{ tokenIds: string[] }>} The IDs of the minted assets
    */
   async mintDrop(
     dropId: UUID,
     quantity: Uint256,
     signer: Signer,
     onProgress?: (state: MintDropState) => void,
-  ): Promise<UUID> {
+  ): Promise<{ tokenIds: string[] }> {
     return mintDrop(this.sdk, dropId, quantity, signer, onProgress)
   }
 

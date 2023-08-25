@@ -32,7 +32,7 @@ export default function useMintDrop(signer: Signer | undefined): [
     (state) => {
       switch (state.type) {
         case 'TRANSACTION_SIGNATURE': {
-          setActiveProcess(MintDropStep.TRANSACTION_PENDING)
+          setActiveProcess(MintDropStep.TRANSACTION_SIGNATURE)
           break
         }
         case 'TRANSACTION_PENDING': {
