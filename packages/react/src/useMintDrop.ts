@@ -53,7 +53,7 @@ export default function useMintDrop(signer: Signer | undefined): [
     async (dropId, quantity) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       try {
-        await client.exchange.mintDrop(dropId, quantity, signer, onProgress)
+        await client.asset.mintDrop(dropId, quantity, signer, onProgress)
       } finally {
         setActiveProcess(MintDropStep.INITIAL)
         setTransactionHash(undefined)
