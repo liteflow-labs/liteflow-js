@@ -1,6 +1,6 @@
 import { Signer } from '@ethersproject/abstract-signer'
 import { BigNumberish } from '@ethersproject/bignumber'
-import { Address, ChainId, TransactionHash, UUID } from '@liteflow/core'
+import { TransactionHash, UUID } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
@@ -13,14 +13,7 @@ export enum MintDropStep {
   OWNERSHIP,
 }
 
-type mintDropFn = (
-  {
-    chain,
-    collection,
-    dropId,
-  }: { chain: ChainId; collection: Address; dropId: UUID },
-  quantity: BigNumberish,
-) => Promise<void>
+type mintDropFn = (dropId: UUID, quantity: BigNumberish) => Promise<void>
 
 export default function useMintDrop(signer: Signer | undefined): [
   mintDropFn,
@@ -57,15 +50,10 @@ export default function useMintDrop(signer: Signer | undefined): [
   )
 
   const mintDrop: mintDropFn = useCallback(
-    async ({ chain, collection, dropId }, quantity) => {
+    async (dropId, quantity) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       try {
-        await client.exchange.mintDrop(
-          { chain, collection, dropId },
-          quantity,
-          signer,
-          onProgress,
-        )
+        await client.exchange.mintDrop(dropId, quantity, signer, onProgress)
       } finally {
         setActiveProcess(MintDropStep.INITIAL)
         setTransactionHash(undefined)

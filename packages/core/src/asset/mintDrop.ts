@@ -1,50 +1,27 @@
 import type { Signer } from 'ethers'
+import invariant from 'ts-invariant'
+import { checkOwnership, pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
-import type {
-  Address,
-  ChainId,
-  IState,
-  TransactionHash,
-  UUID,
-  Uint256,
-} from '../types'
+import type { IState, TransactionHash, UUID, Uint256 } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
-import { checkOwnership, pollOwnership } from './offerQuantityChanges'
 
 export type State =
   | IState<'TRANSACTION_SIGNATURE', {}>
   | IState<'TRANSACTION_PENDING', { txHash: TransactionHash }>
   | IState<'OWNERSHIP', {}>
 
-export type Drop = {
-  /**
-   * The chain of the drop to be minted
-   * @type ChainId
-   */
-  chain: ChainId
-
-  /**
-   * The collection of the drop to be minted
-   * @type Address
-   */
-  collection: Address
-
-  /**
-   * The dropId of the drop to be minted
-   * @type UUID
-   */
-  dropId: UUID
-}
-
 export async function mintDrop(
   sdk: Sdk,
-  { chain, collection, dropId }: Drop,
+  dropId: UUID,
   quantity: Uint256,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
   const address = await signer.getAddress()
+
+  const { drop } = await sdk.FetchDrop({ dropId })
+  invariant(drop, "Can't find drop")
 
   const {
     createDropMintTransaction: { transaction },
@@ -56,9 +33,9 @@ export async function mintDrop(
 
   const initialQuantity = await checkOwnership(
     sdk,
-    chain,
-    collection,
-    dropId,
+    drop.chainId,
+    drop.collectionAddress,
+    drop.id,
     toAddress(address),
   )
 
@@ -74,9 +51,9 @@ export async function mintDrop(
   onProgress?.({ type: 'OWNERSHIP', payload: {} })
   await pollOwnership(
     sdk,
-    chain,
-    collection,
-    dropId,
+    drop.chainId,
+    drop.collectionAddress,
+    drop.id,
     toAddress(address),
     initialQuantity,
   )

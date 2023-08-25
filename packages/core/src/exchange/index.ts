@@ -12,8 +12,6 @@ import type { Auction } from './createAuction'
 import { createAuction } from './createAuction'
 import type { State as ListTokenState, Listing } from './listToken'
 import { listToken } from './listToken'
-import type { Drop, State as MintDropState } from './mintDrop'
-import { mintDrop } from './mintDrop'
 import type { Bid, State as PlaceBidState } from './placeBid'
 import { placeBid } from './placeBid'
 
@@ -116,23 +114,6 @@ export class Exchange {
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
     return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
-  }
-
-  /**
-   * Mint a drop
-   * @param {drop} drop - The drop to create
-   * @param {Uint256} quantity - The quantity of the drop to mint
-   * @param {Signer} signer - The signer to use to mint the drop
-   * @param {(state: MintDropState) => void} onProgress - Callback to track the minting progress
-   * @returns {Promise<UUID>} The ID of the minted drop
-   */
-  async mintDrop(
-    drop: Drop,
-    quantity: Uint256,
-    signer: Signer,
-    onProgress?: (state: MintDropState) => void,
-  ): Promise<UUID> {
-    return mintDrop(this.sdk, drop, quantity, signer, onProgress)
   }
 
   /**
