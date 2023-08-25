@@ -21,18 +21,16 @@ export {
   AcceptOfferStep,
   CancelOfferStep,
   CreateOfferStep,
-  MintDropStep,
   useAcceptAuction,
   useAcceptOffer,
   useAuctionStatus,
   useCancelOffer,
   useCreateAuction,
   useCreateOffer,
-  useMintDrop,
 }
 
 // Asset
-export { CreateNftStep, useCreateNFT }
+export { CreateNftStep, MintDropStep, useCreateNFT, useMintDrop }
 
 // Account
 export { useInvitation, useUpdateAccount, useVerifyAccount }
