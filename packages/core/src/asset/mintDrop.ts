@@ -81,7 +81,6 @@ export async function mintDrop(
     try {
       const parsed = transferInterface.parseLog(log)
       if (parsed.name !== 'Transfer') continue
-      console.log(parsed.args)
       transfers.push({ tokenId: parsed.args.tokenId.toString() })
     } catch (e) {}
   }
