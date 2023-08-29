@@ -1,9 +1,10 @@
 import { Interface } from '@ethersproject/abi'
-import type { Signer } from 'ethers'
+import type { BigNumberish, Signer } from 'ethers'
+import { BigNumber } from 'ethers'
 import invariant from 'ts-invariant'
-import { checkOwnership, pollOwnership } from '../exchange/offerQuantityChanges'
+import { pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
-import type { IState, TransactionHash, UUID, Uint256 } from '../types'
+import type { Address, ChainId, IState, TransactionHash, UUID } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 
@@ -44,10 +45,16 @@ const transferInterface = new Interface(abi)
 export async function mintDrop(
   sdk: Sdk,
   dropId: UUID,
-  quantity: Uint256,
+  quantity: BigNumberish,
   signer: Signer,
   onProgress?: (state: State) => void,
-): Promise<{ tokenIds: string[] }> {
+): Promise<
+  {
+    chain: ChainId
+    collection: Address
+    token: string
+  }[]
+> {
   const address = await signer.getAddress()
 
   const { drop } = await sdk.FetchDrop({ dropId })
@@ -57,7 +64,7 @@ export async function mintDrop(
     createDropMintTransaction: { transaction },
   } = await sdk.CreateDropMintTransaction({
     dropId,
-    quantity: quantity.toString(),
+    quantity: BigNumber.from(quantity).toString(),
     minter: toAddress(address),
   })
 
@@ -74,18 +81,12 @@ export async function mintDrop(
     try {
       const parsed = transferInterface.parseLog(log)
       if (parsed.name !== 'Transfer') continue
+      console.log(parsed.args)
       transfers.push({ tokenId: parsed.args.tokenId.toString() })
     } catch (e) {}
   }
 
   invariant(transfers[0], 'Error checking ownership')
-  const initialQuantity = await checkOwnership(
-    sdk,
-    drop.chainId,
-    drop.collectionAddress,
-    transfers[0].tokenId,
-    toAddress(address),
-  )
 
   onProgress?.({ type: 'OWNERSHIP', payload: {} })
   await pollOwnership(
@@ -94,9 +95,15 @@ export async function mintDrop(
     drop.collectionAddress,
     transfers[0].tokenId,
     toAddress(address),
-    initialQuantity,
+    BigNumber.from(0),
   )
-  const tokenIds = transfers.map((t) => t.tokenId)
 
-  return { tokenIds }
+  const tokenIds = transfers.map((t) => t.tokenId)
+  const tokens = tokenIds.map((tokenId) => ({
+    chain: drop.chainId,
+    collection: drop.collectionAddress,
+    token: tokenId,
+  }))
+
+  return tokens
 }
