@@ -33,7 +33,11 @@ async mintDrop(
   dropId: UUID,
   signer: Signer,
   onProgress?: (state: MintDropState) => void,
-): Promise<{ tokenIds: string[] }>
+): Promise<{
+  chain: ChainId
+  collection: Address
+  token: string
+}[]>
 ```
 
 ### lazymint
