@@ -56,6 +56,6 @@ async lazymint(
 }>
 ```
 
-Each method in the `Asset` class returns a `Promise` that resolves to an object containing the `chain`, `collection`, and `token` of the minted asset. The `mintDrop` method returns a `Promise` that resolves to an object containing the `tokenIds` of the minted assets.
+Each method in the `Asset` class returns a `Promise` that resolves to an object containing the `chain`, `collection`, and `token` of the minted asset. The `mintDrop` method returns a `Promise` that resolves to an array of objects containing the `chain`, `collection`, and `token` of the minted assets.
 
 The `asset` parameter is the asset data to mint. The `dropId` parameter is the id of the drop to mint. The `signer` parameter is an instance of `Signer` used to sign transactions. The `onProgress` parameter is an optional callback function that can be used to track the progress of the operation.
