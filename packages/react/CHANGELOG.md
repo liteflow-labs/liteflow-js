@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+### Patch Changes
+
+- [#177](https://github.com/liteflow-labs/liteflow-js/pull/177) [`47539b2`](https://github.com/liteflow-labs/liteflow-js/commit/47539b207566006c895fef320c3fc216d51aaca1) Thanks [@antho1404](https://github.com/antho1404)! - Ensure errors a caught when creating an offer
+
 ## 1.1.0
 
 ### Minor Changes
