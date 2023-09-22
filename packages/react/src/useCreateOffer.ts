@@ -88,8 +88,8 @@ export default function useCreateOffer(
       try {
         invariant(signer, ErrorMessages.SIGNER_FALSY)
 
-        if (type === 'SALE')
-          return client.exchange.listToken(
+        if (type === 'SALE') {
+          const listingId = await client.exchange.listToken(
             {
               chain,
               collection,
@@ -103,9 +103,11 @@ export default function useCreateOffer(
             signer,
             updateProgress,
           )
+          return listingId
+        }
         if (type === 'BUY') {
           invariant(unitPrice.currency)
-          return client.exchange.placeBid(
+          const bidId = await client.exchange.placeBid(
             {
               chain,
               collection,
@@ -120,6 +122,7 @@ export default function useCreateOffer(
             signer,
             updateProgress,
           )
+          return bidId
         }
 
         throw new Error(ErrorMessages.OFFER_CREATION_FAILED)
