@@ -1,0 +1,19 @@
+mutation CreateDropMintTransaction(
+  $dropId: UUID!
+  $minter: Address!
+  $quantity: Uint256!
+) {
+  createDropMintTransaction(
+    dropId: $dropId
+    minter: $minter
+    quantity: $quantity
+  ) {
+    transaction {
+      to
+      from
+      data
+      gasPrice
+      value
+    }
+  }
+}

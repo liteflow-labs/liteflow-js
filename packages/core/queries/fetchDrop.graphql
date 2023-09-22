@@ -1,0 +1,7 @@
+query FetchDrop($dropId: UUID!) {
+  drop(id: $dropId) {
+    chainId
+    collectionAddress
+    id
+  }
+}

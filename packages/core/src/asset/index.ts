@@ -1,11 +1,13 @@
-import type { Signer } from 'ethers'
+import type { BigNumberish, Signer } from 'ethers'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId } from '../types'
+import type { Address, ChainId, UUID } from '../types'
 import type { Uploader } from '../uploader'
 import type { State as LazymintState } from './lazymint'
 import { lazymint } from './lazymint'
 import type { State as MintState } from './mint'
 import { mint } from './mint'
+import type { State as MintDropState } from './mintDrop'
+import { mintDrop } from './mintDrop'
 import type * as Type from './type'
 
 export class Asset {
@@ -34,6 +36,29 @@ export class Asset {
     token: string
   }> {
     return mint(this.sdk, this.uploader, asset, signer, onProgress)
+  }
+
+  /**
+   * Mint a drop directly on-chain
+   * @param {UUID} dropId - The drop to mint
+   * @param {BigNumberish} quantity - The quantity of the drop to mint
+   * @param {Signer} signer - The signer to use to mint the drop
+   * @param {(state: MintDropState) => void} onProgress - Callback to track the minting progress
+   * @returns {Promise<{ chain: ChainId; collection: Address; token: string }[]>} The addresses of the minted assets
+   */
+  async mintDrop(
+    dropId: UUID,
+    quantity: BigNumberish,
+    signer: Signer,
+    onProgress?: (state: MintDropState) => void,
+  ): Promise<
+    {
+      chain: ChainId
+      collection: Address
+      token: string
+    }[]
+  > {
+    return mintDrop(this.sdk, dropId, quantity, signer, onProgress)
   }
 
   /**
