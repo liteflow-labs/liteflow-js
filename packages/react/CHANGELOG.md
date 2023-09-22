@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0
+
+### Minor Changes
+
+- [#175](https://github.com/liteflow-labs/liteflow-js/pull/175) [`79424f0`](https://github.com/liteflow-labs/liteflow-js/commit/79424f0238b87ec70b3d597b95387e910425e9ea) Thanks [@ismailToyran](https://github.com/ismailToyran)! - Add new mintDrop function and useMintDrop hook
+
+### Patch Changes
+
+- Updated dependencies [[`79424f0`](https://github.com/liteflow-labs/liteflow-js/commit/79424f0238b87ec70b3d597b95387e910425e9ea)]:
+  - @liteflow/core@1.2.0
+
 ## 1.1.1
 
 ### Patch Changes
