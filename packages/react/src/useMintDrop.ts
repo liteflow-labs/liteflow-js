@@ -13,7 +13,10 @@ export enum MintDropStep {
   OWNERSHIP,
 }
 
-type mintDropFn = (data: { dropId: UUID; quantity: BigNumberish }) => Promise<
+type mintDropFn = (
+  dropId: UUID,
+  quantity: BigNumberish,
+) => Promise<
   {
     chain: ChainId
     collection: Address
@@ -58,7 +61,7 @@ export default function useMintDrop(
   )
 
   const mintDrop: mintDropFn = useCallback(
-    async ({ dropId, quantity }) => {
+    async (dropId, quantity) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
       try {
         const mints = await client.asset.mintDrop(

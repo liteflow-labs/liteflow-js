@@ -16,10 +16,10 @@ export default function Component() {
   const [mintDrop, { activeStep, transactionHash }] = useMintDrop(signer)
 
   const handleClick = async () => {
-    await mintDrop({
-      dropId: '1', // the dropId of the drop to mint
-      quantity: 5, // the quantity of the drop to mint
-    })
+    await mintDrop(
+      '10d07af7-1fd1-433c-b92c-e4e5f86752cf', // the dropId of the drop to mint
+      5, // the quantity of the drop to mint
+    )
   }
 
   return (
@@ -52,10 +52,10 @@ useMintDrop(
 
 ```tsx
 [
-  ({
+  (
     dropId: UUID // The dropId of the drop to mint
     quantity: BigNumberish // The quantity of the drop to mint
-  }) => Promise<{ chain: ChainId; collection: Address; token: string }[]>, // MintDrop function
+  ) => Promise<{ chain: ChainId; collection: Address; token: string }[]>, // MintDrop function
   {
     activeStep: MintDropStep, // steps of the drop minting process
     transactionHash: string | undefined // returns the transaction hash after transaction has been placed on the blockchain
