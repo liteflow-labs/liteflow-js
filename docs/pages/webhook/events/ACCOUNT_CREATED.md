@@ -15,6 +15,11 @@ type ACCOUNT_CREATED = {
   address: Address
   username: string | null
   email: string | null
+  referrer: {
+    address: Address
+    username: string | null
+    email: string | null
+  } | null
 }
 ```
 
