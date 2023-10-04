@@ -6,6 +6,7 @@ title: 'Events'
 
 | Event                 | Triggered                               | Detail                                        |
 | :-------------------- | :-------------------------------------- | :-------------------------------------------- |
+| `ACCOUNT_CREATED`     | Whenever an account is created          | [detail](/webhook/events/ACCOUNT_CREATED)     |
 | `AUCTION_BID_CREATED` | Whenever a bid on an auction is created | [detail](/webhook/events/AUCTION_BID_CREATED) |
 | `BID_CREATED`         | Whenever an open bid is created         | [detail](/webhook/events/BID_CREATED)         |
 | `OFFER_CREATED`       | Whenever a new listing is created       | [detail](/webhook/events/OFFER_CREATED)       |
