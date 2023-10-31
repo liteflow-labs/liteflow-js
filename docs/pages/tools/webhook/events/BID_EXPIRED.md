@@ -33,12 +33,12 @@ type BID_EXPIRED = {
     decimals: number
   }
   maker: {
-    address: string
+    address: Address
     username: string | null
     email: string | null
   }
   taker: {
-    address: string
+    address: Address
     username: string | null
     email: string | null
   } | null
