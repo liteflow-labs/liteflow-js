@@ -1,5 +1,5 @@
 ---
-title: 'Welcome'
+title: 'What is Liteflow?'
 ---
 
 # Liteflow Documentation
