@@ -1,4 +1,5 @@
 {
+  "*": { "type": "page" },
   "index": "What is Liteflow?",
   "products": "Products",
   "guides": "Guides",
