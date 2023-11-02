@@ -4,5 +4,6 @@
   "webhook": "Webhook",
   "service": "Service",
   "sdk-core": "SDK Javascript",
-  "sdk-react": "SDK React"
+  "sdk-react": "SDK React",
+  "chat": "Chat Widget"
 }
