@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
-import type { ReactNode } from 'react'
+import { useMemo, type ReactNode } from 'react'
 
 const classes = {
   card: cn(
@@ -29,32 +29,41 @@ export function Card({
   arrow?: boolean
   href: string
 }) {
-  return (
-    <NextLink
-      href={href}
-      className={cn(
-        classes.card,
-        'nx-shadow-sm dark:nx-border-neutral-800 hover:nx-bg-slate-50 hover:nx-shadow-md dark:hover:nx-border-neutral-700 dark:hover:nx-bg-neutral-900',
-      )}
-      {...props}
-    >
-      {title && (
-        <span
-          className={cn(
-            classes.title,
-            'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50 nx-flex nx-items-center',
-          )}
-        >
-          {icon}
-          {title}
-          {arrow && (
-            <span className="nx-transition-transform nx-duration-75 group-hover:nx-translate-x-[2px]">
-              →
-            </span>
-          )}
-        </span>
-      )}
-      {children && <div className="nx-px-4 nx-pb-4">{children}</div>}
+  const content = useMemo(
+    () => (
+      <>
+        {title && (
+          <span
+            className={cn(
+              classes.title,
+              'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50 nx-flex nx-items-center',
+            )}
+          >
+            {icon}
+            {title}
+            {arrow && (
+              <span className="nx-transition-transform nx-duration-75 group-hover:nx-translate-x-[2px]">
+                →
+              </span>
+            )}
+          </span>
+        )}
+        {children && <div className="nx-px-4 nx-pb-4">{children}</div>}
+      </>
+    ),
+    [],
+  )
+  const containerClasses = cn(
+    classes.card,
+    'nx-shadow-sm dark:nx-border-neutral-800 hover:nx-bg-slate-50 hover:nx-shadow-md dark:hover:nx-border-neutral-700 dark:hover:nx-bg-neutral-900',
+  )
+  return href ? (
+    <NextLink href={href} className={containerClasses} {...props}>
+      {content}
     </NextLink>
+  ) : (
+    <div className={containerClasses} {...props}>
+      {content}
+    </div>
   )
 }

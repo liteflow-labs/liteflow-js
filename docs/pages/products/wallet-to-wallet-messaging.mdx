@@ -1,0 +1,53 @@
+---
+title: 'Wallet-to-Wallet Messaging'
+---
+
+import { Card } from '../../components/Card'
+import { Cards, Steps } from 'nextra-theme-docs'
+
+# Introduction
+
+Liteflow's Wallet to Wallet Messaging feature empowers seamless communication between various wallets. Ideal for social interactions, negotiations with sellers, or customer support, this feature uses instant messaging powered by [XMTP](https://xmtp.org/). It can be integrated universally—either embedded within your existing applications or as a standalone application using our chat template.
+
+## Features
+
+<Cards num={3}>
+  <Card title="Universal Compatibility">
+    Can be integrated into any application.
+  </Card>
+  <Card title="Instant Messaging">
+    Utilizes XMTP for quick, real-time conversations.
+  </Card>
+  <Card title="Multiple Use-Cases">
+    Ideal for negotiations, social interactions, and customer support.
+  </Card>
+  <Card title="Seamless wallet integration">
+    Don't ask your user to connect their wallet again, it they're connected they
+    can start chatting.
+  </Card>
+  <Card title="Custom theme">
+    Customize anything on the chat to make it match your brand, colors, fonts,
+    borders...
+  </Card>
+  <Card title="Custom user profiles">
+    Customize chat users based on your data for their wallet.
+  </Card>
+</Cards>
+
+## How to use it
+
+<Steps>
+
+### Integration in the marketplace
+
+If using the [marketplace template](/template/marketplace), the messaging feature is automatically integrated.
+
+### Integrate as a standalone application
+
+If you want to integrate the messaging feature as a standalone application, you can use our [chat template](/template/chat).
+
+### Integrate in your own application
+
+Import the `@nft/chat` library and use the `Chat` component to integrate the messaging feature in your own application.
+
+</Steps>
