@@ -59,7 +59,7 @@ export function Playground() {
   }, [apiKey, valid])
 
   return (
-    <div className="nx-gap-4">
+    <div className="nx-gap-4 nx-mt-8">
       <div>
         <label className="nx-text-sm nx-font-medium nx-mt-4">
           Liteflow API Key
