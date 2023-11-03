@@ -6,20 +6,6 @@ title: 'Dashboard'
 
 Liteflow Dashboard serves as the control center for managing and observing your Liteflow infrastructure. It presents you with extensive capabilities to track your platform's financial activities, regulate user behavior, and customize your platform according to your business model.
 
-## Getting Started
-
-### Login with your wallet
-
-1. On the login page, click on the 'Connect a Wallet' button.
-2. Choose your wallet provider from the list.
-3. Follow the prompts to sign in and authorize the connection between your wallet and the Liteflow Dashboard.
-
-### Create a platform
-
-1. Click on 'Create platform' on the navbar menu (or get automatically redirected).
-2. Enter the name of your organization and any other details as required.
-3. Click on 'Create' to finalize the creation of your organization.
-
 ## Dashboard Features
 
 ### Financial Activity
