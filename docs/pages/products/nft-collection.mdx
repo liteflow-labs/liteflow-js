@@ -5,78 +5,70 @@ title: 'NFT Collections'
 import { Card } from '../../components/Card'
 import { Cards, Steps } from 'nextra-theme-docs'
 
-# Introduction
+# Collection & NFT mint
 
-Liteflow’s Collection Creation and NFT Minting / Drop feature is designed to provide businesses with a diverse range of options for creating and managing NFT collections. Whether it's a open edition, a private collection, or external limited edition collections, this feature caters to varying business needs. It even supports lazy minting to optimize gas fees.
+Liteflow offers a flexible approach to NFT collection creation and minting, catering to various business models. Our platform supports creation of public open editions, private collections, and the integration of external collections, all of which are complemented by lazy minting functionality to optimize gas fees.
 
 ## Features
 
 <Cards num={3}>
-  <Card title="Open Edition Collection">
-    Create User Generated Content (UGC) collections with no limit on the number
-    of NFTs.
+  <Card title="Open Edition Collections">
+    Facilitate user-generated content with unlimited NFT minting potential.
   </Card>
-  <Card title="Private Collection">
-    Create private collections where only you and your team can create and sell
-    NFTs.
+  <Card title="Private Collections">
+    Maintain exclusive control over NFT creation and sales, akin to an online
+    shop.
   </Card>
-  <Card title="External Edition">
-    Import any other collections, PFPs, Game, Membership...
+  <Card title="Import External Collections">
+    Easily incorporate external collections like PFPs, games, and memberships.
   </Card>
-  <Card title="Drop">
-    Create drops to let your users mint NFTs from your collection and create
-    your initial sale.
+  <Card title="Drops">
+    Enable users to participate in drops, sparking initial sales and engagement.
   </Card>
-  <Card title="Single vs Multiple owners">
-    Chose the standard that fits your need with ERC721 or ERC1155.
+  <Card title="Ownership Standards">
+    Choose between ERC721 or ERC1155 standards to match your collection’s needs.
   </Card>
   <Card title="Lazy Minting">
-    Save on gas fees by minting your NFTs only when purchased.
+    Optimize budget by minting NFTs only upon sale to reduce upfront costs.
   </Card>
 </Cards>
 
-## How to chose my NFT type
+## Choosing Your NFT Type
 
-### Type of collection
+### Collection Types
 
-**Open edition**
+**Open Edition**:
+Ideal for UGC, these collections impose no cap on NFT numbers, offering freedom for user minting and metadata customization. Less suitable for controlled NFT issuance and metadata management.
 
-Perfect for user generated content (UGC) collections, open edition collections have no limit on the number of NFTs. Users can mint as many NFTs as they want from your collection set their own metadata like name, description, image and even royalties.
-This type of collection is not great if you want to control the number of NFTs minted, or if you want to control the metadata of the NFTs.
+**Private Collection**:
+Best for NFT-based e-commerce with full control over metadata and issuance. Not designed for user-minting scenarios.
 
-**Private collection**
+### Ownership Models
 
-Perfect for "e-commerce" you can create your products as NFTs and sell them to your users. You have full control on the metadata and the amount of NFTs minted without being limited on a specific cap.
-This type of collection is not suitable if you want to let your users mint their own NFTs.
+**ERC721**:
+For unique, singularly-owned NFTs, creating distinct value and rarity.
 
-### Single vs Multiple owners
+**ERC1155**:
+For NFTs with shared ownership, perfect for memberships or game items where multiple copies are beneficial.
 
-**ERC721**
-
-ERC721 is the standard for NFTs with a single owner. This is the standard you want to use if you want to create a collection where each NFT is owned by a single user. This is useful if you want to create uniqueness and rarity in your collection.
-
-**ERC1155**
-
-ERC1155 is the standard for NFTs with multiple owners. This is the standard you want to use if you want to create a collection where each NFT can be owned by multiple users. This is useful if you want to create a collection where each NFT is a membership, or a game item.
-
-## How to use it
+## How to Use It
 
 <Steps>
 
-### Create Collection
+### Collection Creation
 
-Choose the type of collection you want from the [dashboard](/tools/dashboard) and configure it based on your needs: open edition, private, or external limited edition
+From the [dashboard](/tools/dashboard), select and tailor your collection type: open edition, private, or external limited edition.
 
-### Let your users mint open editions
+### Public Minting
 
-Utilize the minter integrated into the [marketplace template](/templates/marketplace), [API](/tools/graphql-api), or [SDK](/tools/sdk-core) for public minting.
+Enable public minting of open editions through the integrated minter in our [marketplace template](/templates/marketplace), [API](/tools/graphql-api), or [SDK](/tools/sdk-core).
 
-### Mint your own NFTs
+### Minting for Private Collections
 
-For private collections, mint your own NFTs via the minter integrated in the [dashboard](/tools/dashboard).
+Mint NFTs for your private collection using the minter in the [dashboard](/tools/dashboard).
 
-### Drop System
+### Implementing Drops
 
-Want to let your user mint a predifined number of NFTs from your collection? Create a drop from the [dashboard](/tools/dashboard) and let your users mint their NFTs from the [marketplace template](/templates/marketplace).
+Set up a drop via the [dashboard](/tools/dashboard) to allow users to mint a predefined number of NFTs, available through the [marketplace template](/templates/marketplace).
 
 </Steps>
