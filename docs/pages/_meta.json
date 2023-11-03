@@ -4,5 +4,21 @@
   "products": "Products",
   "guides": "Guides",
   "tools": "Tools",
-  "templates": "Templates"
+  "templates": "Templates",
+  "more": {
+    "title": "More",
+    "type": "menu",
+    "items": {
+      "feedback": {
+        "title": "Feedback",
+        "href": "https://liteflow.canny.io/feedback",
+        "newWindow": true
+      },
+      "changelog": {
+        "title": "Changelog",
+        "href": "https://liteflow.canny.io/changelog",
+        "newWindow": true
+      }
+    }
+  }
 }
