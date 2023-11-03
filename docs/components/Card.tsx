@@ -21,12 +21,14 @@ export function Card({
   icon,
   arrow,
   href,
+  noPadding,
   ...props
 }: {
   children: ReactNode
   title: string
   icon: ReactNode
   arrow?: boolean
+  noPadding: boolean
   href: string
 }) {
   const content = useMemo(
@@ -48,7 +50,9 @@ export function Card({
             )}
           </span>
         )}
-        {children && <div className="nx-px-4 nx-pb-4">{children}</div>}
+        {children && (
+          <div className={noPadding ? '' : 'nx-px-4 nx-pb-4'}>{children}</div>
+        )}
       </>
     ),
     [],
