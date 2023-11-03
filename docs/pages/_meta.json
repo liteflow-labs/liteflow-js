@@ -2,7 +2,10 @@
   "*": { "type": "page" },
   "index": "What is Liteflow?",
   "products": "Products",
-  "guides": "Guides",
+  "guides": {
+    "title": "Guides",
+    "display": "hidden"
+  },
   "tools": "Tools",
   "templates": "Templates",
   "more": {
