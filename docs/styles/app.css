@@ -13,3 +13,7 @@ html[class~='light'] .nx-text-primary-600 {
 .nextra-card:hover svg {
   stroke: hsl(var(--nextra-primary-hue) 100% 30% / var(--tw-text-opacity));
 }
+
+.graphiql-container {
+  min-height: 700px;
+}
