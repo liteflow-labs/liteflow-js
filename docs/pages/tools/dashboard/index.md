@@ -22,4 +22,4 @@ The Platform Configuration section allows you to tailor the platform according t
 
 ## Troubleshooting
 
-If you encounter any issues while using the Liteflow Dashboard, refer to the 'Help' section on the navbar. If the issue persists, please contact our support team.
+If you encounter any issues while using the Liteflow Dashboard, refer to the 'Help' section on the navbar. If the issue persists, please [contact our support team](contact@liteflow.com).
