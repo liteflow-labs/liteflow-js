@@ -4,7 +4,7 @@ title: 'Dashboard'
 
 ## Overview
 
-Liteflow Dashboard serves as the control center for managing and observing your Liteflow infrastructure. It presents you with extensive capabilities to track your platform's financial activities, regulate user behavior, and customize your platform according to your business model.
+Liteflow [Dashboard](https://dashboard.liteflow.com/) serves as the control center for managing and observing your Liteflow infrastructure. It presents you with extensive capabilities to track your platform's financial activities, regulate user behavior, and customize your platform according to your business model.
 
 ## Dashboard Features
 
