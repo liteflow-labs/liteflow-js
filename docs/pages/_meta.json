@@ -9,7 +9,7 @@
   "tools": "Tools",
   "templates": "Templates",
   "more": {
-    "title": "More",
+    "title": "Resources",
     "type": "menu",
     "items": {
       "feedback": {
@@ -20,6 +20,16 @@
       "changelog": {
         "title": "Changelog",
         "href": "https://liteflow.canny.io/changelog",
+        "newWindow": true
+      },
+      "demo": {
+        "title": "Request a Demo",
+        "href": "https://meetings.hubspot.com/aestebe",
+        "newWindow": true
+      },
+      "support": {
+        "title": "Support",
+        "href": "https://share.hsforms.com/1auOfCTXYSGSqjoNNpmjy1Acjga0",
         "newWindow": true
       }
     }
