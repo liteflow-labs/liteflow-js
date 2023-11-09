@@ -6,8 +6,6 @@ import type { FetchOfferQuery, Sdk } from '../graphql'
 import type { Address, IState, TransactionHash, UUID, Uint256 } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
-import { approveCollection } from './approveCollection'
-import { approveCurrency } from './approveCurrency'
 import { checkOwnership, pollOwnership } from './offerQuantityChanges'
 
 export type State =
@@ -49,26 +47,20 @@ const approveTransferTransaction = async (
   signer: Signer,
 ): Promise<TransactionResponse | null> => {
   invariant(offer)
-  if (offer.type === 'BUY')
-    return approveCollection(
-      sdk,
-      {
-        chain: offer.asset.collection.chainId,
-        collection: toAddress(offer.asset.collection.address),
-      },
-      signer,
-    )
-  // The offer is in native token so we don't need any approval
-  if (!offer.currency.address) return null
-  return approveCurrency(
-    sdk,
-    {
-      chain: offer.currency.chainId,
-      currency: toAddress(offer.currency.address),
-      amount: BigNumber.from(offer.unitPrice).mul(quantity).toString(),
-    },
-    signer,
-  )
+
+  const address = await signer.getAddress()
+
+  const {
+    createOfferApprovalTransaction: { transaction },
+  } = await sdk.CreateOfferApprovalTransaction({
+    offerId: offer.id,
+    accountAddress: toAddress(address),
+    quantity: quantity.toString(),
+  })
+
+  if (!transaction) return null
+
+  return sendTransaction(signer, transaction)
 }
 
 export async function acceptOffer(
