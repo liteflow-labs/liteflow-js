@@ -1,9 +1,37 @@
 {
-  "index": "Introduction",
-  "graphql-api": "GraphQL API",
-  "webhook": "Webhook",
-  "service": "Service",
-  "sdk": "SDK",
-  "starter-kit": "Starter Kit",
-  "dashboard": "Dashboard"
+  "*": { "type": "page" },
+  "index": "What is Liteflow?",
+  "products": "Products",
+  "guides": {
+    "title": "Guides",
+    "display": "hidden"
+  },
+  "tools": "Tools",
+  "templates": "Templates",
+  "more": {
+    "title": "Resources",
+    "type": "menu",
+    "items": {
+      "feedback": {
+        "title": "Feedback",
+        "href": "https://liteflow.canny.io/feedback",
+        "newWindow": true
+      },
+      "changelog": {
+        "title": "Changelog",
+        "href": "https://liteflow.canny.io/changelog",
+        "newWindow": true
+      },
+      "demo": {
+        "title": "Request a Demo",
+        "href": "https://meetings.hubspot.com/aestebe",
+        "newWindow": true
+      },
+      "support": {
+        "title": "Support",
+        "href": "https://share.hsforms.com/1auOfCTXYSGSqjoNNpmjy1Acjga0",
+        "newWindow": true
+      }
+    }
+  }
 }

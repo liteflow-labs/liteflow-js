@@ -1,0 +1,164 @@
+---
+title: 'What is Liteflow?'
+type: 'page'
+---
+
+import { Card } from '../components/Card'
+import Image from 'next/image'
+import { Bleed, Cards } from 'nextra-theme-docs'
+import {
+  ArrowsRightLeftIcon,
+  BookmarkIcon,
+  PlusCircleIcon,
+  ChatBubbleLeftRightIcon,
+  ChartBarIcon,
+  LinkIcon,
+  CodeBracketIcon,
+  CodeBracketSquareIcon,
+  CommandLineIcon,
+  DocumentTextIcon,
+  CloudIcon,
+  GiftIcon,
+  LifebuoyIcon,
+  MegaphoneIcon,
+} from '@heroicons/react/24/outline'
+
+<Bleed>
+
+# Liteflow
+
+Liteflow is an extensive infrastructure platform tailored for the development and operation of Non-Fungible Token (NFT)-based applications. It features a dedicated API and a highly customizable infrastructure that supports a wide array of NFT-related activities, including creation, management, and trading.
+
+Designed with agility in mind, Liteflow equips businesses with a comprehensive suite of tools that streamline the launch and maintenance of NFT platforms.
+
+## Products
+
+Liteflow revolves around 4 pillar products, each meticulously crafted to address distinct business cases within the NFT ecosystem.
+
+<Cards num="2">
+  <Card
+    href="/products/nft-data"
+    title="NFT Data"
+    icon={<BookmarkIcon />}
+    arrow
+  >
+    Aggregate, synchronize, and access NFT data across multiple blockchains
+  </Card>
+  <Card
+    href="/products/nft-exchange"
+    title="NFT Exchange"
+    icon={<ArrowsRightLeftIcon />}
+    arrow
+  >
+    Seamlessly create, list, and manage offers to trade NFTs across multiple blockchains
+  </Card>
+  <Card
+    href="/products/nft-collection"
+    title="Collection & NFT Minting"
+    icon={<PlusCircleIcon />}
+    arrow
+  >
+    Create, manage NFT collections, and mint NFTs across multiple blockchains
+
+  </Card>
+  <Card
+    href="/products/wallet-to-wallet-messaging"
+    title="Wallet-to-Wallet Messaging"
+    icon={<ChatBubbleLeftRightIcon />}
+    arrow
+  >
+    Enable users to connect & converse with each other directly from their wallets
+  </Card>
+</Cards>
+
+## Tools
+
+To facilitate seamless interaction with its products, Liteflow offers a diverse toolkit ranging from user-friendly UI dashboard for comprehensive activity monitoring to advanced developer tools for deep customization.
+
+<Cards num="3">
+  <Card href="/tools/dashboard" title="Dashboard" icon={<ChartBarIcon />} arrow>
+    The dashboard is the main interface for managing your NFT marketplace. It
+    allows you to create and manage collections, monitor activity, and configure
+    your marketplace.
+  </Card>
+  <Card href="/tools/graphql-api" title="GraphQL API" icon={<LinkIcon />} arrow>
+    This is the main interface for interacting with the Liteflow infrastructure.
+    It allows you to query and manipulate data in your NFT marketplace.
+  </Card>
+  <Card href="/tools/webhook" title="Webhook" icon={<CommandLineIcon />} arrow>
+    Webhooks provide a way for your application to be notified of events
+    happening in your NFT marketplace. This is useful for triggering actions
+    based on specific events.
+  </Card>
+  <Card href="/tools/service" title="Service" icon={<CloudIcon />} arrow>
+    Services are the building blocks of your NFT platform. They encapsulate
+    business logic and can be used to tailor your product based on your business
+    model.
+  </Card>
+  <Card
+    href="/tools/sdk-core"
+    title="SDK Javascript"
+    icon={<CodeBracketIcon />}
+    arrow
+  >
+    This SDK provides a JavaScript interface for interacting with the Liteflow
+    infrastructure. It can be used in any JavaScript-based application.
+  </Card>
+  <Card
+    href="/tools/sdk-react"
+    title="SDK React"
+    icon={<CodeBracketSquareIcon />}
+    arrow
+  >
+    This SDK is specifically designed for React applications. It provides React
+    components and hooks for interacting with the Liteflow infrastructure.
+  </Card>
+</Cards>
+
+## Templates
+
+To simplify the adoption of Liteflow and ensure a quick go to market, Liteflow is proposing various templates that can be adopted by any Liteflow user.
+
+<Cards num="3">
+  <Card href="/templates/marketplace" title="Marketplace" arrow>
+    This is a pre-built application that showcases how to use the Liteflow
+    infrastructure. It can be used as a starting point for building your own NFT
+    marketplace.
+  </Card>
+  <Card href="/templates/chat" title="Chat" arrow>
+    This chat template is a pre-built application that showcases how to use the
+    wallet-to-wallet messaging feature. It can be used as a starting point for
+    building your own chat application.
+  </Card>
+</Cards>
+
+## Additional Resources
+
+<Cards num="2">
+  <Card
+    href="https://liteflow.canny.io/feedback"
+    title="Feedback"
+    arrow
+    icon={<MegaphoneIcon />}
+  />
+  <Card
+    href="https://liteflow.canny.io/changelog"
+    title="Changelog"
+    arrow
+    icon={<DocumentTextIcon />}
+  />
+  <Card
+    href="https://meetings.hubspot.com/aestebe"
+    title="Request a Demo"
+    arrow
+    icon={<GiftIcon />}
+  />
+  <Card
+    href="https://share.hsforms.com/1auOfCTXYSGSqjoNNpmjy1Acjga0"
+    title="Support"
+    arrow
+    icon={<LifebuoyIcon />}
+  />
+</Cards>
+
+</Bleed>

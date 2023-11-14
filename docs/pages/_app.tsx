@@ -1,9 +1,6 @@
-import { AppProps } from 'next/app'
-import 'nextra-theme-docs/style.css'
 import '../styles/app.css'
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+// This default export is required in a new `pages/_app.js` file.
+export default function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
-
-export default MyApp

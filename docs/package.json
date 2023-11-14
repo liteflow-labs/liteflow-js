@@ -8,6 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "graphiql": "^3.0.9",
+    "graphql": "^15.8.0",
     "next": "^13.5.4",
     "nextra": "^2.13.2",
     "nextra-theme-docs": "^2.13.2",

@@ -1,0 +1,77 @@
+---
+title: 'NFT Collections'
+---
+
+import { Card } from '../../components/Card'
+import { Cards, Steps } from 'nextra-theme-docs'
+
+# Collection & NFT Minting
+
+Liteflow empowers diverse NFT strategies with customizable collection creation and minting options. Benefit from our support for public open editions, exclusive private collections, external collection integration, and lazy minting to optimize gas fees.
+
+## Features
+
+<Cards num={3}>
+  <Card title="Open Edition Collections">
+    Facilitate user-generated content and community engagement with unlimited
+    NFT minting.
+  </Card>
+  <Card title="Private Collections">
+    Maintain exclusive control over NFT minting, similar to a private online
+    storefront.
+  </Card>
+  <Card title="External Collections">
+    Easily import & incorporate external collections like PFPs, games, and
+    memberships.
+  </Card>
+  <Card title="Drops">
+    Enable users to participate in NFT drops, sparking initial sales and
+    engagement.
+  </Card>
+  <Card title="Ownership Standards">
+    Choose between ERC721 or ERC1155 standards to match your collection’s needs.
+  </Card>
+  <Card title="Lazy Minting">
+    Mint NFTs only upon sale to efficiently manage costs.
+  </Card>
+</Cards>
+
+## Select Your NFT Collection Type
+
+### Collection Types
+
+**Open Edition**:
+Ideal for UGC, these collections impose no cap on NFT supply, offering freedom for user minting and metadata customization. Less suitable for controlled NFT issuance and metadata management.
+
+**Private Collection**:
+Best for NFT-based e-commerce with full control over metadata and issuance. Not designed for user-minting scenarios.
+
+### Ownership Standards
+
+**ERC721**:
+For unique, singularly-owned NFTs, creating distinct value and rarity.
+
+**ERC1155**:
+For NFTs with shared ownership, perfect for memberships or game items where multiple copies are beneficial.
+
+## How to Use It
+
+<Steps>
+
+### Collection Creation
+
+From the [dashboard](/tools/dashboard), select and tailor your collection type from open edition to private collection.
+
+### Public Minting
+
+Enable public minting of open editions through the integrated minter in our [marketplace template](/templates/marketplace), [API](/tools/graphql-api), or [SDK](/tools/sdk-core).
+
+### Private Collection Minting
+
+Mint NFTs for your private collection using the minter in the [dashboard](/tools/dashboard).
+
+### Drops Implementation
+
+Set up a drop via the [dashboard](/tools/dashboard) to allow users to mint a predefined number of NFTs through custom rules, available through the [marketplace template](/templates/marketplace).
+
+</Steps>
