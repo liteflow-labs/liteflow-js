@@ -4,9 +4,7 @@ query FetchOffer($offerId: UUID!) {
     type
     makerAddress
     takerAddress
-    createdAt
     expiredAt
-    orderHash
     unitPrice
     availableQuantity
     asset {
