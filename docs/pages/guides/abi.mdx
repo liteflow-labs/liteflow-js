@@ -1,0 +1,72 @@
+---
+title: 'Understanding Application Binary Interfaces (ABI) in Smart Contracts'
+---
+
+# Understanding Application Binary Interfaces (ABI) in Smart Contracts
+
+## What is an ABI?
+
+An Application Binary Interface (ABI) is a set of rules and descriptions that define how to interact with binary program functions or structures in a machine-readable format. In the context of smart contracts, particularly those on blockchain platforms like Ethereum, the ABI is a critical component that enables external applications and services, like the Liteflow dashboard, to interact with the smart contract.
+
+## Role of ABI in Smart Contracts
+
+The ABI details the methods and structures of the smart contract, allowing applications to understand how to:
+
+- Invoke functions within the contract.
+- Format the data to send to these functions.
+- Interpret the data received from these functions.
+- When you create a new drop in Liteflow, you need to connect your smart contract's ABI to the drop system. This connection ensures that when a drop is executed, Liteflow can accurately call the smart contract's functions, such as minting NFTs, and handle the interactions as intended by the smart contract's design.
+
+## How to Obtain and Use the ABI
+
+The ABI is typically generated when a smart contract is compiled. It is a JSON array that contains objects describing the name of the function, the types of inputs and outputs, and other details necessary for the function's execution.
+
+Here's an example of what part of an ABI might look like for a mint function:
+
+```json
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "name": "quantity",
+        "type": "uint256"
+      }
+    ],
+    "name": "mint",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]
+```
+
+## Retrieving ABI for Non-Creators
+
+If you are not the creator of the smart contract or do not have the ABI readily available, you can still retrieve it through various methods:
+
+- **Etherscan**: For contracts deployed on Ethereum, you can find the ABI on Etherscan by searching for the contract address and accessing the "Contract" tab. If the contract is verified, Etherscan will display the ABI in the "Code" section.
+- **Blockchain Explorers**: Similar to Etherscan, other blockchains have their own explorers. For verified contracts, the ABI is typically available in the contract's details page.
+- **Ask the Creator**: If the contract is not verified, or you're unsure of its status, reaching out directly to the contract creator or team is a viable option. They can provide the ABI if it's available for public use.
+
+Remember, you'll need the ABI to interact with the smart contract's functions properly, so it's important to obtain it from a reliable source.
+
+## Connecting ABI to Liteflow's Drop System
+
+To connect your ABI to Liteflow's drop system:
+
+1. In the drop creation form, you'll see a field labeled 'ABI of the smart contract'.
+2. Use the 'Connect ABI' button to upload the JSON file containing your smart contract's ABI.
+
+## Considerations for ABI in Liteflow
+
+- Ensure that your ABI is up-to-date with the latest version of your smart contract.
+- Verify that the ABI aligns with the functions you want to execute during the drop, such as mint functions.
+- If your smart contract is updated, remember to update the ABI in Liteflow's dashboard to reflect these changes.
+
+By correctly integrating your smart contract's ABI with the Liteflow drop system, you enable the dashboard to communicate effectively with your smart contract, ensuring that the drop process operates smoothly and as expected.
