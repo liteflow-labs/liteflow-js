@@ -1,39 +1,60 @@
 ---
-title: 'Create a Drop'
+title: 'Setting Up a Drop'
 ---
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout, Steps } from 'nextra-theme-docs'
 
-# Create a drop
+# Guide to Setting Up a Drop
 
-To create a drop you will need to have a collection deployed and connect this collection to the drop system in the [dashboard](https://dashboard.liteflow.com/drops/new).
+## Introduction
 
-## Smart contract requirements
+Liteflow's drop system is designed to integrate seamlessly with your deployed collections, allowing you to manage and execute drops directly from the dashboard. This guide will walk you through the process of creating a drop, detailing the smart contract requirements and functions needed.
 
-The Liteflow Infrastructure requires the smart contract to implement at least a mint function and an optional minted function with specific inputs and outputs.
+## Prerequisites
 
-### Mint function
+Before creating a drop, ensure you have:
 
-This function will be called by the user. It must mint and transfer the token to the user.
+- A deployed collection ready to be connected to the drop system.
+- A Liteflow account with access to the [dashboard](https://dashboard.liteflow.com).
 
-The function must be `payable` for paid mint and can have up to two arguments:
+## Creating a Drop
 
-| Type                                                              | Description                                   |
-| :---------------------------------------------------------------- | :-------------------------------------------- |
-| `int` (`int8`, ..., `int256`) or `uint` (`uint8`, ..., `uint256`) | Number of token to mint                       |
-| `address`                                                         | Optional. Address that will receive the token |
+Navigate to the [New drop](https://dashboard.liteflow.com/drops/new) section in your Liteflow dashboard and follow these steps:
 
-The `int` and `address` arguments are not required but is strongly advised. If the function doesn't implement it, it will be omitted when generating the user transaction.
+<Steps>
 
-Here is examples of compatible function:
+### Select a Collection
 
-```solidity
-function mint(address to, uint256 quantity) public payable
-function mint(uint256 quantity, address to) public payable
-function freeMint() public
-function mintWithERC20() public
-function mintToMsgSender(uint8 numberToMint) public payable
-```
+Choose a deployed collection from the list.
+If your collection is not listed, import it by following the provided link.
+
+### Set the Drop Details
+
+During this phase, you'll establish the specifics of your NFT drop:
+
+**Drop Title**: Choose a distinctive and relevant title that will be visible to users and serve as the identifier for your drop within the dashboard. e.g. 'Public Sale', 'Early Access', 'Founder's Drop'
+
+**Mint price per unit**: Set the price for each NFT minted during the drop. This price can be set in the native token of the blockchain (eg: ETH). e.g. 0.1 ETH
+
+**Start Date and End Date**: Schedule the opening and closing of your drop, defining the timeframe during which the NFTs can be minted. e.g. 01/01/2024 - 01/02/2024 for a month-long drop.
+
+**ABI of the Smart Contract**: Upload the ABI JSON file, which is vital for allowing Liteflow to call the correct functions within your smart contract. For more information on ABIs, see [Understanding Application Binary Interfaces (ABI) in Smart Contracts](/guides/abi).
+
+**Mint Function**: Specify the mint function from your smart contract that Liteflow will use, ensuring it aligns with the intended minting process for your drop. For more information on mint functions, see [Smart Contract Requirements](#smart-contract-requirements).
+
+### Set the Drop Limits
+
+Configure the parameters that will govern the distribution of your NFTs:
+
+**Limited Supply**: Define the maximum number of NFTs available for minting to create exclusivity and scarcity for your drop.
+
+**Limited Mint per Wallet**: Set a cap on the number of NFTs a single wallet can mint to promote fair distribution among participants.
+
+**Allowlist**: Implement an allowlist to offer exclusive access to predefined users, enhancing control over your drop's audience.
+
+</Steps>
+
+## Smart Contract Requirements
 
 <Callout type="warning" emoji="⚠️">
 Liteflow Infrastructure **does not enforce any check on the blockchain** during the execution of the transaction.
@@ -43,46 +64,49 @@ necessary.
 
 </Callout>
 
-### Minted function
+### Mint Function
 
-This function must return the number of tokens minted by this drop.
+The smart contract must have a mint function with the following characteristics:
 
-The function must be a `view`, have no `inputs`, and must return a unique output of type `int` or `uint`.
+- **Payable**: The function must accept payments if the mint has a fee.
+- **Arguments**:
+  - Quantity: The number of tokens to mint (int/uint).
+  - Receiver Address: The wallet address that will receive the tokens (optional).
 
-Here is examples of compatible function:
-
-```solidity
-function mintCounter() view returns (uint8)
-function totalSupply() view returns (uint256)
-```
-
-If you plan to do only one public drop, then the function `totalSupply() view returns (uint256)` could be enough.
-
-<Callout type="warning" emoji="⚠️">
-This function is not required **but strongly advised** in order to display and properly calculate the remaining number of token that can be minted.
-
-If not set, the Liteflow Infrastructure will use the number of tokens created between the start date and the end date of the Drop which may result in inconsistencies.
-
-</Callout>
-
-### Minted by wallet function
-
-This function must return the number of tokens minted by a specific wallet during this drop.
-
-The function must be a `view`, have one `input` type `address`, and must return a unique output of type `int` or `uint`.
-
-Here is examples of compatible function:
+**Examples of compatible mint functions:**
 
 ```solidity
-function mintByWalletCounter(address minter) view returns (uint8)
-function balanceOf(address owner) view returns (uint256)
+function mint(address to, uint256 quantity) public payable;
+function mint(uint256 quantity, address to) public payable;
+function freeMint() public;
+function mintWithERC20() public;
+function mintToMsgSender(uint8 numberToMint) public payable;
 ```
 
-If you plan to do only one public drop, then the function `balanceOf(address owner) view returns (uint256)` could be enough.
+### Minted Function
 
-<Callout type="warning" emoji="⚠️">
-This function is not required **but strongly advised** in order to display and properly calculate the remaining number of token that can be minted.
+Optional but recommended, this view function should return the total number of tokens minted by the drop:
 
-If not set, the Liteflow Infrastructure will use the number of tokens created between the start date and the end date of the Drop which may result in inconsistencies.
+```solidity
+function mintCounter() view returns (uint8);
+function totalSupply() view returns (uint256);
+```
 
-</Callout>
+### Minted by Wallet Function
+
+Optional but recommended, this view function should return the number of tokens a specific wallet has minted during the drop:
+
+```solidity
+function mintByWalletCounter(address minter) view returns (uint8);
+function balanceOf(address owner) view returns (uint256);
+```
+
+## Best Practices and Additional Notes
+
+- Ensure that your smart contract includes the necessary checks and balances as Liteflow does not enforce checks on the blockchain during the transaction.
+- Properly implement the minted functions to avoid inconsistencies in the display and calculation of the remaining tokens.
+- Use view functions to provide real-time data without incurring transaction costs.
+
+## Conclusion
+
+By following these guidelines, you can effectively set up a drop in Liteflow, leveraging smart contract functionality to manage your NFT sales with precision and control.
