@@ -2,11 +2,11 @@
 title: 'Setting Up Platform Fees'
 ---
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout, Steps } from 'nextra-theme-docs'
 
 # Setting Up Platform Fees
 
-Implementing the right platform fee structure is pivotal for the sustainability and profitability of your marketplace. Liteflow simplifies this with a range of customizable fee plugins.
+Implementing the right platform fee structure is pivotal for the sustainability and profitability of your marketplace. Liteflow simplifies this with a range of customizable fee plugins. Note that plugins are mutually exclusive; only one can be active at any given time.
 
 <Callout>
   When selecting a fee plugin, it's important to consider when and how fees will
@@ -14,37 +14,74 @@ Implementing the right platform fee structure is pivotal for the sustainability 
   of offer creation, ensuring transparency and consistency for users.
 </Callout>
 
-## Standard Fee Plugins
+<Callout>
+  Before deploying any new fee structure, be aware that it will apply only to
+  newly created offers. Existing offers will not be affected, ensuring that
+  users are not impacted by changes to the fee structure without prior notice.
+</Callout>
 
-Liteflow's standard fee plugins offer ready-to-use solutions for applying transaction fees on your platform, catering to various business models:
+## Steps to Activate Standard Fee Plugins
 
-- **Percentage Fee**: A dynamic fee structure that calculates fees as a percentage of the transaction value. Ideal for sales where the transaction amounts vary significantly.
-- **Split Fee**: This plugin enables the distribution of collected fees between multiple parties, such as creators, developers, and the platform itself, streamlining revenue-sharing agreements.
-- **Fixed Fee**: Best suited for platforms with uniform service offerings, this plugin applies a flat fee to all transactions, providing simplicity and predictability for users.
+Liteflow's standard fee plugins offer ready-to-use solutions for applying transaction fees on your platform, suitable for a variety of business models.
 
-Each of these plugins can be easily activated from the Liteflow dashboard, allowing for quick integration into your platform's financial workflow.
+<Steps>
+
+### Access Plugins
+
+Navigate to [Plugins](https://dashboard.liteflow.com/settings/plugins) in the dashboard.
+
+### Activate Plugin
+
+Select the 'Activate' button next to the desired plugin. Options include:
+
+- **Percentage Fee**: A dynamic fee structure calculating fees as a percentage of the transaction value. Ideal for variable sales amounts.
+- **Split Fee**: Enables fee distribution among multiple parties, such as creators, developers, and the platform, facilitating revenue-sharing.
+- **Fixed Fee**: Applies a consistent fee to all transactions, ideal for platforms with standardized service offerings.
+
+### Set Up Plugin Details
+
+Configure the necessary details for the chosen plugin and click 'Save changes'.
+
+</Steps>
 
 ## Creating Custom Fee Plugins
 
-Custom fee structures can offer a competitive edge by aligning with user behaviors and preferences.
-
-1. **Access Plugins**: Go to 'Plugins' from the dashboard.
-2. **Initiate Plugin Creation**: Click 'Create plugin' to start.
+If standard plugins don't meet your specific needs, Liteflow allows for the creation of custom fee plugins for greater flexibility.
 
 ### Examples of Custom Fees
 
-- **Staking-Based Discounts**: Users with staked tokens receive reduced fees.
-- **Activity-Based Discounts**: More active users benefit from lower fees.
-- **Time-Based Fees**: "Happy hours" with discounted fees.
-- **Loyalty Rewards**: Transactions earn points that reduce future fees.
-- **Tiered Fee Structure**: Different fee levels based on user subscription or status.
+- **Staking-Based Discounts**: Reduced fees for users staking platform tokens.
+- **Activity-Based Discounts**: Lower fees for frequent platform users.
+- **Time-Based Fees**: Special fee rates during selected hours, like "Happy hours".
+- **Loyalty Rewards**: Fee discounts for transactions that accumulate reward points.
+- **Tiered Fee Structure**: Varied fee levels based on user subscription tiers or status.
 
-3. **Set Up Plugin Details**: Provide the endpoint URL and select the relevant event type.
+Custom fee structures align with unique user behaviors and platform preferences.
 
-4. **Deploy and Test**: Implement your fee logic and test to ensure functionality.
+<Steps>
 
-## Integrating Custom Logic
+### Access Plugins
 
-Incorporate smart contract interactions and external APIs for dynamic fee calculations, enhancing the platform's adaptability to user activity and market conditions.
+Visit [Plugins](https://dashboard.liteflow.com/settings/plugins) in the dashboard.
 
-By creatively configuring fees, you can encourage user engagement and sustain platform growth.
+### Initiate Plugin Creation
+
+Start creating a custom plugin at [Create plugin](https://dashboard.liteflow.com/developer/plugins/create).
+
+### Develop Plugin
+
+Design a plugin that uses smart contract interactions and external APIs for dynamic fee adjustments, adapting to user activities and market conditions.
+
+Create and deploy a cloud function for the [`CALCULATE_ORDER_FEES`](/tools/service/CALCULATE_ORDER_FEES) service.
+
+**Note:** The endpoint URL must be publicly accessible.
+
+### Set Up Plugin Details
+
+Provide the endpoint URL and choose the [`CALCULATE_ORDER_FEES`](/tools/service/CALCULATE_ORDER_FEES) type.
+
+**Note:** Ensure no other fee plugins are active during this setup.
+
+</Steps>
+
+Your custom fee plugin is now ready and will apply to all new offers, adding a unique edge to your platform's fee structure.
