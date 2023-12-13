@@ -6,6 +6,7 @@ import type { State as AcceptAuctionHighestBidState } from './acceptAuctionHighe
 import { acceptAuctionHighestBid } from './acceptAuctionHighestBid'
 import type { State as AcceptOfferState } from './acceptOffer'
 import { acceptOffer } from './acceptOffer'
+import { batchPurchase } from './batchPurchase'
 import type { State as CancelOfferState } from './cancelOffer'
 import { cancelOffer } from './cancelOffer'
 import type { Auction } from './createAuction'
@@ -114,6 +115,22 @@ export class Exchange {
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
     return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
+  }
+
+  /**
+   * Accept multiple listings
+   * The signer should already have approved the transfer of the tokens otherwise the transaction will fail
+   * @param {Array<{ listingId: UUID, quantity: Uint256 }>} purchases - The listings to accept
+   * @param {Signer} signer - The signer to use to accept the listings
+   * @param {(state: AcceptOfferState) => void} onProgress - Callback to track the acceptance progress
+   * @returns {Promise<UUID[]>} The IDs of the accepted listings
+   */
+  async batchPurchase(
+    purchases: { listingId: UUID; quantity: Uint256 }[],
+    signer: Signer,
+    onProgress?: (state: AcceptOfferState) => void,
+  ): Promise<UUID[]> {
+    return batchPurchase(this.sdk, purchases, signer, onProgress)
   }
 
   /**
