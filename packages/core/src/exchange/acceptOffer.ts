@@ -3,12 +3,13 @@ import type { Signer } from 'ethers'
 import { BigNumber } from 'ethers'
 import { invariant } from 'ts-invariant'
 import type { FetchOfferQuery, Sdk } from '../graphql'
-import type { Address, IState, TransactionHash, UUID, Uint256 } from '../types'
+import type { IState, TransactionHash, UUID, Uint256 } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 import { approveCollection } from './approveCollection'
 import { approveCurrency } from './approveCurrency'
 import { checkOwnership, pollOwnership } from './offerQuantityChanges'
+import { checkOfferValidity } from './utils'
 
 export type State =
   | IState<'OFFER_VALIDITY', {}>
@@ -17,30 +18,6 @@ export type State =
   | IState<'TRANSACTION_SIGNATURE', {}>
   | IState<'TRANSACTION_PENDING', { txHash: TransactionHash }>
   | IState<'OWNERSHIP', {}>
-
-const checkOfferValidity = async (
-  offer: FetchOfferQuery['offer'],
-  taker: Address,
-) => {
-  invariant(offer)
-
-  if (offer.expiredAt && new Date(offer.expiredAt) < new Date())
-    throw new Error('Offer has expired')
-
-  if (BigNumber.from(offer.availableQuantity).isZero())
-    throw new Error('Offer is not available')
-
-  if (offer.takerAddress && toAddress(offer.takerAddress) !== taker)
-    throw new Error('Offer is not for you')
-
-  if (toAddress(offer.makerAddress) === toAddress(taker))
-    throw new Error('You can not accept your own offer')
-
-  // TODO: Check if the maker still has the asset
-  // TODO: Check if the maker has authorized the transfer
-
-  // Except front running, the offer should be valid at this point
-}
 
 const approveTransferTransaction = async (
   sdk: Sdk,
