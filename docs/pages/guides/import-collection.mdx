@@ -1,0 +1,71 @@
+---
+title: 'Importing a Collection'
+---
+
+import { Steps } from 'nextra-theme-docs'
+
+# Importing a Collection
+
+Importing your NFT collection into Liteflow is straightforward. Follow these steps to manage your NFTs within Liteflow's platform.
+
+## Steps to Import a Collection
+
+<Steps>
+
+### Access Collections
+
+Go to the ['Collections'](https://dashboard.liteflow.com/collections) section in your Liteflow dashboard.
+
+### Start Import
+
+Click on the 'Import' button to bring up the import modal.
+
+### Input Collection Information
+
+- `Chain`: Select the blockchain network of your collection (e.g., Ethereum Mainnet).
+- `Contract Address`: Input the address of your NFT collection's smart contract.
+- `Collection Name`: Name your collection as it should appear in your platform.
+- `Standard`: Specify the token standard, like ERC721 or ERC1155.
+- `Contract Creator`: This field is auto-populated when the contract address is recognized.
+- `Deployment Transaction Hash`: Automatically filled if the contract is verified, showing the contract's deployment transaction.
+
+### Finalize Import
+
+Confirm the details and click 'Import collection' to add it to your dashboard.
+
+</Steps>
+
+## Post-Import Process
+
+After successfully importing your collection into Liteflow, the system initiates an automatic synchronization process. Here's what happens:
+
+### On-Chain Activity Synchronization
+
+Liteflow's infrastructure will begin to import all on-chain activities associated with your collection. This includes:
+
+- **Trades**: Every transaction where your NFTs have been bought or sold.
+- **Transfers**: All instances where the NFTs have been moved between wallets.
+- **Mints**: The creation of new NFTs within the collection.
+- **Owners**: The current owner of each NFT in your collection.
+- **Royalties**: The royalty information associated with each NFT in your collection.
+
+### Off-chain Activity Synchronization
+
+Liteflow will also import all off-chain activities associated with your collection. This includes:
+
+- **Metadata**: The metadata associated with each NFT in your collection.
+- **Images**: The images associated with each NFT in your collection.
+- **Offers**: The offers associated with each NFT in your collection present on the major NFT marketplaces.
+
+### Timeframe for Synchronization
+
+The duration of this synchronization depends on two main factors:
+
+- **Size of the Collection**: Larger collections with more NFTs will take longer to fully synchronize.
+- **Age of the Collection**: Older collections with a long history of transactions will require more time for the system to backfill data.
+
+In average, the synchronization process takes between 15 to 30 minutes. However, it can take up to 24 hours for larger collections with a long history of transactions.
+
+## What to Expect
+
+During this period, you may notice incremental updates in your dashboard. The synchronization is designed to run in the background, allowing you to continue using Liteflow's other features without interruption. Once the import of on-chain activities is complete, you will have a comprehensive view of your collection's history and real-time status within the Liteflow ecosystem.

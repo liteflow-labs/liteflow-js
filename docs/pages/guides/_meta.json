@@ -1,10 +1,23 @@
 {
-  "setup-fees": "Setup your marketplace fees",
-  "setup-currencies": "Setup your marketplace currencies",
-  "import-collection": "Import a collection",
-  "open-edition": "Create an open edition collection",
-  "private-edition": "Create a private collection",
-  "create-nft": "Create an NFT",
-  "sell-nft": "Sell an NFT",
-  "drop": "Create a Drops"
+  "setup-fees": "Setting up platform fees",
+  "setup-currencies": "Setting up currencies",
+  "import-collection": "Importing a collection",
+  "drop": "Setting up a Drop",
+  "abi": "Understanding ABI",
+  "open-edition": {
+    "title": "Create an open edition collection",
+    "display": "hidden"
+  },
+  "private-edition": {
+    "title": "Create a private collection",
+    "display": "hidden"
+  },
+  "create-nft": {
+    "title": "Create an NFT",
+    "display": "hidden"
+  },
+  "sell-nft": {
+    "title": "Sell an NFT",
+    "display": "hidden"
+  }
 }
