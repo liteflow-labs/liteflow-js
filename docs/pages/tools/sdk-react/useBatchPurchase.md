@@ -21,11 +21,11 @@ export default function Component() {
   const handleClick = async () => {
     await batchPurchase([
       {
-        offerId: '66710e28-38d4-11ed-a261-0242ac120002', // ID of the offer
+        listingId: '66710e28-38d4-11ed-a261-0242ac120002', // ID of the offer
         quantity: BigNumber.from(1), // The quantity of NFT to accept. Must be 1 for erc721, must be inferior (partial fill) or equal to offer's quantity for erc1155.
       },
       {
-        offerId: '66710e28-38d4-11ed-a261-0242ac120003', // ID of the offer
+        listingId: '66710e28-38d4-11ed-a261-0242ac120003', // ID of the offer
         quantity: BigNumber.from(1), // The quantity of NFT to accept. Must be 1 for erc721, must be inferior (partial fill) or equal to offer's quantity for erc1155.
       },
     ])
@@ -69,16 +69,18 @@ useBatchPurchase(
 ]
 ```
 
-### acceptOffer
+### batchPurchase
 
-Function to accept an offer for an NFT.
+Function to accept multiple offers.
 
 Arguments:
 
 ```tsx
 (
-  offerId: string, // Id of the offer
-  quantity: BigNumberish, // Quantity of asset to accept. Use BigNumber
+  purchases: {
+    listingId: string, // Id of the offer
+    quantity: BigNumberish, // Quantity of asset to accept. Use BigNumber
+  }[]
 )
 ```
 
