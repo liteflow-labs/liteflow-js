@@ -13,6 +13,7 @@
   },
   "useCreateOffer": "useCreateOffer",
   "useAcceptOffer": "useAcceptOffer",
+  "useBatchPurchase": "useBatchPurchase",
   "useCreateAuction": "useCreateAuction",
   "useAcceptAuction": "useAcceptAuction",
   "useCancelOffer": "useCancelOffer",

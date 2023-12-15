@@ -82,6 +82,19 @@ async buyToken(
 ): Promise<UUID>
 ```
 
+### batchPurchase
+
+This method allows you to purchase multiple listing.
+**Note:** The signer should already have approved the transfer of the tokens otherwise the transaction will fail.
+
+```ts
+async batchPurchase(
+  purchases: { listingId: UUID; quantity: Uint256 }[],
+  signer: Signer,
+  onProgress?: (state: AcceptOfferState) => void,
+): Promise<UUID>
+```
+
 ### createAuction
 
 This method allows you to create an auction.
