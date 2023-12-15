@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0
+
+### Minor Changes
+
+- [#202](https://github.com/liteflow-labs/liteflow-js/pull/202) [`426e3fd`](https://github.com/liteflow-labs/liteflow-js/commit/426e3fd1a4b1da27a789046cf5ca0b823e8dcb22) Thanks [@antho1404](https://github.com/antho1404)! - Add batch purchase feature to purchase multiple offers in a single transaction
+
+### Patch Changes
+
+- Updated dependencies [[`426e3fd`](https://github.com/liteflow-labs/liteflow-js/commit/426e3fd1a4b1da27a789046cf5ca0b823e8dcb22), [`69b5307`](https://github.com/liteflow-labs/liteflow-js/commit/69b5307f4a7f1b63ca106ce9059dc8501d65473f)]:
+  - @liteflow/core@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes
