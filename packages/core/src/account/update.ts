@@ -29,8 +29,8 @@ export async function update(
   const address = await signer.getAddress()
 
   const [image, cover] = await Promise.all([
-    uploader.publicUpload(account.image),
-    uploader.publicUpload(account.cover),
+    uploader.upload(account.image),
+    uploader.upload(account.cover),
   ])
 
   const { updateAccount } = await sdk.UpdateAccount({
