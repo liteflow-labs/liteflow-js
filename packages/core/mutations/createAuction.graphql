@@ -1,7 +1,0 @@
-mutation CreateAuction($createAuctionInput: AuctionInput!) {
-  createAuction(input: { auction: $createAuctionInput }) {
-    auction {
-      id
-    }
-  }
-}

@@ -4,7 +4,7 @@ title: 'Exchange'
 
 # Exchange
 
-The `Exchange` module provides a set of methods to interact with the marketplace. It allows you to place bids, list tokens for sale, cancel bids or listings, accept bids, buy tokens, create auctions, and accept the highest bid on an auction.
+The `Exchange` module provides a set of methods to interact with the marketplace. It allows you to place bids, list tokens for sale, cancel bids or listings, accept bids, and buy tokens.
 
 ## Methods
 
@@ -92,30 +92,6 @@ async batchPurchase(
   purchases: { listingId: UUID; quantity: Uint256 }[],
   signer: Signer,
   onProgress?: (state: AcceptOfferState) => void,
-): Promise<UUID>
-```
-
-### createAuction
-
-This method allows you to create an auction.
-
-```ts
-async createAuction(
-  auction: Auction,
-  signer: Signer,
-  onProgress?: (state: ListTokenState) => void,
-): Promise<UUID>
-```
-
-### acceptAuctionHighestBid
-
-This method allows you to accept the highest bid on an auction.
-
-```ts
-async acceptAuctionHighestBid(
-  auctionId: UUID,
-  signer: Signer,
-  onProgress?: (state: AcceptAuctionHighestBidState) => void,
 ): Promise<UUID>
 ```
 

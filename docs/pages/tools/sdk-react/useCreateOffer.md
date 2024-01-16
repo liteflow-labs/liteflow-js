@@ -77,7 +77,6 @@ useCreateOffer(
     }
     taker?: Address
     expiredAt?: Date
-    auctionId?: UUID
     metadata?: Record<string, unknown>
   }) => Promise<string>, // createOffer. function to create an Offer
   {
@@ -105,8 +104,7 @@ Arguments `createOfferFn`:
     currency: Address | null,   // Currency address, set `null` for native token
   },
   taker?: Taker,      // Optional, wallet address of the offer's receiver. This allows to create an offer that only a specific wallet can accept.
-  expiredAt?: Date,   // Optional date at which the offer expired. If not set, the API will enforce one. If offer is on an auction, this date is always set by the API.
-  auctionId?: UUID    // Optional, Id of the auction to create the offer on.
+  expiredAt?: Date,   // Optional date at which the offer expired. If not set, the API will enforce one.
   metadata?: Record<string, unknown>  // Optional, payload to save alongside the offer
 }
 ```

@@ -2,15 +2,11 @@ import type { Signer } from 'ethers'
 import invariant from 'ts-invariant'
 import type { FetchOfferQuery, Sdk } from '../graphql'
 import type { UUID, Uint256 } from '../types'
-import type { State as AcceptAuctionHighestBidState } from './acceptAuctionHighestBid'
-import { acceptAuctionHighestBid } from './acceptAuctionHighestBid'
 import type { State as AcceptOfferState } from './acceptOffer'
 import { acceptOffer } from './acceptOffer'
 import { batchPurchase } from './batchPurchase'
 import type { State as CancelOfferState } from './cancelOffer'
 import { cancelOffer } from './cancelOffer'
-import type { Auction } from './createAuction'
-import { createAuction } from './createAuction'
 import type { State as ListTokenState, Listing } from './listToken'
 import { listToken } from './listToken'
 import type { Bid, State as PlaceBidState } from './placeBid'
@@ -131,36 +127,6 @@ export class Exchange {
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID[]> {
     return batchPurchase(this.sdk, purchases, signer, onProgress)
-  }
-
-  /**
-   * Create an auction
-   * @param {Auction} auction - The auction to create
-   * @param {Signer} signer - The signer to use to create the auction
-   * @param {(state: ListTokenState) => void} onProgress - Callback to track the auction creation progress
-   * @returns {Promise<UUID>} The ID of the created auction
-   */
-  async createAuction(
-    auction: Auction,
-    signer: Signer,
-    onProgress?: (state: ListTokenState) => void,
-  ): Promise<UUID> {
-    return createAuction(this.sdk, auction, signer, onProgress)
-  }
-
-  /**
-   * Accept the highest bid on an auction
-   * @param {UUID} auctionId - The auction to accept the highest bid on
-   * @param {Signer} signer - The signer to use to accept the highest bid
-   * @param {(state: AcceptAuctionHighestBidState) => void} onProgress - Callback to track the acceptance progress
-   * @returns {Promise<UUID>} The ID of the accepted bid
-   */
-  async acceptAuctionHighestBid(
-    auctionId: UUID,
-    signer: Signer,
-    onProgress?: (state: AcceptAuctionHighestBidState) => void,
-  ): Promise<UUID> {
-    return acceptAuctionHighestBid(this.sdk, auctionId, signer, onProgress)
   }
 
   // Low level API to retrieve an offer
