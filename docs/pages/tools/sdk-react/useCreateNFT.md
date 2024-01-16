@@ -121,7 +121,7 @@ Arguments:
     attributes?: { traitType: string, value: string }[]   // The attributes of the asset
     media: {
       content: File           // Content for the asset
-      preview?: File,         // Preview of the asset (if the content is private or an animation)
+      preview?: File,         // Preview of the asset (if the content is an animation)
       isAnimation: boolean,   // Set the content as animation
     }
   }
