@@ -27,7 +27,7 @@ export class Client {
   private readonly uploader: Uploader
 
   /**
-   * Exchange module to interact with the exchange and manage listings, bids and auctions
+   * Exchange module to interact with the exchange and manage listings and bids
    * @type {Exchange}
    */
   public readonly exchange: Exchange

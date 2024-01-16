@@ -70,12 +70,6 @@ export type Bid = {
   expiredAt?: Date
 
   /**
-   * The auction id of the bid
-   * @type UUID
-   */
-  auctionId?: UUID
-
-  /**
    * The metadata associated to the bid
    * @type Record<string, unknown>
    */
@@ -92,7 +86,6 @@ export async function placeBid(
     quantity,
     taker,
     expiredAt,
-    auctionId,
     metadata,
   }: Bid,
   signer: Signer,
@@ -109,7 +102,6 @@ export async function placeBid(
     quantity: BigNumber.from(quantity || '1').toString(),
     takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : null,
-    auctionId: auctionId,
     metadata: metadata,
   }
 
