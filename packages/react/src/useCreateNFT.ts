@@ -29,7 +29,6 @@ type createNftFn = (
         content: File
         preview?: File
         isAnimation: boolean
-        isPrivate: boolean
       }
     }
   },
@@ -56,21 +55,14 @@ export default function useCreateNFT(
       content,
       preview,
       isAnimation,
-      isPrivate,
     }: {
       content: File
       preview?: File
       isAnimation: boolean
-      isPrivate: boolean
     }): Promise<{
       image: File
       animationUrl?: File
-      unlockableContent?: File
     }> => {
-      if (isPrivate) {
-        invariant(preview, ErrorMessages.MINT_UNLOCKABLE_CONTENT_PREVIEW)
-        return { image: preview, unlockableContent: content }
-      }
       if (isAnimation) {
         invariant(preview, ErrorMessages.MINT_ANIMATION_PREVIEW)
         return { image: preview, animationUrl: content }

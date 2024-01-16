@@ -4,7 +4,6 @@ export enum ErrorMessages {
   OFFER_NOT_FOUND = 'Offer not found',
   OFFER_CREATION_FAILED = 'Offer creation failed',
 
-  MINT_UNLOCKABLE_CONTENT_PREVIEW = 'Preview is required for private content',
   MINT_ANIMATION_PREVIEW = 'Preview is required for animations content',
   MINT_SIGNATURE_GENERATION = 'Error while creating the lazy minted asset signature',
 
