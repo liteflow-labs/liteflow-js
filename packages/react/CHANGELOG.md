@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.1
+
+### Patch Changes
+
+- [#212](https://github.com/liteflow-labs/liteflow-js/pull/212) [`2e5cecf`](https://github.com/liteflow-labs/liteflow-js/commit/2e5cecf1acb9d9585a8b4a7ace8137c7d33ed2c0) Thanks [@antho1404](https://github.com/antho1404)! - Add missing graphql-tag dependency
+
+- [#214](https://github.com/liteflow-labs/liteflow-js/pull/214) [`64268de`](https://github.com/liteflow-labs/liteflow-js/commit/64268de6b2e19047bcd48f0510bfc2a9c54455e0) Thanks [@antho1404](https://github.com/antho1404)! - Fix invalid event sent when accepting an offer or doing a batch purchase
+
+- Updated dependencies [[`2e5cecf`](https://github.com/liteflow-labs/liteflow-js/commit/2e5cecf1acb9d9585a8b4a7ace8137c7d33ed2c0)]:
+  - @liteflow/core@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes
