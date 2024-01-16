@@ -61,7 +61,7 @@ useUpdateAccount(
 
 ### updateAccount
 
-Function to accept an auction for an NFT. All arguments are optional. It returns the updated account's address.
+Function to update the user's account
 
 Arguments `AccountInput`:
 
