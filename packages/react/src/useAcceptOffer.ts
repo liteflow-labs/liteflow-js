@@ -43,7 +43,7 @@ export default function useAcceptOffer(signer: Signer | undefined): [
           break
         }
         case 'TRANSACTION_SIGNATURE': {
-          setActiveProcess(AcceptOfferStep.TRANSACTION_PENDING)
+          setActiveProcess(AcceptOfferStep.TRANSACTION_SIGNATURE)
           break
         }
         case 'TRANSACTION_PENDING': {

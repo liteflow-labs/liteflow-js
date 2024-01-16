@@ -34,7 +34,7 @@ export default function useBatchPurchase(signer: Signer | undefined): [
     (state) => {
       switch (state.type) {
         case 'TRANSACTION_SIGNATURE': {
-          setActiveProcess(BatchPurchaseStep.TRANSACTION_PENDING)
+          setActiveProcess(BatchPurchaseStep.TRANSACTION_SIGNATURE)
           break
         }
         case 'TRANSACTION_PENDING': {
