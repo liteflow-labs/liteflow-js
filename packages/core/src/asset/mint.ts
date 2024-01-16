@@ -29,10 +29,9 @@ export async function mint(
   const account = await signer.getAddress()
 
   onProgress?.({ type: 'UPLOAD', payload: {} })
-  const [image, animationUrl, unlockableContent] = await Promise.all([
-    uploader.publicUpload(asset.metadata.image),
-    uploader.publicUpload(asset.metadata.animationUrl),
-    uploader.privateUpload(asset.metadata.unlockableContent),
+  const [image, animationUrl] = await Promise.all([
+    uploader.upload(asset.metadata.image),
+    uploader.upload(asset.metadata.animationUrl),
   ])
 
   invariant(image, 'Image is required')
@@ -51,7 +50,6 @@ export async function mint(
       name: asset.metadata.name,
       image,
       animationUrl,
-      unlockableContent,
       attributes: asset.metadata.attributes || [],
     },
   })

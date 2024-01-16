@@ -57,12 +57,6 @@ export type Asset = {
     animationUrl?: File | URL
 
     /**
-     * The unlockable content of the asset. This will be encrypted and only the owner of the asset will be able to decrypt it
-     * @type File | URL
-     */
-    unlockableContent?: File | URL
-
-    /**
      * The attributes of the asset
      * @type { traitType: string; value: string }[]
      * @default []

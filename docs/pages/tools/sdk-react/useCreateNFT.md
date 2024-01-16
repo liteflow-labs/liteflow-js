@@ -34,9 +34,8 @@ export default function Component() {
           ], // Array of traits associated to the NFT
           media: {
             content: azukiImage, // content file uploaded by the user
-            preview: azukiImagePreview, // preview in the case of private or animation content uploaded by user
+            preview: azukiImagePreview, // preview in the case of animation content
             isAnimation: false, // set to true if content file is a video. Require to set preview
-            isPrivate: false, // set to true if content is private. Require to set preview.
           },
         },
       },
@@ -94,7 +93,6 @@ useCreateNFT(
         content: File
         preview?: File
         isAnimation: boolean
-        isPrivate: boolean
       }
     }
   }, lazymint: boolean) => Promise<string>, // createNFT function
@@ -123,9 +121,8 @@ Arguments:
     attributes?: { traitType: string, value: string }[]   // The attributes of the asset
     media: {
       content: File           // Content for the asset
-      preview?: File,         // Preview of the asset (if the content is private or an animation)
+      preview?: File,         // Preview of the asset (if the content is an animation)
       isAnimation: boolean,   // Set the content as animation
-      isPrivate: boolean,     // Set the content as private so only owners will be able to read it
     }
   }
 }
