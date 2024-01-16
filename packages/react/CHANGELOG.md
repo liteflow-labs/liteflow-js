@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.0
+
+### Major Changes
+
+- [#215](https://github.com/liteflow-labs/liteflow-js/pull/215) [`d6c7c60`](https://github.com/liteflow-labs/liteflow-js/commit/d6c7c608d713cf626f944676a882676193da6e9c) Thanks [@antho1404](https://github.com/antho1404)! - Remove auction system.
+
+- [#216](https://github.com/liteflow-labs/liteflow-js/pull/216) [`43247cc`](https://github.com/liteflow-labs/liteflow-js/commit/43247cca709e991cc0474c39bae149b9a1683fae) Thanks [@antho1404](https://github.com/antho1404)! - Remove unlockable content
+
+### Patch Changes
+
+- Updated dependencies [[`d6c7c60`](https://github.com/liteflow-labs/liteflow-js/commit/d6c7c608d713cf626f944676a882676193da6e9c), [`43247cc`](https://github.com/liteflow-labs/liteflow-js/commit/43247cca709e991cc0474c39bae149b9a1683fae)]:
+  - @liteflow/core@2.0.0
+
 ## 1.3.1
 
 ### Patch Changes
