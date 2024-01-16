@@ -1,10 +1,6 @@
 export enum ErrorMessages {
   SIGNER_FALSY = 'Signer falsy: Please login first',
 
-  AUCTION_NOT_FOUND = 'Auction not found',
-  AUCTION_RESERVER_NOT_MATCH = 'Reserve not match',
-  AUCTION_CREATION_FAILED = 'Auction creation failed',
-
   OFFER_NOT_FOUND = 'Offer not found',
   OFFER_CREATION_FAILED = 'Offer creation failed',
 

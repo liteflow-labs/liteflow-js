@@ -32,7 +32,6 @@ export default function useCreateOffer(
     unitPrice: PriceNative | PriceERC20
     taker?: Address
     expiredAt?: Date
-    auctionId?: UUID
     metadata?: Record<string, unknown>
   }) => Promise<string>,
   {
@@ -70,7 +69,6 @@ export default function useCreateOffer(
       unitPrice,
       expiredAt,
       taker,
-      auctionId,
       metadata,
     }: {
       type: OfferType
@@ -81,7 +79,6 @@ export default function useCreateOffer(
       unitPrice: PriceNative | PriceERC20
       taker?: Address
       expiredAt?: Date
-      auctionId?: UUID
       metadata?: Record<string, unknown>
     }): Promise<string> => {
       setActiveProcess(CreateOfferStep.INITIAL)
@@ -116,7 +113,6 @@ export default function useCreateOffer(
               taker,
               expiredAt,
               unitPrice,
-              auctionId,
               metadata,
             },
             signer,
