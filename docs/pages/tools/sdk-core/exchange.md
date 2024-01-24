@@ -91,7 +91,7 @@ This method allows you to purchase multiple listing.
 async batchPurchase(
   purchases: { listingId: UUID; quantity: Uint256 }[],
   signer: Signer,
-  onProgress?: (state: BatchPurchaseState) => void,
+  onProgress?: (state: AcceptOfferState) => void,
 ): Promise<UUID>
 ```
 
