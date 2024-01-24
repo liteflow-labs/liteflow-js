@@ -61,9 +61,9 @@ useBatchPurchase(
 
 ```tsx
 ;[
-  (purchases: { offerId: string; quantity: BigNumberish }[]) => Promise<void>, // batchPurchase function to accept an purchase multiple offers
+  (purchases: { offerId: string; quantity: BigNumberish }[]) => Promise<void>, // batchPurchase function to accept a purchase multiple offers
   {
-    activeStep: AcceptOfferStep, // returns different values depending on the current acceptation step
+    activeStep: BatchPurchaseStep, // returns different values depending on the current purchase step
     transactionHash: string | undefined, // returns the transaction hash after transaction has been placed on the blockchain
   },
 ]
