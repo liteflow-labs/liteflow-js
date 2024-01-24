@@ -1,6 +1,6 @@
 import useAcceptOffer, { AcceptOfferStep } from './useAcceptOffer'
 import useAuthenticate from './useAuthenticate'
-import useBatchPurchase from './useBatchPurchase'
+import useBatchPurchase, { BatchPurchaseStep } from './useBatchPurchase'
 import useCancelOffer, { CancelOfferStep } from './useCancelOffer'
 import useCreateNFT, { CreateNftStep } from './useCreateNFT'
 import useCreateOffer, { CreateOfferStep } from './useCreateOffer'
@@ -16,6 +16,7 @@ export type { LiteflowProviderProps } from './context'
 // Exchange
 export {
   AcceptOfferStep,
+  BatchPurchaseStep,
   CancelOfferStep,
   CreateOfferStep,
   useAcceptOffer,
