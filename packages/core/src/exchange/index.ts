@@ -4,7 +4,6 @@ import type { FetchOfferQuery, Sdk } from '../graphql'
 import type { UUID, Uint256 } from '../types'
 import type { State as AcceptOfferState } from './acceptOffer'
 import { acceptOffer } from './acceptOffer'
-import type { State as BatchPurchaseState } from './batchPurchase'
 import { batchPurchase } from './batchPurchase'
 import type { State as CancelOfferState } from './cancelOffer'
 import { cancelOffer } from './cancelOffer'
@@ -119,13 +118,13 @@ export class Exchange {
    * The signer should already have approved the transfer of the tokens otherwise the transaction will fail
    * @param {Array<{ listingId: UUID, quantity: Uint256 }>} purchases - The listings to accept
    * @param {Signer} signer - The signer to use to accept the listings
-   * @param {(state: BatchPurchaseState) => void} onProgress - Callback to track the purchase progress
+   * @param {(state: AcceptOfferState) => void} onProgress - Callback to track the acceptance progress
    * @returns {Promise<UUID[]>} The IDs of the accepted listings
    */
   async batchPurchase(
     purchases: { listingId: UUID; quantity: Uint256 }[],
     signer: Signer,
-    onProgress?: (state: BatchPurchaseState) => void,
+    onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID[]> {
     return batchPurchase(this.sdk, purchases, signer, onProgress)
   }
