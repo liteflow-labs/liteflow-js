@@ -16,16 +16,6 @@ gql`
 `
 
 gql`
-  mutation AcceptInvitation($id: UUID!) {
-    acceptInvitation(input: { id: $id }) {
-      invitation {
-        id
-      }
-    }
-  }
-`
-
-gql`
   query GetInvitation($address: Address!) {
     invitationByInvitedByAddress(invitedByAddress: $address) {
       id
@@ -33,15 +23,13 @@ gql`
   }
 `
 
-export default function useInvitation(signer: Signer | undefined): {
+export default function useCreateInvitation(signer: Signer | undefined): {
   create: () => Promise<string>
-  accept: (invitationId: string) => Promise<string>
-  accepting: boolean
   creating: boolean
 } {
   const { sdk } = useContext(LiteflowContext)
-  const [accepting, setAccepting] = useState(false)
   const [creating, setCreating] = useState(false)
+
   const create = useCallback(async () => {
     invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
@@ -63,24 +51,5 @@ export default function useInvitation(signer: Signer | undefined): {
     }
   }, [sdk, signer])
 
-  const accept = useCallback(
-    async (invitationId: string) => {
-      try {
-        setAccepting(true)
-        const { acceptInvitation } = await sdk.AcceptInvitation({
-          id: invitationId,
-        })
-        invariant(
-          acceptInvitation?.invitation,
-          ErrorMessages.INVITATION_NOT_FOUND,
-        )
-        return acceptInvitation.invitation.id
-      } finally {
-        setAccepting(false)
-      }
-    },
-    [sdk],
-  )
-
-  return { create, accept, accepting, creating }
+  return { create, creating }
 }
