@@ -18,13 +18,15 @@ export default function useAcceptInvitation(): {
   accept: (invitationId: string) => Promise<string>
   accepting: boolean
 } {
-  const { sdk } = useContext(LiteflowContext)
+  const { sdk, resetAuthenticationToken } = useContext(LiteflowContext)
   const [accepting, setAccepting] = useState(false)
 
   const accept = useCallback(
     async (invitationId: string) => {
       try {
         setAccepting(true)
+        // Ensure that there is no token in the context
+        resetAuthenticationToken()
         const { acceptInvitation } = await sdk.AcceptInvitation({
           id: invitationId,
         })
@@ -37,7 +39,7 @@ export default function useAcceptInvitation(): {
         setAccepting(false)
       }
     },
-    [sdk],
+    [resetAuthenticationToken, sdk],
   )
 
   return { accept, accepting }
