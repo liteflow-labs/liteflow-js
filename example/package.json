@@ -9,8 +9,8 @@
     "lint": "next lint && prettier \"**/*.{ts,tsx,json,md}\" --check"
   },
   "dependencies": {
-    "@liteflow/core": "file:../liteflow-core-1.3.0.tgz",
-    "@liteflow/react": "file:../liteflow-react-1.3.0.tgz",
+    "@liteflow/core": "file:../liteflow-core-2.0.0.tgz",
+    "@liteflow/react": "file:../liteflow-react-2.0.0.tgz",
     "ethers": "^5.7.2",
     "next": "^13.5.4",
     "react": "^18.2.0",
