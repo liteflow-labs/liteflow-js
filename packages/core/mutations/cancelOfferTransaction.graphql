@@ -1,7 +1,7 @@
 # This query should use the mutation `cancelOfferTransaction` to cancel an offer
-query OfferWithCancel($offerId: UUID!, $account: Address!) {
-  offer(id: $offerId) {
-    cancel(account: $account) {
+mutation CreateCancelOfferTransaction($offerId: String!, $account: Address!) {
+  createCancelOfferTransaction(offerId: $offerId, accountAddress: $account) {
+    transaction {
       ...Transaction
     }
   }

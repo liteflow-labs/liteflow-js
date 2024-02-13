@@ -16,14 +16,18 @@ export async function cancelOffer(
 ): Promise<UUID> {
   const address = await signer.getAddress()
 
-  const { offer } = await sdk.OfferWithCancel({
-    offerId,
-    account: toAddress(address),
-  })
-  if (!offer) throw new Error("Can't find offer")
+  const { createCancelOfferTransaction } =
+    await sdk.CreateCancelOfferTransaction({
+      offerId,
+      account: toAddress(address),
+    })
+  if (!createCancelOfferTransaction) throw new Error("Can't find offer")
 
   onProgress?.({ type: 'TRANSACTION_SIGNATURE', payload: {} })
-  const tx = await sendTransaction(signer, offer.cancel)
+  const tx = await sendTransaction(
+    signer,
+    createCancelOfferTransaction.transaction,
+  )
 
   onProgress?.({
     type: 'TRANSACTION_PENDING',
