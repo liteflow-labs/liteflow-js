@@ -12,14 +12,6 @@ export function toId(keys: (string | undefined | null)[]): string {
   return keys.filter(Boolean).join('-')
 }
 
-export function toAssetId(
-  chain: ChainId,
-  address: Address,
-  token: string,
-): string {
-  return toId([chain.toString(), address, token])
-}
-
 export function toCurrencyId(chain: ChainId, address: Address | null): string {
   return toId([chain.toString(), address])
 }
