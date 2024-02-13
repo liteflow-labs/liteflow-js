@@ -1,5 +1,4 @@
-query FetchOffer($offerId: UUID!) {
-  offer(id: $offerId) {
+fragment Offer on Offer {
     id
     type
     makerAddress
@@ -18,5 +17,4 @@ query FetchOffer($offerId: UUID!) {
       chainId
       address
     }
-  }
 }

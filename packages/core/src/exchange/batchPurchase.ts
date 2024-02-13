@@ -1,6 +1,6 @@
 import { BigNumber, type Signer } from 'ethers'
 import { invariant } from 'ts-invariant'
-import type { FetchOfferQuery, Sdk } from '../graphql'
+import type { FetchListingQuery, Sdk } from '../graphql'
 import type { IState, TransactionHash, UUID, Uint256 } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
@@ -22,12 +22,12 @@ export async function batchPurchase(
   const address = await signer.getAddress()
 
   const offersAndQuantities: {
-    offer: NonNullable<FetchOfferQuery['offer']>
+    offer: NonNullable<FetchListingQuery['listing']>
     quantity: Uint256
   }[] = []
   onProgress?.({ type: 'OFFER_VALIDITY', payload: {} })
   for (const { listingId, quantity } of purchases) {
-    const { offer } = await sdk.FetchOffer({ offerId: listingId })
+    const { listing: offer } = await sdk.FetchListing({ offerId: listingId })
     invariant(offer, "Can't find offer")
 
     await checkOfferValidity(offer, toAddress(address))

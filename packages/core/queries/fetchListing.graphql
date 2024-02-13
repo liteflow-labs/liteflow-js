@@ -1,0 +1,5 @@
+query FetchListing($offerId: UUID!) {
+  listing(id: $offerId) {
+    ...Offer
+  }
+}

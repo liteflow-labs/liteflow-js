@@ -2,7 +2,7 @@ import type { TransactionResponse } from '@ethersproject/abstract-provider'
 import type { Signer } from 'ethers'
 import { BigNumber } from 'ethers'
 import { invariant } from 'ts-invariant'
-import type { FetchOfferQuery, Sdk } from '../graphql'
+import type { OfferFragment, Sdk } from '../graphql'
 import type { IState, TransactionHash, UUID, Uint256 } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
@@ -21,7 +21,7 @@ export type State =
 
 const approveTransferTransaction = async (
   sdk: Sdk,
-  offer: FetchOfferQuery['offer'],
+  offer: OfferFragment,
   quantity: Uint256,
   signer: Signer,
 ): Promise<TransactionResponse | null> => {
@@ -57,8 +57,15 @@ export async function acceptOffer(
 ): Promise<UUID> {
   const address = await signer.getAddress()
 
-  const { offer } = await sdk.FetchOffer({ offerId })
-  invariant(offer, "Can't find offer")
+  let offer = undefined
+  const { listing } = await sdk.FetchListing({ offerId })
+  if (listing) {
+    offer = listing
+  } else {
+    const { openOffer } = await sdk.FetchOpenOffer({ offerId })
+    invariant(openOffer, "Can't find offer")
+    offer = openOffer
+  }
 
   onProgress?.({ type: 'OFFER_VALIDITY', payload: {} })
   await checkOfferValidity(offer, toAddress(address))
