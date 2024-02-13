@@ -2,4 +2,4 @@
 '@liteflow/react': major
 ---
 
-Change retun payload of createNFT function
+Change return payload of createNFT function
