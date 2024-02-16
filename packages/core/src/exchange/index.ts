@@ -94,7 +94,9 @@ export class Exchange {
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    return acceptOffer(this.sdk, bidId, quantity, signer, onProgress)
+    const { openOffer } = await this.sdk.FetchOpenOffer({ offerId: bidId })
+    invariant(openOffer, "Offer doesn't exist")
+    return acceptOffer(this.sdk, openOffer, quantity, signer, onProgress)
   }
 
   /**
@@ -111,7 +113,9 @@ export class Exchange {
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
+    const { listing } = await this.sdk.FetchListing({ offerId: listingId })
+    invariant(listing, 'Listing not found')
+    return acceptOffer(this.sdk, listing, quantity, signer, onProgress)
   }
 
   /**

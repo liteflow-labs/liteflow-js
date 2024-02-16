@@ -50,22 +50,12 @@ const approveTransferTransaction = async (
 
 export async function acceptOffer(
   sdk: Sdk,
-  offerId: UUID,
+  offer: OfferFragment,
   quantity: Uint256,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
   const address = await signer.getAddress()
-
-  let offer = undefined
-  const { listing } = await sdk.FetchListing({ offerId })
-  if (listing) {
-    offer = listing
-  } else {
-    const { openOffer } = await sdk.FetchOpenOffer({ offerId })
-    invariant(openOffer, "Can't find offer")
-    offer = openOffer
-  }
 
   onProgress?.({ type: 'OFFER_VALIDITY', payload: {} })
   await checkOfferValidity(offer, toAddress(address))
