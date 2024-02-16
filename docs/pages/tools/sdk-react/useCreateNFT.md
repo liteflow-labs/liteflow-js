@@ -19,7 +19,7 @@ export default function Component() {
 
   const handleClick = async () => {
     const isLazyMinted = true
-    await createNFT(
+    const { chain, collection, token } = await createNFT(
       {
         chain: 1, // chainId of the network to mint on
         collection: '0x0000', // address of the collection to use
@@ -95,7 +95,7 @@ useCreateNFT(
         isAnimation: boolean
       }
     }
-  }, lazymint: boolean) => Promise<string>, // createNFT function
+  }, lazymint: boolean) => Promise<{ chain: ChainId; collection: Address; token: string }>, // createNFT function
   {
     activeStep: CreateNftStep, // steps of the NFT creation process
     transactionHash: string | undefined // returns the transaction hash after transaction has been placed on the blockchain
