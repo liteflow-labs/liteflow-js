@@ -1,10 +1,10 @@
 import { BigNumber } from 'ethers'
-import type { FetchOfferQuery } from '../graphql'
+import type { OfferFragment } from '../graphql'
 import type { Address } from '../types'
 import { toAddress } from '../utils/convert'
 
 export const checkOfferValidity = async (
-  offer: NonNullable<FetchOfferQuery['offer']>,
+  offer: NonNullable<OfferFragment>,
   taker: Address,
 ) => {
   if (offer.expiredAt && new Date(offer.expiredAt) < new Date())

@@ -1,0 +1,5 @@
+query FetchOpenOffer($offerId: UUID!) {
+  openOffer(id: $offerId) {
+    ...Offer
+  }
+}

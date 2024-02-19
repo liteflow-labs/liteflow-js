@@ -1,6 +1,6 @@
 import type { Signer } from 'ethers'
 import invariant from 'ts-invariant'
-import type { FetchOfferQuery, Sdk } from '../graphql'
+import type { OfferFragment, Sdk } from '../graphql'
 import type { UUID, Uint256 } from '../types'
 import type { State as AcceptOfferState } from './acceptOffer'
 import { acceptOffer } from './acceptOffer'
@@ -94,7 +94,9 @@ export class Exchange {
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    return acceptOffer(this.sdk, bidId, quantity, signer, onProgress)
+    const { openOffer } = await this.sdk.FetchOpenOffer({ offerId: bidId })
+    invariant(openOffer, "Offer doesn't exist")
+    return acceptOffer(this.sdk, openOffer, quantity, signer, onProgress)
   }
 
   /**
@@ -111,7 +113,9 @@ export class Exchange {
     signer: Signer,
     onProgress?: (state: AcceptOfferState) => void,
   ): Promise<UUID> {
-    return acceptOffer(this.sdk, listingId, quantity, signer, onProgress)
+    const { listing } = await this.sdk.FetchListing({ offerId: listingId })
+    invariant(listing, 'Listing not found')
+    return acceptOffer(this.sdk, listing, quantity, signer, onProgress)
   }
 
   /**
@@ -132,11 +136,14 @@ export class Exchange {
 
   // Low level API to retrieve an offer
   // Offer can be either a bid or a listing
-  async getOffer(
-    offerId: UUID,
-  ): Promise<NonNullable<FetchOfferQuery['offer']>> {
-    const { offer } = await this.sdk.FetchOffer({ offerId })
-    invariant(offer, "Offer doesn't exist")
-    return offer
+  async getOffer(offerId: UUID): Promise<OfferFragment> {
+    const { listing } = await this.sdk.FetchListing({ offerId })
+    if (listing) {
+      return listing
+    }
+
+    const { openOffer } = await this.sdk.FetchOpenOffer({ offerId })
+    invariant(openOffer, "Offer doesn't exist")
+    return openOffer
   }
 }
