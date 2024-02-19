@@ -12,12 +12,7 @@ import type {
   UUID,
   Uint256,
 } from '../types'
-import {
-  toAddress,
-  toAssetId,
-  toCurrencyId,
-  toTransactionHash,
-} from '../utils/convert'
+import { toAddress, toCurrencyId, toTransactionHash } from '../utils/convert'
 import { signEIP712 } from '../utils/signature'
 import { approveCollection } from './approveCollection'
 
@@ -61,6 +56,7 @@ export type Listing = {
   /**
    * The address of the taker of the asset
    * @type Address
+   * @deprecated This parameter is not used anymore
    */
   taker?: Address
 
@@ -85,7 +81,6 @@ export async function listToken(
     token,
     unitPrice,
     quantity,
-    taker,
     expiredAt,
     metadata,
   }: Listing,
@@ -97,11 +92,12 @@ export async function listToken(
   const offer: OfferInputBis = {
     type: 'SALE',
     makerAddress: toAddress(address),
-    assetId: toAssetId(chain, collection, token),
+    chainId: chain,
+    collectionAddress: collection,
+    tokenId: token,
     currencyId: toCurrencyId(chain, unitPrice.currency),
     unitPrice: BigNumber.from(unitPrice.amount).toString(),
     quantity: BigNumber.from(quantity || '1').toString(),
-    takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : undefined,
     metadata: metadata,
   }

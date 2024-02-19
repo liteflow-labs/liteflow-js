@@ -11,12 +11,7 @@ import type {
   UUID,
   Uint256,
 } from '../types'
-import {
-  toAddress,
-  toAssetId,
-  toCurrencyId,
-  toTransactionHash,
-} from '../utils/convert'
+import { toAddress, toCurrencyId, toTransactionHash } from '../utils/convert'
 import { signEIP712 } from '../utils/signature'
 import { approveCurrency } from './approveCurrency'
 
@@ -60,6 +55,7 @@ export type Bid = {
   /**
    * The address of the taker
    * @type Address
+   * @deprecated This parameter is not used anymore
    */
   taker?: Address
 
@@ -78,16 +74,7 @@ export type Bid = {
 
 export async function placeBid(
   sdk: Sdk,
-  {
-    chain,
-    collection,
-    token,
-    unitPrice,
-    quantity,
-    taker,
-    expiredAt,
-    metadata,
-  }: Bid,
+  { chain, collection, token, unitPrice, quantity, expiredAt, metadata }: Bid,
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
@@ -96,11 +83,12 @@ export async function placeBid(
   const offer: OfferInputBis = {
     type: 'BUY',
     makerAddress: toAddress(address),
-    assetId: toAssetId(chain, collection, token),
+    chainId: chain,
+    collectionAddress: collection,
+    tokenId: token,
     currencyId: toCurrencyId(chain, unitPrice.currency),
     unitPrice: BigNumber.from(unitPrice.amount).toString(),
     quantity: BigNumber.from(quantity || '1').toString(),
-    takerAddress: taker,
     expiredAt: expiredAt ? expiredAt.toISOString() : null,
     metadata: metadata,
   }
