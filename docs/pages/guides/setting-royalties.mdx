@@ -1,0 +1,54 @@
+---
+title: 'Setting up Royalties'
+---
+
+import { Steps, Callout } from 'nextra-theme-docs'
+
+# Setting up Royalties for Collections
+
+This guide provides instructions for platform and collection owners on how to set royalties for a collection using the Liteflow dashboard.
+## Setting up Royalties
+<Callout type="info">
+  If you are a platform owner and do not own the collection for which you wish
+  to set royalties, you will need to [invite the collection
+  owner](/guides/inviting-member#inviting-a-team-member) with the role
+  ["Collection Owner"](/guides/inviting-member#team-roles-and-permissions) to
+  your platform.
+</Callout>
+To set royalties for a collection:
+<Steps>
+
+### Log In to the Platform
+
+Access the Liteflow dashboard and navigate to the ["Collections" section](https://dashboard.liteflow.com/collections) to view all collections available on your platform.
+
+### Open Royalties Menu
+
+Within the collection detail page, click on the "More" button and select "Set royalties" from the dropdown menu.
+
+### Enter Royalty Details
+
+On the royalties page, specify the addresses that will receive the royalties and assign the corresponding percentage for each address.
+
+_You can add multiple addresses to receive royalties by clicking the "Add"
+button. This allows you to distribute royalties to multiple parties, such as
+the artist, the collection owner, and other stakeholders._
+
+### Save and Submit
+
+After entering all necessary details, click "Save changes" to confirm the royalty settings. Then, submit the transaction to the blockchain to enforce the royalty settings on-chain.
+
+</Steps>
+
+<Callout type="warning">
+  Any change to the royalty settings will require a new transaction to be
+  submitted to the blockchain. This process may incur gas fees, depending on the
+  blockchain network used.
+</Callout>
+
+<Callout type="warning">
+  Changing royalty settings will not affect previous offers and sales. The new
+  settings will only apply to future offers and sales.
+</Callout>
+
+Congratulations! You have successfully set royalties for your collection on Liteflow. The royalties will now be automatically distributed to the specified addresses whenever a sale occurs.
