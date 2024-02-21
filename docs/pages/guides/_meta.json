@@ -12,10 +12,7 @@
     "title": "Create a private collection",
     "display": "hidden"
   },
-  "create-nft": {
-    "title": "Create an NFT",
-    "display": "hidden"
-  },
+  "create-nft": "Create an NFT",
   "sell-nft": {
     "title": "Sell an NFT",
     "display": "hidden"
