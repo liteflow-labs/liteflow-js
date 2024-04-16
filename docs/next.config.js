@@ -9,4 +9,13 @@ const withNextra = require('nextra')({
 })
 module.exports = withNextra({
   reactStrictMode: true,
+  redirects: async () => {
+    return [
+      {
+        source: '/guides',
+        destination: '/guides/setup-fees',
+        permanent: false,
+      },
+    ]
+  },
 })
