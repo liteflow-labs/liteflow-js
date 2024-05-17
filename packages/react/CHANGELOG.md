@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.0.0
+
+### Major Changes
+
+- [#238](https://github.com/liteflow-labs/liteflow-js/pull/238) [`a2bdad8`](https://github.com/liteflow-labs/liteflow-js/commit/a2bdad8533bac0f5de6bf0c2189b75e23bb23f8a) Thanks [@NicolasMahe](https://github.com/NicolasMahe)! - Replace Ethers.js by Viem
+
+### Patch Changes
+
+- [#221](https://github.com/liteflow-labs/liteflow-js/pull/221) [`40c1fd6`](https://github.com/liteflow-labs/liteflow-js/commit/40c1fd672f576ed234fd39d8fac007b35efc5126) Thanks [@ismailToyran](https://github.com/ismailToyran)! - Export BatchPurchaseStep
+
+- Updated dependencies [[`6aa847b`](https://github.com/liteflow-labs/liteflow-js/commit/6aa847bc9c21af76fdbc0456bd47e3554331abb3), [`a2bdad8`](https://github.com/liteflow-labs/liteflow-js/commit/a2bdad8533bac0f5de6bf0c2189b75e23bb23f8a), [`3f577d3`](https://github.com/liteflow-labs/liteflow-js/commit/3f577d361b8fd886ecf1afa822959b2ab553a8ac), [`ca11e0b`](https://github.com/liteflow-labs/liteflow-js/commit/ca11e0bfd95e2357a6b0796a5ce6a3077d9d11b7), [`40c1fd6`](https://github.com/liteflow-labs/liteflow-js/commit/40c1fd672f576ed234fd39d8fac007b35efc5126)]:
+  - @liteflow/core@3.0.0
+
 ## 2.0.0
 
 ### Major Changes
