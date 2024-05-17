@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  prerelease:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +43,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build and publish Node packages
+      - name: Build core
+        run: npm run build -w packages/core
+
+      - name: Build react
+        run: npm run build -w packages/react
+
+      - name: Publish Node packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_PUBLISH }}
-        run: npm run prerelease
+        run: npm run release

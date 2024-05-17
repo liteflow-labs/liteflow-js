@@ -16,7 +16,7 @@
     "build": "npm run build -ws --if-present",
     "watch": "npm run build && concurrently -n core,react --kill-others \"npm run watch -w packages/core\" \"npm run watch -w packages/react\"",
     "graphql-codegen": "npm run graphql-codegen -ws --if-present",
-    "prerelease": "lerna publish from-package --no-private --force-publish --dist-tag latest --sync-workspace-lock --no-git-tag-version --yes"
+    "release": "lerna publish from-package --no-private --force-publish --dist-tag latest --sync-workspace-lock --no-git-tag-version --yes"
   },
   "workspaces": [
     "packages/*"
