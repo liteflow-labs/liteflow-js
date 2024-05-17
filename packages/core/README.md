@@ -4,7 +4,7 @@ This document provides a step-by-step guide on how to install and use the Litefl
 
 ## Installation
 
-First, you need to install the `@liteflow/core` package along with its ethers peer dependency. You can do this using npm with the following command:
+First, you need to install the `@liteflow/core` package. You can do this using npm with the following command:
 
 ```bash
 npm i @liteflow/core

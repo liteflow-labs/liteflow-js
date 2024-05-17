@@ -1,7 +1,5 @@
-import type { TransactionResponse } from '@ethersproject/abstract-provider'
-import type { Signer } from 'ethers'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId, Uint256 } from '../types'
+import type { Address, ChainId, Hash, Signer, Uint256 } from '../types'
 import { toAddress, toCurrencyId } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 
@@ -15,8 +13,8 @@ export async function approveCurrency(
   sdk: Sdk,
   { chain, currency, amount }: CurrencyApproval,
   signer: Signer,
-): Promise<TransactionResponse | null> {
-  const address = await signer.getAddress()
+): Promise<{ hash: Hash } | null> {
+  const address = signer.account.address
 
   const {
     createCurrencyApprovalTransaction: { transaction },

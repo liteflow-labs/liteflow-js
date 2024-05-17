@@ -1,10 +1,10 @@
-import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
 import { BigNumber } from '@ethersproject/bignumber'
 import {
   Address,
   ChainId,
   PriceERC20,
   PriceNative,
+  Signer,
   TransactionHash,
 } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
@@ -20,9 +20,7 @@ export enum CreateOfferStep {
   SIGNATURE,
 }
 
-export default function useCreateOffer(
-  signer: (Signer & TypedDataSigner) | undefined,
-): [
+export default function useCreateOffer(signer: Signer | undefined): [
   (data: {
     type: OfferType
     chain: ChainId

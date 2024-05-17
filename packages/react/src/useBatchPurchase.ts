@@ -1,6 +1,5 @@
-import { Signer } from '@ethersproject/abstract-signer'
-import { BigNumberish } from '@ethersproject/bignumber'
-import { TransactionHash, UUID } from '@liteflow/core'
+import type { BigNumberish } from '@ethersproject/bignumber'
+import { Signer, TransactionHash, UUID } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'

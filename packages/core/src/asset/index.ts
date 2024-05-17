@@ -1,6 +1,6 @@
-import type { BigNumberish, Signer } from 'ethers'
+import type { BigNumberish } from '@ethersproject/bignumber'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId, UUID } from '../types'
+import type { Address, ChainId, Signer, UUID } from '../types'
 import type { Uploader } from '../uploader'
 import type { State as LazymintState } from './lazymint'
 import { lazymint } from './lazymint'

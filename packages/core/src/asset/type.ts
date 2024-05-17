@@ -1,4 +1,4 @@
-import type { BigNumberish } from 'ethers'
+import type { BigNumberish } from '@ethersproject/bignumber'
 import type { Address, ChainId } from '../types'
 
 export type Asset = {

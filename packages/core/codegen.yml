@@ -19,7 +19,7 @@ config:
     Datetime: 'string'
     Cursor: 'string'
     JSON: 'unknown'
-    Uint256: './types#Uint256'
+    Uint256: 'string'
     Address: './types#Address'
     TransactionHash: './types#TransactionHash'
     BigFloat: 'string'

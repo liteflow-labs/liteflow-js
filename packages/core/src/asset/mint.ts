@@ -1,9 +1,14 @@
-import type { Signer } from 'ethers'
-import { BigNumber } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import invariant from 'ts-invariant'
 import { pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId, IState, TransactionHash } from '../types'
+import type {
+  Address,
+  ChainId,
+  IState,
+  Signer,
+  TransactionHash,
+} from '../types'
 import type { Uploader } from '../uploader'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
@@ -26,7 +31,7 @@ export async function mint(
   collection: Address
   token: string
 }> {
-  const account = await signer.getAddress()
+  const account = signer.account.address
 
   onProgress?.({ type: 'UPLOAD', payload: {} })
   const [image, animationUrl] = await Promise.all([
@@ -61,7 +66,7 @@ export async function mint(
     type: 'TRANSACTION_PENDING',
     payload: { txHash: toTransactionHash(tx.hash) },
   })
-  await tx.wait()
+  await signer.waitForTransactionReceipt(tx)
 
   onProgress?.({ type: 'OWNERSHIP', payload: {} })
   await pollOwnership(

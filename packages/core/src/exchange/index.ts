@@ -1,7 +1,6 @@
-import type { Signer } from 'ethers'
 import invariant from 'ts-invariant'
 import type { OfferFragment, Sdk } from '../graphql'
-import type { UUID, Uint256 } from '../types'
+import type { Signer, UUID, Uint256 } from '../types'
 import type { State as AcceptOfferState } from './acceptOffer'
 import { acceptOffer } from './acceptOffer'
 import type { State as BatchPurchaseState } from './batchPurchase'

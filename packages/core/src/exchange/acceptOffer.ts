@@ -1,9 +1,14 @@
-import type { TransactionResponse } from '@ethersproject/abstract-provider'
-import type { Signer } from 'ethers'
-import { BigNumber } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import { invariant } from 'ts-invariant'
 import type { OfferFragment, Sdk } from '../graphql'
-import type { IState, TransactionHash, UUID, Uint256 } from '../types'
+import type {
+  Hash,
+  IState,
+  Signer,
+  TransactionHash,
+  UUID,
+  Uint256,
+} from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 import { approveCollection } from './approveCollection'
@@ -24,7 +29,7 @@ const approveTransferTransaction = async (
   offer: OfferFragment,
   quantity: Uint256,
   signer: Signer,
-): Promise<TransactionResponse | null> => {
+): Promise<{ hash: Hash } | null> => {
   invariant(offer)
   if (offer.type === 'BUY')
     return approveCollection(
@@ -55,7 +60,7 @@ export async function acceptOffer(
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
-  const address = await signer.getAddress()
+  const address = signer.account.address
 
   onProgress?.({ type: 'OFFER_VALIDITY', payload: {} })
   await checkOfferValidity(offer, toAddress(address))
@@ -72,7 +77,7 @@ export async function acceptOffer(
       type: 'APPROVAL_PENDING',
       payload: { txHash: toTransactionHash(approveTx.hash) },
     })
-    await approveTx.wait()
+    await signer.waitForTransactionReceipt(approveTx)
   }
 
   const newOwner =
@@ -101,7 +106,7 @@ export async function acceptOffer(
     type: 'TRANSACTION_PENDING',
     payload: { txHash: toTransactionHash(tx.hash) },
   })
-  await tx.wait()
+  await signer.waitForTransactionReceipt(tx)
 
   onProgress?.({ type: 'OWNERSHIP', payload: {} })
   await pollOwnership(

@@ -1,9 +1,8 @@
-import type { Signer } from 'ethers'
-import { BigNumber } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import invariant from 'ts-invariant'
 import { pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId, EIP712Data, IState } from '../types'
+import type { Address, ChainId, EIP712Data, IState, Signer } from '../types'
 import type { Uploader } from '../uploader'
 import { toAddress } from '../utils/convert'
 import { signEIP712 } from '../utils/signature'
@@ -26,7 +25,7 @@ export async function lazymint(
   collection: Address
   token: string
 }> {
-  const account = await signer.getAddress()
+  const account = signer.account.address
 
   onProgress?.({ type: 'UPLOAD', payload: {} })
   const [image, animationUrl] = await Promise.all([

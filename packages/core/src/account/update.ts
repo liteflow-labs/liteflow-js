@@ -1,7 +1,6 @@
-import type { Signer } from 'ethers'
 import invariant from 'ts-invariant'
 import type { Sdk } from '../graphql'
-import type { Address } from '../types'
+import type { Address, Signer } from '../types'
 import type { Uploader } from '../uploader'
 
 export type AccountInput = {
@@ -26,7 +25,7 @@ export async function update(
   account: AccountInput,
   signer: Signer,
 ): Promise<Address> {
-  const address = await signer.getAddress()
+  const address = signer.account.address
 
   const [image, cover] = await Promise.all([
     uploader.upload(account.image),

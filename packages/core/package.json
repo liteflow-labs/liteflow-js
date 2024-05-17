@@ -1,6 +1,6 @@
 {
   "name": "@liteflow/core",
-  "version": "2.0.0",
+  "version": "3.0.0-rc.2",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "publishConfig": {
@@ -15,15 +15,13 @@
     "graphql-codegen": "graphql-codegen --overwrite"
   },
   "dependencies": {
-    "@ethersproject/abstract-provider": "^5.7.0",
-    "@ethersproject/abstract-signer": "^5.7.0",
     "@ethersproject/bignumber": "^5.7.0",
-    "graphql-request": "^5.0.0",
+    "graphql-request": "5.1",
     "graphql-tag": "^2.12.6",
     "ts-invariant": "^0.9.4"
   },
   "peerDependencies": {
-    "ethers": "^5.6.1"
+    "viem": "1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.7",

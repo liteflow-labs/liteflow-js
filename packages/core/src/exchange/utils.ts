@@ -1,4 +1,4 @@
-import { BigNumber } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import type { OfferFragment } from '../graphql'
 import type { Address } from '../types'
 import { toAddress } from '../utils/convert'

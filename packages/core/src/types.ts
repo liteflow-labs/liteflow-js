@@ -1,9 +1,37 @@
-import type { BigNumberish, TypedDataDomain, TypedDataField } from 'ethers'
+import type { BigNumberish } from '@ethersproject/bignumber'
+import type {
+  Account,
+  Chain,
+  Hex,
+  PublicActions,
+  Transport,
+  WalletClient,
+} from 'viem'
 
+/**
+ * Signer is an object representing a wallet that can sign transactions and messages
+ */
+export type Signer<
+  TTransport extends Transport = Transport,
+  TChain extends Chain = Chain,
+  TAccount extends Account = Account,
+> = WalletClient<TTransport, TChain, TAccount> &
+  PublicActions<TTransport, TChain, TAccount>
+
+/**
+ * EIP712Data is an object representing the data needed to sign a message using EIP712
+ */
 export type EIP712Data = {
-  domain: TypedDataDomain
-  types: Record<string, Array<TypedDataField>>
+  domain: {
+    name?: string
+    version?: string
+    chainId?: number
+    verifyingContract?: Address
+    salt?: Hex
+  }
+  types: Record<string, Array<{ name: string; type: string }>>
   message: Record<string, any>
+  primaryType: string
 }
 
 /**
@@ -20,6 +48,11 @@ export type ChainId = number
  * An Address is a string starting with 0x with a length of 42
  */
 export type Address = `0x${string}`
+
+/**
+ * An Hash is a string representing a transaction hash.
+ */
+export type Hash = `0x${string}`
 
 /**
  * A UUID is a string

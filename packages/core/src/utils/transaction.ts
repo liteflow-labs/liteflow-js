@@ -1,20 +1,20 @@
-import type { TransactionResponse } from '@ethersproject/abstract-provider'
-import type { Signer } from 'ethers'
-import { BigNumber } from 'ethers'
+import { isHex } from 'viem'
 import type { Transaction } from '../graphql'
+import type { Hash, Signer } from '../types'
 
 export async function sendTransaction(
   signer: Signer,
   transaction: Transaction,
-): Promise<TransactionResponse> {
-  const tx = await signer.sendTransaction({
+): Promise<{ hash: Hash }> {
+  const data = isHex(transaction.data) ? transaction.data : undefined
+  const hash = await signer.sendTransaction({
+    account: transaction.from || undefined,
     to: transaction.to || undefined,
-    from: transaction.from || undefined,
-    data: transaction.data || undefined,
-    value: transaction.value ? BigNumber.from(transaction.value) : undefined,
-    gasPrice: transaction.gasPrice
-      ? BigNumber.from(transaction.gasPrice)
-      : undefined,
+    data: data,
+    value: transaction.value ? BigInt(transaction.value) : undefined,
+    gasPrice: transaction.gasPrice ? BigInt(transaction.gasPrice) : undefined,
   })
-  return tx
+  return {
+    hash,
+  }
 }

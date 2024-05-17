@@ -1,6 +1,5 @@
-import type { Signer } from 'ethers'
 import type { Sdk } from '../graphql'
-import type { IState, TransactionHash, UUID } from '../types'
+import type { IState, Signer, TransactionHash, UUID } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 
@@ -14,7 +13,7 @@ export async function cancelOffer(
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
-  const address = await signer.getAddress()
+  const address = signer.account.address
 
   const { createCancelOfferTransaction } =
     await sdk.CreateCancelOfferTransaction({
@@ -33,7 +32,7 @@ export async function cancelOffer(
     type: 'TRANSACTION_PENDING',
     payload: { txHash: toTransactionHash(tx.hash) },
   })
-  await tx.wait()
+  await signer.waitForTransactionReceipt(tx)
 
   await sdk.DeleteOffer({ id: offerId })
   return offerId

@@ -9,8 +9,8 @@ Hook for creating an offer, accessing the active process step as well as the tra
 ## Usage
 
 ```tsx
+import { BigNumber } from '@ethersproject/bignumber'
 import { CreateOfferStep, useCreateOffer } from '@liteflow/react'
-import { BigNumber } from 'ethers'
 
 export default function Component() {
   const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)

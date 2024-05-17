@@ -1,7 +1,7 @@
-import { BigNumber, type Signer } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import { invariant } from 'ts-invariant'
 import type { FetchListingQuery, Sdk } from '../graphql'
-import type { IState, TransactionHash, UUID, Uint256 } from '../types'
+import type { IState, Signer, TransactionHash, UUID, Uint256 } from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 import { checkOwnership, pollOwnership } from './offerQuantityChanges'
@@ -19,7 +19,7 @@ export async function batchPurchase(
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID[]> {
-  const address = await signer.getAddress()
+  const address = signer.account.address
 
   const offersAndQuantities: {
     offer: NonNullable<FetchListingQuery['listing']>
@@ -62,7 +62,7 @@ export async function batchPurchase(
     type: 'TRANSACTION_PENDING',
     payload: { txHash: toTransactionHash(tx.hash) },
   })
-  await tx.wait()
+  await signer.waitForTransactionReceipt(tx)
 
   onProgress?.({ type: 'OWNERSHIP', payload: {} })
   await pollOwnership(
