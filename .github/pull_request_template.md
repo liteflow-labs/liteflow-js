@@ -14,5 +14,4 @@
 
 ### Checklist
 
-- [ ] Update related changelogs <!-- Check [root's CHANGELOG.md](/CHANGELOG.md) to access the right changelogs -->
 - [ ] Update docs if necessary
