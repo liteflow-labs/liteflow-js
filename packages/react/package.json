@@ -1,6 +1,6 @@
 {
   "name": "@liteflow/react",
-  "version": "3.0.0-rc.3",
+  "version": "3.0.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "publishConfig": {
@@ -22,7 +22,7 @@
     "ts-invariant": "0.9.4"
   },
   "peerDependencies": {
-    "@liteflow/core": "3.0.0-rc.2",
+    "@liteflow/core": "3.0.0",
     "react": ">=17"
   },
   "devDependencies": {
