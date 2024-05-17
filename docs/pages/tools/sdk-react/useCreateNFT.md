@@ -19,7 +19,7 @@ export default function Component() {
   const signer = useMemo(() => {
     return walletClient?.extend(publicActions)
   }, [walletClient])
-  
+
   const [createNFT, { activeStep, transactionHash }] = useCreateNFT(signer, {
     uploadUrl: 'Your liteflow upload URL',
   })

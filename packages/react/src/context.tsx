@@ -2,8 +2,8 @@ import { Client } from '@liteflow/core'
 import { GraphQLClient } from 'graphql-request'
 import decode, { JwtPayload } from 'jwt-decode'
 import React, {
+  ReactElement,
   createContext,
-  PropsWithChildren,
   useCallback,
   useEffect,
   useMemo,
@@ -41,7 +41,7 @@ export function LiteflowProvider({
   apiKey,
   endpoint = 'https://api.liteflow.com',
   children,
-}: PropsWithChildren<LiteflowProviderProps>): JSX.Element {
+}: React.PropsWithChildren<LiteflowProviderProps>): ReactElement {
   const [authenticationToken, setAuthenticationToken] = useState<string>()
   const client = useMemo(
     () => new GraphQLClient(`${endpoint}/${apiKey}/graphql`),
