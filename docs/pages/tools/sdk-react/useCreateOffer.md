@@ -11,9 +11,16 @@ Hook for creating an offer, accessing the active process step as well as the tra
 ```tsx
 import { BigNumber } from '@ethersproject/bignumber'
 import { CreateOfferStep, useCreateOffer } from '@liteflow/react'
+import { useMemo } from 'react'
+import { publicActions } from 'viem'
+import { useWalletClient } from 'wagmi'
 
 export default function Component() {
-  const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(() => {
+    return walletClient?.extend(publicActions)
+  }, [walletClient])
+
   const [createOffer, { activeStep, transactionHash }] = useCreateOffer(signer)
 
   const handleClick = async () => {

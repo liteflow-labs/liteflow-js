@@ -42,6 +42,7 @@ function Login() {
   const signer = useMemo(() => {
     return walletClient?.extend(publicActions)
   }, [walletClient])
+
   const [authenticate, { resetAuthenticationToken }] = useAuthenticate()
   const loggedIn = useIsLoggedIn(walletClient?.account.address)
 
@@ -68,6 +69,7 @@ function PlaceBid() {
   const signer = useMemo(() => {
     return walletClient?.extend(publicActions)
   }, [walletClient])
+
   const [createOffer] = useCreateOffer(signer)
 
   const handleClick = async () => {

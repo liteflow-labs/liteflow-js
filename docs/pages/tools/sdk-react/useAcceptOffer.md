@@ -13,9 +13,16 @@ Can only be executed by an owner of the related NFT if it's a bid, or by anyone 
 ```tsx
 import { BigNumber } from '@ethersproject/bignumber'
 import { AcceptOfferStep, useAcceptOffer } from '@liteflow/react'
+import { useMemo } from 'react'
+import { publicActions } from 'viem'
+import { useWalletClient } from 'wagmi'
 
 export default function Component() {
-  const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(() => {
+    return walletClient?.extend(publicActions)
+  }, [walletClient])
+
   const [acceptOffer, { activeStep, transactionHash }] = useAcceptOffer(signer)
 
   const handleClick = async () => {
