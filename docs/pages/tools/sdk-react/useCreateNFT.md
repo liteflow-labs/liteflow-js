@@ -12,7 +12,7 @@ Hook for creating an NFT, accessing the active process step as well as the trans
 import { CreateNftStep, useCreateNFT } from '@liteflow/react'
 
 export default function Component() {
-  const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
+  const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/) // TODO: to update
   const [createNFT, { activeStep, transactionHash }] = useCreateNFT(signer, {
     uploadUrl: 'Your liteflow upload URL',
   })
