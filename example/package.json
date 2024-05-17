@@ -9,20 +9,20 @@
     "lint": "next lint && prettier \"**/*.{ts,tsx,json,md}\" --check"
   },
   "dependencies": {
-    "@liteflow/core": "file:../packages/core",
-    "@liteflow/react": "file:../packages/react",
-    "ethers": "^5.7.2",
-    "next": "^13.5.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "wagmi": "^0.9.5"
+    "@ethersproject/bignumber": "^5.7.0",
+    "@liteflow/react": "3.0.0-rc.3",
+    "next": "^14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "wagmi": "^1.4.13"
   },
   "devDependencies": {
-    "@types/react": "^18.0.26",
+    "@types/react": "^18.3.2",
     "eslint": "^8.30.0",
-    "eslint-config-next": "^13.1.1",
-    "eslint-config-prettier": "^8.5.0",
-    "prettier": "^2.8.1",
-    "typescript": "^4.9.4"
+    "eslint-config-next": "^14.2.3",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "typescript": "^5.4.5"
   }
 }

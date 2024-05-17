@@ -1,4 +1,4 @@
-import { Signer } from '@ethersproject/abstract-signer'
+import { Signer } from '@liteflow/core'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
@@ -42,7 +42,7 @@ export default function useAuthenticate(): [
   const authenticate = useCallback(
     async (signer: Signer) => {
       invariant(signer, ErrorMessages.SIGNER_FALSY)
-      const address = (await signer.getAddress()).toLowerCase()
+      const address = signer.account.address.toLowerCase()
 
       try {
         resetAuthenticationToken()
@@ -56,9 +56,9 @@ export default function useAuthenticate(): [
         })
 
         // sign message
-        const signature = await signer.signMessage(
-          requestAuthentication.message,
-        )
+        const signature = await signer.signMessage({
+          message: requestAuthentication.message,
+        })
 
         // authenticate against the API
         const authenticateData = await sdk.Authenticate({

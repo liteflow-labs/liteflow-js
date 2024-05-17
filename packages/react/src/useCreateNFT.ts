@@ -1,5 +1,10 @@
-import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
-import { Address, ChainId, TransactionHash, toAssetId } from '@liteflow/core'
+import {
+  Address,
+  ChainId,
+  Signer,
+  TransactionHash,
+  toAssetId,
+} from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'
@@ -35,9 +40,7 @@ type createNftFn = (
   lazymint: boolean,
 ) => Promise<string>
 
-export default function useCreateNFT(
-  signer: (Signer & TypedDataSigner) | undefined,
-): [
+export default function useCreateNFT(signer: Signer | undefined): [
   createNftFn,
   {
     activeStep: CreateNftStep

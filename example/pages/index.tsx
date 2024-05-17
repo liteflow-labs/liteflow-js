@@ -1,9 +1,9 @@
-import { Signer, TypedDataSigner } from '@ethersproject/abstract-signer'
+import { BigNumber } from '@ethersproject/bignumber'
 import { toAddress } from '@liteflow/core'
 import { useAuthenticate, useCreateOffer, useIsLoggedIn } from '@liteflow/react'
-import { BigNumber } from 'ethers'
-import { useCallback } from 'react'
-import { useAccount, useConnect, useSigner } from 'wagmi'
+import { useCallback, useMemo } from 'react'
+import { parseUnits, publicActions } from 'viem'
+import { useAccount, useConnect, useWalletClient } from 'wagmi'
 
 export default function Home(): JSX.Element {
   const { address, isConnected } = useAccount()
@@ -12,12 +12,16 @@ export default function Home(): JSX.Element {
     connectors: [connector],
   } = useConnect()
   const [authenticate] = useAuthenticate()
-  const { data: signer } = useSigner<Signer & TypedDataSigner>()
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(
+    () => walletClient?.extend(publicActions),
+    [walletClient],
+  )
   const isLoggedIn = useIsLoggedIn(address)
   const [createOffer] = useCreateOffer(signer)
 
   const create = useCallback(async () => {
-    const price = parseFloat(prompt('Price of the offer'))
+    const price = prompt('Price of the offer')
     const id = await createOffer({
       type: 'BUY',
       chain: Number(process.env.NEXT_PUBLIC_CHAIN), // Pass the chain ID,
@@ -26,7 +30,7 @@ export default function Home(): JSX.Element {
       expiredAt: new Date(Date.now() + 1000 * 60 * 60),
       quantity: BigNumber.from(1),
       unitPrice: {
-        amount: BigNumber.from(price).mul(BigNumber.from(10).pow(18)), // Replace `pow(18)` by the right number of decimals of the used currency to shift the price to unit.
+        amount: parseUnits(price, 18), // Replace 18 by the right number of decimals of the used currency to shift the price to unit.
         currency: toAddress(process.env.NEXT_PUBLIC_CURRENCY),
       },
     })

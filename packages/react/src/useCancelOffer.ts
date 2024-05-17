@@ -1,5 +1,4 @@
-import { Signer } from '@ethersproject/abstract-signer'
-import { TransactionHash } from '@liteflow/core'
+import { Signer, TransactionHash } from '@liteflow/core'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
 import { LiteflowContext } from './context'

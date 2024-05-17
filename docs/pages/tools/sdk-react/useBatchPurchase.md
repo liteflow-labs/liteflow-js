@@ -12,9 +12,16 @@ Hook to accept multiple offers, accessing the active process step as well as the
 ```tsx
 import { BigNumber } from '@ethersproject/bignumber'
 import { BatchPurchaseStep, useBatchPurchase } from '@liteflow/react'
+import { useMemo } from 'react'
+import { publicActions } from 'viem'
+import { useWalletClient } from 'wagmi'
 
 export default function Component() {
-  const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(() => {
+    return walletClient?.extend(publicActions)
+  }, [walletClient])
+
   const [batchPurchase, { activeStep, transactionHash }] =
     useBatchPurchase(signer)
 

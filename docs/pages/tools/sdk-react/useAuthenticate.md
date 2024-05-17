@@ -10,9 +10,16 @@ Hook to authenticate a web3 wallet against the API. It returns a token that need
 
 ```tsx
 import { useAuthenticate } from '@liteflow/react'
+import { useMemo } from 'react'
+import { publicActions } from 'viem'
+import { useWalletClient } from 'wagmi'
 
 export default function Component() {
-  const signer = undefined // type of "Signer & TypedDataSigner" Get the signer from the wallet. Need to be an Ethers Signer (https://docs.ethers.io/v5/api/signer/)
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(() => {
+    return walletClient?.extend(publicActions)
+  }, [walletClient])
+
   const [authenticate, { loading }] = useAuthenticate()
 
   const handleClick = async () => {

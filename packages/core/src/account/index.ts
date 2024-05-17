@@ -1,6 +1,5 @@
-import type { Signer } from 'ethers'
 import type { AccountVerificationStatus, Sdk } from '../graphql'
-import type { Address } from '../types'
+import type { Address, Signer } from '../types'
 import type { Uploader } from '../uploader'
 import type { AccountInput } from './update'
 import { update } from './update'

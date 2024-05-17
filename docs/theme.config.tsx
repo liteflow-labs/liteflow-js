@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
 import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
+import { ReactElement } from 'react'
 
-function Head(): JSX.Element {
+function Head(): ReactElement {
   const { route } = useRouter()
   const { frontMatter } = useConfig()
   const description = frontMatter.description
@@ -29,7 +30,7 @@ function Head(): JSX.Element {
   )
 }
 
-function Logo(): JSX.Element {
+function Logo(): ReactElement {
   return (
     <svg
       height="64"

@@ -32,13 +32,19 @@ To authenticate your user you will need to have access to the `Signer` of their 
 
 ```tsx
 import { useAuthenticate, useIsLoggedIn } from '@liteflow/react'
-import { useAccount, useSigner } from 'wagmi' // or your favorite web3 wallet
+import { useMemo } from 'react'
+import { publicActions } from 'viem'
+import { useWalletClient } from 'wagmi'
 
 function Login() {
   const { address } = useAccount()
-  const { data: signer } = useSigner()
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(() => {
+    return walletClient?.extend(publicActions)
+  }, [walletClient])
+
   const [authenticate, { resetAuthenticationToken }] = useAuthenticate()
-  const loggedIn = useIsLoggedIn(address)
+  const loggedIn = useIsLoggedIn(walletClient?.account.address)
 
   if (!signer) return 'No wallet connected'
   if (loggedIn)
@@ -52,12 +58,18 @@ function Login() {
 Every component inside the `LiteflowProvider` is now set up to use the Liteflow hooks.
 
 ```tsx
+import { BigNumber } from '@ethersproject/bignumber'
 import { useCreateOffer } from '@liteflow/react'
-import { BigNumber } from 'ethers'
-import { useSigner } from 'wagmi' // or your favorite web3 wallet
+import { useMemo } from 'react'
+import { publicActions } from 'viem'
+import { useWalletClient } from 'wagmi'
 
 function PlaceBid() {
-  const { data: signer } = useSigner()
+  const { data: walletClient } = useWalletClient()
+  const signer = useMemo(() => {
+    return walletClient?.extend(publicActions)
+  }, [walletClient])
+
   const [createOffer] = useCreateOffer(signer)
 
   const handleClick = async () => {

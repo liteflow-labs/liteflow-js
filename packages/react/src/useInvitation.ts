@@ -1,4 +1,4 @@
-import { Signer } from '@ethersproject/abstract-signer'
+import { Signer } from '@liteflow/core'
 import { gql } from 'graphql-request'
 import { useCallback, useContext, useState } from 'react'
 import invariant from 'ts-invariant'
@@ -46,7 +46,7 @@ export default function useInvitation(signer: Signer | undefined): {
     invariant(signer, ErrorMessages.SIGNER_FALSY)
     try {
       setCreating(true)
-      const account = await signer.getAddress()
+      const account = signer.account.address
       const { invitationByInvitedByAddress } = await sdk.GetInvitation({
         address: account.toLowerCase(),
       })

@@ -1,10 +1,17 @@
-import { Interface } from '@ethersproject/abi'
-import type { BigNumberish, Signer } from 'ethers'
-import { BigNumber } from 'ethers'
+import type { BigNumberish } from '@ethersproject/bignumber'
+import { BigNumber } from '@ethersproject/bignumber'
 import invariant from 'ts-invariant'
+import { decodeEventLog } from 'viem'
 import { pollOwnership } from '../exchange/offerQuantityChanges'
 import type { Sdk } from '../graphql'
-import type { Address, ChainId, IState, TransactionHash, UUID } from '../types'
+import type {
+  Address,
+  ChainId,
+  IState,
+  Signer,
+  TransactionHash,
+  UUID,
+} from '../types'
 import { toAddress, toTransactionHash } from '../utils/convert'
 import { sendTransaction } from '../utils/transaction'
 
@@ -39,8 +46,7 @@ const abi = [
     name: 'Transfer',
     type: 'event',
   },
-]
-const transferInterface = new Interface(abi)
+] as const
 
 export async function mintDrop(
   sdk: Sdk,
@@ -55,7 +61,7 @@ export async function mintDrop(
     token: string
   }[]
 > {
-  const address = await signer.getAddress()
+  const address = signer.account.address
 
   const { drop } = await sdk.FetchDrop({ dropId })
   invariant(drop, "Can't find drop")
@@ -75,12 +81,15 @@ export async function mintDrop(
     type: 'TRANSACTION_PENDING',
     payload: { txHash: toTransactionHash(tx.hash) },
   })
-  const receipt = await tx.wait()
+  const receipt = await signer.waitForTransactionReceipt(tx)
   const transfers = [] as { tokenId: string }[]
   for (const log of receipt.logs || []) {
     try {
-      const parsed = transferInterface.parseLog(log)
-      if (parsed.name !== 'Transfer') continue
+      const parsed = decodeEventLog({
+        abi: abi,
+        data: log.data,
+        topics: log.topics,
+      })
       transfers.push({ tokenId: parsed.args.tokenId.toString() })
     } catch (e) {}
   }

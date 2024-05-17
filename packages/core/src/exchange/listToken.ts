@@ -1,5 +1,4 @@
-import type { Signer } from 'ethers'
-import { BigNumber } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import type { OfferInputBis, Sdk } from '../graphql'
 import type {
   Address,
@@ -8,6 +7,7 @@ import type {
   IState,
   PriceERC20,
   PriceNative,
+  Signer,
   TransactionHash,
   UUID,
   Uint256,
@@ -87,7 +87,7 @@ export async function listToken(
   signer: Signer,
   onProgress?: (state: State) => void,
 ): Promise<UUID> {
-  const address = await signer.getAddress()
+  const address = signer.account.address
 
   const offer: OfferInputBis = {
     type: 'SALE',
@@ -109,7 +109,7 @@ export async function listToken(
       type: 'APPROVAL_PENDING',
       payload: { txHash: toTransactionHash(tx.hash) },
     })
-    await tx.wait()
+    await signer.waitForTransactionReceipt(tx)
   }
 
   const {
